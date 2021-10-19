@@ -1,0 +1,3 @@
+--lst-personal
+ALTER TABLE public.employee
+    RENAME working_days_per_year TO working_days_per_week;

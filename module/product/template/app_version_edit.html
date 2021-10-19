@@ -1,0 +1,102 @@
+<div class="row">
+
+	<TMPL_IF NAME='ErrorList'>
+		<div class="alert alert-danger alert-no-margin">
+			<TMPL_LOOP NAME='ErrorList'>
+				<TMPL_VAR NAME='Message'><TMPL_UNLESS NAME='__LAST__'><br /></TMPL_UNLESS>
+			</TMPL_LOOP>
+		</div>
+	</TMPL_IF>
+	<TMPL_IF NAME='MessageList'>
+		<div class="alert alert-success alert-no-margin">
+			<TMPL_LOOP NAME='MessageList'>
+				<TMPL_VAR NAME='Message'><TMPL_UNLESS NAME='__LAST__'><br /></TMPL_UNLESS>
+			</TMPL_LOOP>
+		</div>
+	</TMPL_IF>
+	
+	<section class="box no-margin">
+		<header class="panel_header" for="header_app_version_edit" table="product">
+			<TMPL_IF NAME='app_version_id'>
+				<h2 class="title"><TMPL_VAR NAME='LNG_EditAppVersion'></h2>
+			<TMPL_ELSE>
+				<h2 class="title"><TMPL_VAR NAME='LNG_AddAppVersion'></h2>
+			</TMPL_IF>
+		</header>
+		<div class="content-body">
+			<form action="<TMPL_VAR NAME='MODULE_URL'>" method="post" autocomplete="off">			
+				<div class="row">
+					<div class="col-md-12">
+						<div class="form-group">
+							<label class="form-label required" for="app_version" table="app_version"><TMPL_VAR NAME='LNG_AppVersion'></label>
+							<TMPL_IF NAME="app_version_id">
+								<TMPL_IF NAME='HistoryAdmin'>
+									(<a href="#" class="property-history" property_name="app_version"><TMPL_VAR NAME='LNG_RevisionHistory'></a>)
+								</TMPL_IF>
+							</TMPL_IF>
+							<div class="controls"><input type="text" class="form-control" name="app_version" value="<TMPL_VAR NAME='app_version'>"></div>
+						</div>
+						<div class="form-group">
+							<label class="form-label" for="client" table="app_version"><TMPL_VAR NAME='LNG_Client'></label>
+							<TMPL_IF NAME="app_version_id">
+								<TMPL_IF NAME='HistoryAdmin'>
+									(<a href="#" class="property-history" property_name="client"><TMPL_VAR NAME='LNG_RevisionHistory'></a>)
+								</TMPL_IF>
+							</TMPL_IF>
+							<div class="controls">
+								<select class="form-control m-bot15" name="client">
+									<option value=""></option>
+									<option value="android" <TMPL_IF NAME="client" VALUE="android">selected</TMPL_IF>> android</option>
+									<option value="ios" <TMPL_IF NAME="client" VALUE="ios">selected</TMPL_IF>> ios</option>
+								</select>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="form-label" for="critical" table="app_version"><TMPL_VAR NAME='LNG_Critical'></label>
+							<TMPL_IF NAME="app_version_id">
+								<TMPL_IF NAME='HistoryAdmin'>
+									(<a href="#" class="property-history" property_name="critical"><TMPL_VAR NAME='LNG_RevisionHistory'></a>)
+								</TMPL_IF>
+							</TMPL_IF>
+							<div class="controls"><input type="checkbox" name="critical" value="Y" class="iswitch iswitch-md iswitch-primary" <TMPL_IF NAME='critical' VALUE='Y'>checked</TMPL_IF>></div>
+						</div>				
+					</div>
+				</div>
+				<div>
+					<button type="submit" class="btn btn-primary btn-icon right15"><i class="fa fa-save"></i><TMPL_VAR NAME='LNG_Save'></button>
+					<a class="btn btn-icon" href="<TMPL_VAR NAME='MODULE_URL'>&<TMPL_VAR NAME='ParamsForURL'>"><i class="fa fa-ban"></i><TMPL_VAR NAME='LNG_Cancel'></a>
+				</div>
+				<TMPL_VAR NAME='ParamsForForm' ESCAPE='none'>
+				<input type="hidden" name="app_version_id" value="<TMPL_VAR NAME='app_version_id'>" />
+				<input type="hidden" name="Save" value="1" />
+			</form>
+		</div>
+	</section>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('.property-history').click(function(e){
+            var propertyName = $(this).attr('property_name');
+            var appVersionID = "<TMPL_VAR NAME='app_version_id'>";
+            $.ajax({
+                url: '<TMPL_VAR NAME='PROJECT_PATH'>module/product/ajax.php',
+                type: 'GET',
+                dataType: 'JSON',
+                data:{
+                    Action: 'GetPropertyHistoryAppVersionHTML',
+                    property_name: propertyName,
+                    app_version_id: appVersionID
+                },
+                success: function(data){
+                    if(typeof data.HTML != 'undefined'){
+                        $(data.HTML).modal('show').on('hidden.bs.modal', function () {
+                            $(this).remove();
+                        });
+                    }
+                }
+            });
+            e.preventDefault();
+        });
+    })
+</script>

@@ -1,0 +1,5 @@
+CREATE TABLE "public"."employee_history" ("value_id" integer NOT NULL, "employee_id" integer NOT NULL, "property_name" character varying(255) NOT NULL, "value" character varying(255) NOT NULL, "created" timestamp without time zone NOT NULL, "user_id" integer NOT NULL) WITHOUT OIDS;
+CREATE SEQUENCE "public"."employee_history_EmployeeID_seq" INCREMENT 1;
+ALTER TABLE "public"."employee_history" ALTER COLUMN "value_id" SET DEFAULT nextval('"employee_history_EmployeeID_seq"'::regclass);
+CREATE SEQUENCE "public"."company_history_CompanyUnitID_seq" INCREMENT 1;
+CREATE TABLE "public"."company_unit_history" ("value_id" integer NOT NULL DEFAULT nextval('"company_history_CompanyUnitID_seq"'::regclass), "company_unit_id" integer NOT NULL, "property_name" character varying(255) NOT NULL, "value" character varying(255) NOT NULL, "created" timestamp without time zone NOT NULL, "user_id" integer NOT NULL) WITHOUT OIDS;

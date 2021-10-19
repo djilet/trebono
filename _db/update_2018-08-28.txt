@@ -1,0 +1,4 @@
+ALTER TABLE "public"."operation" ALTER COLUMN "ip" DROP NOT NULL;
+
+CREATE SEQUENCE "public"."invoice_export_datev_ExportID_seq" INCREMENT 1 START 1;
+CREATE TABLE "public"."invoice_export_datev" ("export_id" integer DEFAULT nextval('"invoice_export_datev_ExportID_seq"'::regclass), "user_id" integer NOT NULL, "created" timestamp without time zone NOT NULL, "export_number" integer NOT NULL, PRIMARY KEY ("export_id")) WITHOUT OIDS;

@@ -1,0 +1,241 @@
+<div class="row">
+
+	<TMPL_IF NAME='ErrorList'>
+		<div class="alert alert-danger alert-no-margin">
+			<TMPL_LOOP NAME='ErrorList'>
+				<TMPL_VAR NAME='Message'><TMPL_UNLESS NAME='__LAST__'><br /></TMPL_UNLESS>
+			</TMPL_LOOP>
+		</div>
+	</TMPL_IF>
+	<TMPL_IF NAME='MessageList'>
+		<div class="alert alert-success alert-no-margin">
+			<TMPL_LOOP NAME='MessageList'>
+				<TMPL_VAR NAME='Message'><TMPL_UNLESS NAME='__LAST__'><br /></TMPL_UNLESS>
+			</TMPL_LOOP>
+		</div>
+	</TMPL_IF>
+
+	<section class="box no-margin">
+		<header class="panel_header" for="header_contracts" table="agreements">
+			<h2 class="title">
+				<TMPL_VAR NAME='LNG_RecreationConfirmation'> <TMPL_VAR NAME="CompanyUnitTitle" />
+			</h2>
+		</header>
+		<div class="content-body">
+			<TMPL_IF NAME="isViewConfirmationEdit">
+
+				<div class="floating-button-row">
+					<TMPL_IF NAME="ReadOnly">
+
+						<div class="contract-content">
+							<TMPL_VAR NAME="content" ESCAPE="none" />
+						</div>
+
+					<TMPL_ELSE>
+
+						<form method="post">
+							<div class="form-group">
+								<label for="Content"><TMPL_VAR NAME="LNG_LabelContract" /></label> <br>
+								<textarea name="content" id="Content"  rows="10"><TMPL_VAR NAME="content" /></textarea>
+							</div>
+
+							<input type="hidden" name="confirmation_id" value="<TMPL_VAR NAME='confirmation_id' />">
+							<input type="hidden" name="company_unit_id" value="<TMPL_VAR NAME='CompanyUnitID' />">
+							<input type="hidden" name="Save" value="1" />
+							<input type="hidden" name="Action" value="Preview" />
+
+							<div id="floating-button">
+								<button type="submit" id="preview" class="btn btn-primary btn-icon right15" onclick="$('form').attr('target', '_blank');">
+									<i class="fa fa-file-alt"></i><TMPL_VAR NAME='LNG_Preview'>
+								</button>
+								<button type="submit" id="save" class="btn btn-primary btn-icon right15" onclick="$('form').attr('target', '');">
+									<i class="fa fa-save"></i><TMPL_VAR NAME='LNG_Save'>
+								</button>
+								<a class="btn btn-icon" href="<TMPL_VAR NAME='MODULE_URL' />&<TMPL_VAR NAME='ParamsForURL' />">
+									<i class="fa fa-ban"></i>
+									<TMPL_VAR NAME='LNG_Cancel'>
+								</a>
+							</div>
+						</form>
+
+						<div class="templates" style="margin-top: 30px;">
+							<h4>
+								<TMPL_VAR NAME="LNG_AvailableVariables" />
+								<small><TMPL_VAR NAME='LNG_AvailableVariablesComment' /></small>
+							</h4>
+							<TMPL_LOOP NAME="AgreementReplacements">
+								<a href="#" data-template="<TMPL_VAR NAME='template'>"><TMPL_VAR NAME="translation" /></a> <br>
+							</TMPL_LOOP>
+						</div>
+
+						<script>
+							jQuery(document).ready(function($) {
+								$('.templates a').click(function(e) {
+									e.preventDefault();
+									CKEDITOR.instances.Content.insertText($(this).data('template').trim());
+									CKEDITOR.instances.Content.focus();
+								});
+							});
+						</script>
+
+					</TMPL_IF>
+				</div>
+
+				<script>
+					createCKEditor('Content');
+					$(document).ready(function(){
+						$("#preview").click(function (e) {
+							$("[name='Save']").val(0);
+						});
+						$("#save").click(function (e) {
+							$("[name='Save']").val(1);
+						});
+					});
+				</script>
+
+			<TMPL_ELSE>
+
+			<TMPL_IF NAME='confirmation_id'>
+				<table class="table">
+					<thead>
+						<tr>
+							<th></th>
+							<th><TMPL_VAR NAME='LNG_UpdatedAt'></th>
+							<th></th>
+						</tr>
+					</thead>
+					<tr>
+						<td>
+							<a href="<TMPL_VAR NAME='MODULE_URL' />&<TMPL_VAR NAME='ParamsForURL' />&ConfirmationID=<TMPL_VAR NAME='confirmation_id' />">
+								<TMPL_VAR NAME="LNG_EditConfirmation" />
+							</a>
+						</td>
+						<td>
+							<TMPL_VAR NAME="updated_at" />
+						</td>
+						<td>
+							<a href="#" class="confirmation-history" data-id="<TMPL_VAR NAME='confirmation_id' />" data-company_unit_id="<TMPL_VAR NAME='company_unit_id' />">
+								<TMPL_VAR NAME="LNG_History" />
+							</a>
+						</td>
+					</tr>
+				</table>
+				<script>
+					$(document).ready(function(){
+						$('.confirmation-history').click(function(e){
+							var id = $(this).data('id');
+							var organization_id = $(this).data('company_unit_id');
+
+							$.ajax({
+								url: '<TMPL_VAR NAME='MODULE_PATH'>ajax.php',
+								type: 'GET',
+								dataType: 'JSON',
+								data:{
+									Action: 'GetConfirmationHistoryHTML',
+									ConfirmationID: id,
+									OrganizationID: organization_id
+								},
+								success: function(data){
+									console.log(data);
+									if(typeof data.HTML != 'undefined'){
+										$(data.HTML).modal('show').on('hidden.bs.modal', function () {
+											$(this).remove();
+										});
+									}
+								}
+							});
+							e.preventDefault();
+						});
+					});
+				</script>
+				<TMPL_ELSE>
+					<a href="<TMPL_VAR NAME='MODULE_URL' />&<TMPL_VAR NAME='ParamsForURL' />&ConfirmationID=null">
+						<TMPL_VAR NAME="LNG_CreateConfirmation" />
+					</a>
+			</TMPL_IF>
+		</div>
+	</section>
+</div>
+
+<div class="row">
+	<section class="box no-margin">
+		<header class="panel_header">
+			<h2 class="title"><TMPL_VAR NAME='LNG_RecreationConfirmationList'></h2>
+		</header>
+		<div class="content-body">
+			<div class="row">
+				<div class="col-md-12 col-sm-12 col-xs-12">
+
+					<TMPL_IF NAME='ConfirmationList'>
+						<div class="row">
+							<div class="col-md-6 form-group text-center-xs">
+								<span><TMPL_VAR NAME='ListInfo'/></span>
+							</div>
+							<div class="col-md-6 form-group text-right text-center-xs">
+								<form action="<TMPL_VAR NAME='ADMIN_PATH' />module.php?load=agreements&Section=confirmation&CompanyUnitID=<TMPL_VAR NAME='company_unit_id'>" method="post" class="form-inline">
+									<span class="right15 visible-xs-block visible-sm-inline visible-md-inline visible-lg-inline"><TMPL_VAR NAME='LNG_DocumentsOnPage'/></span>
+									<select name="ItemsOnPage" class="form-control">
+										<TMPL_LOOP NAME='ItemsOnPageList'>
+											<option <TMPL_IF NAME='Selected'>selected</TMPL_IF> value="<TMPL_VAR NAME='Value'>"><TMPL_IF NAME='Value'><TMPL_VAR NAME='Value'><TMPL_ELSE><TMPL_VAR NAME='LNG_All'></TMPL_IF></option>
+										</TMPL_LOOP>
+									</select>
+									<TMPL_VAR NAME='ParamsForItemsOnPage' ESCAPE='none'>
+								</form>
+							</div>
+						</div>
+						<table class="table table-striped">
+							<thead>
+							<tr>
+								<th><TMPL_VAR NAME='LNG_EmployeeName'></th>
+								<th><TMPL_VAR NAME='LNG_Created'></th>
+								<th><TMPL_VAR NAME='LNG_Receipt'></th>
+								<th><TMPL_VAR NAME='LNG_Status'></th>
+								<th class="text-center"><TMPL_VAR NAME='LNG_PDF'></th>
+							</tr>
+							</thead>
+							<tbody>
+							<TMPL_LOOP NAME='ConfirmationList'>
+								<tr>
+									<td>
+										<a href="<TMPL_VAR NAME='ADMIN_PATH' />module.php?load=company&Section=employee&employee_id=<TMPL_VAR NAME='employee_id' />" target="_blank">
+											<TMPL_VAR NAME='employee_name'/>
+										</a>
+									</td>
+									<td><TMPL_VAR NAME='created' FORMAT='datetime'/></td>
+									<td>
+										<a href="<TMPL_VAR NAME='ADMIN_PATH' />module.php?load=receipt&Section=receipt&receipt_id=<TMPL_VAR NAME='receipt_id' />" target="_blank">
+											<TMPL_VAR NAME='legal_receipt_id'/>
+										</a>
+									</td>
+									<td><TMPL_VAR NAME='status'/></td>
+									<td class="text-center">
+										<TMPL_IF NAME='pdf_file'>
+											<a rel="tooltip" data-toggle="tooltip" data-original-title="<TMPL_VAR NAME='LNG_DownloadPDF'>" data-placement="top" href="<TMPL_VAR NAME='MODULE_URL'>&<TMPL_VAR NAME='ParamsForURL'>&Action=GetConfirmationPDF&ConfirmationID=<TMPL_VAR NAME='id'>" target="_blank"><i class="fa fa-file-pdf-o"></i></a>
+										</TMPL_IF>
+									</td>
+								</tr>
+							</TMPL_LOOP>
+							</tbody>
+						</table>
+						<div class="text-center">
+							<ul class="pagination">
+								<TMPL_VAR NAME='Paging' ESCAPE='none'>
+							</ul>
+						</div>
+						<TMPL_ELSE>
+							<div class="alert alert-success"><TMPL_VAR NAME='LNG_Empty'></div>
+					</TMPL_IF>
+
+				</div>
+			</div>
+			</TMPL_IF>
+		</div>
+	</section>
+</div>
+<script type="text/javascript">
+	$(document).ready(function() {
+		$('select[name=ItemsOnPage]').change(function() {
+			$(this).closest('form').submit();
+		});
+	});
+</script>

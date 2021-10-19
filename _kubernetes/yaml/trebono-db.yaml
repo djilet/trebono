@@ -1,0 +1,25 @@
+apiVersion: "acid.zalan.do/v1"
+kind: postgresql
+metadata:
+  name: trebono-db
+  namespace: ${KUBE_NAMESPACE}
+spec:
+  teamId: "trebono"
+  volume:
+    size: 10Gi
+  numberOfInstances: 2
+  users:
+    # database owner
+    trebono:
+      - superuser
+      - createdb
+
+  preparedDatabases:
+    lst_main:
+      defaultUsers: true
+    lst_control:
+      defaultUsers: true
+    lst_personal:
+      defaultUsers: true
+  postgresql:
+    version: "10"

@@ -1,0 +1,18 @@
+<div class="row">
+			<div class="col-md-12 padding-3">
+				<section class="box">
+					<header class="panel_header" table="company">
+						<h2 class="title"><TMPL_VAR NAME="LNG_BillableRecords"></h2>
+					</header>
+					<div class="content-body">
+							<div class="row">
+								<div class="col-md-6 form-group">
+									<a href="<TMPL_VAR NAME='MODULE_URL'>&Section=bill&company_unit_id=<TMPL_VAR NAME='company_unit_id'>&billable_item_id=0" type="button" class="btn btn-primary statistics-show" group-id="<TMPL_VAR NAME='group_id'>"><TMPL_VAR NAME="LNG_AddNewBill"></a>
+								</div>
+							</div>
+							<div class="billable-statistics-container">
+							</div>
+					</div>
+				</section>
+			</div>
+</div>

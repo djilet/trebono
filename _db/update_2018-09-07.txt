@@ -1,0 +1,3 @@
+-- lst_main
+ALTER TABLE "public"."product_group" ADD COLUMN "need_check_image" "public"."flag" DEFAULT 'Y' NOT NULL;
+UPDATE "product_group" SET "need_check_image" = 'N' WHERE "code" = 'ad';

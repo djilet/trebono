@@ -1,0 +1,69 @@
+<div class="modal fade" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="ultraModal-Label" aria-hidden="true">
+	<div class="modal-dialog voucher-receipts">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+				<h4 class="modal-title"><TMPL_VAR NAME='LNG_VoucherReceiptsHeader'></h4>
+			</div>
+			<div class="modal-body">
+				<p>
+					<TMPL_VAR NAME='LNG_VoucherID'>: <TMPL_VAR NAME='voucher_id'>
+				</p>
+				<p>
+					<TMPL_VAR NAME='LNG_Created'>: <TMPL_VAR NAME='created' FORMAT='datetime'>
+				</p>
+				<TMPL_IF NAME='ReceiptList'>
+					<table class="table">
+						<thead>
+						<tr>
+							<th><TMPL_VAR NAME='LNG_ReceiptReceiptID'></th>
+							<th><TMPL_VAR NAME='LNG_ReceiptUpdated'></th>
+							<th><TMPL_VAR NAME='LNG_ReceiptDocumentDate'></th>
+							<th><TMPL_VAR NAME='LNG_Service'></th>
+							<th><TMPL_VAR NAME='LNG_ApprovedAmount'></th>
+							<th><TMPL_VAR NAME='LNG_ReceiptStatus'></th>
+							<th><TMPL_VAR NAME='LNG_DatePayment'></th>
+						</tr>
+						</thead>
+						<tbody>
+						<TMPL_LOOP NAME='ReceiptList'>
+							<tr>
+								<td>
+									<TMPL_IF NAME='Admin'>
+										<a href="<TMPL_VAR NAME='ADMIN_PATH'>module.php?load=receipt&Section=receipt&receipt_id=<TMPL_VAR NAME='receipt_id'>" target="_blank"><TMPL_VAR NAME='legal_receipt_id'></a>
+										<TMPL_ELSE>
+											<TMPL_IF NAME='FileList'>
+												<TMPL_LOOP NAME='FileList'>
+													<TMPL_IF NAME='__FIRST__'>
+														<a href="<TMPL_VAR NAME='file_image_full_path'>" class="fancybox" data-fancybox="receipt-voucher-<TMPL_VAR NAME='receipt_id'>">
+															<TMPL_VAR NAME='ReceiptList.legal_receipt_id'>
+														</a>
+														<TMPL_ELSE>
+															<a href="<TMPL_VAR NAME='file_image_full_path'>" class="fancybox hidden" data-fancybox="receipt-voucher-<TMPL_VAR NAME='receipt_id'>"></a>
+													</TMPL_IF>
+												</TMPL_LOOP>
+												<TMPL_ELSE>
+													<TMPL_VAR NAME='receipt_id'>
+											</TMPL_IF>
+									</TMPL_IF>
+								</td>
+								<td><TMPL_VAR NAME='updated' FORMAT='datetime'></td>
+								<td><TMPL_VAR NAME='document_date' FORMAT='datetime'></td>
+								<td><TMPL_VAR NAME='group_title_translation'></td>
+								<td><TMPL_VAR NAME='amount' FORMAT='price'>€</td>
+								<td><TMPL_VAR NAME='status_title'></td>
+								<td><TMPL_VAR NAME='date_payment' FORMAT='date'></td>
+							</tr>
+						</TMPL_LOOP>
+						</tbody>
+					</table>
+				<TMPL_ELSE>
+					<div class="alert alert-success"><TMPL_VAR NAME='LNG_Empty'></div>
+				</TMPL_IF>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-info" data-dismiss="modal"><TMPL_VAR NAME='LNG_Close'></button>
+			</div>
+		</div>
+	</div>
+</div>

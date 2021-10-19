@@ -1,0 +1,321 @@
+<div class="row">
+	<TMPL_IF NAME='ErrorList'>
+		<div class="alert alert-danger alert-no-margin">
+			<TMPL_LOOP NAME='ErrorList'>
+				<TMPL_VAR NAME='Message'><TMPL_UNLESS NAME='__LAST__'><br /></TMPL_UNLESS>
+			</TMPL_LOOP>
+		</div>
+	</TMPL_IF>
+	<TMPL_IF NAME='MessageList'>
+		<div class="alert alert-success alert-no-margin">
+			<TMPL_LOOP NAME='MessageList'>
+				<TMPL_VAR NAME='Message'><TMPL_UNLESS NAME='__LAST__'><br /></TMPL_UNLESS>
+			</TMPL_LOOP>
+		</div>
+	</TMPL_IF>
+	<section class="box no-margin">
+		<header class="panel_header" for="header_receipt_list" table="receipt">
+			<h2 class="title"><TMPL_VAR NAME='LNG_ReceiptList'></h2>
+		</header>
+		<div class="content-body">
+			<form action="<TMPL_VAR NAME='MODULE_URL'>" method="post" autocomplete="off">
+				<div class="row">
+					<div class="col-md-2 col-sm-3">
+						<div class="form-group">
+							<label class="form-label"><TMPL_VAR NAME='LNG_FilterCreatedRange'></label>
+							<input type="text" name="FilterCreatedRange" class="form-control daterange active receipt-filter" value="<TMPL_VAR NAME='FilterCreatedRange'>" data-time-picker-increment="1" data-time-picker="true">
+						</div>
+					</div>
+					<div class="col-md-2 col-sm-3">
+						<label class="form-label"><TMPL_VAR NAME='LNG_FilterStatus'></label>
+						<select name="FilterStatus[]" class="form-control select2 receipt-filter" multiple>
+							<TMPL_LOOP NAME='FilterStatusList'>
+								<option value="<TMPL_VAR NAME='value'>" <TMPL_IF NAME='selected'>selected</TMPL_IF>><TMPL_VAR NAME='title_translation'/></option>
+							</TMPL_LOOP>
+						</select>
+					</div>
+					<div class="col-md-2 col-sm-3">
+						<div class="form-group">
+							<label class="form-label"><TMPL_VAR NAME='LNG_FilterReceiptID'></label>
+							<input type="text" placeholder="<TMPL_VAR NAME='LNG_FilterReceiptIDPlaceholder'>" class="form-control receipt-filter" name="FilterLegalReceiptID" value="<TMPL_VAR NAME='FilterLegalReceiptID'>" />
+						</div>
+					</div>
+					<div class="col-md-2 col-sm-3">
+						<div class="form-group">
+							<label class="form-label"><TMPL_VAR NAME='LNG_FilterName'></label>
+							<input type="text" placeholder="<TMPL_VAR NAME='LNG_FilterNamePlaceholder'>" class="form-control receipt-filter" name="FilterName" value="<TMPL_VAR NAME='FilterName'>">
+						</div>
+					</div>
+					<div class="col-md-2 col-sm-3">
+						<div class="form-group">
+							<label class="form-label"><TMPL_VAR NAME='LNG_FilterCompanyTitle'></label>
+							<input type="text" placeholder="<TMPL_VAR NAME='LNG_FilterCompanyTitlePlaceholder'>" class="form-control receipt-filter" name="FilterCompanyTitle" value="<TMPL_VAR NAME='FilterCompanyTitle'>">
+						</div>
+					</div>
+					<div class="col-md-2 col-sm-3">
+						<div class="form-group">
+							<label class="form-label"><TMPL_VAR NAME='LNG_FilterProductGroup'/></label>
+							<select name="FilterProductGroup" class="form-control receipt-filter">
+								<option value=""><TMPL_VAR NAME='LNG_All'/></option>
+								<TMPL_LOOP NAME='ProductGroupList'>
+									<option value="<TMPL_VAR NAME='group_id'>" <TMPL_IF NAME='Selected'>selected</TMPL_IF>><TMPL_VAR NAME='title_translation'/></option>
+								</TMPL_LOOP>
+							</select>
+						</div>
+					</div>
+                </div>
+                <div class="row">
+					<div class="col-md-2 col-sm-3">
+						<label class="form-label"><TMPL_VAR NAME='LNG_IsActive'/></label>
+						<select name="FilterArchive" class="form-control receipt-filter">
+							<option value=""><TMPL_VAR NAME='LNG_All'/></option>
+							<option value="N" <TMPL_IF NAME='FilterArchive' value='N'>selected</TMPL_IF>><TMPL_VAR NAME='LNG_IsActiveY'/></option>
+							<option value="Y" <TMPL_IF NAME='FilterArchive' value='Y'>selected</TMPL_IF>><TMPL_VAR NAME='LNG_IsActiveN'/></option>
+						</select>
+					</div>
+					<div class="col-md-2 col-sm-3">
+						<label class="form-label"><TMPL_VAR NAME='LNG_CreditorNumber'/></label>
+						<input type="text" placeholder="<TMPL_VAR NAME='LNG_FilterCreditorNumberPlaceholder'>" class="form-control receipt-filter" name="FilterCreditorNumber" value="<TMPL_VAR NAME='FilterCreditorNumber'>">
+					</div>
+                	<div class="col-md-3 col-sm-3 filter-trip-id hidden">
+						<div class="form-group">
+							<label class="form-label"><TMPL_VAR NAME='LNG_FilterTripID'></label>
+							<select name="FilterTripID" class="form-control select2" data-allow-clear="true" data-placeholder="<TMPL_VAR NAME='LNG_FilterTripID'>">
+							</select>
+						</div>
+					</div>
+					<div class="col-md-2 col-sm-3 filter-voucher-id hidden">
+						<div class="form-group">
+							<label class="form-label"><TMPL_VAR NAME='LNG_FilterVoucherID'></label>
+							<input type="text" placeholder="<TMPL_VAR NAME='LNG_FilterVoucherIDPlaceholder'>" class="form-control receipt-filter" name="FilterVoucherID" value="<TMPL_VAR NAME='FilterVoucherID'>" />
+						</div>
+					</div>
+					<div class="col-md-1 col-sm-3 loading">
+						<br/>
+						<img src="<TMPL_VAR NAME='PATH2MAIN' />images/loading.gif">
+					</div>
+					<div class="col-md-2 col-sm-3">
+						<label class="form-label">
+							<br />
+							<input type="checkbox" name="FilterNotBooked" value="Y" class="receipt-filter" <TMPL_IF NAME='FilterNotBooked' VALUE='Y'>checked</TMPL_IF> />
+							<TMPL_VAR NAME='LNG_FilterNotBooked'/>
+						</label>
+					</div>
+					<TMPL_IF NAME='Admin'>
+						<div class="col-md-2 col-sm-3">
+							<div class="form-group">
+								<label class="form-label"><TMPL_VAR NAME='LNG_UserLastChangedStatus'/></label>
+								<select name="FilterUserLastChangedStatus" class="form-control">
+									<option value=""></option>
+									<TMPL_LOOP NAME='UserLastChangedStatusList'>
+										<option value="<TMPL_VAR NAME='user_id'>" <TMPL_IF NAME='Selected'>selected</TMPL_IF>><TMPL_VAR NAME='first_name'> <TMPL_VAR NAME='last_name'></option>
+									</TMPL_LOOP>
+								</select>
+							</div>
+						</div>
+					</TMPL_IF>
+				</div>
+                <div class="row">
+					<div class="col-md-2 col-sm-3">
+						<label class="form-label">
+							<br />
+							<input type="checkbox" name="FilterHasUnreadMessagesAdmin" value="Y" class="receipt-filter" <TMPL_IF NAME='FilterHasUnreadMessagesAdmin' VALUE='Y'>checked</TMPL_IF> />
+							<TMPL_VAR NAME='LNG_FilterHasUnreadMessagesAdmin'/>
+						</label>
+					</div>
+					<div class="col-md-2 col-sm-3">
+						<label class="form-label">
+							<br />
+							<input type="checkbox" name="FilterHasUnreadMessagesEmployee" value="Y" class="receipt-filter" <TMPL_IF NAME='FilterHasUnreadMessagesEmployee' VALUE='Y'>checked</TMPL_IF> />
+							<TMPL_VAR NAME='LNG_FilterHasUnreadMessagesEmployee'/>
+						</label>
+					</div>
+					<div class="col-md-2 col-sm-3">
+						<label class="form-label">
+							<br />
+							<input type="checkbox" name="FilterHasChat" value="Y" class="receipt-filter" <TMPL_IF NAME='FilterHasChat' VALUE='Y'>checked</TMPL_IF> />
+							<TMPL_VAR NAME='LNG_FilterHasChat'/>
+						</label>
+					</div>
+                    <div class="col-md-2 col-sm-3">
+                        <label class="form-label">
+                            <br />
+                            <input type="checkbox" name="FilterAutomaticProcessed" value="Y" class="receipt-filter" <TMPL_IF NAME='FilterAutomaticProcessed' VALUE='Y'>checked</TMPL_IF> />
+                            <TMPL_VAR NAME='LNG_FilterAutomaticProcessed'/>
+                        </label>
+                    </div>
+                    <div class="col-md-2 col-sm-3">
+                        <label class="form-label hidden-xs">&nbsp;</label><br />
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary btn-icon"><i class="fa fa-search"></i> <TMPL_VAR NAME='LNG_FilterApply'/></button>
+                        </div>
+                    </div>
+				</div>
+				<TMPL_VAR NAME='ParamsForFilter' ESCAPE='none'/>
+				<input type="hidden" name="FilterSubmitted" value="1" />
+			</form>
+			
+			<div id="receipt-list-container"></div>
+		</div>											
+	</section>
+</div>   
+
+<script type="text/javascript">
+	$(document).ready(function(){
+
+        var companyTitles = [];
+        "<TMPL_LOOP NAME='CompanyUnitList'>"
+			"<TMPL_UNLESS NAME='parent_unit_id'>"
+				companyTitles.push("<TMPL_VAR NAME='title' ESCAPE='none'>");
+			"</TMPL_UNLESS>"
+        "</TMPL_LOOP>"
+
+        $('input[name=FilterCompanyTitle]').typeahead({
+            hint: true,
+            highlight: true,
+            minLength: 1
+        }, {
+            //name: 'states',
+            displayKey: 'value',
+            source: typeaheadSubstringMatcher(companyTitles)
+        });
+
+		$(document).on('change', 'select[name=ItemsOnPage]', function(){
+			$(this).closest('form').submit();
+		});
+
+        GetTripList(true);
+		setInterval(LoadReceiptList, 10000);
+		LoadReceiptList();
+		
+		$('select[name=FilterProductGroup]').on('change', function(){
+			if($(this).val() == "<TMPL_VAR NAME='TravelGroupID'>") {
+				$('.filter-trip-id').removeClass('hidden');
+			}
+			else {
+				$('.filter-trip-id').addClass('hidden');
+			}		
+		});
+
+		$('select[name=FilterProductGroup]').on('change', function(){
+		    var showVoucherSearch = false;
+		    "<TMPL_LOOP NAME='VoucherProductGroupList'>"
+            	if($(this).val() == "<TMPL_VAR NAME='group_id'>")
+                	showVoucherSearch = true;
+			"</TMPL_LOOP>"
+
+			if(showVoucherSearch)
+				$('.filter-voucher-id').removeClass('hidden');
+			else
+				$('.filter-voucher-id').addClass('hidden');
+		});
+		
+		$('select[name=FilterProductGroup]').trigger("change");
+
+		$('.receipt-filter').on("change", function(){
+            GetTripList();
+        });
+
+        $(document).on('click','a.confirm-remove',function(e){
+            var a = $(this);
+            var title = a.attr('title');
+            var msg = '<TMPL_VAR NAME="LNG_RemoveMessage">'.replace(/%Title%/g, title);
+            ModalConfirm(msg, function(){
+                window.location.href = a.attr('href');
+            });
+            e.preventDefault();
+        });
+        $(document).on('click','a.confirm-activate',function(e){
+            var a = $(this);
+            var title = a.attr('title');
+            var msg = '<TMPL_VAR NAME="LNG_ActivateMessage">'.replace(/%Title%/g, title);
+            ModalConfirm(msg, function(){
+                window.location.href = a.attr('href');
+            });
+            e.preventDefault();
+        });
+	});
+	
+	var busy = false;
+	
+	function LoadReceiptList(){
+		if(busy){
+			return;
+		}else{
+			busy = true;
+		}
+		$.ajax({
+			url: '<TMPL_VAR NAME='MODULE_PATH'>ajax.php?<TMPL_VAR NAME='ParamsForURL'>',
+			type: 'GET',
+			dataType: 'JSON',
+			data:{
+				Action: 'GetReceiptListHTML',
+				Page: '<TMPL_VAR NAME='Page'>'
+			},
+			success: function(data){
+				if(typeof data.HTML != 'undefined')
+					$('#receipt-list-container').html(data.HTML);
+				
+				busy = false;
+			}
+		});
+	}
+
+	function GetTripList(setSelected){
+        var tripSelect = $("[name='FilterTripID']");
+        var filterNotBooked = false;
+        var filterHasUnreadMessagesAdmin = false;
+        var filterHasUnreadMessagesEmployee = false;
+		var filterHasChat = false;
+        var filterAutomaticProcessed = false;
+
+        $('.loading').show();
+        if ($("[name='FilterNotBooked']").prop('checked'))
+            filterNotBooked = "Y";
+        if ($("[name='FilterHasUnreadMessagesAdmin']").prop('checked'))
+            filterHasUnreadMessagesAdmin = "Y";
+        if ($("[name='FilterHasUnreadMessagesEmployee']").prop('checked'))
+            filterHasUnreadMessagesEmployee = "Y";
+		if ($("[name='FilterHasChat']").prop('checked'))
+			filterHasChat = "Y";
+        if ($("[name='FilterAutomaticProcessed']").prop('checked'))
+            filterAutomaticProcessed = "Y";
+
+        $.ajax({
+            url: '<TMPL_VAR NAME='MODULE_PATH'>ajax.php?<TMPL_VAR NAME='ParamsForURL'>',
+            type: 'GET',
+            dataType: 'JSON',
+            data:{
+                Action: 'GetTripList',
+				FilterCreateRange: $("[name='FilterCreatedRange']").val(),
+                FilterStatus: $("[name='FilterStatus[]']").val(),
+                FilterLegalReceiptID: $("[name='FilterLegalReceiptID']").val(),
+				FilterCreditorNumber: $("[name='FilterCreditorNumber']").val(),
+				FilterVoucherID: $("[name='FilterVoucherID']").val(),
+                FilterName: $("[name='FilterName']").val(),
+                FilterCompanyTitle: $("[name='FilterCompanyTitle']").val(),
+                FilterProductGroup: $("[name='FilterProductGroup']").val(),
+                FilterArchive: $("[name='FilterArchive']").val(),
+                FilterNotBooked: filterNotBooked,
+                FilterHasUnreadMessagesAdmin: filterHasUnreadMessagesAdmin,
+                FilterHasUnreadMessagesEmployee: filterHasUnreadMessagesEmployee,
+				FilterHasChat: filterHasChat,
+                FilterAutomaticProcessed: filterAutomaticProcessed
+            },
+            success: function(data){
+            	if(data.TripList != null){
+					var TripListHTML = "<option value=''></option>";
+					for (var i = 0; i < data["TripList"].length; i++) {
+						TripListHTML += '<option value="' + data["TripList"][i]["trip_id"]+ '">' +
+								'#' + data["TripList"][i]["trip_id"] + (data["TripList"][i]["trip_name"] != null ? ', '  + data["TripList"][i]["trip_name"] : '') + '</option>';
+					}
+					tripSelect.empty().append(TripListHTML);
+
+					if (setSelected)
+						tripSelect.val("<TMPL_VAR NAME='FilterTripID'>").trigger('change');
+				}
+				$('.loading').hide();
+            }
+        });
+	}
+</script>

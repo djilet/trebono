@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Root>
+    <admin>
+        <invoice_list.html>
+            <Filter>Filter</Filter>
+            <FilterCreatedRange>Datum &amp; Zeitbereich</FilterCreatedRange>
+            <FilterTitle>Kunde</FilterTitle>
+            <FilterTitlePlaceholder>Name eingeben</FilterTitlePlaceholder>
+            <FilterApply>Suchen</FilterApply>
+
+            <DateOfInvoice>Tag für Rechnungserstellung</DateOfInvoice>
+            <CreateInvoice>Rechnung erstellen</CreateInvoice>
+
+            <Export>Export</Export>
+            <ExportDateFrom>Zeitraum von</ExportDateFrom>
+            <ExportDateTo>Zeitraum bis</ExportDateTo>
+
+            <InvoiceList>Liste Rechnungen</InvoiceList>
+            <InvoicesOnPage>Rechnungen pro Seite:</InvoicesOnPage>
+            <CompanyUnitTitle>Kunde</CompanyUnitTitle>
+            <Created>Erstellt am</Created>
+            <Period>Rechnungsperiode</Period>
+            <CostWithVat>RG-Betrag inkl. MwSt</CostWithVat>
+            <Status>Status</Status>
+            <PDF>PDF/A</PDF>
+            <DownloadPDF>Download PDF/A</DownloadPDF>
+            <InvoiceFor>Rechnung für</InvoiceFor>
+            <Cancelled>Storniert</Cancelled>
+        </invoice_list.html>
+        <payroll_list.html>
+            <Filter>Filter</Filter>
+            <FilterCreatedRange>Datum &amp; Zeit Bereich</FilterCreatedRange>
+            <FilterTitle>Unternehmen</FilterTitle>
+            <FilterTitlePlaceholder>Unternehmensname eingeben</FilterTitlePlaceholder>
+            <FilterApply>Filter anwenden</FilterApply>
+
+            <DateOfPayroll>Lohnabrechnungsdatum</DateOfPayroll>
+            <CreatePayroll>Export starten</CreatePayroll>
+
+            <PayrollList>Liste Lohnabrechnungen</PayrollList>
+            <DocumentsOnPage>Anzahl Dokumente auf der Seite:</DocumentsOnPage>
+            <CompanyUnitTitle>Unternehmen</CompanyUnitTitle>
+            <Created>Erstellt am</Created>
+            <Period>für Periode</Period>
+            <Status>Status</Status>
+            <PDF>PDF/A</PDF>
+            <Lodas>Lodas</Lodas>
+            <Lug>Lug</Lug>
+            <LugIni>Lug INI</LugIni>
+            <DownloadPDF>Download PDF/A</DownloadPDF>
+            <DownloadLodas>Download Lodas</DownloadLodas>
+            <DownloadLug>Download Lug</DownloadLug>
+            <DownloadLugIni>Download Lug INI</DownloadLugIni>
+        </payroll_list.html>
+    </admin>
+</Root>

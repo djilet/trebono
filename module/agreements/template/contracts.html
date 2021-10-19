@@ -1,0 +1,232 @@
+<div class="row">
+	<TMPL_INCLUDE NAME="_tabs.html"/>
+	
+	<TMPL_IF NAME='ErrorList'>
+		<div class="alert alert-danger alert-no-margin">
+			<TMPL_LOOP NAME='ErrorList'>
+				<TMPL_VAR NAME='Message'><TMPL_UNLESS NAME='__LAST__'><br /></TMPL_UNLESS>
+			</TMPL_LOOP>
+		</div>
+	</TMPL_IF>
+	<TMPL_IF NAME='MessageList'>
+		<div class="alert alert-success alert-no-margin">
+			<TMPL_LOOP NAME='MessageList'>
+				<TMPL_VAR NAME='Message'><TMPL_UNLESS NAME='__LAST__'><br /></TMPL_UNLESS>
+			</TMPL_LOOP>
+		</div>
+	</TMPL_IF>
+	
+	<section class="box no-margin">
+	    <header class="panel_header" for="header_contracts" table="agreements">
+	        <h2 class="title">
+	            <TMPL_VAR NAME='LNG_Title'/>
+	            <TMPL_IF NAME="ProductGroupTitle"> - <TMPL_VAR NAME="ProductGroupTitle" /> </TMPL_IF>
+	            - <TMPL_VAR NAME="CompanyUnitTitle" />
+	        </h2>
+	    </header>
+	    <div class="content-body">
+	        <TMPL_IF NAME="isViewAgreementEdit">
+	
+	            <div class="floating-button-row">
+	                <TMPL_IF NAME="ReadOnly">
+	
+	           			<div class="contract-content">
+	         				<TMPL_VAR NAME="content" ESCAPE="none" />
+	     				</div>
+	                    
+	                <TMPL_ELSE>
+	
+	                    <form method="post">
+
+							<div class="form-group">
+								<label for="NewOnly"><TMPL_VAR NAME="LNG_NewContractsOnly" /></label>
+								<TMPL_IF NAME="agreement_id">
+									<TMPL_IF NAME='HistoryAdmin'>
+										(<a href="#" class="property-history" property_name="new_only"><TMPL_VAR NAME='LNG_RevisionHistory'/></a>)
+									</TMPL_IF>
+								</TMPL_IF>
+								<br/>
+								<input type="checkbox" class="iswitch iswitch-md iswitch-primary" id="NewOnly" <TMPL_IF NAME='new_only' VALUE="Y">checked</TMPL_IF> />
+							</div>
+	                        <div class="form-group">
+	                            <label for="ConfirmMessage"><TMPL_VAR NAME="LNG_LabelConfirmMessage" /></label>
+	                            <TMPL_IF NAME="agreement_id">
+									<TMPL_IF NAME='HistoryAdmin'>
+										(<a href="#" class="property-history" property_name="confirm_message"><TMPL_VAR NAME='LNG_RevisionHistory'/></a>)
+									</TMPL_IF>
+								</TMPL_IF>
+								<br />
+	                            <input type="text" name="confirm_message" id="ConfirmMessage" value="<TMPL_VAR NAME='confirm_message' />" class="form-control" autocomplete="off" >
+	                        </div>
+	                        
+	                        <div class="form-group">
+	                            <label for="Content"><TMPL_VAR NAME="LNG_LabelContract" /></label> <br>
+	                            <textarea name="content" id="Content"  rows="10"><TMPL_VAR NAME="content" /></textarea>
+	                        </div>
+	
+	                        <input type="hidden" name="agreement_id" value="<TMPL_VAR NAME='agreement_id' />">
+	                        <input type="hidden" name="group_id" value="<TMPL_VAR NAME='group_id' />">
+	                        <input type="hidden" name="organization_id" value="<TMPL_VAR NAME='organization_id' />">
+	                        <input type="hidden" name="Save" value="1" />
+	                        <input type="hidden" name="ScrollTop" value="<TMPL_VAR NAME='ScrollTop'>">
+							<input type="hidden" name="Action" value="Preview" />
+							<input type="hidden" name="new_only" value="<TMPL_VAR NAME='new_only'>" />
+	
+	                        <div id="floating-button">
+								<button type="submit" id="preview" class="btn btn-primary btn-icon right15" onclick="$('form').attr('target', '_blank');">
+									<i class="fa fa-file-alt"></i><TMPL_VAR NAME='LNG_Preview'>
+								</button>
+	                            <button type="submit" id="save" class="btn btn-primary btn-icon right15" onclick="$('form').attr('target', '');">
+									<i class="fa fa-save"></i><TMPL_VAR NAME='LNG_Save'>
+								</button>
+	                            <a class="btn btn-icon" href="<TMPL_VAR NAME='MODULE_URL' />&<TMPL_VAR NAME='ParamsForURL' />">
+	                                <i class="fa fa-ban"></i>
+	                                <TMPL_VAR NAME='LNG_Cancel'>
+	                            </a>
+	                        </div>
+	                    </form>
+	
+	                    <div class="templates" style="margin-top: 30px;">
+	                        <h4>
+	                            <TMPL_VAR NAME="LNG_AvailableVariables" />
+	                            <small><TMPL_VAR NAME='LNG_AvailableVariablesComment' /></small>
+	                        </h4>
+							<TMPL_LOOP NAME="AgreementReplacements">
+								<a href="#" data-template="<TMPL_VAR NAME='template'>"><TMPL_VAR NAME="translation" /></a> <br>
+							</TMPL_LOOP>
+	                    </div>
+	
+	                    <script>
+	                        jQuery(document).ready(function($) {
+	                            $('.templates a').click(function(e) {
+	                                e.preventDefault();
+	                                CKEDITOR.instances.Content.insertText($(this).data('template').trim());
+	                                CKEDITOR.instances.Content.focus();
+	                            });
+	                        });
+	                    </script>
+	                    
+	                </TMPL_IF>
+	            </div>
+	
+	            <script>
+	                createCKEditor('Content');
+	            </script>
+	            
+	           	<script>
+		           $(document).ready(function(){
+
+		               $('#NewOnly').click(function (e) {
+						   if ($(this).prop('checked'))
+							   $('[name="new_only"]').val("Y");
+						   else
+                               $('[name="new_only"]').val("N");
+                       });
+
+		               $('.property-history').click(function(e){
+		                   var propertyName = $(this).attr('property_name');
+		                   var agreementID = "<TMPL_VAR NAME='agreement_id'>";
+		                   $.ajax({
+		                       url: "<TMPL_VAR NAME='MODULE_PATH'>ajax.php",
+		                       type: 'GET',
+		                       dataType: 'JSON',
+		                       data:{
+		                           Action: 'GetPropertyHistoryAgreementHTML',
+		                           property_name: propertyName,
+		                           agreement_id: agreementID
+		                       },
+		                       success: function(data){
+		                           if(typeof data.HTML != 'undefined'){
+		                               $(data.HTML).modal('show').on('hidden.bs.modal', function () {
+		                                   $(this).remove();
+		                               });
+		                           }
+		                       }
+		                   });
+	
+		                   e.preventDefault();
+		               });
+		               $("#preview").click(function (e) {
+		                   $("[name='Save']").val(0);
+                       });
+                       $("#save").click(function (e) {
+                           $("[name='Save']").val(1);
+                       });
+		           });
+	            </script>
+	            
+	        <TMPL_ELSE>
+	            
+	            <table class="table">
+	                <thead>
+	                    <tr>
+	                        <th><TMPL_VAR NAME="LNG_Service" /></th>
+	                        <th width="150px"><TMPL_VAR NAME="LNG_Version" /></th>
+	                        <th width="200px"><TMPL_VAR NAME="LNG_UpdatedAt" /></th>
+	                        <th width="120px"></th>
+	                    </tr>
+	                </thead>
+	                <tbody>
+	                    <TMPL_LOOP NAME="ServicesList">
+	                        <tr>
+	                            <td>
+	                                <TMPL_IF NAME="agreement_id">
+	                                    <a href="<TMPL_VAR NAME='MODULE_URL' />&<TMPL_VAR NAME='ParamsForURL' />&AgreementID=<TMPL_VAR NAME='agreement_id' />">
+	                                        <TMPL_VAR NAME="title_translation" />
+	                                    </a>
+	                                <TMPL_ELSE>
+	                                    <a href="<TMPL_VAR NAME='MODULE_URL' />&<TMPL_VAR NAME='ParamsForURL' />&ServiceID=<TMPL_VAR NAME='group_id' />">
+	                                        <TMPL_VAR NAME="title_translation" />
+	                                    </a>
+	                                </TMPL_IF>
+	                                
+	                            </td>
+	                            <td><TMPL_VAR NAME="version" /></td>
+	                            <td><TMPL_VAR NAME="updated_at" FORMAT="datetime" /></td>
+	                            <td>
+	                                <TMPL_IF NAME="agreement_id">
+	                                    <a href="#" class="agreement-history" data-id="<TMPL_VAR NAME='agreement_id' />" data-version="<TMPL_VAR NAME='version' />" data-organization-id="<TMPL_VAR NAME='organization_id' />">
+	                                        <TMPL_VAR NAME="LNG_History" />
+	                                    </a>
+	                                </TMPL_IF>
+	                            </td>
+	                        </tr>
+	                    </TMPL_LOOP>
+	                </tbody>
+	            </table>
+	
+	            <script>
+		           $(document).ready(function(){
+		               $('.agreement-history').click(function(e){
+		                   var id = $(this).data('id');
+		                   var version = $(this).data('version');
+		                   var organization_id = $(this).data('organization-id');
+		
+		                   $.ajax({
+		                       url: '<TMPL_VAR NAME='MODULE_PATH'>ajax.php',
+		                       type: 'GET',
+		                       dataType: 'JSON',
+		                       data:{
+		                           Action: 'GetAgreementContractHistoryHTML',
+		                           AgreementID: id,
+		                           OrganizationID: organization_id,
+		                           version: version
+		                       },
+		                       success: function(data){
+		                           if(typeof data.HTML != 'undefined'){
+		                               $(data.HTML).modal('show').on('hidden.bs.modal', function () {
+		                                   $(this).remove();
+		                               });
+		                           }
+		                       }
+		                   });
+		
+		                   e.preventDefault();
+		               });
+		           });
+	            </script>
+	            
+	        </TMPL_IF>
+	    </div>
+	</section>
+</div>

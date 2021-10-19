@@ -1,0 +1,9 @@
+--lst-personal
+ALTER TABLE public.partner_contact
+    ADD COLUMN contact_for_commission flag DEFAULT 'N';
+ALTER TABLE public.partner_contact
+    ADD COLUMN contact_for_service flag DEFAULT 'N';
+ALTER TABLE public.partner_contact
+    ADD COLUMN contact_for_support flag DEFAULT 'N';
+ALTER TABLE public.partner_contact
+    ADD COLUMN contact_for_contract flag DEFAULT 'N';

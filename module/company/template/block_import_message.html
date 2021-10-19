@@ -1,0 +1,39 @@
+<div class="modal fade" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="ultraModal-Label" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+				<h4 class="modal-title"><TMPL_VAR NAME='LNG_ImportEnd'></h4>
+			</div>
+			<div class="modal-body">
+				<TMPL_IF NAME='MessageList'>
+					<table class="table">
+						<tbody>
+							<TMPL_LOOP NAME='MessageList'>
+								<tr>
+									<td class='green'><TMPL_VAR NAME='Message'></td>
+								</tr>
+							</TMPL_LOOP>
+						</tbody>
+					</table>
+				</TMPL_IF>
+				
+				<TMPL_IF NAME='ErrorList'>
+					<table class="table">
+						<tbody>
+							<TMPL_LOOP NAME='ErrorList'>
+								<tr>
+									<td class='red'><TMPL_VAR NAME='Message'></td>
+								</tr>
+							</TMPL_LOOP>
+						</tbody>
+					</table>
+				</TMPL_IF>
+				
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-info btn-close-import-modal" data-dismiss="modal" onclick="location.reload(); return false"><TMPL_VAR NAME='LNG_Close'></button>
+			</div>
+		</div>
+	</div>
+</div>

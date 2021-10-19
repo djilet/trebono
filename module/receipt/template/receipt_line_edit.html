@@ -1,0 +1,64 @@
+<div class="row">
+	<TMPL_IF NAME='ErrorList'>
+		<div class="alert alert-danger alert-no-margin">
+			<TMPL_LOOP NAME='ErrorList'>
+				<TMPL_VAR NAME='Message'><TMPL_UNLESS NAME='__LAST__'><br /></TMPL_UNLESS>
+			</TMPL_LOOP>
+		</div>
+	</TMPL_IF>
+	<TMPL_IF NAME='MessageList'>
+		<div class="alert alert-success alert-no-margin">
+			<TMPL_LOOP NAME='MessageList'>
+				<TMPL_VAR NAME='Message'><TMPL_UNLESS NAME='__LAST__'><br /></TMPL_UNLESS>
+			</TMPL_LOOP>
+		</div>
+	</TMPL_IF>
+	<section class="box no-margin">
+		<header class="panel_header" for="header_receipt_line_edit" table="receipt">
+			<TMPL_IF NAME='line_id'>
+				<h2 class="title"><TMPL_VAR NAME='LNG_EditReceiptLine'></h2>
+			<TMPL_ELSE>
+				<h2 class="title"><TMPL_VAR NAME='LNG_AddReceiptLine'></h2>
+			</TMPL_IF>
+		</header>
+		<div class="content-body">
+			<form action="<TMPL_VAR NAME='MODULE_URL'>" enctype="multipart/form-data" method="post" class="enter-to-tab" data-validation="true" autocomplete="off">
+				<div class="form-group">
+					<label class="form-label" for="line_number" table="receipt_line"><TMPL_VAR NAME='LNG_LineNumber'></label><br />
+					<input class="form-control" type="text" name="line_number" id="line_number" value="<TMPL_VAR NAME='line_number'>" />
+				</div>
+				<div class="form-group">
+					<label class="form-label" for="sku" table="receipt_line"><TMPL_VAR NAME='LNG_SKU'></label><br />
+					<input class="form-control" type="text" name="sku" id="sku" value="<TMPL_VAR NAME='sku'>" />
+				</div>
+				<div class="form-group">
+					<label class="form-label required" for="title" table="receipt_line"><TMPL_VAR NAME='LNG_Title'></label><br />
+					<input class="form-control" type="text" name="title" id="title" value="<TMPL_VAR NAME='title'>" />
+				</div>
+				<div class="form-group">
+					<label class="form-label required" for="quantity" table="receipt_line"><TMPL_VAR NAME='LNG_Quantity'></label><br />
+					<input class="form-control" type="text" name="quantity" id="quantity" value="<TMPL_VAR NAME='quantity' FORMAT='price'>" />
+				</div>
+				<div class="form-group">
+					<label class="form-label required" for="price" table="receipt_line"><TMPL_VAR NAME='LNG_Price'></label><br />
+					<input class="form-control" type="text" name="price" id="price" value="<TMPL_VAR NAME='price' FORMAT='price'>" />
+				</div>
+				<div class="form-group">
+					<label class="form-label required" for="vat" table="receipt_line"><TMPL_VAR NAME='LNG_VAT'></label><br />
+					<select class="form-control" name="vat">
+						<option value=""></option>
+						<option value="7" <TMPL_IF NAME='vat' VALUE='7'>selected</TMPL_IF>><TMPL_VAR NAME='LNG_Approved'></option>
+						<option value="19" <TMPL_IF NAME='vat' VALUE='19'>selected</TMPL_IF>><TMPL_VAR NAME='LNG_Denied'></option>
+					</select>
+				</div>
+				<div>
+					<button type="submit" class="btn btn-primary"><TMPL_VAR NAME='LNG_Save'></button>
+					<a href="<TMPL_VAR NAME='MODULE_URL'>&<TMPL_VAR NAME='ParamsForURL'>&line_id=<TMPL_VAR NAME='line_id'>" class="btn btn-purple"><TMPL_VAR NAME='LNG_Reset'></a>
+				</div>
+				<input type="hidden" name="Save" value="1" />
+				<input type="hidden" name="line_id" value="<TMPL_VAR NAME='line_id'>" />
+				<TMPL_VAR NAME='ParamsForForm' ESCAPE='none'>
+			</form>
+		</div>
+	</section>
+</div>

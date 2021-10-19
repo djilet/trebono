@@ -1,0 +1,481 @@
+<TMPL_IF NAME='employee_id'>
+	<TMPL_LOOP NAME='ProductGroupList'>
+		<TMPL_IF NAME='BenefitGrouping'>
+			<div class="row <TMPL_IF NAME='no_company_contract'>hidden</TMPL_IF>">
+				<div class="col-md-12 padding-3">
+					<section class="box">
+						<header class="panel_header">
+							<h2 class="title pull-left"><TMPL_VAR NAME='LNG_BenefitProgram'></h2>
+							<div class="actions panel_actions pull-left">
+								<i class="box_toggle fa fa-chevron-up"></i>
+							</div>
+						</header>
+						<div class="content-body padding-3 collapsed">
+							<div class="row row-new">
+								<TMPL_LOOP NAME='BenefitGrouping'>
+									<div class="col-md-12 padding-3 <TMPL_IF NAME='no_company_contract'>hidden</TMPL_IF>">
+										<section class="box">
+											<header class="panel_header">
+												<h2 class="title pull-left <TMPL_IF NAME='no_employee_contract'>inactive
+													</TMPL_IF>"><TMPL_VAR NAME='title_translation'></h2>
+												<div class="actions panel_actions pull-left collapsed">
+													<i class="box_toggle fa fa-chevron-up"></i>
+												</div>
+											</header>
+											<div class="content-body padding-3 collapsed">
+												<div class="row row-new">
+													<TMPL_LOOP NAME='ProductList'>
+														<TMPL_UNLESS NAME='hide'>
+															<TMPL_IF NAME='inheritable' VALUE='N'>
+																<div class="col-md-6 padding-3 <TMPL_IF NAME='no_company_contract'>hidden</TMPL_IF>">
+																	<section class="box">
+																		<header class="panel_header">
+																			<h2 class="title pull-left"><TMPL_VAR NAME='title_translation'></h2>
+																			<div class="actions panel_actions pull-left collapsed">
+																				<TMPL_UNLESS NAME='__FIRST__'>
+																					<i class="box_toggle fa fa-chevron-up"></i>
+																				</TMPL_UNLESS>
+																			</div>
+																			<div class="product-enabling-container actions pull-right">
+																				<TMPL_IF NAME='HistoryAdmin'>
+																					<a href="#" class="contract-history" product_id="<TMPL_VAR NAME='product_id'>"><TMPL_VAR NAME='LNG_RevisionHistory'></a>
+																				</TMPL_IF>
+																			</div>
+																		</header>
+																		<div class="content-body <TMPL_UNLESS NAME='__FIRST__'>collapsed</TMPL_UNLESS>">
+																			<div class="row">
+																				<div class="col-md-6 form-group">
+																					<label class="form-label" for="start_date" table="product"><TMPL_VAR NAME='LNG_ProductStartDate'></label>
+																					<TMPL_IF NAME='HistoryAdmin'>
+																						(<a href="#" class="contract-property-history" product_id="<TMPL_VAR NAME='product_id'>" property_name="start_date"><TMPL_VAR NAME='LNG_RevisionHistory'></a>)
+																					</TMPL_IF>
+																					<input type="text" name="Product[<TMPL_VAR NAME='ProductList.product_id'>][start_date]" class="form-control datepicker"
+																					<TMPL_UNLESS NAME='request_start_date'>
+																						<TMPL_IF NAME='contract_start_date'>
+																							<TMPL_IF NAME='disabled_start_date'>
+																								readonly disabled
+																							</TMPL_IF>
+																						</TMPL_IF>
+																					</TMPL_UNLESS>
+																					value="<TMPL_VAR NAME='contract_start_date' FORMAT='datepicker'>" />
+																				</div>
+																				<div class="col-md-6 form-group">
+																					<label class="form-label" for="end_date" table="product"><TMPL_VAR NAME='LNG_ProductEndDate'></label>
+																					<TMPL_IF NAME='HistoryAdmin'>
+																						(<a href="#" class="contract-property-history" product_id="<TMPL_VAR NAME='product_id'>" property_name="end_date"><TMPL_VAR NAME='LNG_RevisionHistory'></a>)
+																					</TMPL_IF>
+																					<input
+																							type="text"
+																							name="Product[<TMPL_VAR NAME='ProductList.product_id'>][end_date]"
+																							class="form-control datepicker"
+																							id="end_date"
+																					<TMPL_IF NAME='contract_start_date'>
+																						<TMPL_IF NAME="Admin">
+																							<TMPL_ELSE>
+																								<TMPL_IF NAME='contract_end_date'>
+																									<TMPL_UNLESS NAME='request_end_date'>
+																										<TMPL_IF NAME='disabled_end_date'>
+																											readonly disabled
+																										</TMPL_IF>
+																									</TMPL_UNLESS>
+																								</TMPL_IF>
+																						</TMPL_IF>
+																					</TMPL_IF>
+																					<TMPL_IF NAME="Admin">
+																						<TMPL_ELSE>
+																							<TMPL_UNLESS NAME='contract_start_date'>
+																								readonly disabled
+																							</TMPL_UNLESS>
+																					</TMPL_IF>
+																					value="<TMPL_VAR NAME='contract_end_date' FORMAT='datepicker'>"
+																					/>
+																				</div>
+																				<TMPL_IF NAME='contract_start_date'>
+																					<input type="hidden" name="Product[<TMPL_VAR NAME='ProductList.product_id'>][contract_id]" value="<TMPL_VAR NAME='contract_id'>" />
+																				</TMPL_IF>
+																			</div>
+																			<TMPL_IF NAME='HistoryAdmin'>
+																				<TMPL_IF NAME="OptionList">
+																					<div class="input-group date-of-params" style="display: inline-block;">
+																						(<label class="form-label" for="date-of-params" table="core"><TMPL_VAR NAME="LNG_DateOfParams"/></label>:
+																						<a href="#"><span class="date-of-param"><TMPL_IF NAME="date_of_params"><TMPL_VAR NAME="date_of_params" FORMAT="date"/><TMPL_ELSE><TMPL_VAR NAME="DateOfParams" FORMAT="date"/></TMPL_IF></span></a>)
+																						<input type="text" class="datepicker" name="Product[<TMPL_VAR NAME='ProductList.product_id'>][date_of_params]" style="visibility: hidden; height: 0" VALUE="<TMPL_VAR NAME='date_of_params' FORMAT='date'/>">
+																					</div>
+																				</TMPL_IF>
+																			</TMPL_IF>
+																			<div class="row">
+																				<TMPL_LOOP NAME='OptionList'>
+																					<TMPL_IF NAME='show_group'>
+																						<div class="col-md-12 group-title">
+																							<h3><TMPL_VAR NAME='group_title_translation'></h3>
+																						</div>
+																					</TMPL_IF>
+																					<div class="col-md-6 form-group <TMPL_IF NAME='hide'>hide</TMPL_IF>" id="<TMPL_VAR NAME='option_id'>">
+																						<div>
+																							<label class="form-label" for="<TMPL_VAR NAME='code'>" table="option" show-additional-help="<TMPL_VAR NAME='show_additional_help'/>"><TMPL_VAR NAME='title_translation'></label>
+																							<TMPL_IF NAME='HistoryAdmin'>
+																								(<a href="#" class="option-value-history" option_id="<TMPL_VAR NAME='option_id'>"><TMPL_VAR NAME='LNG_RevisionHistory'></a>)
+																							</TMPL_IF>
+																						</div>
+																						<TMPL_UNLESS NAME='value' VALUE='null'>
+																							<div>
+																								<label class="form-label">
+																									<small class="text-info">
+																										<TMPL_IF NAME='inherited_value_source' VALUE='global'>
+																											<TMPL_VAR NAME='LNG_InheritedValueSourceGlobal'>:
+																												<TMPL_ELSEIF NAME='inherited_value_source' VALUE='company_unit'/>
+																												<TMPL_VAR NAME='LNG_InheritedValueSourceCompanyUnit'/>:
+																										</TMPL_IF>
+																										<TMPL_IF NAME="type" VALUE="currency">
+																											<TMPL_VAR NAME='inherited_value' FORMAT="price">
+																												<TMPL_ELSEIF NAME='type' VALUE='float'>
+																													<TMPL_VAR NAME='inherited_value' FORMAT="price">
+																														<TMPL_ELSE>
+																															<TMPL_VAR NAME='inherited_value'>
+																										</TMPL_IF>
+																									</small>
+																								</label>
+																							</div>
+																							<TMPL_ELSE>
+																								<label class="form-label"><small class="text-info"><br></small></label>
+																						</TMPL_UNLESS>
+																						<TMPL_IF NAME='type' VALUE='flag'>
+																							<input type="checkbox" class="jtoggler" data-jtmulti-state
+																								   name="Product[<TMPL_VAR NAME='ProductList.product_id'>][Option][<TMPL_VAR NAME='option_id'>]"
+																								   value="<TMPL_VAR NAME='value'>" checked <TMPL_IF NAME='disabled'>disabled</TMPL_IF>
+																							>
+																							<TMPL_IF NAME='disabled'>
+																								<input type="hidden"
+																									   name="Product[<TMPL_VAR NAME='ProductList.product_id'>][Option][<TMPL_VAR NAME='option_id'>]"
+																									   value="<TMPL_VAR NAME='value'>" />
+																							</TMPL_IF>
+																							<TMPL_ELSEIF NAME='title' VALUE='Salary option'>
+																								<select class="form-control m-bot15" name="Product[<TMPL_VAR NAME='ProductList.product_id'>][Option][<TMPL_VAR NAME='option_id'>]" <TMPL_IF NAME='disabled'>disabled</TMPL_IF>>
+																									<option value=""></option>
+																									<option value="Z" <TMPL_IF NAME="value" VALUE='Z'>selected</TMPL_IF>><TMPL_VAR NAME='LNG_Z'></option>
+																									<option value="V" <TMPL_IF NAME="value" VALUE='V'>selected</TMPL_IF>><TMPL_VAR NAME='LNG_V'></option>
+																								</select>
+																								<TMPL_IF NAME='disabled'>
+																									<input type="hidden"
+																										   name="Product[<TMPL_VAR NAME='ProductList.product_id'>][Option][<TMPL_VAR NAME='option_id'>]"
+																										   value="<TMPL_VAR NAME='value'>" />
+																								</TMPL_IF>
+																							<TMPL_ELSEIF NAME='type' VALUE='monthly-yearly-select'>
+																								<select class="form-control m-bot15" name="Product[<TMPL_VAR NAME='ProductList.product_id'>][Option][<TMPL_VAR NAME='option_id'>]" <TMPL_IF NAME='disabled'>disabled</TMPL_IF>>
+																									<option value=""></option>
+																									<option value="monthly" <TMPL_IF NAME="value" VALUE='monthly'>selected</TMPL_IF>><TMPL_VAR NAME='LNG_Monthly'></option>
+																									<option value="yearly" <TMPL_IF NAME="value" VALUE='yearly'>selected</TMPL_IF>><TMPL_VAR NAME='LNG_Yearly'></option>
+																								</select>
+																								<TMPL_IF NAME='disabled'>
+																									<input type="hidden"
+																										   name="Product[<TMPL_VAR NAME='ProductList.product_id'>][Option][<TMPL_VAR NAME='option_id'>]"
+																										   value="<TMPL_VAR NAME='value'>" />
+																								</TMPL_IF>
+																							<TMPL_ELSEIF NAME='type' VALUE='custom-select'>
+																								<select class="form-control m-bot15" name="Product[<TMPL_VAR NAME='ProductList.product_id'>][Option][<TMPL_VAR NAME='option_id'>]"
+																									<TMPL_IF NAME='disabled'>disabled</TMPL_IF>
+																									<TMPL_IF NAME='category_preference_select'>
+																										data-preference=<TMPL_VAR NAME='category_preference_select'>
+																										data-preference_product_id=<TMPL_VAR NAME='product_id'>
+																									</TMPL_IF>
+																								>
+																									<option value=""></option>
+																									<TMPL_LOOP NAME='SelectList'>
+																										<option value="<TMPL_VAR NAME='Key'>" <TMPL_IF NAME='Selected'>selected</TMPL_IF>><TMPL_VAR NAME='Reason'></option>
+																									</TMPL_LOOP>
+																								</select>
+																								<TMPL_IF NAME='disabled'>
+																									<input type="hidden"
+																										   name="Product[<TMPL_VAR NAME='ProductList.product_id'>][Option][<TMPL_VAR NAME='option_id'>]"
+																										   value="<TMPL_VAR NAME='value'>" />
+																								</TMPL_IF>
+																								<TMPL_IF NAME='category_preference_select'>
+																									<input type="hidden"
+																										   name="Product[<TMPL_VAR NAME='product_id'>][Option][<TMPL_VAR NAME='category_preference_select'>][inherited_value]"
+																										   value="<TMPL_VAR NAME='inherited_value_no_translation'>" />
+																								</TMPL_IF>
+																							<TMPL_ELSEIF NAME='type' VALUE='textarea'>
+																								<textarea class="form-control" name="Product[<TMPL_VAR NAME='ProductList.product_id'>][Option][<TMPL_VAR NAME='option_id'>]" <TMPL_IF NAME='disabled'>readonly="readonly"</TMPL_IF>><TMPL_VAR NAME='value'></textarea>
+																								<TMPL_ELSE>
+																									<input type="text" class="form-control" name="Product[<TMPL_VAR NAME='ProductList.product_id'>][Option][<TMPL_VAR NAME='option_id'>]" <TMPL_IF NAME='disabled'>readonly="readonly"</TMPL_IF>
+																									<TMPL_IF NAME='type' VALUE='currency'>
+																										value="<TMPL_VAR NAME='value' FORMAT='price'>"
+																										<TMPL_ELSEIF NAME='type' VALUE='float'>
+																											value="<TMPL_VAR NAME='value' FORMAT='price'>"
+																											<TMPL_ELSE>
+																												value="<TMPL_VAR NAME='value'>"
+																									</TMPL_IF>/>
+																						</TMPL_IF>
+																					</div>
+																				</TMPL_LOOP>
+																				<TMPL_IF NAME="AgreementEmployment">
+																					<div class="col-md-6 form-group">
+																						<br>
+																						<p><TMPL_VAR NAME="LNG_AgreementEmployment" /></p>
+																						<TMPL_LOOP NAME="AgreementEmployment">
+																							<a href="<TMPL_VAR NAME='linkToAcceptedAgreementVersion' />" target="_blank">
+																								<TMPL_VAR NAME="LNG_AcceptVersion" /> <TMPL_VAR NAME="version" />
+																								<TMPL_VAR NAME="LNG_AcceptDateOf" /> <TMPL_VAR NAME="updated_at" FORMAT="datetime" />.
+																								<TMPL_VAR NAME="LNG_Device" />: <TMPL_VAR NAME="device_info" />
+																							</a>
+																						</TMPL_LOOP>
+																					</div>
+																				</TMPL_IF>
+																			</div>
+																		</div>
+																	</section>
+																</div>
+															</TMPL_IF>
+														</TMPL_UNLESS>
+													</TMPL_LOOP>
+												</div>
+											</div>
+										</section>
+									</div>
+								</TMPL_LOOP>
+							</div>
+						</div>
+					</section>
+				</div>
+			</div>
+			<TMPL_ELSE>
+				<div class="row <TMPL_IF NAME='no_company_contract'>hidden</TMPL_IF>">
+					<div class="col-md-12 padding-3">
+						<section class="box">
+							<header class="panel_header">
+								<h2 class="title pull-left"><TMPL_VAR NAME='title_translation'></h2>
+								<div class="actions panel_actions pull-left collapsed">
+									<TMPL_UNLESS NAME='__FIRST__'>
+										<i class="box_toggle fa fa-chevron-up"></i>
+									</TMPL_UNLESS>
+								</div>
+							</header>
+							<div class="content-body <TMPL_UNLESS NAME='__FIRST__'>collapsed</TMPL_UNLESS>">
+								<div class="row row-new">
+									<TMPL_LOOP NAME='ProductList'>
+										<TMPL_UNLESS NAME='hide'>
+											<TMPL_IF NAME='inheritable' VALUE='N'>
+												<div class="col-md-6 padding-3 <TMPL_IF NAME='no_company_contract'>hidden</TMPL_IF>">
+													<section class="box">
+														<header class="panel_header">
+															<h2 class="title pull-left"><TMPL_VAR NAME='title_translation'></h2>
+															<div class="actions panel_actions pull-left">
+																<TMPL_UNLESS NAME='__FIRST__'>
+																	<i class="box_toggle fa fa-chevron-up"></i>
+																</TMPL_UNLESS>
+															</div>
+															<div class="product-enabling-container actions pull-right">
+																<TMPL_IF NAME='HistoryAdmin'>
+																	<a href="#" class="contract-history" product_id="<TMPL_VAR NAME='product_id'>"><TMPL_VAR NAME='LNG_RevisionHistory'></a>
+																</TMPL_IF>
+															</div>
+														</header>
+														<div class="content-body <TMPL_UNLESS NAME='ProductGroupList.__FIRST__'><TMPL_UNLESS NAME='__FIRST__'>collapsed</TMPL_UNLESS></TMPL_UNLESS>">
+															<div class="row">
+																<div class="col-md-6 form-group">
+																	<label class="form-label" for="start_date" table="product"><TMPL_VAR NAME='LNG_ProductStartDate'></label>
+																	<TMPL_IF NAME='HistoryAdmin'>
+																		(<a href="#" class="contract-property-history" product_id="<TMPL_VAR NAME='product_id'>" property_name="start_date"><TMPL_VAR NAME='LNG_RevisionHistory'></a>)
+																	</TMPL_IF>
+																	<input type="text" name="Product[<TMPL_VAR NAME='ProductList.product_id'>][start_date]" class="form-control datepicker"
+																	<TMPL_UNLESS NAME='request_start_date'>
+																		<TMPL_IF NAME='contract_start_date'>
+																			<TMPL_IF NAME='disabled_start_date'>
+																				readonly disabled
+																			</TMPL_IF>
+																		</TMPL_IF>
+																	</TMPL_UNLESS> value="<TMPL_VAR NAME='contract_start_date' FORMAT='datepicker'>" />
+																</div>
+																<div class="col-md-6 form-group">
+																	<label class="form-label" for="end_date" table="product"><TMPL_VAR NAME='LNG_ProductEndDate'></label>
+																	<TMPL_IF NAME='HistoryAdmin'>
+																		(<a href="#" class="contract-property-history" product_id="<TMPL_VAR NAME='product_id'>" property_name="end_date"><TMPL_VAR NAME='LNG_RevisionHistory'></a>)
+																	</TMPL_IF>
+																	<input
+																			type="text"
+																			name="Product[<TMPL_VAR NAME='ProductList.product_id'>][end_date]"
+																			class="form-control datepicker
+																		<TMPL_IF NAME='ProductGroupList.__FIRST__'>
+																			<TMPL_IF NAME='ProductList.__FIRST__'>
+																				base-end-date
+																			</TMPL_IF>
+																		</TMPL_IF>"
+																	<TMPL_IF NAME='contract_start_date'>
+																		<TMPL_IF NAME="Admin">
+																			<TMPL_ELSE>
+																				<TMPL_IF NAME='contract_end_date'>
+																					<TMPL_UNLESS NAME='request_end_date'>
+																						<TMPL_IF NAME='disabled_end_date'>
+																							readonly disabled
+																						</TMPL_IF>
+																					</TMPL_UNLESS>
+																				</TMPL_IF>
+																		</TMPL_IF>
+																	</TMPL_IF>
+																	<TMPL_IF NAME="Admin">
+																		<TMPL_ELSE>
+																			<TMPL_UNLESS NAME='contract_start_date'>
+																				readonly disabled
+																			</TMPL_UNLESS>
+																	</TMPL_IF>
+																	value="<TMPL_VAR NAME='contract_end_date' FORMAT='datepicker'>"
+																	/>
+																</div>
+																<TMPL_IF NAME='contract_start_date'>
+																	<input type="hidden" name="Product[<TMPL_VAR NAME='ProductList.product_id'>][contract_id]" value="<TMPL_VAR NAME='contract_id'>" />
+																</TMPL_IF>
+															</div>
+															<TMPL_IF NAME='HistoryAdmin'>
+																<TMPL_IF NAME="OptionList">
+																	<div class="input-group date-of-params" style="display: inline-block;">
+																		(<label class="form-label" for="date-of-params" table="core"><TMPL_VAR NAME="LNG_DateOfParams"/></label>:
+																		<a href="#"><span class="date-of-param"><TMPL_IF NAME="date_of_params"><TMPL_VAR NAME="date_of_params" FORMAT="date"/><TMPL_ELSE><TMPL_VAR NAME="DateOfParams" FORMAT="date"/></TMPL_IF></span></a>)
+																		<input type="text" class="datepicker" name="Product[<TMPL_VAR NAME='ProductList.product_id'>][date_of_params]" style="visibility: hidden; height: 0" VALUE="<TMPL_VAR NAME='date_of_params' FORMAT='date'/>">
+																	</div>
+																</TMPL_IF>
+															</TMPL_IF>
+															<div class="row">
+																<TMPL_LOOP NAME='OptionList'>
+																	<TMPL_IF NAME='show_group'>
+																		<div class="col-md-12 group-title">
+																			<h3><TMPL_VAR NAME='group_title_translation'></h3>
+																		</div>
+																	</TMPL_IF>
+																	<div class="col-md-6 form-group <TMPL_IF NAME='hide'>hide</TMPL_IF>">
+																		<div>
+																			<label class="form-label" for="<TMPL_VAR NAME='code'>" table="option" show-additional-help="<TMPL_VAR NAME='show_additional_help'/>"><TMPL_VAR NAME='title_translation'></label>
+																			<TMPL_IF NAME='HistoryAdmin'>
+																				(<a href="#" class="option-value-history" option_id="<TMPL_VAR NAME='option_id'>"><TMPL_VAR NAME='LNG_RevisionHistory'></a>)
+																			</TMPL_IF>
+																		</div>
+																		<TMPL_UNLESS NAME='value' VALUE='null'>
+																			<div>
+																				<label class="form-label">
+																					<small class="text-info">
+																						<TMPL_IF NAME='inherited_value_source' VALUE='global'>
+																							<TMPL_VAR NAME='LNG_InheritedValueSourceGlobal'>:
+																								<TMPL_ELSEIF NAME='inherited_value_source' VALUE='company_unit'/>
+																								<TMPL_VAR NAME='LNG_InheritedValueSourceCompanyUnit'/>:
+																						</TMPL_IF>
+																						<TMPL_IF NAME="type" VALUE="currency">
+																							<TMPL_VAR NAME='inherited_value' FORMAT="price">
+																								<TMPL_ELSEIF NAME='type' VALUE='float'>
+																									<TMPL_VAR NAME='inherited_value' FORMAT="price">
+																										<TMPL_ELSE>
+																											<TMPL_VAR NAME='inherited_value'>
+																						</TMPL_IF>
+																					</small>
+																				</label>
+																			</div>
+																			<TMPL_ELSE>
+																				<TMPL_UNLESS NAME='title' VALUE='Deactivation reason'>
+																					<label class="form-label"><small class="text-info"><br></small></label>
+																				</TMPL_UNLESS>
+																		</TMPL_UNLESS>
+																		<TMPL_IF NAME='type' VALUE='flag'>
+																			<input type="checkbox" class="jtoggler" data-jtmulti-state
+																				   name="Product[<TMPL_VAR NAME='ProductList.product_id'>][Option][<TMPL_VAR NAME='option_id'>]"
+																				   value="<TMPL_VAR NAME='value'>" checked <TMPL_IF NAME='disabled'>disabled</TMPL_IF>
+																			>
+																			<TMPL_IF NAME='disabled'>
+																				<input type="hidden"
+																					   name="Product[<TMPL_VAR NAME='ProductList.product_id'>][Option][<TMPL_VAR NAME='option_id'>]"
+																					   value="<TMPL_VAR NAME='value'>" />
+																			</TMPL_IF>
+																			<TMPL_ELSEIF NAME='title' VALUE='Salary option'>
+																				<select class="form-control m-bot15" name="Product[<TMPL_VAR NAME='ProductList.product_id'>][Option][<TMPL_VAR NAME='option_id'>]" <TMPL_IF NAME='disabled'>disabled</TMPL_IF>>
+																					<option value=""></option>
+																					<option value="Z" <TMPL_IF NAME="value" VALUE='Z'>selected</TMPL_IF>><TMPL_VAR NAME='LNG_Z'></option>
+																					<option value="V" <TMPL_IF NAME="value" VALUE='V'>selected</TMPL_IF>><TMPL_VAR NAME='LNG_V'></option>
+																				</select>
+																				<TMPL_IF NAME='disabled'>
+																					<input type="hidden"
+																						   name="Product[<TMPL_VAR NAME='ProductList.product_id'>][Option][<TMPL_VAR NAME='option_id'>]"
+																						   value="<TMPL_VAR NAME='value'>" />
+																				</TMPL_IF>
+																			<TMPL_ELSEIF NAME='title' VALUE='Deactivation reason'>
+																				<select class="form-control m-bot15 reasons" name="Product[<TMPL_VAR NAME='ProductList.product_id'>][Option][<TMPL_VAR NAME='option_id'>]" readonly disabled>
+																					<option value=""></option>
+																					<option value="end" <TMPL_IF NAME="value" VALUE='end'>selected</TMPL_IF>><TMPL_VAR NAME='LNG_EndEmploymentContract'></option>
+																					<option value="continue" <TMPL_IF NAME="value" VALUE='continue'>selected</TMPL_IF>><TMPL_VAR NAME='LNG_ContinueEmploymentContract'></option>
+																				</select>
+																				<TMPL_IF NAME='disabled'>
+																					<input type="hidden"
+																						   name="Product[<TMPL_VAR NAME='ProductList.product_id'>][Option][<TMPL_VAR NAME='option_id'>]"
+																						   value="<TMPL_VAR NAME='value'>" />
+																				</TMPL_IF>
+																				<TMPL_ELSEIF NAME='type' VALUE='monthly-yearly-select'>
+																					<select class="form-control m-bot15" name="Product[<TMPL_VAR NAME='ProductList.product_id'>][Option][<TMPL_VAR NAME='option_id'>]" <TMPL_IF NAME='disabled'>disabled</TMPL_IF>>
+																						<option value=""></option>
+																						<option value="monthly" <TMPL_IF NAME="value" VALUE='monthly'>selected</TMPL_IF>><TMPL_VAR NAME='LNG_Monthly'></option>
+																						<option value="yearly" <TMPL_IF NAME="value" VALUE='yearly'>selected</TMPL_IF>><TMPL_VAR NAME='LNG_Yearly'></option>
+																					</select>
+																					<TMPL_IF NAME='disabled'>
+																						<input type="hidden"
+																							   name="Product[<TMPL_VAR NAME='ProductList.product_id'>][Option][<TMPL_VAR NAME='option_id'>]"
+																							   value="<TMPL_VAR NAME='value'>" />
+																					</TMPL_IF>
+																				<TMPL_ELSEIF NAME='type' VALUE='custom-select'>
+																					<select class="form-control m-bot15" name="Product[<TMPL_VAR NAME='ProductList.product_id'>][Option][<TMPL_VAR NAME='option_id'>]"
+																						<TMPL_IF NAME='disabled'>disabled</TMPL_IF>
+																						<TMPL_IF NAME='category_preference_select'>
+																							data-preference=<TMPL_VAR NAME='category_preference_select'>
+																							data-preference_product_id=<TMPL_VAR NAME='product_id'>
+																						</TMPL_IF>
+																					>
+																						<option value=""></option>
+																						<TMPL_LOOP NAME='SelectList'>
+																							<option value="<TMPL_VAR NAME='Key'>" <TMPL_IF NAME='Selected'>selected</TMPL_IF>><TMPL_VAR NAME='Reason'></option>
+																						</TMPL_LOOP>
+																					</select>
+																					<TMPL_IF NAME='disabled'>
+																						<input type="hidden"
+																							   name="Product[<TMPL_VAR NAME='ProductList.product_id'>][Option][<TMPL_VAR NAME='option_id'>]"
+																							   value="<TMPL_VAR NAME='value'>" />
+																					</TMPL_IF>
+																					<TMPL_IF NAME='category_preference_select'>
+																						<input type="hidden"
+																							   name="Product[<TMPL_VAR NAME='product_id'>][Option][<TMPL_VAR NAME='category_preference_select'>][inherited_value]"
+																							   value="<TMPL_VAR NAME='inherited_value_no_translation'>" />
+																					</TMPL_IF>
+																				<TMPL_ELSEIF NAME='type' VALUE='textarea'>
+																					<textarea class="form-control" name="Product[<TMPL_VAR NAME='ProductList.product_id'>][Option][<TMPL_VAR NAME='option_id'>]" <TMPL_IF NAME='disabled'>readonly="readonly"</TMPL_IF>><TMPL_VAR NAME='value'>
+																					</textarea>
+																				<TMPL_ELSE>
+																					<input type="text" class="form-control" name="Product[<TMPL_VAR NAME='ProductList.product_id'>][Option][<TMPL_VAR NAME='option_id'>]" <TMPL_IF NAME='disabled'>readonly="readonly"</TMPL_IF>
+																					<TMPL_IF NAME='type' VALUE='currency'>
+																						value="<TMPL_VAR NAME='value' FORMAT='price'>"
+																						<TMPL_ELSEIF NAME='type' VALUE='float'>
+																							value="<TMPL_VAR NAME='value' FORMAT='price'>"
+																							<TMPL_ELSE>
+																								value="<TMPL_VAR NAME='value'>"
+																					</TMPL_IF>/>
+																		</TMPL_IF>
+																	</div>
+																</TMPL_LOOP>
+																<TMPL_IF NAME="AgreementEmployment">
+																	<br>
+																	<p><TMPL_VAR NAME="LNG_AgreementEmployment" /></p>
+																	<TMPL_LOOP NAME="AgreementEmployment">
+																		<a href="<TMPL_VAR NAME='linkToAcceptedAgreementVersion' />" target="_blank">
+																			<TMPL_VAR NAME="LNG_AcceptVersion" /> <TMPL_VAR NAME="version" />
+																			<TMPL_VAR NAME="LNG_AcceptDateOf" /> <TMPL_VAR NAME="updated_at" FORMAT="datetime" />.
+																			<TMPL_VAR NAME="LNG_Device" />: <TMPL_VAR NAME="device_info" />
+																		</a>
+																	</TMPL_LOOP>
+																</TMPL_IF>
+															</div>
+														</div>
+													</section>
+												</div>
+											</TMPL_IF>
+										</TMPL_UNLESS>
+									</TMPL_LOOP>
+								</div>
+							</div>
+						</section>
+					</div>
+				</div>
+		</TMPL_IF>
+	</TMPL_LOOP>
+</TMPL_IF>

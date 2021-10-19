@@ -1,0 +1,420 @@
+<div class="row">
+	<section class="box no-margin">
+		<header class="panel_header" for="header_invoice_list_filter" table="billing">
+			<h2 class="title pull-left"><TMPL_VAR NAME='LNG_Filter'></h2>
+			<div class="actions panel_actions pull-left">
+				<i class="box_toggle fa fa-chevron-down"></i>
+			</div>
+		</header>
+		<div class="content-body">
+			<form action="<TMPL_VAR NAME='MODULE_URL'>" method="post">
+				<div class="row">
+					<div class="col-md-3">
+						<div class="form-group">
+							<label class="form-label"><TMPL_VAR NAME='LNG_FilterCreatedRange'></label><br />
+							<input type="text" name="FilterCreatedRange" class="form-control daterange active" value="<TMPL_VAR NAME='FilterCreatedRange'>" data-time-picker-increment="1" data-time-picker="true">
+						</div>
+					</div>
+					<div class="col-md-3">
+						<div class="form-group">
+							<label class="form-label"><TMPL_VAR NAME='LNG_FilterTitle'></label>
+							<input type="text" placeholder="<TMPL_VAR NAME='LNG_FilterTitlePlaceholder'>" class="form-control" name="FilterTitle" value="<TMPL_VAR NAME='FilterTitle'>">
+						</div>
+					</div>
+					<div class="col-md-3">
+						<div class="form-group">
+							<label class="form-label hidden-xs">&nbsp;</label><br />
+							<button type="submit" class="btn btn-primary btn-icon"><i class="fa fa-search"></i> <TMPL_VAR NAME='LNG_FilterApply'></button>
+						</div>
+					</div>
+				</div>
+				<TMPL_VAR NAME='ParamsForFilter' ESCAPE='none'/>
+			</form>
+			<TMPL_IF NAME='Admin'>
+				<div class="row">
+					<div class="col-md-3">
+						<div class="form-group">
+							<label class="form-label hidden-xs">&nbsp;</label><br />
+						</div>
+						<div class="form-group">
+							<label class="form-label"><TMPL_VAR NAME='LNG_DateOfInvoice'></label><br />
+							<input type="text" id="create_date" name="date" class="form-control datepicker" FORMAT='datepicker'>
+						</div>
+					</div>
+					<div class="col-md-3">
+						<div class="form-group">
+							<label class="form-label hidden-xs">&nbsp;</label><br />
+						</div>
+						<div class="form-group">
+							<label class="form-label"><TMPL_VAR NAME='LNG_CompanyUnitID'></label>
+							<select class="select2" name="company_unit_id" data-allow-clear="true">
+								<option value=""></option>
+								<TMPL_LOOP NAME='CompanyUnitList'>
+									<TMPL_IF NAME='Selected'>
+										<option value="<TMPL_VAR NAME='company_unit_id'>" selected><TMPL_VAR NAME='select_prefix'> <TMPL_VAR NAME='title'></option>
+										<TMPL_ELSEIF NAME='archive' VALUE='N'>
+											<option value="<TMPL_VAR NAME='company_unit_id'>"><TMPL_VAR NAME='select_prefix'> <TMPL_VAR NAME='title'></option>
+									</TMPL_IF>
+								</TMPL_LOOP>
+							</select>
+						</div>
+					</div>
+					<div class="col-md-6">
+						<div class="form-group">
+							<label class="form-label hidden-xs">&nbsp;</label><br />
+							<button id="create_invoice" class="btn btn-primary btn-icon"> <TMPL_VAR NAME='LNG_CreateInvoice'></button>
+						</div>
+						<div class="form-group">
+							<label class="form-label hidden-xs">&nbsp;</label><br />
+							<button id="create_voucher_invoice" class="btn btn-primary btn-icon"> <TMPL_VAR NAME='LNG_CreateVoucherInvoice'></button>
+						</div>
+					</div>
+				</div>
+				<form action="<TMPL_VAR NAME='MODULE_URL'>" method="post">
+					<h5><strong><TMPL_VAR NAME='LNG_ExportDatev'></strong></h5>
+					<div class="row">
+						<div class="col-md-3 form-group">
+							<label class="form-label"><TMPL_VAR NAME='LNG_ExportDateFrom'></label>
+							<input type="text" class="form-control datepicker" name="DateFrom">
+						</div>
+						<div class="col-md-3 form-group">
+							<label class="form-label"><TMPL_VAR NAME='LNG_ExportDateTo'></label>
+							<input type="text" class="form-control datepicker" name="DateTo">
+						</div>
+						<div class="col-md-3 form-group">
+							<label class="form-label hidden-xs">&nbsp;</label><br />
+							<button type="submit" class="btn btn-primary btn-icon"><i class="fa fa-file-export"></i> <TMPL_VAR NAME='LNG_Export'></button>
+						</div>
+					</div>
+					<input type="hidden" name="Action" value="Export" />
+					<TMPL_VAR NAME='ParamsForFilter' ESCAPE='none'>
+				</form>
+				<form action="<TMPL_VAR NAME='MODULE_URL'>" method="post">
+					<div class="row">
+						<div class="col-md-3 form-group"></div>
+						<div class="col-md-3 form-group">
+							<label class="form-label"><TMPL_VAR NAME='LNG_InvoiceExportCreated'></label>
+							<input type="text" class="form-control datepicker" name="InvoiceExportCreated">
+						</div>
+						<div class="col-md-3 form-group">
+							<label class="form-label hidden-xs">&nbsp;</label><br />
+							<button type="submit" class="btn btn-primary btn-icon"> <TMPL_VAR NAME='LNG_ResetInvoiceExport'></button>
+						</div>
+					</div>
+					<input type="hidden" name="Action" value="DeactivateInvoiceExport" />
+					<TMPL_VAR NAME='ParamsForFilter' ESCAPE='none'>
+				</form>
+				<form action="<TMPL_VAR NAME='MODULE_URL'>" method="post">
+					<h5><strong><TMPL_VAR NAME='LNG_ExportVoucherDatev'></strong></h5>
+					<div class="row">
+						<div class="col-md-3 form-group">
+							<label class="form-label"><TMPL_VAR NAME='LNG_ExportDateFrom'></label>
+							<input type="text" class="form-control datepicker" name="VoucherDateFrom">
+						</div>
+						<div class="col-md-3 form-group">
+							<label class="form-label"><TMPL_VAR NAME='LNG_ExportDateTo'></label>
+							<input type="text" class="form-control datepicker" name="VoucherDateTo">
+						</div>
+						<div class="col-md-3 form-group">
+							<label class="form-label hidden-xs">&nbsp;</label><br />
+							<button type="submit" class="btn btn-primary btn-icon"><i class="fa fa-file-export"></i> <TMPL_VAR NAME='LNG_VoucherExport'></button>
+						</div>
+					</div>
+					<input type="hidden" name="Action" value="VoucherExport" />
+					<TMPL_VAR NAME='ParamsForFilter' ESCAPE='none'>
+				</form>
+				<form action="<TMPL_VAR NAME='MODULE_URL'>" method="post">
+					<div class="row">
+						<div class="col-md-3 form-group"></div>
+						<div class="col-md-3 form-group">
+							<label class="form-label"><TMPL_VAR NAME='LNG_InvoiceVoucherExportCreated'></label>
+							<input type="text" class="form-control datepicker" name="InvoiceVoucherExportCreated">
+						</div>
+						<div class="col-md-3 form-group">
+							<label class="form-label hidden-xs">&nbsp;</label><br />
+							<button type="submit" class="btn btn-primary btn-icon"> <TMPL_VAR NAME='LNG_ResetVoucherInvoiceExport'></button>
+						</div>
+					</div>
+					<input type="hidden" name="Action" value="DeactivateInvoiceVoucherExport" />
+					<TMPL_VAR NAME='ParamsForFilter' ESCAPE='none'>
+				</form>
+			</TMPL_IF>
+		</div>
+	</section>
+</div>
+
+<div class="row">
+	<section class="box no-margin">
+		<div class="content-body padding-3">
+			<div class="row row-new">
+				<div class="row">
+					<ul class="nav nav-tabs left-align-title">
+						<li
+						<TMPL_IF NAME='Admin'>
+							<TMPL_IF NAME='ActiveTab' VALUE='1'>class="active"<TMPL_ELSEIF NAME='ActiveTab' VALUE=''>class="active"</TMPL_IF>
+							<TMPL_ELSE>class="active"
+						</TMPL_IF>>
+						<a href="#tab-1" data-toggle='tab' for="nav_tab1_invoice_list" table="invoice_list"><TMPL_VAR NAME='LNG_InvoiceList'></a>
+						</li>
+						<TMPL_IF NAME='Admin'>
+							<li
+							<TMPL_IF NAME='ActiveTab' VALUE='2'>class="active"</TMPL_IF>>
+							<a href="#tab-2" data-toggle='tab' for="nav_tab2_export_invoice_list" table="export_invoice_list"><TMPL_VAR NAME='LNG_ExportInvoiceList'></a>
+							</li>
+						</TMPL_IF>
+					</ul>
+				</div>
+				<div class="tab-content">
+					<div id="tab-1" class="tab-pane <TMPL_IF NAME='ActiveTab' VALUE='1'>active<TMPL_ELSEIF NAME='ActiveTab' VALUE=''>active</TMPL_IF>">
+						<section class="box no-margin">
+							<header class="panel_header" for="header_invoice_list" table="invoice_list">
+								<h2 class="title"><TMPL_VAR NAME='LNG_InvoiceList'></h2>
+							</header>
+							<div class="content-body">
+								<div class="row">
+									<div class="col-md-12 col-sm-12 col-xs-12">
+										<TMPL_IF NAME='InvoiceList'>
+											<div class="row">
+												<div class="col-md-6 form-group text-center-xs">
+													<span><TMPL_VAR NAME='ListInfo'></span>
+												</div>
+												<div class="col-md-6 form-group text-right text-center-xs">
+													<form action="<TMPL_VAR NAME='MODULE_URL'>" method="post" class="form-inline">
+														<span class="right15 visible-xs-block visible-sm-inline visible-md-inline visible-lg-inline"><TMPL_VAR NAME='LNG_InvoicesOnPage'></span>
+														<select name="ItemsOnPageInvoice" class="form-control">
+															<TMPL_LOOP NAME='ItemsOnPageListInvoice'>
+																<option <TMPL_IF NAME='Selected'>selected</TMPL_IF> value="<TMPL_VAR NAME='Value'>"><TMPL_IF NAME='Value'><TMPL_VAR NAME='Value'><TMPL_ELSE><TMPL_VAR NAME='LNG_All'></TMPL_IF></option>
+															</TMPL_LOOP>
+														</select>
+														<TMPL_VAR NAME='ParamsForItemsOnPageInvoice' ESCAPE='none'>
+															<input type="hidden" name="ActiveTab" value="1">
+													</form>
+												</div>
+											</div>
+											<table class="table table-striped">
+												<thead>
+													<tr>
+														<th><TMPL_VAR NAME='LNG_InvoiceType'></th>
+														<th><TMPL_VAR NAME='LNG_CompanyUnitTitle'></th>
+														<th><TMPL_VAR NAME='LNG_Created'></th>
+														<th><TMPL_VAR NAME='LNG_Period'></th>
+														<th><TMPL_VAR NAME='LNG_CostWithVat'></th>
+														<th><TMPL_VAR NAME='LNG_Status'></th>
+														<th><TMPL_VAR NAME='LNG_PDF'></th>
+														<TMPL_IF NAME='Admin'>
+															<th width="3%" align="center"><TMPL_VAR NAME='LNG_InvoiceDetails'></th>
+															<th width="3%"></th>
+														</TMPL_IF>
+														<th width="7%"></th>
+													</tr>
+												</thead>
+												<tbody>
+													<TMPL_LOOP NAME='InvoiceList'>
+														<TMPL_IF NAME='archive' VALUE='N'>
+															<tr>
+																<TMPL_ELSE/>
+															<tr class="inactive">
+														</TMPL_IF>
+															<td>
+																<TMPL_IF NAME='invoice_type' VALUE='voucher_invoice'>
+																	<TMPL_VAR NAME='LNG_InvoiceVoucher'>
+																	<TMPL_ELSE>
+																		<TMPL_VAR NAME='LNG_InvoicePlain'>
+																</TMPL_IF>
+															</td>
+															<td><TMPL_VAR NAME='company_unit_title'></td>
+															<td><TMPL_VAR NAME='created' FORMAT='datetime'></td>
+															<td><TMPL_VAR NAME='date_from' FORMAT='date'> - <TMPL_VAR NAME='date_to' FORMAT='date'></td>
+															<td><TMPL_VAR NAME='cost_with_vat' FORMAT='price'>€</td>
+															<td><TMPL_IF NAME='archive' VALUE='Y'><TMPL_VAR NAME='LNG_Cancelled'><TMPL_ELSE><TMPL_VAR NAME='status_title'></TMPL_IF></td>
+															<td align="center"><a rel="tooltip" data-toggle="tooltip" data-original-title="<TMPL_VAR NAME='LNG_DownloadPDF'>" data-placement="top" target="_blank" href="<TMPL_VAR NAME='MODULE_URL'>&<TMPL_VAR NAME='ParamsForURL'>&Action=GetInvoicePDF&invoice_id=<TMPL_VAR NAME='invoice_id'>"><i class="fa fa-file-pdf-o"></i></a></td>
+															<TMPL_IF NAME='Admin'>
+																<td align="center">
+																	<TMPL_IF NAME="details_file">
+																		<a rel="tooltip" data-toggle="tooltip" data-original-title="<TMPL_VAR NAME='LNG_DownloadInvoiceDetails'>" data-placement="top" target="_blank" href="<TMPL_VAR NAME='MODULE_URL'>&<TMPL_VAR NAME='ParamsForURL'>&Action=GetInvoiceDetails&invoice_id=<TMPL_VAR NAME='invoice_id'>"><i class="fa fa-file-pdf-o"></i></a>
+																	</TMPL_IF>
+																</td>
+															</TMPL_IF>
+															<td class="text-right">
+																<TMPL_IF NAME='Admin'>
+																	<TMPL_IF NAME='archive' VALUE='N'>
+																		<a href="<TMPL_VAR NAME='MODULE_URL'>&<TMPL_VAR NAME='ParamsForURL'>&Do=Remove&InvoiceIDs[]=<TMPL_VAR NAME='invoice_id'>" class="confirm-remove" title="<TMPL_VAR NAME='LNG_InvoiceFor'> '<TMPL_VAR NAME='company_unit_title'>' <TMPL_VAR NAME='LNG_Created'> <TMPL_VAR NAME='created' FORMAT='datetime'>"><i class='fa fa-close delete'></i></a>
+																	</TMPL_IF>
+																</TMPL_IF>
+															</td>
+															<td>
+																<TMPL_IF NAME='HistoryAdmin'>
+																	(<a href="#" class="property-history" property_name="archive" invoice_id="<TMPL_VAR NAME='invoice_id'>"><TMPL_VAR NAME='LNG_RevisionHistory'></a>)
+																</TMPL_IF>
+															</td>
+														</tr>
+													</TMPL_LOOP>
+												</tbody>
+											</table>
+											<div class="text-center">
+												<ul class="pagination">
+													<TMPL_VAR NAME='PagingInvoice' ESCAPE='none'>
+												</ul>
+											</div>
+										<TMPL_ELSE>
+											<div class="alert alert-success"><TMPL_VAR NAME='LNG_Empty'></div>
+										</TMPL_IF>
+									</div>
+								</div>
+							</div>
+						</section>
+					</div>
+					<div id="tab-2" class="tab-pane <TMPL_IF NAME='ActiveTab' VALUE='2'>active</TMPL_IF>">
+						<section class="box no-margin">
+							<header class="panel_header" for="header_export_invoice_list" table="export_invoice_list">
+								<h2 class="title"><TMPL_VAR NAME='LNG_ExportInvoiceList'></h2>
+							</header>
+							<div class="content-body">
+								<div class="row">
+									<div class="col-md-12 col-sm-12 col-xs-12">
+										<TMPL_IF NAME='ExportInvoiceList'>
+											<div class="row">
+												<div class="col-md-6 form-group text-center-xs">
+													<span><TMPL_VAR NAME='ListInfo'></span>
+												</div>
+												<div class="col-md-6 form-group text-right text-center-xs">
+													<form action="<TMPL_VAR NAME='MODULE_URL'>" method="post" class="form-inline">
+														<span class="right15 visible-xs-block visible-sm-inline visible-md-inline visible-lg-inline"><TMPL_VAR NAME='LNG_ExportInvoicesOnPage'></span>
+														<select name="ItemsOnPageExportInvoice" class="form-control">
+															<TMPL_LOOP NAME='ItemsOnPageListExportInvoice'>
+																<option <TMPL_IF NAME='Selected'>selected</TMPL_IF> value="<TMPL_VAR NAME='Value'>"><TMPL_IF NAME='Value'><TMPL_VAR NAME='Value'><TMPL_ELSE><TMPL_VAR NAME='LNG_All'></TMPL_IF></option>
+															</TMPL_LOOP>
+														</select>
+														<TMPL_VAR NAME='ParamsForItemsOnPageExportInvoice' ESCAPE='none'>
+															<input type="hidden" name="ActiveTab" value="2">
+													</form>
+												</div>
+											</div>
+											<table class="table table-striped">
+												<thead>
+												<tr>
+													<th><TMPL_VAR NAME='LNG_ExportInvoiceType'></th>
+													<th><TMPL_VAR NAME='LNG_Period'></th>
+													<th><TMPL_VAR NAME='LNG_Created'></th>
+													<th><TMPL_VAR NAME='LNG_CreatedUser'></th>
+													<th><TMPL_VAR NAME='LNG_ExportFile'></th>
+												</tr>
+												</thead>
+												<tbody>
+												<TMPL_LOOP NAME='ExportInvoiceList'>
+													<TMPL_IF NAME='archive' VALUE='N'>
+														<tr>
+															<TMPL_ELSE/>
+														<tr class="inactive">
+													</TMPL_IF>
+														<td>
+															<TMPL_IF NAME='type' VALUE='voucher_invoice'>
+																<TMPL_VAR NAME='LNG_ExportInvoiceVoucherType'>
+															<TMPL_ELSE>
+																<TMPL_VAR NAME='LNG_ExportInvoiceServiceType'>
+															</TMPL_IF>
+														</td>
+														<td><TMPL_VAR NAME='date_from' FORMAT='date'> - <TMPL_VAR NAME='date_to' FORMAT='date'></td>
+														<td><TMPL_VAR NAME='created' FORMAT='datetime'></td>
+														<td>
+															<a href="<TMPL_VAR NAME='ADMIN_PATH'>user.php?user_id=<TMPL_VAR NAME='user_id'>">
+																<TMPL_VAR NAME='created_user_name'>
+															</a>
+														</td>
+														<td><a rel="tooltip" data-toggle="tooltip" data-original-title="<TMPL_VAR NAME='LNG_DownloadCSV'>" data-placement="top" target="_blank" href="<TMPL_VAR NAME='MODULE_URL'>&<TMPL_VAR NAME='ParamsForURL'>&Action=GetExportInvoiceCSV&export_id=<TMPL_VAR NAME='export_id'>"><i class="fa fa-file-text-o"></i></a></td>
+													</tr>
+												</TMPL_LOOP>
+												</tbody>
+											</table>
+											<div class="text-center">
+												<ul class="pagination">
+													<TMPL_VAR NAME='PagingExportInvoice' ESCAPE='none'>
+												</ul>
+											</div>
+											<TMPL_ELSE>
+												<div class="alert alert-success"><TMPL_VAR NAME='LNG_Empty'></div>
+										</TMPL_IF>
+									</div>
+								</div>
+							</div>
+						</section>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+</div>
+<script type="text/javascript">
+	$(document).ready(function(){
+		$('select[name=ItemsOnPageInvoice]').change(function(){
+			$(this).closest('form').submit();
+		});
+
+		$('select[name=ItemsOnPageExportInvoice]').change(function(){
+			$(this).closest('form').submit();
+		});
+
+        $('#create_invoice').click(function () {
+            var date = $("#create_date").val().split('.');
+            var companyUnitID = "";
+            if ($("[name=company_unit_id]").val() != "")
+                companyUnitID = "&company_unit_id=" + $("[name=company_unit_id]").val();
+            var isCron = "&is_cron=true";
+            if (date.length == 3) {
+                $.ajax({
+                    url: '<TMPL_VAR NAME='PROJECT_PATH'>module/billing/cron/invoice_create.php?date=' + date[2] + '-' + date[1] + '-' + date[0] + companyUnitID + isCron,
+                    complete: function (data) {
+						location.href = "<TMPL_VAR NAME='PROJECT_PATH'>admin/module.php?load=billing&Section=invoice&ActiveTab=1";
+                    }
+                });
+            }
+        });
+        $('#create_voucher_invoice').click(function () {
+            var date = $("#create_date").val().split('.');
+            var companyUnitID = "";
+            if ($("[name=company_unit_id]").val() != "")
+                companyUnitID = "&company_unit_id=" + $("[name=company_unit_id]").val();
+            var isCron = "&is_cron=true";
+            if (date.length == 3) {
+                $.ajax({
+                    url: '<TMPL_VAR NAME='PROJECT_PATH'>module/billing/cron/invoice_voucher_create.php?date=' + date[2] + '-' + date[1] + '-' + date[0] + companyUnitID + isCron,
+                    complete: function (data) {
+                        location.href = "<TMPL_VAR NAME='PROJECT_PATH'>admin/module.php?load=billing&Section=invoice&ActiveTab=1";
+                    }
+                });
+            }
+        });
+        $('.property-history').click(function (e) {
+            var propertyName = $(this).attr('property_name');
+            var invoiceID = $(this).attr('invoice_id');
+            $.ajax({
+                url: '<TMPL_VAR NAME='PROJECT_PATH'>module/billing/ajax.php',
+                type: 'GET',
+                dataType: 'JSON',
+                data:{
+                    Action: 'GetPropertyHistoryInvoiceHTML',
+                    property_name: propertyName,
+                    invoice_id: invoiceID
+                },
+                success: function(data){
+                    if(typeof data.HTML != 'undefined'){
+                        $(data.HTML).modal('show').on('hidden.bs.modal', function () {
+                            $(this).remove();
+                        });
+                    }
+                }
+            });
+            e.preventDefault();
+        });
+
+		$(document).on('click','a.confirm-remove',function(e){
+            var a = $(this);
+            var title = a.attr('title');
+            var msg = '<TMPL_VAR NAME="LNG_RemoveMessage">'.replace(/%Title%/g, title);
+            ModalConfirm(msg, function(){
+                window.location.href = a.attr('href');
+            });
+            e.preventDefault();
+        });
+	});
+</script>

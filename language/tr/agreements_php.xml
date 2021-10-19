@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Root>
+    <module-title>Ergänzende Vereinbarung</module-title>
+
+    <error-save-content-empty>Der Vereinbarungstext ist leer</error-save-content-empty>
+    <send-email-contract-subject>Ergänzende Vereinbarung für %FirstName% %LastName%</send-email-contract-subject>
+    <send-email-contract-message>Guten Tag %Salutation% %FirstName% %LastName%,
+
+        wir freuen uns, dass Sie unseren trebono Cloud Service verwenden
+        und wünschen Ihnen und ihrem Unternehmen viel Erfolg beim Steuern sparen.
+
+        Sie finden die Ergänzende Vereinbarung für das Modul %ServiceName% für Ihre(n) Mitarbeiter(in)
+        %EmployeeFirstName% %EmployeeLastName% unter dem folgenden Link:
+
+        %LinkToTheAgreement%
+        %LinkToTheAgreementList%
+
+        Wie gewohnt können Sie sich mit Ihren normalen Zugangsdaten die Ergänzende Vereinbarung herunterladen.
+
+        Sollten Sie Fragen oder Anregungen haben wenden Sie sich bitte jederzeit gerne an uns,
+        am besten mit einem E-Mail an support@trebono.de.
+
+        So, nun wünschen wir Ihnen weiterhin viel Spaß und Erfolg
+        beim Digitalisieren Ihrer Belege und dem Sparen von Abgaben!
+    </send-email-contract-message>
+    <send-email-contract-link-agreement>Link zur Ergänzenden Vereinbarung</send-email-contract-link-agreement>
+    <send-email-contract-link-agreement-list>Link zur Liste aller Ergänzenden Vereinbarungen
+    </send-email-contract-link-agreement-list>
+</Root>

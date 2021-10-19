@@ -1,0 +1,45 @@
+<div class="modal fade" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="ultraModal-Label" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title"><TMPL_VAR NAME='LNG_ConfirmationHistory'></h4>
+            </div>
+            <div class="modal-body">
+                
+                <TMPL_IF NAME='HistoryList'>
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>#</th>
+                            <th><TMPL_VAR NAME='LNG_User'></th>
+                            <th><TMPL_VAR NAME='LNG_Created'></th>
+                            <th width="100"></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <TMPL_LOOP NAME='HistoryList'>
+                            <tr>
+                                <th scope="row"><TMPL_VAR NAME='__ROWNUM__'></th>
+                                <td><a href="<TMPL_VAR NAME='ADMIN_PATH'>user.php?user_id=<TMPL_VAR NAME='user_id'>"><TMPL_VAR NAME='user_first_name'> <TMPL_VAR NAME='user_last_name'></a></td>
+                                <td><TMPL_VAR NAME='created' FORMAT='datetime'></td>
+                                <td>
+                                    <a href="<TMPL_VAR NAME='MODULE_URL' />&<TMPL_VAR NAME='URL_PARAMS' />&Section=confirmation&Action=HistoryView&ConfirmationID=<TMPL_VAR NAME='value_id'>" target="_blank">
+                                        <span class="fa fa-eye"></span> view
+                                    </a>
+                                </td>
+                            </tr>
+                        </TMPL_LOOP>
+                        </tbody>
+                    </table>
+                    <TMPL_ELSE>
+                        <div class="alert alert-success"><TMPL_VAR NAME='LNG_Empty'></div>
+                </TMPL_IF>
+                
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-info" data-dismiss="modal"><TMPL_VAR NAME='LNG_Close'></button>
+            </div>
+        </div>
+    </div>
+</div>

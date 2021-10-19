@@ -1,0 +1,9 @@
+--lst-main
+ALTER TABLE public.employee_option_value
+    ALTER COLUMN value DROP NOT NULL;
+
+UPDATE public.option SET group_id=3 WHERE code LIKE '%_salary_option'
+
+--lst-control
+ALTER TABLE public.option_value_history
+    ALTER COLUMN value DROP NOT NULL;

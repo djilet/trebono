@@ -1,0 +1,194 @@
+<div class="row">
+	<section class="box no-margin">
+		<header class="panel_header" for="header_variable" table="core">
+			<h2 class="title pull-left"><TMPL_VAR NAME='Title'></h2>
+		</header>
+		<div class="content-body">
+			<form action="variable.php" method="get" class="form-inline">
+				<select name="section" onchange="this.form.submit();" class="form-control">
+					<TMPL_LOOP NAME='SectionList'>
+						<option value="<TMPL_VAR NAME='Section'>" <TMPL_IF NAME='Selected'>selected</TMPL_IF>><TMPL_VAR NAME='Title'></option>
+					</TMPL_LOOP>
+				</select>
+			</form>
+			
+			<hr />
+			<div class="form-group">
+				<textarea type="text" class="result form-control"></textarea>
+			</div>
+			<TMPL_IF NAME='VariableList'>
+				<form action="<TMPL_VAR NAME='ADMIN_PATH'>variable.php" method="post" id="variable-list">
+					<div class="col-md-12 no-padding">
+						<a href="#" class="btn btn-success" onclick="return Generate('insert', $('#variable-list')[0], 'VariableIDs[]');">Get insert</a>
+						<a href="#" class="btn btn-danger" onclick="return Generate('delete', $('#variable-list')[0], 'VariableIDs[]');">Get delete</a>
+						<a href="#" class="btn btn-primary" onclick="return Generate('template', null, null);">Get template</a>
+					</div>
+					<table class="table table-hover" id="listing">
+						<thead>
+							<tr>
+								<th width="10%"></th>
+								<th width="20%"><TMPL_VAR NAME='TagName'></th>
+								<th width="60%"><TMPL_VAR NAME='VariableValue'></th>
+								<th width="10%"></th>
+							</tr>
+						</thead>
+						<TMPL_LOOP NAME='VariableList'>
+							<tr class="variable-list-template">
+								<th colspan="4"><TMPL_VAR NAME='template'></th>
+							</tr>
+							<tr class="variable-add clickable" template="<TMPL_VAR NAME='template'>" module="<TMPL_VAR NAME='module'>" type="<TMPL_VAR NAME='type'>">
+								<th colspan="4">+</th>
+							</tr>
+							<TMPL_LOOP NAME='variable_list'>
+								<tr class="variable">
+									<td><input type="checkbox" class="icheck-minimal-green" name="VariableIDs[]" value="<TMPL_VAR NAME='variable_id'>" /></td>
+									<td><TMPL_VAR NAME='tag_name'></td>
+									<td>
+										<div class="variable-value"><span variable_id="<TMPL_VAR NAME='variable_id'>"></span><TMPL_VAR NAME='value'></span>
+										</div></td><td><i class="fa fa-edit variable-edit" variable_id="<TMPL_VAR NAME='variable_id'>"></i>
+									</td>
+								</tr>
+							</TMPL_LOOP>
+						</TMPL_LOOP>
+					</table>
+				</form>
+			<TMPL_ELSE>
+				<div class="alert alert-success"><TMPL_VAR NAME='LNG_Empty'></div>
+			</TMPL_IF>
+		</div>
+	</section>
+</div>
+
+<div id="variable-add" class="modal">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<form id="variable-add-form" onsubmit="GetInsert();return false;">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title">Add variable</h4>
+			</div>
+			<div class="modal-body">
+				<div class="form-group">
+					<input name="tag_name" type="text" class="form-control var-tag-name" placeholder="Tag name">
+				</div>
+				<TMPL_LOOP NAME='InterfaceLanguageList'>
+				<TMPL_IF NAME='Folder' OP='!=' VALUE='tr'>
+					<div class="form-group">
+						<textarea name="Value[<TMPL_VAR NAME='Folder'>]" type="text" class="form-control var-value" placeholder="Value <TMPL_VAR NAME='Folder'>"></textarea>
+					</div>
+					</TMPL_IF>
+				</TMPL_LOOP>
+			</div>
+			
+			<div class="modal-body-hidden"></div>
+
+			<div class="modal-footer">
+				<button type="button" class="btn variable-add-cancel">Cancel</button>
+				<button type="submit" class="btn btn-success">Get query</button>
+			</div>
+			</form>
+		</div>
+	</div>
+</div>
+
+<script type="text/javascript">
+
+	function Generate(type, form, elmName)
+	{
+		if(type == "template") {
+			
+			$.ajax({
+                url: "<TMPL_VAR NAME='MODULE_PATH'>variable.php",
+                type: 'GET',
+                dataType: 'JSON',
+                data:{
+                	Action: 'GetTemplate'
+                },
+                success: function(data){
+                	$('.result').html(data);
+                }
+            });
+			
+			return false;
+		}
+		
+		var checked = 0;
+		for (var i = 0; i < form.elements.length; i++)
+		{
+			if (form.elements[i].name == elmName && form.elements[i].type == "checkbox" && form.elements[i].checked)
+			{
+				checked++;
+			}
+		}
+	
+		if (checked == 0)
+		{
+			$('.result').html("");
+		}
+		else
+		{
+			var form = $('#variable-list');
+			var formData = form.serializeArray();
+			var action = "GetDelete";
+			if(type == "insert"){
+				action = "GetInsert";
+			}
+			
+			formData.push({name: 'Action', value: action});
+			
+			$.ajax({
+                url: "<TMPL_VAR NAME='MODULE_PATH'>variable.php",
+                type: 'GET',
+                dataType: 'JSON',
+                data:formData,
+                success: function(data){
+                	$('.result').html(data);
+                }
+            });
+		}
+		return false;
+	}
+	
+	function GetInsert()
+	{
+		
+		var form = $('#variable-add-form')
+		var formData = form.serializeArray();
+		formData.push({name: 'Action', value: 'GetInsertQuery'});
+			
+		$.ajax({
+               url: "<TMPL_VAR NAME='MODULE_PATH'>variable.php",
+               type: 'GET',
+               dataType: 'JSON',
+               data:formData,
+               success: function(data){
+            	   if(data){
+            		   $('.result').html(data);
+                  		$('#variable-add').modal('hide');
+            	   }
+               }
+           });
+		return false;
+	}
+	
+	$(document).on('click', '.variable-add', function(e){
+		
+		var html = '<input type="hidden" name="module" id="Module" value="'+$(this).attr("module")+'" />';
+		html += '<input type="hidden" name="type" id="Type" value="'+$(this).attr("type")+'" />';
+		html += '<input type="hidden" name="template" id="Template" value="'+$(this).attr("template")+'" />';
+		
+		$('#variable-add .modal-body-hidden').html(html);
+		
+		$('.var-value').text("");
+		$('.var-tag-name').val("");
+		
+		$('#variable-add').modal('show');
+		e.preventDefault();
+	});
+	
+	$(document).on('click', '.variable-add-cancel', function(e){
+		$('#variable-add').modal('hide');
+		e.preventDefault();
+	});
+	
+	</script>

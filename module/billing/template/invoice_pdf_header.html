@@ -1,0 +1,28 @@
+<htmlpageheader name="firstpage" style="display:none">
+	<div class="invoice-header">
+		<br />
+		<div class="image">
+			<img align="right" src="<TMPL_VAR NAME='PROJECT_PATH'>module/<TMPL_VAR NAME='Module'>/template/images/logo.png">
+		</div>	
+	</div>
+</htmlpageheader>
+
+<htmlpageheader name="otherpages" style="display:none">
+    <div class="invoice-header">
+		<br />
+		<div class="image">
+			<img align="right" src="<TMPL_VAR NAME='PROJECT_PATH'>module/<TMPL_VAR NAME='Module'>/template/images/logo.png">
+		</div>
+		<br /><br /><br />
+		<table width="100%" border="0">
+			<tr>
+				<td width="33%"><strong>Rechnung Nr. <TMPL_VAR NAME='INVOICE_invoice_guid'></strong></td>
+				<td width="34%" align="center"><strong>vom <TMPL_VAR NAME='INVOICE_created' FORMAT='date_german'></strong></td>
+				<td width="33%" align="right"><strong>Seite: {PAGENO} von {nb}</strong></td>
+			</tr>
+		</table>
+	</div>
+</htmlpageheader>
+
+<sethtmlpageheader name="firstpage" value="on" show-this-page="1" />
+<sethtmlpageheader name="otherpages" value="on" />

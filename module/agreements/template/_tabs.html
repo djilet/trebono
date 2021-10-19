@@ -1,0 +1,19 @@
+<nav class="navbar navbar-default navbar-primary">
+    <div class="container-fluid">
+        <div class="collapse navbar-collapse" id="header-navbar">
+            <ul class="nav navbar-nav">
+                <li <TMPL_IF NAME='Section' VALUE="Contracts"> class="active"</TMPL_IF>>
+                    <a href="<TMPL_VAR NAME='MODULE_URL' />&Section=Contracts&OrganizationID=<TMPL_VAR NAME='OrganizationID' />">
+                        <TMPL_VAR NAME="LNG_SectionContracts" />
+                    </a>
+                </li>
+                <li <TMPL_IF NAME='Section' VALUE="Employees"> class="active"</TMPL_IF>>
+                    <a href="<TMPL_VAR NAME='MODULE_URL' />&Section=Employees&OrganizationID=<TMPL_VAR NAME='OrganizationID' />">
+                        <TMPL_VAR NAME="LNG_SectionEmployees" />
+                    </a>
+                </li>
+            </ul>
+        </div>
+        
+    </div>
+</nav>

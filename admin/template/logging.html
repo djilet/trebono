@@ -1,0 +1,139 @@
+<div class="row">
+	<section class="box no-margin">
+		<header class="panel_header" for="header_logging" table="core">
+			<h2 class="title"><TMPL_VAR NAME='LNG_Logging'></h2>
+		</header>
+		<div class="content-body">
+			<div class="col-md-12 no-padding form-group">
+				<form action="<TMPL_VAR NAME='ADMIN_PATH'>logging.php" method="post" autocomplete="off">
+					<div class="row">
+						<div class="col-md-3 col-sm-3">
+							<div class="form-group">
+								<label class="form-label"><TMPL_VAR NAME='LNG_FilterDateRange'></label>
+								<input type="text" name="FilterDateRange" class="form-control daterange active" value="<TMPL_VAR NAME='FilterDateRange'>" data-time-picker-increment="1" data-time-picker="true">
+							</div>
+						</div>
+						<div class="col-md-2 col-sm-2">
+							<div class="form-group">
+								<label class="form-label"><TMPL_VAR NAME='LNG_FilterUser'></label>
+								<input type="text" name="FilterUser" class="form-control" value="<TMPL_VAR NAME='FilterUser'>">
+							</div>
+						</div>
+						<div class="col-md-2 col-sm-2">
+							<label class="form-label"><TMPL_VAR NAME='LNG_FilterSection'></label>
+							<select name="FilterSection" class="form-control">
+								<option value=""><TMPL_VAR NAME='LNG_All'></option>
+								<option value="receipt" <TMPL_IF NAME='FilterSection' value='receipt'>selected</TMPL_IF>><TMPL_VAR NAME='LNG_Receipt'></option>
+								<option value="support" <TMPL_IF NAME='FilterSection' value='support'>selected</TMPL_IF>><TMPL_VAR NAME='LNG_Support'></option>
+								<option value="company" <TMPL_IF NAME='FilterSection' value='company'>selected</TMPL_IF>><TMPL_VAR NAME='LNG_Company'></option>
+								<option value="employee" <TMPL_IF NAME='FilterSection' value='employee'>selected</TMPL_IF>><TMPL_VAR NAME='LNG_Employee'></option>
+								<option value="product" <TMPL_IF NAME='FilterSection' value='product'>selected</TMPL_IF>><TMPL_VAR NAME='LNG_Product'></option>
+								<option value="partner" <TMPL_IF NAME='FilterSection' value='partner'>selected</TMPL_IF>><TMPL_VAR NAME='LNG_Partner'></option>
+								<option value="billing" <TMPL_IF NAME='FilterSection' value='billing'>selected</TMPL_IF>><TMPL_VAR NAME='LNG_Billing'></option>
+								<option value="settings" <TMPL_IF NAME='FilterSection' value='settings'>selected</TMPL_IF>><TMPL_VAR NAME='LNG_Settings'></option>
+								<option value="config" <TMPL_IF NAME='FilterSection' value='config'>selected</TMPL_IF>><TMPL_VAR NAME='LNG_Config'></option>
+								<option value="logging" <TMPL_IF NAME='FilterSection' value='logging'>selected</TMPL_IF>><TMPL_VAR NAME='LNG_Logging'></option>
+								<option value="user" <TMPL_IF NAME='FilterSection' value='user'>selected</TMPL_IF>><TMPL_VAR NAME='LNG_Users'></option>
+								<option value="dashboard" <TMPL_IF NAME='FilterSection' value='dashboard'>selected</TMPL_IF>><TMPL_VAR NAME='LNG_Dashboard'></option>
+								<option value="push_history" <TMPL_IF NAME='FilterSection' value='push_history'>selected</TMPL_IF>><TMPL_VAR NAME='LNG_PushHistory'></option>
+							</select>
+						</div>
+						<div class="col-md-2 col-sm-2">
+							<label class="form-label"><TMPL_VAR NAME='LNG_GroupBy'></label>
+							<select name="FilterGroupBy" class="form-control">
+								<option value="">-</option>
+								<option value="date" <TMPL_IF NAME='FilterGroupBy' value='date'>selected</TMPL_IF>><TMPL_VAR NAME='LNG_Date'></option>
+								<option value="user_id" <TMPL_IF NAME='FilterGroupBy' value='user_id'>selected</TMPL_IF>><TMPL_VAR NAME='LNG_User'></option>
+							</select>
+						</div>
+						<div class="col-md-2 col-sm-2">
+							<div class="form-group">
+								<label class="form-label hidden-xs">&nbsp;</label><br />
+								<button type="submit" class="btn btn-primary btn-icon"><i class="fa fa-search"></i> <TMPL_VAR NAME='LNG_Search'></button>
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+			<div class="clearfix"></div>
+			<div>
+				<TMPL_IF NAME='OperationList'>
+					<div class="row">
+						<div class="col-md-6 form-group text-center-xs">
+							<span><TMPL_VAR NAME='ListInfo'></span>
+						</div>
+						<div class="col-md-6 form-group text-right text-center-xs">
+							<form action="<TMPL_VAR NAME='MODULE_URL'>" method="post" class="form-inline">
+								<span class="right15 visible-xs-block visible-sm-inline visible-md-inline visible-lg-inline"><TMPL_VAR NAME='LNG_OperationsOnPage'></span>
+								<select name="ItemsOnPage" class="form-control">
+									<TMPL_LOOP NAME='ItemsOnPageList'>
+										<option <TMPL_IF NAME='Selected'>selected</TMPL_IF> value="<TMPL_VAR NAME='Value'>"><TMPL_IF NAME='Value'><TMPL_VAR NAME='Value'><TMPL_ELSE><TMPL_VAR NAME='LNG_All'></TMPL_IF></option>
+									</TMPL_LOOP>
+								</select>
+								<TMPL_VAR NAME='ParamsForItemsOnPage' ESCAPE='none'>
+							</form>
+						</div>
+					</div>
+					<table class="table">
+						<tr>
+							<th><TMPL_VAR NAME='LNG_Date'></th>
+							<th><TMPL_VAR NAME='LNG_User'></th>
+							<th><TMPL_VAR NAME='LNG_IP'></th>
+							<th><TMPL_VAR NAME='LNG_Link'></th>
+							<th><TMPL_VAR NAME='LNG_Description'></th>
+						</tr>
+
+						<TMPL_LOOP NAME='OperationList'>
+							<TMPL_IF NAME='GroupList'>
+								<TMPL_LOOP NAME='GroupList'>
+									<tr class="logging-operation-group-<TMPL_VAR NAME='group'>">
+										<th colspan="5"><TMPL_VAR NAME='group_translation'>: <TMPL_VAR NAME='group_title'> (<TMPL_VAR NAME='group_count'>)</th>
+										<th class="text-right"><a href="#" class="expand-group" group-by-id="<TMPL_VAR NAME='group_by_id'>"><i class="fa fa-chevron-up"></i></a></th>
+									</tr>
+								</TMPL_LOOP>
+							</TMPL_IF>
+							<tr <TMPL_IF NAME='group_by_id'> class="hidden" group-by-id="<TMPL_VAR NAME='group_by_id'>" </TMPL_IF>>
+
+							<td><TMPL_VAR NAME='date' FORMAT='datetime'></td>
+							<td><TMPL_VAR NAME='user_name'></td>
+							<td><TMPL_VAR NAME='ip'></td>
+							<td><a href="<TMPL_VAR NAME='ADMIN_PATH'><TMPL_VAR NAME='link'>"><TMPL_VAR NAME='link'></a></td>
+							<td><TMPL_VAR NAME='section_translation'> - <TMPL_VAR NAME='code_translation'><TMPL_IF NAME='object_description'> - <TMPL_VAR NAME='object_description'></TMPL_IF></td>
+
+							</tr>
+						</TMPL_LOOP>
+					</table>
+					<div class="text-center">
+						<ul class="pagination">
+							<TMPL_VAR NAME='Paging' ESCAPE='none'>
+						</ul>
+					</div>	
+				<TMPL_ELSE>
+					<div class="alert alert-success"><TMPL_VAR NAME='LNG_Empty'></div>
+				</TMPL_IF>
+			</div>
+		</div>
+	</section>
+</div>
+
+<script type="text/javascript">
+	$(document).ready(function(){
+		$('select[name=ItemsOnPage]').change(function(){
+			$(this).closest('form').submit();
+		});
+
+        $('.expand-group').click(function(e){
+            if($(this).find('.fa-chevron-up').length > 0){
+                $('tr[group-by-id='+$(this).attr('group-by-id')+']').removeClass('hidden');
+                $(this).find('i').removeClass('fa-chevron-up');
+                $(this).find('i').addClass('fa-chevron-down');
+            }
+            else{
+                $('tr[group-by-id='+$(this).attr('group-by-id')+']').addClass('hidden');
+                $(this).find('i').removeClass('fa-chevron-down');
+                $(this).find('i').addClass('fa-chevron-up');
+            }
+            e.preventDefault();
+        });
+	});
+</script>

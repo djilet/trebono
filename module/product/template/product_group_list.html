@@ -1,0 +1,287 @@
+<div class="row">
+	<TMPL_INCLUDE FILE='_navigation.html'>
+
+	<TMPL_IF NAME='ErrorList'>
+		<div class="alert alert-danger alert-no-margin">
+			<TMPL_LOOP NAME='ErrorList'>
+				<TMPL_VAR NAME='Message'><TMPL_UNLESS NAME='__LAST__'><br /></TMPL_UNLESS>
+			</TMPL_LOOP>
+		</div>
+	</TMPL_IF>
+	<TMPL_IF NAME='MessageList'>
+		<div class="alert alert-success alert-no-margin">
+			<TMPL_LOOP NAME='MessageList'>
+				<TMPL_VAR NAME='Message'><TMPL_UNLESS NAME='__LAST__'><br /></TMPL_UNLESS>
+			</TMPL_LOOP>
+		</div>
+	</TMPL_IF>
+
+	<section class="box no-margin">
+		<header class="panel_header" for="header_product_group_list" table="product">
+			<h2 class="title"><TMPL_VAR NAME='LNG_ProductGroupList'></h2>
+		</header>								
+		<div class="content-body">
+			<TMPL_IF NAME='ProductGroupList'>
+				<div class="row">
+					<div class="col-md-12 col-sm-12 col-xs-12">
+						<table class="table table-hover">
+							<thead>
+								<tr>
+									<th width="50"><TMPL_VAR NAME='LNG_ProductGroupImage'></th>
+									<th><TMPL_VAR NAME='LNG_Title'></th>
+								</tr>
+							</thead>
+							<tbody>
+								<TMPL_LOOP NAME='ProductGroupList'>
+									<tr>
+										<td class="text-center">
+											<TMPL_IF NAME='product_group_image'>
+												<img src="<TMPL_VAR NAME='product_group_image_admin_path'>" />
+											</TMPL_IF>
+										</td>
+										<td><a href="<TMPL_VAR NAME='MODULE_URL'>&<TMPL_VAR NAME='ParamsForURL'>&group_id=<TMPL_VAR NAME='group_id'>"><TMPL_VAR NAME='title_translation'></a></td>
+									</tr>
+								</TMPL_LOOP>
+							</tbody>
+						</table>  
+					</div>
+				</div>
+			<TMPL_ELSE>
+				<div class="alert alert-success"><TMPL_VAR NAME='LNG_Empty'></div>
+			</TMPL_IF>
+		</div>											
+	</section>
+	
+	<section class="box no-margin">
+		<header class="panel_header" for="header_product_group_list_receipt_type_list" table="product">
+			<h2 class="title"><TMPL_VAR NAME='LNG_ReceiptTypeList'></h2>
+		</header>								
+		<div class="content-body">
+			<div class="row">
+				<div class="col-md-12">
+					<a href="<TMPL_VAR NAME='MODULE_URL'>&<TMPL_VAR NAME='ParamsForURL'>&receipt_type_id=" class="btn btn-primary btn-icon"><i class="fa fa-plus"></i> <TMPL_VAR NAME='LNG_AddReceiptType'></a>
+				</div>	
+			</div>
+			<TMPL_IF NAME=ReceiptTypeList>
+				<div class="row">
+					<div class="col-md-12 col-sm-12 col-xs-12">
+						<table class="table table-hover">
+							<thead>
+								<tr>
+									<th width="50"><TMPL_VAR NAME='LNG_ProductGroupImage'></th>
+									<th width="150"><TMPL_VAR NAME='LNG_Code'></th>
+									<th><TMPL_VAR NAME='LNG_Title'></th>
+									<th><TMPL_VAR NAME='LNG_Created'></th>
+									<th><TMPL_VAR NAME='LNG_CreatedBy'></th>
+									<th></th>
+									<th></th>
+								</tr>
+							</thead>
+							<tbody>
+								<TMPL_LOOP NAME='ReceiptTypeList'>
+									<tr <TMPL_IF NAME='archive' VALUE='Y'>class="inactive"</TMPL_IF>>
+										<td class="text-center">
+											<TMPL_IF NAME='receipt_type_image'>
+												<img src="<TMPL_VAR NAME='receipt_type_image_admin_path'>" />
+											</TMPL_IF>
+										</td>
+										<TMPL_IF NAME='archive' VALUE='Y'>
+											<td><TMPL_VAR NAME='code'></td>
+										<TMPL_ELSE>
+											<td><a href="<TMPL_VAR NAME='MODULE_URL'>&<TMPL_VAR NAME='ParamsForURL'>&receipt_type_id=<TMPL_VAR NAME='receipt_type_id'>"><TMPL_VAR NAME='code'></a></td>
+										</TMPL_IF>
+										<td><TMPL_VAR NAME='title_translation'></td>
+										<td><TMPL_VAR NAME='created' FORMAT='datetime'></td>
+										<td>
+											<a href="<TMPL_VAR NAME='ADMIN_PATH'>user.php?user_id=<TMPL_VAR NAME='created_by'>"><TMPL_VAR NAME='user_name'></a>
+										</td>
+										<td>
+											<TMPL_LOOP NAME='ReceiptTypeProductGroupList'>
+												<span class="label label-secondary"><TMPL_VAR NAME='product_group_title_translation'></span>
+											</TMPL_LOOP>
+										</td>
+										<td class="text-right">
+											<TMPL_IF NAME='archive' VALUE='N'>
+												<a href="<TMPL_VAR NAME='MODULE_URL'>&<TMPL_VAR NAME='ParamsForURL'>&Do=Remove&ReceiptTypeIDs[]=<TMPL_VAR NAME='receipt_type_id'>" class="confirm-remove" title="<TMPL_VAR NAME='code'>"><i class='fa fa-close delete'></i></a>
+											<TMPL_ELSE/>
+												<a href="<TMPL_VAR NAME='MODULE_URL'>&<TMPL_VAR NAME='ParamsForURL'>&Do=Activate&ReceiptTypeIDs[]=<TMPL_VAR NAME='receipt_type_id'>" class="confirm-activate" title="<TMPL_VAR NAME='code'>"><i class='fa fa-check activate'></i></a>
+											</TMPL_IF>
+										</td>
+									</tr>
+								</TMPL_LOOP>
+							</tbody>
+						</table>  
+					</div>
+				</div>
+			<TMPL_ELSE>
+				<div class="alert alert-success"><TMPL_VAR NAME='LNG_Empty'></div>
+			</TMPL_IF>
+		</div>											
+	</section>
+	
+	<section class="box no-margin">
+		<header class="panel_header" for="header_product_group_list_app_version_list" table="product">
+			<h2 class="title"><TMPL_VAR NAME='LNG_AppVersionList'></h2>
+		</header>						
+		<div class="content-body">
+			<div class="row">
+				<div class="col-md-12">
+					<a href="<TMPL_VAR NAME='MODULE_URL'>&<TMPL_VAR NAME='ParamsForURL'>&app_version_id=" class="btn btn-primary btn-icon"><i class="fa fa-plus"></i> <TMPL_VAR NAME='LNG_AddAppVersion'></a>
+				</div>	
+			</div>
+			<TMPL_IF NAME='AppVersionList'>
+				<div class="row">
+					<div class="col-md-12 col-sm-12 col-xs-12">
+						<table class="table table-hover">
+							<thead>
+								<tr>
+									<th width="100"><TMPL_VAR NAME='LNG_AppVersion'></th>
+									<th width="100"><TMPL_VAR NAME='LNG_Client'></th>
+									<th><TMPL_VAR NAME='LNG_Critical'></th>
+									<th><TMPL_VAR NAME='LNG_Created'></th>
+									<th><TMPL_VAR NAME='LNG_CreatedBy'></th>
+								</tr>
+							</thead>
+							<tbody>
+								<TMPL_LOOP NAME='AppVersionList'>
+								<TMPL_IF NAME='GroupList'>
+									<TMPL_LOOP NAME='GroupList'>
+										<tr class="app_version-group-<TMPL_VAR NAME='group'>">
+											<th colspan="6"><TMPL_VAR NAME='group_translation'>: <TMPL_VAR NAME='group_title'></th>
+										</tr>
+									</TMPL_LOOP>
+								</TMPL_IF>
+									<tr>
+										<td><a href="<TMPL_VAR NAME='MODULE_URL'>&<TMPL_VAR NAME='ParamsForURL'>&app_version_id=<TMPL_VAR NAME='app_version_id'>"><TMPL_VAR NAME='app_version'></a></td>
+										<td>
+											<TMPL_IF NAME='client' VALUE='android'>
+												<i class="fa fa-android"></i> 
+											<TMPL_ELSEIF NAME='client' VALUE='ios'>
+												<i class="fa fa-apple"></i>
+											</TMPL_IF>
+										<td><TMPL_VAR NAME='critical'></td>
+										<td><TMPL_VAR NAME='created' FORMAT='datetime'></td>
+										<td>
+											<a href="<TMPL_VAR NAME='ADMIN_PATH'>user.php?user_id=<TMPL_VAR NAME='created_by'>"><TMPL_VAR NAME='user_name'></a>
+										</td>
+										<td class="text-right">
+											<a href="<TMPL_VAR NAME='MODULE_URL'>&<TMPL_VAR NAME='ParamsForURL'>&Do=RemoveAppVersion&AppVersionIDs[]=<TMPL_VAR NAME='app_version_id'>" class="confirm-remove" title="<TMPL_VAR NAME='app_version_id'>"><i class='fa fa-close delete'></i></a>
+										</td>
+									</tr>
+								</TMPL_LOOP>
+							</tbody>
+						</table>  
+					</div>
+				</div>
+			</TMPL_IF>
+		</div>											
+	</section>
+	
+	<section class="box no-margin">
+		<header class="panel_header" for="header_product_group_list_mobile_strings" table="product">
+			<h2 class="title"><TMPL_VAR NAME='LNG_MobileLangStrings'></h2>
+		</header>						
+		<div class="content-body">
+			<TMPL_LOOP NAME='ProductGroupLangTypeList'>
+				<div class="row">
+					<div class="col-md-12 col-sm-12 col-xs-12">
+						<table class="table table-hover">
+							<thead>
+								<tr>
+									<th colspan="2"><TMPL_VAR NAME='type_translation'></th>
+								</tr>
+							</thead>
+							<TMPL_LOOP NAME='ProductGroupLangList'>
+								<tr>
+									<td><TMPL_VAR NAME='product_group_title'></td>
+									<td><TMPL_VAR NAME='value'></td>
+								</tr>
+							</TMPL_LOOP>
+						</table>
+					</div>
+				</div>
+			</TMPL_LOOP>
+			<TMPL_IF NAME='MiscLangList'>
+				<div class="row">
+					<div class="col-md-12 col-sm-12 col-xs-12">
+						<table class="table table-hover">
+							<thead>
+							<tr>
+								<th colspan="2"><TMPL_VAR NAME='LNG_MiscLanguageTranslation'></th>
+							</tr>
+							</thead>
+							<TMPL_LOOP NAME='MiscLangList'>
+								<tr>
+									<td><TMPL_VAR NAME='description'></td>
+									<td><TMPL_VAR NAME='translation'></td>
+								</tr>
+							</TMPL_LOOP>
+						</table>
+					</div>
+				</div>
+			</TMPL_IF>
+		</div>											
+	</section>
+
+	<TMPL_LOOP NAME="ConfigList">
+	    
+		<TMPL_IF NAME="show_group">
+			<TMPL_IF NAME="__ROWNUM__" OP=">" VALUE="1">
+							</table>
+						</div>
+				</section>
+			</TMPL_IF>
+
+			<section class="box no-margin">
+				<header class="panel_header" for="header_product_group_list_config_list" table="product">
+					<h2 class="title"><TMPL_VAR NAME='group_title_translation'/></h2>
+				</header>
+				<div class="content-body">
+
+					<table class="table">
+						<tr>
+							<th><TMPL_VAR NAME='LNG_Title'></th>
+							<TMPL_IF NAME="editor_type" VALUE="field">
+								<th><TMPL_VAR NAME="LNG_CurrentValue"/></th>
+							</TMPL_IF>
+						</tr>
+		</TMPL_IF>
+
+		<tr>
+			<td class="col-md-6">
+				<a href="<TMPL_VAR NAME='ADMIN_PATH'>config.php?config_id=<TMPL_VAR NAME='config_id'>&return_path=<TMPL_VAR NAME='ReturnPath'>">
+					<TMPL_VAR NAME='title_translation'/>
+				</a>
+			</td>
+			<TMPL_IF NAME="editor_type" VALUE="field">
+				<td><TMPL_VAR NAME="value"/></td>
+			</TMPL_IF>
+		</tr>
+		
+	</TMPL_LOOP>
+	</table>
+	</div>
+	</section>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){
+    $(document).on('click','a.confirm-remove',function(e){
+        var a = $(this);
+        var title = a.attr('title');
+        var msg = '<TMPL_VAR NAME="LNG_RemoveMessage">'.replace(/%Title%/g, title);
+        ModalConfirm(msg, function(){
+            window.location.href = a.attr('href');
+        });
+        e.preventDefault();
+    });
+    $(document).on('click','a.confirm-activate',function(e){
+        var a = $(this);
+        var title = a.attr('title');
+        var msg = '<TMPL_VAR NAME="LNG_ActivateMessage">'.replace(/%Title%/g, title);
+        ModalConfirm(msg, function(){
+            window.location.href = a.attr('href');
+        });
+        e.preventDefault();
+    });
+});
+</script>

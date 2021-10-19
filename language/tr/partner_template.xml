@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Root>
+    <admin>
+        <partner_list.html>
+            <PartnerList>Partner</PartnerList>
+            <FilterTitle>Partner</FilterTitle>
+            <FilterTitlePlaceholder>Name eingeben</FilterTitlePlaceholder>
+            <FilterApply>Suche</FilterApply>
+            <Add>Neuen Partner anlegen</Add>
+            <UploadFile>AZ-Datei hochladen</UploadFile>
+            <PartnersOnPage>Partner pro Seite</PartnersOnPage>
+            <Title>Name des Partner</Title>
+            <Products>Beauftragte Cloud Services</Products>
+            <Address>Anschrift</Address>
+            <Contacts>Kontaktpersonen</Contacts>
+            <Employees>Anzahl Mitarbeiter</Employees>
+
+            <IsActive>Daten von:</IsActive>
+            <IsActiveY>aktiven</IsActiveY>
+            <IsActiveN>de-aktivierten</IsActiveN>
+        </partner_list.html>
+        <partner_edit.html>
+            <TabPartnerInfo>Partner Stammdaten</TabPartnerInfo>
+            <TabCloudServices>Aktive Verträge</TabCloudServices>
+
+            <EditPartner>Partner ändern</EditPartner>
+            <AddPartner>Neuen Partner anlegen</AddPartner>
+            <GeneralInfo>Allgemeine Stammdaten</GeneralInfo>
+            <Title>Unternehmensname</Title>
+            <CompanyUnitID>Existierendes Unternehmen verlinken</CompanyUnitID>
+            <ZipCode>PLZ</ZipCode>
+            <Country>Land</Country>
+            <City>Stadt</City>
+            <Street>Straße</Street>
+            <House>Hausnummer</House>
+            <Email>E-Mail</Email>
+            <Phone>Festnetz</Phone>
+            <ClientID>Mandanten ID in Buchhaltungssoftware (z.B. Datev)</ClientID>
+            <VATPayerID>Ust-ID</VATPayerID>
+            <Comment>Bemerkungen:</Comment>
+            <Colorscheme>Mobile App Layout</Colorscheme>
+            <BankDetails>Bankverbindung</BankDetails>
+            <IBAN>IBAN</IBAN>
+            <BIC>BIC</BIC>
+            <Register>Handelsregister</Register>
+            <TaxNumber>Steuernummer</TaxNumber>
+            <TaxConsultant>Steuerberater ID (z.B. DATEV)</TaxConsultant>
+            <Save>Speichern</Save>
+            <Reset>Wiederherstellen</Reset>
+
+            <CompanyAddContracts>Vertrag hinzufügen</CompanyAddContracts>
+            <CompanyDeleteContracts>Vertrag beenden</CompanyDeleteContracts>
+            <CompanyMultiSelectMessage>Bitte Partner Typ und Services für Provision auswählen!
+            </CompanyMultiSelectMessage>
+            <CompanyOneMore>Service hinzufügen</CompanyOneMore>
+            <CompanyAddAll>Alle Services hinzufügen</CompanyAddAll>
+            <CompanyStartDate>Start Datum</CompanyStartDate>
+            <CompanyEndDate>Ende Datum</CompanyEndDate>
+            <ProductId>Service</ProductId>
+
+            <FieldsetCommission>Provision</FieldsetCommission>
+            <CommissionDate>Datum</CommissionDate>
+            <CommissionCompany>Kunde</CommissionCompany>
+            <CommissionService>Service</CommissionService>
+            <CommissionType>Typ</CommissionType>
+            <CommissionValue>%-Satz</CommissionValue>
+            <CommissionSum>Summe</CommissionSum>
+            <CommissionFile>Excel Datei</CommissionFile>
+            <CommissionDownload>Download Export Datei</CommissionDownload>
+            <ExportCommission>Provisionsabrechnung erstellen</ExportCommission>
+
+            <ContactList>Kontaktperson</ContactList>
+            <ContactListAccessNote>Partnerdaten speichern, um Ansprechpartner Info einzugeben.</ContactListAccessNote>
+            <ContactName>Name</ContactName>
+            <ContactType>Rolle</ContactType>
+            <ContactEmail>E-Mail</ContactEmail>
+            <ContactPhone>Telefon</ContactPhone>
+            <AddContact>Kontakt hinzufügen</AddContact>
+
+            <PartnerType>Partner Typ</PartnerType>
+            <BusinessPartner>Business Partner</BusinessPartner>
+            <Kundenbetreuer>Kundenbetreuer</Kundenbetreuer>
+            <LosungPartner>Lösungspartner</LosungPartner>
+            <Company>Kunden</Company>
+            <Commission>% von Service</Commission>
+            <ImplementationFee>% von Impl.</ImplementationFee>
+            <Long>Laufzeit in Monaten</Long>
+            <StartDate>Start Datum</StartDate>
+            <EndDate>Ende Datum</EndDate>
+            <NewContract>Neuen Vertrag hinzufügen:</NewContract>
+            <ProductStartDate>Start Datum</ProductStartDate>
+            <ProductEndDate>Ende Datum</ProductEndDate>
+            <Z>Z</Z>
+            <W>W</W>
+            <OptionSave>Speichern</OptionSave>
+            <OptionReset>Wiederherstellen</OptionReset>
+            <RevisionHistory>Historie</RevisionHistory>
+            <ClearS2>Link löschen</ClearS2>
+
+            <ModalTitle>Parameter Partner Vertrag</ModalTitle>
+            <ModalBPTitle>Business Partner Vertragsparameter</ModalBPTitle>
+            <ConfirmRemoveContract>Sind Sie sicher, dass sie den Provisionsvertrag beenden wollen?
+            </ConfirmRemoveContract>
+            <ConfirmMultiRemoveContract>Sind Sie sicher, dass Sie mehrere Verträge beenden wollen?
+            </ConfirmMultiRemoveContract>
+            <ConfirmExportCommission>Sind Sie sicher, dass Sie eine neue Provisionsabrechnung erstellen wollen?
+            </ConfirmExportCommission>
+        </partner_edit.html>
+        <contact_edit.html>
+            <EditContact>Kontaktperson ändern</EditContact>
+            <AddContact>Kontakt hinzufügen</AddContact>
+            <ContactType>Rolle</ContactType>
+            <LinkedUser>Existierenden Anwender verlinken</LinkedUser>
+            <ClearS2>Link löschen</ClearS2>
+            <ContactTypeManagement>Geschäftsführer/Eigentümer</ContactTypeManagement>
+            <ContactTypeHR>Personalwesen</ContactTypeHR>
+            <ContactTypeFinance>Finanzmanager</ContactTypeFinance>
+            <ContactTypeIT>IT-Manager</ContactTypeIT>
+            <ContactTypeOther>Sonst.</ContactTypeOther>
+            <Salutation>Anrede</Salutation>
+            <FirstName>Vorname</FirstName>
+            <LastName>Nachname</LastName>
+            <Position>Titel</Position>
+            <Department>Abteilung</Department>
+            <Email>E-Mail</Email>
+            <Phone>Mobilnummer</Phone>
+            <PhoneJob>Festnetz</PhoneJob>
+            <Comment>Bemerkungen:</Comment>
+            <ContactFor>Kontakt für</ContactFor>
+            <Invoice>E-Rechnung</Invoice>
+            <Contract>Vertrag</Contract>
+            <Services>Service</Services>
+            <Support>Support</Support>
+            <PayrollExport>Lohn Export Datei</PayrollExport>
+            <Save>Speichern</Save>
+            <Reset>Wiederherstellen</Reset>
+            <RevisionHistory>Historie</RevisionHistory>
+
+            <ContactFor>Kontakt für</ContactFor>
+            <Commission>Provisionsabrechnung</Commission>
+            <Contract>Vertrag</Contract>
+            <Services>Service</Services>
+            <Support>Support</Support>
+        </contact_edit.html>
+        <block_contract_history.html>
+            <ContractHistory>Vertrag Historie</ContractHistory>
+            <Company>Kunden</Company>
+            <PartnerType>Partner Typ</PartnerType>
+            <Commission>% von Service</Commission>
+            <ImplementationFee>% von Impl.</ImplementationFee>
+            <Long>Laufzeit in Monaten</Long>
+            <StartDate>Start Datum</StartDate>
+            <EndDate>Ende Datum</EndDate>
+            <Close>Schliessen</Close>
+        </block_contract_history.html>
+    </admin>
+</Root>

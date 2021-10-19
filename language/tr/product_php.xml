@@ -1,0 +1,320 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Root>
+    <section-option>Cloud Service Einstellungen</section-option>
+    <module-title>Cloud Service</module-title>
+
+    <product-group-all>Alles</product-group-all>
+
+    <option-group-basic>Preise</option-group-basic>
+    <option-group-limits_for_units>Max. Einheiten</option-group-limits_for_units>
+    <option-group-special_values>Optionen</option-group-special_values>
+
+    <product-group-base>Basis Modul</product-group-base>
+    <product-base__main>Basis Modul</product-base__main>
+    <option-base__main__monthly_price>Monatlicher Servicepreis</option-base__main__monthly_price>
+    <option-base__main__monthly_discount>Rabatt für monatlichen Servicepreis</option-base__main__monthly_discount>
+    <option-base__main__implementation_price>Implementierungspreis</option-base__main__implementation_price>
+    <option-base__main__implementation_discount>Rabatt für implementierungspreis
+    </option-base__main__implementation_discount>
+    <option-base__force_approval>Einnahmen erzwingen die Genehmigung</option-base__force_approval>
+
+    <product-group-food>Digitale Essensmarken</product-group-food>
+
+    <product-food__main>Hauptservice DEM</product-food__main>
+    <product-food__document_plausibility>Plausibilitätsprüfung Beleg</product-food__document_plausibility>
+    <product-food__lump_sum_tax_examination>Prüfung Pauschal-versteuerungfreiheit
+    </product-food__lump_sum_tax_examination>
+    <product-food__weekly_shopping>Wocheneinkauf</product-food__weekly_shopping>
+    <product-food__canteen>Kantinennutzung</product-food__canteen>
+    <product-food__advanced_security>Digitale Essensmarken Erweiterte Sicherheit</product-food__advanced_security>
+
+    <option-food__main__monthly_price>Monatlicher Servicepreis</option-food__main__monthly_price>
+    <option-food__main__monthly_discount>Rabatt für monatlichen Servicepreis</option-food__main__monthly_discount>
+    <option-food__main__implementation_price>Einrichtungsgebührs</option-food__main__implementation_price>
+    <option-food__main__implementation_discount>Rabatt für Einrichtungsgebühr
+    </option-food__main__implementation_discount>
+    <option-food__main__salary_option>Gehaltsoption</option-food__main__salary_option>
+    <option-food__main__unit>Wert DEM</option-food__main__unit>
+    <option-food__main__units_per_week>Max. Einheiten pro Woche</option-food__main__units_per_week>
+    <option-food__main__units_per_month>Max. Einheiten pro Monat</option-food__main__units_per_month>
+    <option-food__main__units_per_week_transfer>Max. Transfer von Einheiten</option-food__main__units_per_week_transfer>
+    <option-food__main__meal_value>Sachbezugswert Hauptmahlzeit</option-food__main__meal_value>
+    <option-food__main__employer_meal_grant>AG Essenszuschuss</option-food__main__employer_meal_grant>
+    <option-food__main__employee_meal_grant>Zuzahlung Sachbezugswert AN</option-food__main__employee_meal_grant>
+    <option-food__main__auto_adoption>Automatische Anpassung des steuerlichen DEM Wertes
+    </option-food__main__auto_adoption>
+    <option-food__main__employee_meal_grant_mandatory>Zuzahlung Sachbezugswert AN verpflichtend
+    </option-food__main__employee_meal_grant_mandatory>
+    <option-food__document_plausibility__monthly_price>Monatlicher Servicepreis
+    </option-food__document_plausibility__monthly_price>
+    <option-food__document_plausibility__monthly_discount>Rabatt für monatlichen Servicepreis
+    </option-food__document_plausibility__monthly_discount>
+    <option-food__document_plausibility__implementation_price>Einrichtungsgebühr
+    </option-food__document_plausibility__implementation_price>
+    <option-food__document_plausibility__implementation_discount>Rabatt für Einrichtungsgebühr
+    </option-food__document_plausibility__implementation_discount>
+    <option-food__lump_sum_tax_examination__monthly_price>Monatlicher Servicepreis
+    </option-food__lump_sum_tax_examination__monthly_price>
+    <option-food__lump_sum_tax_examination__monthly_discount>Rabatt für monatlichen Servicepreis
+    </option-food__lump_sum_tax_examination__monthly_discount>
+    <option-food__lump_sum_tax_examination__implementation_price>Einrichtungsgebühr
+    </option-food__lump_sum_tax_examination__implementation_price>
+    <option-food__lump_sum_tax_examination__implementation_discount>Rabatt für Einrichtungsgebühr
+    </option-food__lump_sum_tax_examination__implementation_discount>
+    <option-food__weekly_shopping__monthly_price>Monatlicher Servicepreis</option-food__weekly_shopping__monthly_price>
+    <option-food__weekly_shopping__monthly_discount>Rabatt für monatlichen Servicepreis
+    </option-food__weekly_shopping__monthly_discount>
+    <option-food__weekly_shopping__implementation_price>Einrichtungsgebühr
+    </option-food__weekly_shopping__implementation_price>
+    <option-food__weekly_shopping__implementation_discount>Rabatt für Einrichtungsgebühr
+    </option-food__weekly_shopping__implementation_discount>
+    <option-food__weekly_shopping__receipt_period>Wöchentlicher Kaufbeleg (Tage)
+    </option-food__weekly_shopping__receipt_period>
+    <option-food__canteen__monthly_price>Monatlicher Servicepreis</option-food__canteen__monthly_price>
+    <option-food__canteen__monthly_discount>Rabatt für monatlichen Servicepreis</option-food__canteen__monthly_discount>
+    <option-food__canteen__implementation_price>Implementierungspreis</option-food__canteen__implementation_price>
+    <option-food__canteen__implementation_discount>Rabatt für implementierungspreis
+    </option-food__canteen__implementation_discount>
+    <option-food__advanced_security__monthly_price>Monatlicher Servicepreis
+    </option-food__advanced_security__monthly_price>
+    <option-food__advanced_security__monthly_discount>Rabatt für monatlichen Servicepreis
+    </option-food__advanced_security__monthly_discount>
+    <option-food__advanced_security__implementation_price>Einrichtungsgebühr
+    </option-food__advanced_security__implementation_price>
+    <option-food__advanced_security__implementation_discount>Rabatt für Einrichtungsgebühr
+    </option-food__advanced_security__implementation_discount>
+
+    <product-group-benefit>Sachbezug</product-group-benefit>
+    <product-benefit__main>Sachbezug</product-benefit__main>
+    <product-benefit__advanced_security>Sachbezug Erweiterte Sicherheit</product-benefit__advanced_security>
+    <option-benefit__main__monthly_price>Monatlicher Servicepreis</option-benefit__main__monthly_price>
+    <option-benefit__main__monthly_discount>Rabatt für monatlichen Servicepreis</option-benefit__main__monthly_discount>
+    <option-benefit__main__implementation_price>Einrichtungsgebühr</option-benefit__main__implementation_price>
+    <option-benefit__main__implementation_discount>Rabatt für Einrichtungsgebühr
+    </option-benefit__main__implementation_discount>
+    <option-benefit__main__salary_option>Gehaltsoption</option-benefit__main__salary_option>
+    <option-benefit__main__employer_grant>Max. monatlicher Wert (Arbeitgeberzuschuß)
+    </option-benefit__main__employer_grant>
+    <option-benefit__main__receipt_option>Einreichbarer Belegzeitraum</option-benefit__main__receipt_option>
+    <option-benefit__advanced_security__monthly_price>Monatlicher Servicepreis
+    </option-benefit__advanced_security__monthly_price>
+    <option-benefit__advanced_security__monthly_discount>Rabatt für monatlichen Servicepreis
+    </option-benefit__advanced_security__monthly_discount>
+    <option-benefit__advanced_security__implementation_price>Einrichtungsgebühr
+    </option-benefit__advanced_security__implementation_price>
+    <option-benefit__advanced_security__implementation_discount>Rabatt für Einrichtungsgebühr
+    </option-benefit__advanced_security__implementation_discount>
+
+    <product-group-internet>Internet</product-group-internet>
+    <product-internet__main>Internet</product-internet__main>
+    <product-internet__advanced_security>Internet Erweiterte Sicherheit</product-internet__advanced_security>
+    <option-internet__main__monthly_price>Monatlicher Servicepreis</option-internet__main__monthly_price>
+    <option-internet__main__monthly_discount>Rabatt für monatlichen Servicepreis
+    </option-internet__main__monthly_discount>
+    <option-internet__main__implementation_price>Einrichtungsgebühr</option-internet__main__implementation_price>
+    <option-internet__main__implementation_discount>Rabatt für Einrichtungsgebühr
+    </option-internet__main__implementation_discount>
+    <option-internet__main__salary_option>Gehaltsoption</option-internet__main__salary_option>
+    <option-internet__main__employer_grant>Max. monatlicher Wert (Arbeitgeberzuschuß)
+    </option-internet__main__employer_grant>
+    <option-internet__advanced_security__monthly_price>Monatlicher Servicepreis
+    </option-internet__advanced_security__monthly_price>
+    <option-internet__advanced_security__monthly_discount>Rabatt für monatlichen Servicepreis
+    </option-internet__advanced_security__monthly_discount>
+    <option-internet__advanced_security__implementation_price>Einrichtungsgebühr
+    </option-internet__advanced_security__implementation_price>
+    <option-internet__advanced_security__implementation_discount>Rabatt für Einrichtungsgebühr
+    </option-internet__advanced_security__implementation_discount>
+
+    <product-group-ad>Werbung</product-group-ad>
+    <product-ad__main>Advertisement</product-ad__main>
+    <product-ad__advanced_security>Werbung Erweiterte Sicherheit</product-ad__advanced_security>
+    <option-ad__main__monthly_price>Monatlicher Servicepreis</option-ad__main__monthly_price>
+    <option-ad__main__monthly_discount>Rabatt für monatlichen Servicepreis</option-ad__main__monthly_discount>
+    <option-ad__main__implementation_price>Einrichtungsgebühr</option-ad__main__implementation_price>
+    <option-ad__main__implementation_discount>Rabatt für Einrichtungsgebühr</option-ad__main__implementation_discount>
+    <option-ad__main__salary_option>Gehaltsoption</option-ad__main__salary_option>
+    <option-ad__main__max_yearly>Max. jährlicher Wert</option-ad__main__max_yearly>
+    <option-ad__main__employer_grant>Max. monatlicher Wert</option-ad__main__employer_grant>
+    <option-ad__main__payment_month>Abrechnungsmonat für jährlichen Betrag</option-ad__main__payment_month>
+    <option-ad__advanced_security__monthly_price>Monatlicher Servicepreis</option-ad__advanced_security__monthly_price>
+    <option-ad__advanced_security__monthly_discount>Rabatt für monatlichen Servicepreis
+    </option-ad__advanced_security__monthly_discount>
+    <option-ad__advanced_security__implementation_price>Einrichtungsgebühr
+    </option-ad__advanced_security__implementation_price>
+    <option-ad__advanced_security__implementation_discount>Rabatt für Einrichtungsgebühr
+    </option-ad__advanced_security__implementation_discount>
+
+    <product-group-recreation>Erholungsbeihilfe</product-group-recreation>
+    <product-recreation__main>Erholungsbeihilfe</product-recreation__main>
+    <product-recreation__advanced_security>Erholungsbeihilfe Erweiterte Sicherheit
+    </product-recreation__advanced_security>
+    <option-recreation__main__monthly_price>Monatlicher Servicepreis</option-recreation__main__monthly_price>
+    <option-recreation__main__monthly_discount>Rabatt für monatlichen Servicepreis
+    </option-recreation__main__monthly_discount>
+    <option-recreation__main__implementation_price>Einrichtungsgebührs</option-recreation__main__implementation_price>
+    <option-recreation__main__implementation_discount>Rabatt für Einrichtungsgebühr
+    </option-recreation__main__implementation_discount>
+    <option-recreation__main__salary_option>Gehaltsoption</option-recreation__main__salary_option>
+    <option-recreation__main__max_value>Max. Wert (Arbeitgeberzuschuss)</option-recreation__main__max_value>
+    <option-recreation__main__max_employee>Max. Wert Mitarbeiter</option-recreation__main__max_employee>
+    <option-recreation__main__max_spouse>Max. Wert Ehepartner</option-recreation__main__max_spouse>
+    <option-recreation__main__max_child>Max. Wert Kind</option-recreation__main__max_child>
+    <option-recreation__advanced_security__monthly_price>Monatlicher Servicepreis
+    </option-recreation__advanced_security__monthly_price>
+    <option-recreation__advanced_security__monthly_discount>Rabatt für monatlichen Servicepreis
+    </option-recreation__advanced_security__monthly_discount>
+    <option-recreation__advanced_security__implementation_price>Einrichtungsgebühr
+    </option-recreation__advanced_security__implementation_price>
+    <option-recreation__advanced_security__implementation_discount>Rabatt für Einrichtungsgebühr
+    </option-recreation__advanced_security__implementation_discount>
+
+    <product-group-mobile>Handy</product-group-mobile>
+    <product-mobile__main>Handy</product-mobile__main>
+    <product-mobile__advanced_security>Handy Erweiterte Sicherheit</product-mobile__advanced_security>
+    <option-mobile__main__monthly_price>Monatlicher Servicepreis</option-mobile__main__monthly_price>
+    <option-mobile__main__monthly_discount>Rabatt für monatlichen Servicepreis</option-mobile__main__monthly_discount>
+    <option-mobile__main__implementation_price>Einrichtungsgebühr</option-mobile__main__implementation_price>
+    <option-mobile__main__implementation_discount>Rabatt für Einrichtungsgebühr
+    </option-mobile__main__implementation_discount>
+    <option-mobile__main__salary_option>Gehaltsoption</option-mobile__main__salary_option>
+    <option-mobile__main__employer_grant>Max. monatlicher Wert (Arbeitgeberzuschuß)
+    </option-mobile__main__employer_grant>
+    <option-mobile__main__age_deduction>%uale Reduktion Handy Finanzierung</option-mobile__main__age_deduction>
+    <option-mobile__advanced_security__monthly_price>Monatlicher Servicepreis
+    </option-mobile__advanced_security__monthly_price>
+    <option-mobile__advanced_security__monthly_discount>Rabatt für monatlichen Servicepreis
+    </option-mobile__advanced_security__monthly_discount>
+    <option-mobile__advanced_security__implementation_price>Einrichtungsgebühr
+    </option-mobile__advanced_security__implementation_price>
+    <option-mobile__advanced_security__implementation_discount>Rabatt für Einrichtungsgebühr
+    </option-mobile__advanced_security__implementation_discount>
+
+    <product-group-gift>Geschenke</product-group-gift>
+    <product-gift__main>Geschenke</product-gift__main>
+    <product-gift__advanced_security>Geschenke Erweiterte Sicherheit</product-gift__advanced_security>
+    <option-gift__main__monthly_price>Monatlicher Servicepreis</option-gift__main__monthly_price>
+    <option-gift__main__monthly_discount>Rabatt für monatlichen Servicepreis</option-gift__main__monthly_discount>
+    <option-gift__main__implementation_price>Einrichtungsgebühr</option-gift__main__implementation_price>
+    <option-gift__main__implementation_discount>Rabatt für Einrichtungsgebühr
+    </option-gift__main__implementation_discount>
+    <option-gift__main__salary_option>Gehaltsoption</option-gift__main__salary_option>
+    <option-gift__main__units_per_year>Max. Einheiten pro Jahr</option-gift__main__units_per_year>
+    <option-gift__main__employer_grant>Max. Wert (Arbeitgeberzuschuss) pro Fall</option-gift__main__employer_grant>
+    <option-gift__advanced_security__monthly_price>Monatlicher Servicepreis
+    </option-gift__advanced_security__monthly_price>
+    <option-gift__advanced_security__monthly_discount>Rabatt für monatlichen Servicepreis
+    </option-gift__advanced_security__monthly_discount>
+    <option-gift__advanced_security__implementation_price>Einrichtungsgebühr
+    </option-gift__advanced_security__implementation_price>
+    <option-gift__advanced_security__implementation_discount>Rabatt für Einrichtungsgebühr
+    </option-gift__advanced_security__implementation_discount>
+
+    <product-group-bonus>Prämie</product-group-bonus>
+    <product-bonus__main>Prämie</product-bonus__main>
+    <product-bonus__advanced_security>Prämie Erweiterte Sicherheit</product-bonus__advanced_security>
+    <option-bonus__main__monthly_price>Monatlicher Servicepreis</option-bonus__main__monthly_price>
+    <option-bonus__main__monthly_discount>Rabatt für monatlichen Servicepreis</option-bonus__main__monthly_discount>
+    <option-bonus__main__implementation_price>Einrichtungsgebühr</option-bonus__main__implementation_price>
+    <option-bonus__main__implementation_discount>Rabatt für Einrichtungsgebühr
+    </option-bonus__main__implementation_discount>
+    <option-bonus__main__max_yearly>Max. Wert für Jahr</option-bonus__main__max_yearly>
+    <option-bonus__main__salary_option>Gehaltsoption</option-bonus__main__salary_option>
+    <option-bonus__advanced_security__monthly_price>Monatlicher Servicepreis
+    </option-bonus__advanced_security__monthly_price>
+    <option-bonus__advanced_security__monthly_discount>Rabatt für monatlichen Servicepreis
+    </option-bonus__advanced_security__monthly_discount>
+    <option-bonus__advanced_security__implementation_price>Einrichtungsgebühr
+    </option-bonus__advanced_security__implementation_price>
+    <option-bonus__advanced_security__implementation_discount>Rabatt für Einrichtungsgebühr
+    </option-bonus__advanced_security__implementation_discount>
+
+    <product-group-transport>Job-Ticket</product-group-transport>
+    <product-transport__main>Job-Ticket</product-transport__main>
+    <product-transport__advanced_security>Job-Ticket Erweiterte Sicherheit</product-transport__advanced_security>
+    <option-transport__main__monthly_price>Monatlicher Servicepreis</option-transport__main__monthly_price>
+    <option-transport__main__monthly_discount>Rabatt für monatlichen Servicepreis
+    </option-transport__main__monthly_discount>
+    <option-transport__main__implementation_price>Einrichtungsgebühr</option-transport__main__implementation_price>
+    <option-transport__main__implementation_discount>abatt für Einrichtungsgebühr
+    </option-transport__main__implementation_discount>
+    <option-transport__main__max_monthly>Max. monatlicher Wert</option-transport__main__max_monthly>
+    <option-transport__main__salary_option>Gehaltsoption</option-transport__main__salary_option>
+    <option-transport__advanced_security__monthly_price>Monatlicher Servicepreis
+    </option-transport__advanced_security__monthly_price>
+    <option-transport__advanced_security__monthly_discount>Rabatt für monatlichen Servicepreis
+    </option-transport__advanced_security__monthly_discount>
+    <option-transport__advanced_security__implementation_price>Einrichtungsgebühr
+    </option-transport__advanced_security__implementation_price>
+    <option-transport__advanced_security__implementation_discount>Rabatt für Einrichtungsgebühr
+    </option-transport__advanced_security__implementation_discount>
+
+    <product-group-child_care>Kinderbetreuung</product-group-child_care>
+    <product-child_care__main>Kinderbetreuung</product-child_care__main>
+    <product-child_care__advanced_security>Kinderbetreuung Erweiterte Sicherheit</product-child_care__advanced_security>
+    <option-child_care__main__monthly_price>Monatlicher Servicepreis</option-child_care__main__monthly_price>
+    <option-child_care__main__monthly_discount>Rabatt für monatlichen Servicepreis
+    </option-child_care__main__monthly_discount>
+    <option-child_care__main__implementation_price>Einrichtungsgebühr</option-child_care__main__implementation_price>
+    <option-child_care__main__implementation_discount>abatt für Einrichtungsgebühr
+    </option-child_care__main__implementation_discount>
+    <option-child_care__main__max_monthly>Max. monatlicher Wert</option-child_care__main__max_monthly>
+    <option-child_care__main__salary_option>Gehaltsoption</option-child_care__main__salary_option>
+    <option-child_care__advanced_security__monthly_price>Monatlicher Servicepreis
+    </option-child_care__advanced_security__monthly_price>
+    <option-child_care__advanced_security__monthly_discount>Rabatt für monatlichen Servicepreis
+    </option-child_care__advanced_security__monthly_discount>
+    <option-child_care__advanced_security__implementation_price>Einrichtungsgebühr
+    </option-child_care__advanced_security__implementation_price>
+    <option-child_care__advanced_security__implementation_discount>Rabatt für Einrichtungsgebühr
+    </option-child_care__advanced_security__implementation_discount>
+
+    <option-value-save-error>Der Wert für die Option kann nicht aktualisiert werden "%title_translation%"
+    </option-value-save-error>
+    <option-value-discaunt-value>Rabatt kann nicht über 100 Prozent liegen.</option-value-discaunt-value>
+    <contract-active-contract-exists>Vertrag für %product% erstellt</contract-active-contract-exists>
+    <contract-intersection-found>Start Datum von %product% stimmt nicht mit dem Start Datum im Kunden überein.
+    </contract-intersection-found>
+    <contract-enddate-is-less-than-startdate>Ende Datum darf nicht kleiner sein als das Start Datum sein.
+    </contract-enddate-is-less-than-startdate>
+
+    <info-current-week-units-left>Verfügbare Wocheneinheiten</info-current-week-units-left>
+    <info-current-month-units-left>Verfügbare Monatseinheiten</info-current-month-units-left>
+    <info-current-month-transferred-units>Verfügbare Einheiten aus den Vor-Monaten
+    </info-current-month-transferred-units>
+    <info-current-month-euro-left>Offene Euro aktueller Monat</info-current-month-euro-left>
+    <info-current-year-euro-left>Offene Euro Jahr</info-current-year-euro-left>
+    <info-current-month-receipt-count-left>Noch nicht eingereichte Monatsbelege</info-current-month-receipt-count-left>
+    <info-current-year-receipt-count-left>Noch nicht eingereichte Belege</info-current-year-receipt-count-left>
+    <info-current-year-gift-count-left>Noch nicht eingereichte Jahresgeschenke</info-current-year-gift-count-left>
+    <info-weekly-purchase-active>Wocheneinkauf ist gebucht</info-weekly-purchase-active>
+    <info-working-days-per-week-suffix>Arbeitstage pro Woche</info-working-days-per-week-suffix>
+    <info-working-days-per-week-empty>Not set</info-working-days-per-week-empty>
+    <info-available-amount-voucher>Belegdatum verließ Euro</info-available-amount-voucher>
+    <info-available-amount-voucher-list>Belegdatum verfügbarer Gutscheine</info-available-amount-voucher-list>
+    <info-approved-amount-voucher-list>Bei Gutscheinen genehmigt</info-approved-amount-voucher-list>
+
+    <error-product-notset>Kunde hat keinen Vertrag für den %product%</error-product-notset>
+    <error-product-start_date>Falsches Start Datum für %product%. Kunde hat diesen Service erst ab %start_date%
+        beauftragt.
+    </error-product-start_date>
+
+    <error-employee-base-product-notset>Der Mitarbeiter hat keinen Vertrag für das %base_product%
+    </error-employee-base-product-notset>
+    <error-employee-base-product-start_date>Falsches Start Datum für %product%. Der Mitarbeiter diesen %base_product%
+        erst ab %start_date% beauftragt.
+    </error-employee-base-product-start_date>
+    <error-company-unit-base-product-notset>Kunde hat keinen Vertrag für den %base_product%
+    </error-company-unit-base-product-notset>
+    <error-company-unit-base-product-start_date>Falsches Start Datum für %product%. Kunde hat diesen %base_product% erst
+        ab %start_date% beauftragt.
+    </error-company-unit-base-product-start_date>
+
+    <section-product_group>Mobile App-Einstellung</section-product_group>
+    <title-product_group-edit>Bearbeiten Service</title-product_group-edit>
+
+    <title-app_version-add>App-Version hinzufügen</title-app_version-add>
+    <title-app_version-edit>App-Version bearbeiten</title-app_version-edit>
+
+    <section-price_list>Preisliste</section-price_list>
+</Root>

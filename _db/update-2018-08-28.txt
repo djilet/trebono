@@ -1,0 +1,26 @@
+-- lst_personal
+ALTER TABLE "public"."employee" ADD COLUMN "license_version" Integer DEFAULT 0 NOT NULL;
+
+
+-- lst_control
+
+CREATE TABLE public.config_history (
+    id integer NOT NULL,
+    user_id integer NOT NULL,
+    config_id integer NOT NULL,
+    value text NOT NULL,
+    created timestamp without time zone NOT NULL
+);
+
+CREATE SEQUENCE public.config_history_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+ALTER SEQUENCE public.config_history_id_seq OWNED BY public.config_history.id;
+ALTER TABLE ONLY public.config_history ALTER COLUMN id SET DEFAULT nextval('public.config_history_id_seq'::regclass);
+
+ALTER TABLE ONLY public.config_history
+    ADD CONSTRAINT config_history_pkey PRIMARY KEY (id);

@@ -1,0 +1,110 @@
+<div class="row">
+	<TMPL_INCLUDE FILE='_config_navigation.html'>
+</div>
+
+<div class="row">
+	<section class="box no-margin">
+		<header class="panel_header" for="header_logging_cron" table="core">
+			<h2 class="title"><TMPL_VAR NAME='LNG_LoggingCron'></h2>
+		</header>
+		<div class="content-body">
+			<form action="<TMPL_VAR NAME='ADMIN_PATH'>logging_cron.php" method="post" autocomplete="off">
+				<div class="row">
+					<div class="col-md-3 col-sm-3">
+						<div class="form-group">
+							<label class="form-label"><TMPL_VAR NAME='LNG_FilterDateRange'></label>
+							<input type="text" name="FilterDateRange" class="form-control daterange active" value="<TMPL_VAR NAME='FilterDateRange'>" data-time-picker-increment="1" data-time-picker="true">
+						</div>
+					</div>
+					<div class="col-md-2 col-sm-2">
+						<div class="form-group">
+							<label class="form-label hidden-xs">&nbsp;</label><br />
+							<button type="submit" class="btn btn-primary btn-icon"><i class="fa fa-search"></i> <TMPL_VAR NAME='LNG_Search'></button>
+						</div>
+					</div>
+				</div>
+			</form>
+			<div>
+				<TMPL_IF NAME='CronOperationList'>
+					<div class="row">
+						<div class="col-md-6 form-group text-center-xs">
+							<span><TMPL_VAR NAME='ListInfo'></span>
+						</div>
+						<div class="col-md-6 form-group text-right text-center-xs">
+							<form action="<TMPL_VAR NAME='MODULE_URL'>" method="post" class="form-inline">
+								<span class="right15 visible-xs-block visible-sm-inline visible-md-inline visible-lg-inline"><TMPL_VAR NAME='LNG_OperationsOnPage'></span>
+								<select name="ItemsOnPage" class="form-control">
+									<TMPL_LOOP NAME='ItemsOnPageList'>
+										<option <TMPL_IF NAME='Selected'>selected</TMPL_IF> value="<TMPL_VAR NAME='Value'>"><TMPL_IF NAME='Value'><TMPL_VAR NAME='Value'><TMPL_ELSE><TMPL_VAR NAME='LNG_All'></TMPL_IF></option>
+									</TMPL_LOOP>
+								</select>
+								<TMPL_VAR NAME='ParamsForItemsOnPage' ESCAPE='none'>
+							</form>
+						</div>
+					</div>
+					<table class="table">
+						<tr>
+							<th width="10%"><TMPL_VAR NAME='LNG_Date'></th>
+							<th width="30%"><TMPL_VAR NAME='LNG_Description'></th>
+							<th><TMPL_VAR NAME='LNG_StatusUpdated'></th>
+							<th><TMPL_VAR NAME='LNG_Status'></th>
+							<th><TMPL_VAR NAME='LNG_IsSuccessful'></th>
+							<th><TMPL_VAR NAME='LNG_Error'></th>
+						</tr>
+						<TMPL_LOOP NAME='CronOperationList'>
+							<tr <TMPL_IF NAME='is_successful' VALUE='N'>class="purple"<TMPL_ELSE>class="success"</TMPL_IF> >
+								<td><TMPL_VAR NAME='date' FORMAT='datetime'></td>
+								<td>
+									<TMPL_VAR NAME='description' ESCAPE='none'>
+									<TMPL_IF NAME='used_ids'>
+										<br/>
+										<a href="" class="linkMore" data-operation_id="<TMPL_VAR NAME='operation_id'>"><TMPL_VAR NAME="LNG_ExpandEmployeeList"></a>
+										<br/>
+										<div data-operation_id="<TMPL_VAR NAME='operation_id'>" style="display: none;">
+											<TMPL_LOOP NAME='used_ids'>
+												<a href="module.php?load=company&Section=employee&employee_id=<TMPL_VAR NAME='employee_id'>&ActiveTab=3"><TMPL_VAR NAME='name'></a>
+												<TMPL_UNLESS NAME='__LAST__'><br/></TMPL_UNLESS>
+											</TMPL_LOOP>
+										</div>
+									</TMPL_IF>
+								</td>
+								<td><TMPL_VAR NAME='status_updated' FORMAT='datetime'></td>
+								<td><TMPL_VAR NAME='status'></td>
+								<td><TMPL_VAR NAME='is_successful'></td>
+								<td><TMPL_VAR NAME='error_message' ESCAPE='none'></td>
+							</tr>
+						</TMPL_LOOP>
+					</table>
+					<div class="text-center">
+						<ul class="pagination">
+							<TMPL_VAR NAME='Paging' ESCAPE='none'>
+						</ul>
+					</div>	
+				<TMPL_ELSE>
+					<div class="alert alert-success"><TMPL_VAR NAME='LNG_Empty'></div>
+				</TMPL_IF>
+			</div>
+		</div>
+	</section>
+</div>
+
+<script type="text/javascript">
+	$(document).ready(function(){
+		$('select[name=ItemsOnPage]').change(function(){
+			$(this).closest('form').submit();
+		});
+
+		$("a.linkMore").click(function(e){
+			var operationID = $(this).data("operation_id");
+			if($(this).is('.open')){
+				$(this).removeClass('open').text('<TMPL_VAR NAME="LNG_ExpandEmployeeList">');
+				$("div[data-operation_id='"+operationID+"']").slideUp(300);
+			}
+			else{
+				$(this).addClass('open').text('<TMPL_VAR NAME="LNG_CollapseEmployeeList">');
+				$("div[data-operation_id='"+operationID+"']").slideDown(300);
+			}
+			e.preventDefault();
+		});
+	});
+</script>

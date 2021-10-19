@@ -1,0 +1,53 @@
+<TMPL_IF NAME='ReceiptList'>
+    <div class="row">
+        <div class="col-md-6 form-group text-center-xs">
+            <span><TMPL_VAR NAME='ListInfo'></span>
+        </div>
+        <div class="col-md-6 form-group text-right text-center-xs">
+            <form method="post" class="form-inline">
+                <span class="right15 visible-xs-block visible-sm-inline visible-md-inline visible-lg-inline"><TMPL_VAR NAME='LNG_ReceiptsOnPage'></span>
+                <select name="ItemsOnPage" class="form-control">
+                    <TMPL_LOOP NAME='ItemsOnPageList'>
+                        <option <TMPL_IF NAME='Selected'>selected</TMPL_IF> value="<TMPL_VAR NAME='Value'>"><TMPL_IF NAME='Value'><TMPL_VAR NAME='Value'><TMPL_ELSE><TMPL_VAR NAME='LNG_All'></TMPL_IF></option>
+                    </TMPL_LOOP>
+                </select>
+                <TMPL_VAR NAME='ParamsForItemsOnPage' ESCAPE='none'>
+            </form>
+        </div>
+    </div>
+    <table class="table" id="table">
+        <thead>
+        <tr>
+            <th><TMPL_VAR NAME='LNG_ReceiptID'/></th>
+            <th><TMPL_VAR NAME='LNG_Created'/></th>
+            <th><TMPL_VAR NAME="LNG_ReceiptDate"/></th>
+            <th><TMPL_VAR NAME="LNG_ApprovedVal"/></th>
+            <th><TMPL_VAR NAME="LNG_Service"/></th>
+            <th><TMPL_VAR NAME='LNG_Status'/></th>
+        </tr>
+        </thead>
+        <tbody>
+        <TMPL_LOOP NAME='ReceiptList'>
+            <tr>
+                <td>
+                    <a href="<TMPL_VAR NAME='ADMIN_PATH'>module.php?load=receipt&Section=receipt&receipt_id=<TMPL_VAR NAME='receipt_id'>">
+                        <TMPL_VAR NAME='legal_receipt_id'>
+                    </a>
+                </td>
+                <td><TMPL_VAR NAME='created' FORMAT='datetime'/></td>
+                <td><TMPL_VAR NAME="document_date" FORMAT="date"/></td>
+                <td><TMPL_VAR NAME="approved_val" FORMAT="price"/></td>
+                <td><TMPL_VAR NAME='group_title_translation'/></td>
+                <td><TMPL_VAR NAME='status_title'/></td>
+            </tr>
+        </TMPL_LOOP>
+        </tbody>
+    </table>
+    <div class="text-center">
+        <ul class="pagination">
+            <TMPL_VAR NAME='Paging' ESCAPE='none'>
+        </ul>
+    </div>
+    <TMPL_ELSE>
+        <div class="alert alert-success"><TMPL_VAR NAME='LNG_Empty'></div>
+</TMPL_IF>

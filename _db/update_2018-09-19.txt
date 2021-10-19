@@ -1,0 +1,15 @@
+--lst-main
+INSERT INTO "public"."config" ("config_id","code","value","group_code","editor","updated")
+						VALUES (nextval('"config_ConfigID_seq"'::regclass),'push_receipt_processed','%salutation% %first_name% %last_name%, your receipt #%receipt_id% is processed. Please check it out.','p_push'::character varying,'plain'::character varying,'2018-09-19 00:00:00');
+INSERT INTO "public"."config" ("config_id","code","value","group_code","editor","updated")
+						VALUES (nextval('"config_ConfigID_seq"'::regclass),'push_receipt_processed_remind','%salutation% %first_name% %last_name%, your receipt #%receipt_id% is processed. Please check it out.','p_push'::character varying,'plain'::character varying,'2018-09-19 00:00:00');
+INSERT INTO "public"."config" ("config_id","code","value","group_code","editor","updated")
+						VALUES (nextval('"config_ConfigID_seq"'::regclass),'push_receipt_processed_remind_after_days','2','p_push'::character varying,'plain'::character varying,'2018-09-19 00:00:00');
+
+INSERT INTO "public"."config" ("config_id","code","value","group_code","editor","updated")
+						VALUES (nextval('"config_ConfigID_seq"'::regclass),'push_receipt_payroll','%salutation% %first_name% %last_name%, your receipt #%receipt_id% is processed and should be checked out before payroll day of your company.','p_push'::character varying,'plain'::character varying,'2018-09-19 00:00:00');
+INSERT INTO "public"."config" ("config_id","code","value","group_code","editor","updated")
+						VALUES (nextval('"config_ConfigID_seq"'::regclass),'push_receipt_payroll_before_days','2','p_push'::character varying,'plain'::character varying,'2018-09-19 00:00:00');
+
+INSERT INTO "public"."config" ("config_id","code","value","group_code","editor","updated")
+						VALUES (nextval('"config_ConfigID_seq"'::regclass),'push_receipt_comment_new','%salutation% %first_name% %last_name%, there is new message in chat of your receipt #%receipt_id%.','p_push'::character varying,'plain'::character varying,'2018-09-19 00:00:00');

@@ -1,0 +1,460 @@
+<div class="row">
+	<TMPL_INCLUDE FILE='_config_navigation.html'>
+</div>
+
+<TMPL_IF NAME='Section' VALUE='statistics'>
+	<div class="row">
+		<section class="box no-margin">
+			<header class="panel_header" for="header_dashboard" table="core">
+				<h2 class="title"><TMPL_VAR NAME='LNG_YearlyVoucherStatistics'></h2>
+			</header>
+			<div class="content-body">
+				<form action="<TMPL_VAR NAME='MODULE_URL'>" method="post" autocomplete="off">
+					<div class="row">
+						<div class="col-md-6 form-group">
+							<label class="form-label"><TMPL_VAR NAME='LNG_VoucherStatisticsYearFilter'></label><br />
+							<input type="text" name="yearly_statistics_date" class="form-control datepicker" data-min-view-mode="years" data-format="yyyy"/>
+						</div>
+						<div class="col-md-6 form-group">
+							<label class="form-label">&nbsp;</label><br />
+							<button type="submit" class="btn btn-primary" id="bvs-statistics-show"><TMPL_VAR NAME='LNG_VoucherStatisticsShow'></button>
+							<input class="hidden" name="Filter" value="1" />
+						</div>
+					</div>
+				</form>
+				<div id="statistics-container">
+					<div class="row">
+						<table class="table no-margin">
+							<thead>
+								<tr>
+									<th class="text-center" colspan="2"><TMPL_VAR NAME='LNG_VoucherType'></th>
+									<TMPL_LOOP NAME='MonthTitleList'>
+										<th width="7%" class="text-center"><TMPL_VAR NAME='title'></th>
+									</TMPL_LOOP>
+									<th width="7%" class="text-center"><TMPL_VAR NAME='LNG_StatisticsTotal'></th>
+								</tr>
+							</thead>
+
+							<TMPL_LOOP NAME='StatisticsList'>
+								<tbody>
+									<tr class="text-center success">
+										<td colspan="2"><b><TMPL_VAR NAME='product-group-title'></b></td>
+										<td colspan="13"></td>
+									</tr>
+								</tbody>
+								<TMPL_LOOP NAME='type_list'>
+									<tbody class="no-margin">
+										<tr class="text-center">
+											<td></td>
+											<td>
+												<b><TMPL_VAR NAME='title'></b>
+												<TMPL_IF NAME='type' VALUE='invoiced'>
+													<br/><a href="" class="moreLinkStatistics" data-group="invoiced-<TMPL_VAR NAME='StatisticsList.group_id'>"><TMPL_VAR NAME="LNG_Expand"></a>
+												</TMPL_IF>
+												<TMPL_IF NAME='type' VALUE='open'>
+													<br/><a href="" class="moreLinkStatistics" data-group="open-<TMPL_VAR NAME='StatisticsList.group_id'>"><TMPL_VAR NAME="LNG_Expand"></a>
+												</TMPL_IF>
+											</td>
+											<TMPL_LOOP NAME='month_list'>
+												<td>
+													<TMPL_IF NAME='amount'>
+														<TMPL_VAR NAME='amount' FORMAT='price'>€
+													</TMPL_IF>
+												</td>
+											</TMPL_LOOP>
+											<td>
+												<TMPL_IF NAME='total'>
+													<TMPL_VAR NAME='total' FORMAT='price'>€
+												</TMPL_IF>
+											</td>
+										</tr>
+									</tbody>
+									<TMPL_IF NAME='type' VALUE='invoiced'>
+										<tbody class="no-margin" data-group="invoiced-<TMPL_VAR NAME='StatisticsList.group_id'>" style="display: none;">
+											<tr class="text-center gray">
+												<td></td>
+												<td><TMPL_VAR NAME='title_issued_month'></td>
+												<TMPL_LOOP NAME='month_list'>
+													<td>
+														<TMPL_IF NAME='issued_month'>
+															<TMPL_VAR NAME='issued_month' FORMAT='price'>€
+														</TMPL_IF>
+													</td>
+												</TMPL_LOOP>
+												<td>
+													<TMPL_IF NAME='total_issued_month'>
+														<TMPL_VAR NAME='total_issued_month' FORMAT='price'>€
+													</TMPL_IF>
+												</td>
+											</tr>
+											<tr class="text-center gray">
+												<td></td>
+												<td><TMPL_VAR NAME='title_not_issued_month'></td>
+												<TMPL_LOOP NAME='month_list'>
+													<td>
+														<TMPL_IF NAME='not_issued_month'>
+															<TMPL_VAR NAME='not_issued_month' FORMAT='price'>€
+														</TMPL_IF>
+													</td>
+												</TMPL_LOOP>
+												<td>
+													<TMPL_IF NAME='total_not_issued_month'>
+														<TMPL_VAR NAME='total_not_issued_month' FORMAT='price'>€
+													</TMPL_IF>
+												</td>
+											</tr>
+										</tbody>
+									</TMPL_IF>
+									<TMPL_IF NAME='type' VALUE='open'>
+										<tbody class="no-margin" data-group="open-<TMPL_VAR NAME='StatisticsList.group_id'>" style="display: none;">
+											<tr class="text-center gray">
+												<td></td>
+												<td><a href="<TMPL_VAR NAME='PROJECT_PATH'>admin/voucher_dashboard.php?Do=ShowDetails&group_id=<TMPL_VAR NAME='StatisticsList.group_id'>&type=not_used&yearly_statistics_date=<TMPL_VAR NAME='yearly_statistics_date'>" target="_blank"><TMPL_VAR NAME='title_not_used'></a></td>
+												<TMPL_LOOP NAME='month_list'>
+													<td>
+														<TMPL_IF NAME='not_used_amount'>
+															<TMPL_VAR NAME='not_used_amount' FORMAT='price'>€
+														</TMPL_IF>
+													</td>
+												</TMPL_LOOP>
+												<td>
+													<TMPL_IF NAME='total_not_used'>
+														<TMPL_VAR NAME='total_not_used' FORMAT='price'>€
+													</TMPL_IF>
+												</td>
+											</tr>
+											<tr class="text-center gray">
+												<td></td>
+												<td><a href="<TMPL_VAR NAME='PROJECT_PATH'>admin/voucher_dashboard.php?Do=ShowDetails&group_id=<TMPL_VAR NAME='StatisticsList.group_id'>&type=partially_used&yearly_statistics_date=<TMPL_VAR NAME='yearly_statistics_date'>" target="_blank"><TMPL_VAR NAME='title_partially_used'></a></td>
+												<TMPL_LOOP NAME='month_list'>
+													<td>
+														<TMPL_IF NAME='partially_used_amount'>
+															<TMPL_VAR NAME='partially_used_amount' FORMAT='price'>€
+														</TMPL_IF>
+													</td>
+												</TMPL_LOOP>
+												<td>
+													<TMPL_IF NAME='total_partially_used'>
+														<TMPL_VAR NAME='total_partially_used' FORMAT='price'>€
+													</TMPL_IF>
+												</td>
+											</tr>
+										</tbody>
+									</TMPL_IF>
+								</TMPL_LOOP>
+							</TMPL_LOOP>
+						</table>
+					</div>
+				</div>
+			</div>
+		</section>
+	</div>
+
+	<script type="text/javascript">
+	    $("[name='yearly_statistics_date']").datepicker({
+	        format: "yyyy",
+	        viewMode: "years",
+	        minViewMode: "years"
+	    }).datepicker('setDate', new Date("<TMPL_VAR NAME='yearly_statistics_date'>"));
+
+		$("a.moreLinkStatistics").click(function(e){
+			if($(this).is('.open')){
+				$(this).removeClass('open').text('<TMPL_VAR NAME="LNG_Expand">');
+				$("tbody[data-group='"+$(this).attr('data-group')+"']").fadeOut(300);
+			}
+			else{
+				$(this).addClass('open').text('<TMPL_VAR NAME="LNG_Collapse">');
+				$("tbody[data-group='"+$(this).attr('data-group')+"']").fadeIn(300);
+			}
+			e.preventDefault();
+		});
+	</script>
+</TMPL_IF>
+
+<TMPL_IF NAME='Section' VALUE='reports'>
+	<div class="row">
+		<section class="box no-margin">
+			<header class="panel_header" for="header_dashboard" table="core">
+				<h2 class="title"><TMPL_VAR NAME='LNG_VoucherDashboardReports'></h2>
+			</header>
+			<div class="content-body">
+				<form action="<TMPL_VAR NAME='MODULE_URL'>" method="post" autocomplete="off">
+					<div class="row">
+						<div class="col-md-6 form-group">
+							<label class="form-label"><TMPL_VAR NAME='LNG_VoucherReportsCompanyUnit'></label><br />
+							<select name="company_unit_id[]" class="form-control select2" multiple data-allow-clear="true">
+								<TMPL_VAR NAME='CompanyListHTML' ESCAPE='none'/>
+							</select>
+							<label class="form-label"><TMPL_VAR NAME='LNG_VoucherReportsProductGroup'></label><br />
+							<select name="voucher_type" class="form-control">
+								<option <TMPL_UNLESS NAME='voucher_type'>selected</TMPL_UNLESS> value="all"><TMPL_VAR NAME='LNG_All'></option>
+								<TMPL_LOOP NAME='VoucherProductGroup'>
+									<option <TMPL_IF NAME='selected'>selected</TMPL_IF> value="<TMPL_VAR NAME='group_id'>"> <TMPL_VAR NAME='title_translation'> </option>
+								</TMPL_LOOP>
+							</select>
+						</div>
+						<div class="col-md-3 form-group">
+							<label class="form-label"><TMPL_VAR NAME='LNG_VoucherReportsStartDate'></label><br />
+							<input class="form-control datepicker" name="start_date" value="<TMPL_VAR NAME='start_date'>" />
+
+							<label class="form-label"><TMPL_VAR NAME='LNG_VoucherReportsEndDate'></label><br />
+							<input class="form-control datepicker" name="end_date" value="<TMPL_VAR NAME='end_date'>" />
+						</div>
+						<div class="col-md-3 form-group">
+							<label class="form-label">&nbsp;</label><br />
+							<button type="submit" class="btn btn-primary"><TMPL_VAR NAME='LNG_VoucherReportsShow'></button>
+						</div>
+					</div>
+				</form>
+				<div id="reports-container">
+					<div class="row">
+						<table class="table no-margin" style="table-layout: fixed;">
+							<thead>
+								<tr>
+									<th width="6%" class="text-center"><TMPL_VAR NAME='LNG_VoucherReportsCompany'></th>
+									<th width="7%" class="text-center"><TMPL_VAR NAME='LNG_ReportsPaid'></th>
+									<th width="7%" class="text-center"><TMPL_VAR NAME='LNG_ReportsToBePaid'></th>
+									<th width="7%" class="text-center"><TMPL_VAR NAME='LNG_ReportsOpen'></th>
+									<th width="7%" class="text-center"><TMPL_VAR NAME='LNG_ReportsInvoiced'></th>
+									<th width="7%" class="text-center"><TMPL_VAR NAME='LNG_ReportExpired'></th>
+								</tr>
+							</thead>
+
+							<tbody>
+							<TMPL_LOOP NAME='TotalAmount'>
+								<tr class="text-center">
+									<td width="6%"></td>
+									<td width="7%"><TMPL_VAR NAME='paid' FORMAT='price'>€</td>
+									<td width="7%"><TMPL_VAR NAME='to_be_paid' FORMAT='price'>€</td>
+									<td width="7%"><TMPL_VAR NAME='open' FORMAT='price'>€</td>
+									<td width="7%"><TMPL_VAR NAME='deactivated' FORMAT='price'>€</td>
+									<td width="7%"><TMPL_VAR NAME='expired' FORMAT='price'>€</td>
+								</tr>
+							</TMPL_LOOP>
+							</tbody>
+						</table>
+
+						<TMPL_LOOP NAME='ReportList'>
+							<table class="table no-margin" style="table-layout: fixed;">
+								<tbody>
+								<tr class="text-center">
+									<td width="6%">
+										<a href="<TMPL_VAR NAME='ADMIN_PATH' />module.php?load=company&Section=company_unit&company_unit_id=<TMPL_VAR NAME='company_unit_id'>"><TMPL_VAR NAME='company_unit_title'></a></br>
+										<a href="" class="moreReports" data-company_unit_id="<TMPL_VAR NAME='company_unit_id'>"><TMPL_VAR NAME="LNG_Expand"></a>
+									</td>
+									<td width="7%"><TMPL_VAR NAME='paid' FORMAT='price'>€</td>
+									<td width="7%"><TMPL_VAR NAME='to_be_paid' FORMAT='price'>€</td>
+									<td width="7%"><TMPL_VAR NAME='open' FORMAT='price'>€</td>
+									<td width="7%"><TMPL_VAR NAME='deactivated' FORMAT='price'>€</td>
+									<td width="7%"><TMPL_VAR NAME='expired' FORMAT='price'>€</td>
+								</tr>
+								</tbody>
+							</table>
+							<TMPL_IF NAME='employee_list'>
+								<div class="no-margin" data-company_unit_id="<TMPL_VAR NAME='company_unit_id'>" style="display: none">
+									<table class="table no-margin" style="table-layout: fixed;">
+										<tbody>
+										<TMPL_LOOP NAME='employee_list'>
+											<tr class="text-center gray">
+												<td width="6%">
+													<a href="<TMPL_VAR NAME='ADMIN_PATH' />module.php?load=company&Section=employee&employee_id=<TMPL_VAR NAME='employee_id'>"><TMPL_VAR NAME='employee_name'></a></br>
+													<a href="" class="voucherInfo" data-employee_id="<TMPL_VAR NAME='employee_id'>"><TMPL_VAR NAME="LNG_Expand"></a>
+												</td>
+												<td width="7%">
+													<TMPL_VAR NAME='paid' FORMAT='price'>€
+													<p class="no-margin" data-employee_id="<TMPL_VAR NAME='employee_id'>" style="display: none">
+														<TMPL_LOOP NAME='paid_list'>
+															<TMPL_IF NAME='amount' OP='>' VALUE='0'>
+																<a href="<TMPL_VAR NAME='PROJECT_PATH'>admin/module.php?load=company&Section=employee&employee_id=<TMPL_VAR NAME='employee_id'>&ActiveTab=3&voucher_id=<TMPL_VAR NAME='voucher_id'>" target="_blank"><TMPL_VAR NAME='voucher_id'/></a>
+																(<TMPL_VAR NAME='amount' FORMAT='price'>€)<TMPL_UNLESS NAME='__LAST__'>, </TMPL_UNLESS>
+															</TMPL_IF>
+														</TMPL_LOOP>
+													</p>
+												</td>
+												<td width="7%">
+													<TMPL_VAR NAME='to_be_paid' FORMAT='price'>€
+													<p class="no-margin" data-employee_id="<TMPL_VAR NAME='employee_id'>" style="display: none">
+														<TMPL_LOOP NAME='to_be_paid_list'>
+															<TMPL_IF NAME='amount_approved' OP='>' VALUE='0'>
+																<a href="<TMPL_VAR NAME='PROJECT_PATH'>admin/module.php?load=company&Section=employee&employee_id=<TMPL_VAR NAME='employee_id'>&ActiveTab=3&voucher_id=<TMPL_VAR NAME='voucher_id'>" target="_blank"><TMPL_VAR NAME='voucher_id'/></a>
+																(<TMPL_VAR NAME='amount_approved' FORMAT='price'>€)<TMPL_UNLESS NAME='__LAST__'>, </TMPL_UNLESS>
+															</TMPL_IF>
+														</TMPL_LOOP>
+													</p>
+												</td>
+												<td width="7%">
+													<TMPL_VAR NAME='open' FORMAT='price'>€
+													<p class="no-margin" data-employee_id="<TMPL_VAR NAME='employee_id'>" style="display: none">
+														<TMPL_LOOP NAME='open_list'>
+															<TMPL_IF NAME='amount_left' OP='>' VALUE='0'>
+																<a href="<TMPL_VAR NAME='PROJECT_PATH'>admin/module.php?load=company&Section=employee&employee_id=<TMPL_VAR NAME='employee_id'>&ActiveTab=3&voucher_id=<TMPL_VAR NAME='voucher_id'>" target="_blank"><TMPL_VAR NAME='voucher_id'/></a>
+																(<TMPL_VAR NAME='amount_left' FORMAT='price'>€)<TMPL_UNLESS NAME='__LAST__'>, </TMPL_UNLESS>
+															</TMPL_IF>
+														</TMPL_LOOP>
+													</p>
+												</td>
+												<td width="7%">
+													<TMPL_VAR NAME='deactivated' FORMAT='price'>€
+													<p class="no-margin" data-employee_id="<TMPL_VAR NAME='employee_id'>" style="display: none">
+														<TMPL_LOOP NAME='deactivated_list'>
+															<TMPL_IF NAME='amount' OP='>' VALUE='0'>
+																<a href="<TMPL_VAR NAME='PROJECT_PATH'>admin/module.php?load=company&Section=employee&employee_id=<TMPL_VAR NAME='employee_id'>&ActiveTab=3&voucher_id=<TMPL_VAR NAME='voucher_id'>" target="_blank"><TMPL_VAR NAME='voucher_id'/></a>
+																(<TMPL_VAR NAME='amount' FORMAT='price'>€)<TMPL_UNLESS NAME='__LAST__'>, </TMPL_UNLESS>
+															</TMPL_IF>
+														</TMPL_LOOP>
+													</p>
+												</td>
+												<td width="7%">
+													<TMPL_VAR NAME='expired' FORMAT='price'>€
+													<p class="no-margin" data-employee_id="<TMPL_VAR NAME='employee_id'>" style="display: none">
+														<TMPL_LOOP NAME='expired_list'>
+															<TMPL_IF NAME='amount_left' OP='>' VALUE='0'>
+																<a href="<TMPL_VAR NAME='PROJECT_PATH'>admin/module.php?load=company&Section=employee&employee_id=<TMPL_VAR NAME='employee_id'>&ActiveTab=3&voucher_id=<TMPL_VAR NAME='voucher_id'>" target="_blank"><TMPL_VAR NAME='voucher_id'/></a>
+																(<TMPL_VAR NAME='amount_left' FORMAT='price'>€)<TMPL_UNLESS NAME='__LAST__'>, </TMPL_UNLESS>
+															</TMPL_IF>
+														</TMPL_LOOP>
+													</p>
+												</td>
+											</tr>
+										</TMPL_LOOP>
+										</tbody>
+									</table>
+								</div>
+							</TMPL_IF>
+						</TMPL_LOOP>
+					</div>
+				</div>
+			</div>
+		</section>
+	</div>
+
+	<script>
+        $(document).ready(function(){
+            $("a.moreReports").click(function(e){
+                if($(this).is('.open')){
+                    $(this).removeClass('open').text('<TMPL_VAR NAME="LNG_Expand">');
+                    $("div[data-company_unit_id='"+$(this).attr('data-company_unit_id')+"']").slideUp(300);
+                }
+                else{
+                    $(this).addClass('open').text('<TMPL_VAR NAME="LNG_Collapse">');
+                    $("div[data-company_unit_id='"+$(this).attr('data-company_unit_id')+"']").slideDown(300);
+                }
+                e.preventDefault();
+            });
+
+            $("a.voucherInfo").click(function(e){
+                if($(this).is('.open')){
+                    $(this).removeClass('open').text('<TMPL_VAR NAME="LNG_Expand">');
+                    $("p[data-employee_id='"+$(this).attr('data-employee_id')+"']").slideUp(300);
+                }
+                else{
+                    $(this).addClass('open').text('<TMPL_VAR NAME="LNG_Collapse">');
+                    $("p[data-employee_id='"+$(this).attr('data-employee_id')+"']").slideDown(300);
+                }
+                e.preventDefault();
+            });
+        });
+	</script>
+</TMPL_IF>
+
+<TMPL_IF NAME='Section' VALUE='vat_report'>
+	<div class="row">
+		<section class="box no-margin">
+			<header class="panel_header" for="header_dashboard" table="core">
+				<h2 class="title"><TMPL_VAR NAME='LNG_VatReport'></h2>
+			</header>
+			<div class="content-body">
+				<form action="<TMPL_VAR NAME='MODULE_URL'>" method="post" autocomplete="off">
+					<div class="row">
+						<div class="col-md-6 form-group">
+							<label class="form-label"><TMPL_VAR NAME='LNG_ReportTimeFrame'></label><br />
+							<div class="input-group input-daterange">
+								<input type="text" class="form-control datepicker" name="start_date" value="<TMPL_VAR NAME='start_date'>" data-min-view-mode="months" data-format="mm.yyyy">
+								<div class="input-group-addon">to</div>
+								<input type="text" class="form-control datepicker" name="end_date" value="<TMPL_VAR NAME='end_date'>" data-min-view-mode="months" data-format="mm.yyyy">
+							</div>
+							<label class="form-label"><TMPL_VAR NAME='LNG_ReportProductGroup'></label><br />
+							<select name="voucher_type[]" class="form-control select2" multiple data-allow-clear="true">
+								<TMPL_LOOP NAME='VoucherProductGroup'>
+									<option <TMPL_IF NAME='selected'>selected</TMPL_IF> value="<TMPL_VAR NAME='group_id'>"> <TMPL_VAR NAME='title_translation'> </option>
+								</TMPL_LOOP>
+							</select>
+						</div>
+						<div class="col-md-3 form-group">
+							<label class="form-label">&nbsp;</label><br />
+							<button type="submit" class="btn btn-primary"><TMPL_VAR NAME='LNG_VoucherReportsShow'></button>
+						</div>
+					</div>
+				</form>
+				<div id="vat-report-container">
+					<div class="row">
+						<table class="table no-margin" style="table-layout: fixed;">
+							<thead>
+								<tr>
+									<th width="6%" class="text-center"></th>
+									<th width="7%" class="text-center"></th>
+									<th width="7%" class="text-center"><TMPL_VAR NAME='LNG_PaidAmount'></th>
+									<th width="7%" class="text-center"><TMPL_VAR NAME='LNG_ApprovedAmount'></th>
+									<th width="7%" class="text-center"><TMPL_VAR NAME='LNG_CheckAmount'></th>
+								</tr>
+							</thead>
+
+							<TMPL_LOOP NAME='ReportList'>
+								<tbody>
+									<TMPL_IF NAME='vat' VALUE='total'>
+										<tr class="text-center">
+											<td width="7%" rowspan="3"><TMPL_VAR NAME='LNG_Total'></td>
+											<td width="7%"><TMPL_VAR NAME='LNG_GrossValue'></td>
+											<td width="7%">
+												<a href="<TMPL_VAR NAME='PROJECT_PATH'>admin/voucher_dashboard.php?Do=ShowVatDetails&voucher_type=<TMPL_VAR NAME='VoucherTypeFilter'>&vat=<TMPL_VAR NAME='vat'>&start_date=<TMPL_VAR NAME='start_date'>&end_date=<TMPL_VAR NAME='end_date'>&type=exported" target="_blank"><TMPL_VAR NAME='exported' FORMAT='price'>€</a>
+											</td>
+											<td width="7%">
+												<a href="<TMPL_VAR NAME='PROJECT_PATH'>admin/voucher_dashboard.php?Do=ShowVatDetails&voucher_type=<TMPL_VAR NAME='VoucherTypeFilter'>&vat=<TMPL_VAR NAME='vat'>&start_date=<TMPL_VAR NAME='start_date'>&end_date=<TMPL_VAR NAME='end_date'>&type=approved" target="_blank"><TMPL_VAR NAME='approved' FORMAT='price'>€</a>
+											</td>
+										</tr>
+										<tr class="text-center">
+											<td width="7%"><TMPL_VAR NAME='LNG_Tax'></td>
+											<td width="7%"><TMPL_VAR NAME='exported_difference' FORMAT='price'>€</td>
+											<td width="7%"><TMPL_VAR NAME='approved_difference' FORMAT='price'>€</td>
+											<td width="7%"><TMPL_VAR NAME='difference_check' FORMAT='price'>€</td>
+										</tr>
+										<tr class="text-center">
+										</tr>
+									</TMPL_IF>
+
+									<TMPL_IF NAME='vat' OP='!=' VALUE='total'>
+										<tr class="text-center">
+											<td width="7%" rowspan="3"><TMPL_VAR NAME='vat'>%</td>
+											<td width="7%"><TMPL_VAR NAME='LNG_GrossValue'></td>
+											<td width="7%">
+												<a href="<TMPL_VAR NAME='PROJECT_PATH'>admin/voucher_dashboard.php?Do=ShowVatDetails&voucher_type=<TMPL_VAR NAME='VoucherTypeFilter'>&vat=<TMPL_VAR NAME='vat'>&start_date=<TMPL_VAR NAME='start_date'>&end_date=<TMPL_VAR NAME='end_date'>&type=exported" target="_blank"><TMPL_VAR NAME='exported_sum' FORMAT='price'>€</a>
+											</td>
+											<td width="7%">
+												<a href="<TMPL_VAR NAME='PROJECT_PATH'>admin/voucher_dashboard.php?Do=ShowVatDetails&voucher_type=<TMPL_VAR NAME='VoucherTypeFilter'>&vat=<TMPL_VAR NAME='vat'>&start_date=<TMPL_VAR NAME='start_date'>&end_date=<TMPL_VAR NAME='end_date'>&type=approved" target="_blank"><TMPL_VAR NAME='approved_sum' FORMAT='price'>€</a>
+											</td>
+											<td width="7%"><TMPL_VAR NAME='sum_check' FORMAT='price'>€</td>
+										</tr>
+										<tr class="text-center">
+											<td width="7%"><TMPL_VAR NAME='LNG_Tax'></td>
+											<td width="7%"><TMPL_VAR NAME='exported_difference' FORMAT='price'>€</td>
+											<td width="7%"><TMPL_VAR NAME='approved_difference' FORMAT='price'>€</td>
+											<td width="7%"><TMPL_VAR NAME='difference_check' FORMAT='price'>€</td>
+										</tr>
+										<tr class="text-center">
+											<td width="7%"><TMPL_VAR NAME='LNG_NetValue'></td>
+											<td width="7%"><TMPL_VAR NAME='exported_percentage' FORMAT='price'>€</td>
+											<td width="7%"><TMPL_VAR NAME='approved_percentage' FORMAT='price'>€</td>
+											<td width="7%"><TMPL_VAR NAME='percentage_check' FORMAT='price'>€</td>
+										</tr>
+									</TMPL_IF>
+								</tbody>
+							</TMPL_LOOP>
+						</table>
+					</div>
+				</div>
+			</div>
+		</section>
+	</div>
+	<script>
+	</script>
+</TMPL_IF>

@@ -1,0 +1,319 @@
+<div class="main">
+	<p class="text">
+		<strong>Rechnung Nr. <TMPL_VAR NAME='invoice_guid'></strong>
+	</p>
+	<p></p>
+	<table width="100%" border="1" class="invoice">
+		<thead>
+			<tr>
+				<th width="4%"></th>
+				<th width="41%">Cloud Service</th>
+				<th width="13%">Periode</th>
+				<TMPL_IF NAME='invoice_type' value='invoice'>
+					<th width="10%">Tage zählen</th>
+					<th width="11%"><nobr>Nutzer/</nobr><br>Monat</th>
+					<th width="10%">Rabatt</th>
+				</TMPL_IF>
+				<th width="11%">Gesamt</th>
+				<TMPL_IF NAME='invoice_type' value='voucher_invoice'>
+					<th>Gutscheine</th>
+				</TMPL_IF>
+			</tr>
+		</thead>
+
+		<tr class="empty">
+			<TMPL_IF NAME='invoice_type' VALUE="voucher_invoice">
+				<td colspan="3">&nbsp;</td>
+				<td></td>
+				<td></td>
+				<TMPL_ELSE>
+					<td colspan="5">&nbsp;</td>
+					<td></td>
+					<td></td>
+			</TMPL_IF>
+		</tr>
+	</table>
+		<TMPL_LOOP NAME='DetailsList'>
+			<!-- chunk -->
+			<table width="100%" border="1" class="invoice">
+			<tr>
+				<td width="4%">&nbsp;</td>
+				<td width="41%"><strong><TMPL_VAR NAME="company_unit_title"/></strong></td>
+				<td width="13%"></td>
+				<TMPL_IF NAME='invoice_type' value='invoice'>
+					<td width="10%"></td>
+					<td width="11%"></td>
+					<td width="10%"></td>
+				</TMPL_IF>
+				<td width="11%"></td>
+				<TMPL_IF NAME='invoice_type' value='voucher_invoice'>
+					<td></td>
+				</TMPL_IF>
+			</tr>
+			</table>
+			<TMPL_IF NAME='implementation'>
+				<!-- chunk -->
+				<table width="100%" border="1" class="invoice">
+					<tr>
+						<td width="4%"></td>
+						<td width="41%">
+							Einrichtungsgebühren – einmalig
+						</td>
+						<td width="13%"></td>
+						<TMPL_IF NAME='invoice_type' value='invoice'>
+							<td width="10%"></td>
+							<td width="11%"></td>
+							<td width="10%"></td>
+						</TMPL_IF>
+						<td width="11%"></td>
+						<TMPL_IF NAME='invoice_type' value='voucher_invoice'>
+							<td></td>
+						</TMPL_IF>
+					</tr>
+				</table>
+				<TMPL_LOOP NAME='implementation'>
+					<TMPL_LOOP NAME='product_list'>
+						<!-- chunk -->
+						<table width="100%" border="1" class="invoice">
+							<tr>
+								<td width="4%"></td>
+								<td width="41%">
+									<strong><TMPL_VAR NAME='product_title_translation'/></strong>
+								</td>
+								<td width="13%"></td>
+								<TMPL_IF NAME='invoice_type' value='invoice'>
+									<td width="10%"></td>
+									<td width="11%"></td>
+									<td width="10%"></td>
+								</TMPL_IF>
+								<td width="11%"></td>
+								<TMPL_IF NAME='invoice_type' value='voucher_invoice'>
+									<td></td>
+								</TMPL_IF>
+							</tr>
+						</table>
+						<TMPL_LOOP NAME='details_array'>
+							<!-- chunk -->
+							<table width="100%" border="1" class="invoice">
+								<tr>
+									<td width="4%"><TMPL_VAR NAME='__ROWNUM__'></td>
+									<td width="41%">
+										<TMPL_VAR NAME='employee_name'/>
+									</td>
+									<td width="13%">
+										<TMPL_VAR NAME='date_from' FORMAT='date_implementation'> - <TMPL_VAR NAME='date_to' FORMAT='date_implementation'>
+									</td>
+									<td width="10%"></td>
+									<td width="11%"><TMPL_VAR NAME='user_per_month' FORMAT='price'></td>
+									<td width="10%"><TMPL_IF NAME='discount'><TMPL_VAR NAME='discount'>%</TMPL_IF></td>
+									<td width="11%"><TMPL_VAR NAME='cost' FORMAT='price'></td>
+								</tr>
+							</table>
+						</TMPL_LOOP>
+					</TMPL_LOOP>
+				</TMPL_LOOP>
+			</TMPL_IF>
+			<TMPL_IF NAME='recurring'>
+				<!-- chunk -->
+				<table width="100%" border="1" class="invoice">
+					<tr class="empty">
+						<td width="4%">&nbsp;</td>
+						<td width="41%"></td>
+						<td width="13%"></td>
+						<TMPL_IF NAME='invoice_type' value='invoice'>
+							<td width="10%"></td>
+							<td width="11%"></td>
+							<td width="10%"></td>
+						</TMPL_IF>
+						<td width="11%"></td>
+						<TMPL_IF NAME='invoice_type' value='voucher_invoice'>
+							<td></td>
+						</TMPL_IF>
+					</tr>
+					<tr>
+						<td width="4%">&nbsp;</td>
+						<td width="41%">Monatliche Gebühren</td>
+						<td width="13%"></td>
+						<TMPL_IF NAME='invoice_type' value='invoice'>
+							<td width="10%"></td>
+							<td width="11%"></td>
+							<td width="10%"></td>
+						</TMPL_IF>
+						<td width="11%"></td>
+						<TMPL_IF NAME='invoice_type' value='voucher_invoice'>
+							<td></td>
+						</TMPL_IF>
+					</tr>
+				</table>
+				<TMPL_LOOP NAME='recurring'>
+					<TMPL_LOOP NAME='product_list'>
+						<!-- chunk -->
+						<table width="100%" border="1" class="invoice">
+							<tr>
+								<td width="4%"></td>
+								<td width="41%">
+									<strong><TMPL_VAR NAME='product_title_translation'/></strong>
+								</td>
+								<td width="13%"></td>
+								<TMPL_IF NAME='invoice_type' value='invoice'>
+									<td width="10%"></td>
+									<td width="11%"></td>
+									<td width="10%"></td>
+								</TMPL_IF>
+								<td width="11%"></td>
+								<TMPL_IF NAME='invoice_type' value='voucher_invoice'>
+									<td></td>
+								</TMPL_IF>
+							</tr>
+						</table>
+						<TMPL_LOOP NAME='details_array'>
+							<!-- chunk -->
+							<TMPL_UNLESS NAME='flex' VALUE='1'>
+								<table width="100%" border="1" class="invoice">
+									<tr>
+										<td width="4%"><TMPL_VAR NAME='__ROWNUM__'></td>
+										<td width="41%"><TMPL_VAR NAME='employee_name'/></td>
+										<td width="13%">
+											<TMPL_VAR NAME='date_from' FORMAT='date_recurring'> - <TMPL_VAR NAME='date_to' FORMAT='date_recurring'>
+										</td>
+										<TMPL_IF NAME='invoice_type' VALUE="invoice">
+											<td width="10%"><TMPL_VAR NAME='days_count'></td>
+											<td width="11%"><TMPL_VAR NAME='user_per_month' FORMAT='price'></td>
+											<td width="10%"><TMPL_IF NAME='discount'><TMPL_VAR NAME='discount'>%</TMPL_IF></td>
+										</TMPL_IF>
+										<td width="11%"><TMPL_VAR NAME='cost' FORMAT='price'></td>
+										<TMPL_IF NAME='invoice_type' VALUE="voucher_invoice">
+											<td>
+												<TMPL_LOOP NAME='voucher_ids'>
+													<a href="<TMPL_VAR NAME='PROJECT_PATH'>admin/module.php?load=company&Section=employee&employee_id=<TMPL_VAR NAME='employee_id'>&group_id=<TMPL_VAR NAME='group_id'>&voucher_id=<TMPL_VAR NAME='voucher_id'>" target="_blank"><TMPL_VAR NAME='voucher_id'/></a> (<TMPL_VAR NAME='amount'>)<TMPL_UNLESS NAME='__LAST__'>, </TMPL_UNLESS>
+												</TMPL_LOOP>
+											</td>
+										</TMPL_IF>
+									</tr>
+								</table>
+							</TMPL_UNLESS>
+							<TMPL_IF NAME='flex' VALUE='1'>
+								<!-- chunk -->
+								<table width="100%" border="1" class="invoice">
+									<tr>
+										<td width="4%"><TMPL_VAR NAME='__ROWNUM__'></td>
+										<td width="41%"><TMPL_VAR NAME='employee_name'/></td>
+										<td width="13%">
+										<TMPL_VAR NAME='date_from' FORMAT='date_recurring'> - <TMPL_VAR NAME='date_to' FORMAT='date_recurring'>
+										</td>
+										<td width="10%"></td>
+										<td width="11%"></td>
+										<td width="10%"></td>
+										<td width="11%"></td>
+									</tr>
+									<tr>
+										<td></td>
+										<td align="right"><TMPL_VAR NAME='product_list.product_translation_unit_count_flex'></td>
+										<td>
+											<TMPL_VAR NAME='date_from' FORMAT='date_recurring'> - <TMPL_VAR NAME='date_to' FORMAT='date_recurring'>
+										</td>
+										<td>
+											<TMPL_IF NAME='flex_free_units' OP='>' VALUE='0'>
+												<TMPL_VAR NAME='flex_employee_units'> - <TMPL_VAR NAME='flex_free_units'> = <TMPL_VAR NAME='flex_unit_count'>
+													<TMPL_ELSE>
+														<TMPL_VAR NAME='flex_unit_count'>
+											</TMPL_IF>
+										</td>
+										<td><TMPL_VAR NAME='flex_unit_price' FORMAT='price'></td>
+										<td></td>
+										<td><TMPL_VAR NAME='flex_unit_count'> * <TMPL_VAR NAME='flex_unit_price' FORMAT='price'> = <TMPL_VAR NAME='flex_unit_sum' FORMAT='price'></td>
+									</tr>
+									<tr>
+										<td></td>
+										<td align="right"><TMPL_VAR NAME='product_list.product_translation_total_amount_flex'></td>
+										<td>
+											<TMPL_VAR NAME='date_from' FORMAT='date_recurring'> - <TMPL_VAR NAME='date_to' FORMAT='date_recurring'>
+										</td>
+										<td>
+											<TMPL_IF NAME='flex_unit' OP='>' VALUE='0'>
+												<TMPL_VAR NAME='flex_unit' FORMAT='price'> * <TMPL_VAR NAME='flex_unit_count'> = <TMPL_VAR NAME='flex_amount_sum' FORMAT='price'>
+													<TMPL_ELSE>
+														<TMPL_VAR NAME='flex_amount_sum' FORMAT='price'>
+											</TMPL_IF>
+										</td>
+										<td><TMPL_VAR NAME='flex_unit_percentage'>%</td>
+										<td></td>
+										<td><TMPL_VAR NAME='flex_amount_sum' FORMAT='price'> * <TMPL_VAR NAME='flex_unit_percentage_calculation'> = <TMPL_VAR NAME='flex_percentage_sum' FORMAT='price'></td>
+									</tr>
+								</table>
+							</TMPL_IF>
+						</TMPL_LOOP>
+					</TMPL_LOOP>
+				</TMPL_LOOP>
+			</TMPL_IF>
+			<!-- chunk -->
+			<table width="100%" border="1" class="invoice">
+				<tr>
+					<TMPL_IF NAME='global.invoice_type' VALUE="voucher_invoice">
+						<td width="58%"><TMPL_VAR NAME="company_unit_title"/> Gesamt Netto</td>
+						<td width="11%"></td>
+						<td><TMPL_VAR NAME='price' FORMAT='price'/></td>
+						<TMPL_ELSE>
+							<td width="79%"><TMPL_VAR NAME="company_unit_title"/> Gesamt Netto</td>
+							<td width="10%"></td>
+							<td width="11%"><TMPL_VAR NAME='price' FORMAT='price'/></td>
+					</TMPL_IF>
+				</tr>
+			</table>
+		</TMPL_LOOP>
+		<!-- chunk -->
+	<table width="100%" border="1" class="invoice">
+		<tr>
+			<TMPL_IF NAME='global.invoice_type' VALUE="voucher_invoice">
+				<td width="58%"><br/></td>
+				<td width="11%"></td>
+				<td></td>
+				<TMPL_ELSE>
+					<td width="79%"><br/></td>
+					<td width="10%"></td>
+					<td width="11%"></td>
+			</TMPL_IF>
+		</tr>
+		<tr>
+			<TMPL_IF NAME='global.invoice_type' VALUE="voucher_invoice">
+				<td>Gesamt Netto</td>
+				<td></td>
+				<td><TMPL_VAR NAME='cost' FORMAT='price'></td>
+				<TMPL_ELSE>
+					<td>Gesamt Netto</td>
+					<td></td>
+					<td><TMPL_VAR NAME='cost' FORMAT='price'></td>
+			</TMPL_IF>
+		</tr>
+		<tr>
+			<TMPL_IF NAME='global.invoice_type' VALUE="voucher_invoice">
+				<td style="border-right:none;">
+					MwSt. <TMPL_VAR NAME='VAT'>%
+				</td>
+				<td style="border-left:none;" align="right">
+					von <TMPL_VAR NAME='cost' FORMAT='price'/> Euro
+				</td>
+				<td><TMPL_VAR NAME='vat_amount' FORMAT='price'/></td>
+				<TMPL_ELSE>
+					<td style="border-right:none;">
+						MwSt. <TMPL_VAR NAME='VAT'>%
+					</td>
+					<td style="border-left:none;" align="right">
+						von <TMPL_VAR NAME='cost' FORMAT='price'/> Euro
+					</td>
+					<td><TMPL_VAR NAME='vat_amount' FORMAT='price'/></td>
+			</TMPL_IF>
+		</tr>
+		<tr class="total_amount">
+			<TMPL_IF NAME='global.invoice_type' VALUE="voucher_invoice">
+				<td><strong>Gesamtbetrag</strong></td>
+				<td></td>
+				<td><strong><TMPL_VAR NAME='cost_with_vat' FORMAT='price'></strong></td>
+				<TMPL_ELSE>
+					<td><strong>Gesamtbetrag</strong></td>
+					<td></td>
+					<td><strong><TMPL_VAR NAME='cost_with_vat' FORMAT='price'></strong></td>
+			</TMPL_IF>
+		</tr>
+	</table>
+</div>

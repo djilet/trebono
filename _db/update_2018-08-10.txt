@@ -1,0 +1,7 @@
+UPDATE "public"."option" SET "option_id"='70', "type"='currency', "code"='mobile__main__employer_grant', "title"='Max. Monthly Value (Employer Grant)', "sort_order"='1', "product_id"='11', "group_id"='3', "level_global"='N', "level_company_unit"='Y', "level_employee"='Y' WHERE "option_id"='70';
+UPDATE "public"."option" SET "option_id"='77', "type"='currency', "code"='benefit__main__employer_grant', "title"='Max. Monthly Value (Employer Grant)', "sort_order"='1', "product_id"='12', "group_id"='3', "level_global"='Y', "level_company_unit"='Y', "level_employee"='Y' WHERE "option_id"='77';
+UPDATE "public"."option" SET "option_id"='53', "type"='currency', "code"='ad__main__employer_grant', "title"='Max. monthly Value', "sort_order"='2', "product_id"='9', "group_id"='3', "level_global"='Y', "level_company_unit"='Y', "level_employee"='Y' WHERE "option_id"='53';
+
+-- Application logo
+ALTER TABLE "public"."company_unit" ADD COLUMN "app_logo_image" Character Varying( 70 );
+ALTER TABLE "public"."company_unit" ADD COLUMN "app_logo_mini_image" Character Varying( 70 );

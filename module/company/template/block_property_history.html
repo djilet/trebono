@@ -1,0 +1,92 @@
+<div class="modal fade" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="ultraModal-Label" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+				<h4 class="modal-title"><TMPL_VAR NAME='LNG_PropertyValueHistory'> - <TMPL_VAR NAME='PropertyNameTranslation'></h4>
+			</div>
+			<div class="modal-body">
+				<TMPL_IF NAME='ValueList'>
+					<table class="table">
+						<thead>
+							<tr>
+								<th>#</th>
+								<TMPL_UNLESS NAME="HideValue">
+								<TMPL_IF NAME="IsDocumentProperty" VALUE="1">
+									<th><TMPL_VAR NAME='LNG_Property'/></th>
+								</TMPL_IF>
+								<th><TMPL_VAR NAME='LNG_Value'/></th>
+								</TMPL_UNLESS>
+								<th><TMPL_VAR NAME='LNG_UserName'></th>
+								<TMPL_IF NAME="WithAgreedText" VALUE="1">
+									<th><TMPL_VAR NAME='LNG_AgreedText'></th>
+								</TMPL_IF>
+								<th><TMPL_VAR NAME='LNG_Created'></th>
+								<th></th>
+							</tr>
+						</thead>
+						<tbody>
+							<TMPL_LOOP NAME='ValueList'>
+								<tr>
+									<th scope="row"><TMPL_VAR NAME='__ROWNUM__'></th>
+									<TMPL_UNLESS NAME="HideValue">
+										<TMPL_IF NAME="IsDocumentProperty" VALUE="1">
+											<td><TMPL_VAR NAME='value_type'/></td>
+											<TMPL_IF NAME='property_name' VALUE='archive'>
+												<td><TMPL_VAR NAME='value_text'/></td>
+											<TMPL_ELSEIF NAME='property_name' VALUE='value'>
+												<TMPL_IF NAME='property_name' VALUE='value'>
+													<td><a href="<TMPL_VAR NAME='MODULE_URL'>&Do=DownloadContractFile&HistoryDocumentID=<TMPL_VAR NAME='value'>&company_unit_id=<TMPL_VAR NAME='company_unit_id'>" target="_blank">
+														<span class="fa fa-eye"></span> view
+													</a></td>
+												</TMPL_IF>
+											<TMPL_ELSE>
+												<td><TMPL_VAR NAME='value'/></td>
+											</TMPL_IF>
+										<TMPL_ELSE>
+											<TMPL_IF NAME='value_text'>
+												<td><TMPL_VAR NAME='value_text'/></td>
+												<TMPL_ELSE>
+													<td><TMPL_VAR NAME='value'/></td>
+											</TMPL_IF>
+										</TMPL_IF>
+									</TMPL_UNLESS>
+									<td><TMPL_VAR NAME='user_name'></td>
+									<TMPL_IF NAME="WithAgreedText" VALUE="1">
+										<TMPL_IF NAME="agreed_text">
+										<td>
+											<a class="agreed_text" data-toggle="agreed_text" title="<TMPL_VAR NAME='agreed_text'>">
+												<TMPL_VAR NAME='LNG_AgreedTextToolTip'>
+											</a>
+										</td>
+										</TMPL_ELSE>
+											<td>
+											</td>
+										</TMPL_IF>
+									</TMPL_IF>
+									<td><TMPL_VAR NAME='created' FORMAT='datetime'></td>
+									<td>
+										<TMPL_IF NAME='created_from' VALUE='web_api'>
+											<TMPL_VAR NAME='LNG_ChangedByApi'>
+										</TMPL_IF>
+									</td>
+								</tr>
+							</TMPL_LOOP>
+						</tbody>
+					</table>
+				<TMPL_ELSE>
+					<div class="alert alert-success"><TMPL_VAR NAME='LNG_Empty'></div>
+				</TMPL_IF>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-info" data-dismiss="modal"><TMPL_VAR NAME='LNG_Close'></button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script>
+	$(document).ready(function(){
+		$('[data-toggle="agreed_text"]').tooltip();
+	});
+</script>

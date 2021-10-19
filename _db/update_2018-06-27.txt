@@ -1,0 +1,2 @@
+ALTER TABLE "public"."receipt_line" RENAME COLUMN "tax" TO "vat";
+ALTER TABLE "public"."company_unit" ALTER COLUMN "financial_statement_date" TYPE character varying(255);

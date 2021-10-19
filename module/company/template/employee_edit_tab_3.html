@@ -1,0 +1,259 @@
+<div class="row">
+	<div class="col-md-6 padding-3">
+		<section class="box">
+			<header class="panel_header" for="header_employee_edit_activity" table="company">
+				<h2 class="title">
+					<TMPL_VAR NAME='LNG_FieldsetActivity'>
+				</h2>
+				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#uploadReceipts"
+					style="margin: 10px; float: right; border-radius: 10px">
+					<TMPL_VAR NAME='LNG_UploadReceiptButton'>
+				</button>
+
+				<!-- The Modal -->
+				<div class="modal" id="uploadReceipts">
+					<div class="modal-dialog">
+						<div class="modal-content">
+
+							<!-- Modal Header -->
+							<div class="modal-header">
+								<h4 class="modal-title"><TMPL_VAR NAME='LNG_UploadReceiptModalTitle'></h4>
+								<button type="button" class="close" data-dismiss="modal">&times;</button>
+							</div>
+							<div id="forErrors">
+							</div>
+							<!-- Modal body -->
+							<div class="modal-body">
+								<div class="form-group">
+									<label for="sel"><TMPL_VAR NAME='LNG_UploadReceiptService'></label>
+									<select class="form-control" id="sel" name="upload_group_id">
+										<TMPL_LOOP NAME='AvailableServiceForUploadReceipt'>
+											<option <TMPL_IF NAME='no_employee_contract'>hidden</TMPL_IF> value="<TMPL_VAR NAME='group_id'>"><TMPL_VAR NAME='title_translation'></option>
+										</TMPL_LOOP>
+									</select>
+								</div>
+								<div class="form-group">
+									<label for="receipt-file"><TMPL_VAR NAME='LNG_UploadReceiptFile'></label>
+									<input id="receipt-file" type="file" name="receiptFile" class="form-control" accept="image/jpeg">
+								</div>
+								<div class="checkbox">
+									<label><input id="rules" disabled name="accept" type="checkbox"><TMPL_VAR NAME='LNG_UploadReceiptRules'></label>
+								</div>
+							</div>
+
+							<!-- Modal footer -->
+							<div class="modal-footer">
+								<button type="button" class="btn btn-danger" id="closeModal"
+										data-dismiss="modal"><TMPL_VAR NAME='LNG_UploadReceiptClose'>
+								</button>
+								<button type="submit" class="btn btn-secondary" id="uploadReceiptButton" disabled><TMPL_VAR NAME='LNG_UploadReceiptSend'></button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</header>
+			<div class="content-body">
+				<TMPL_IF NAME='ReceiptList'>
+					<table class="table">
+						<thead>
+						<tr>
+							<th><TMPL_VAR NAME='LNG_ReceiptReceiptID'></th>
+							<th><TMPL_VAR NAME='LNG_ReceiptUpdated'></th>
+							<th><TMPL_VAR NAME='LNG_ReceiptCreated'></th>
+							<th><TMPL_VAR NAME='LNG_Service'></th>
+							<th><TMPL_VAR NAME='LNG_ReceiptStatus'></th>
+						</tr>
+						</thead>
+						<tbody>
+						<TMPL_LOOP NAME='ReceiptList'>
+							<tr>
+								<td>
+									<TMPL_IF NAME='global.ReceiptListShowLinks'>
+										<a href="<TMPL_VAR NAME='ADMIN_PATH'>module.php?load=receipt&Section=receipt&receipt_id=<TMPL_VAR NAME='receipt_id'>">
+											<TMPL_VAR NAME='legal_receipt_id'>
+										</a>
+									<TMPL_ELSE>
+										<TMPL_LOOP NAME='FileList'>
+											<TMPL_IF NAME='__FIRST__'>
+												<a href="<TMPL_VAR NAME='file_image_full_path'>" class="fancybox" data-fancybox="receipt<TMPL_VAR NAME='receipt_id'>">
+													<TMPL_VAR NAME='ReceiptList.legal_receipt_id'>
+												</a>
+											<TMPL_ELSE>
+												<a href="<TMPL_VAR NAME='file_image_full_path'>" class="fancybox hidden" data-fancybox="receipt<TMPL_VAR NAME='receipt_id'>"></a>
+											</TMPL_IF>
+										</TMPL_LOOP>
+									</TMPL_IF>
+								</td>
+								<td><TMPL_VAR NAME='updated' FORMAT='datetime'></td>
+								<td><TMPL_VAR NAME='created' FORMAT='datetime'></td>
+								<td><TMPL_VAR NAME='group_title_translation'></td>
+								<td><TMPL_VAR NAME='status_title'></td>
+							</tr>
+						</TMPL_LOOP>
+						</tbody>
+					</table>
+					<TMPL_IF NAME='ReceiptPaging'>
+						<div class="text-center">
+							<ul class="pagination">
+								<TMPL_VAR NAME='ReceiptPaging' ESCAPE='none'>
+							</ul>
+						</div>
+					</TMPL_IF>
+				<TMPL_ELSE>
+					<div class="alert alert-success"><TMPL_VAR NAME='LNG_Empty'></div>
+				</TMPL_IF>
+			</div>
+		</section>
+	</div>
+	<div class="col-md-6 padding-3">
+		<section class="box">
+			<header class="panel_header" for="header_employee_edit_calendar" table="company">
+				<h2 class="title"><TMPL_VAR NAME='LNG_Calendar'></h2>
+			</header>
+			<div class="content-body">
+				<div id="pb-calendar" class="pb-calendar"></div>
+			</div>
+		</section>
+	</div>
+</div>
+<div class="row">
+	<section class="box">
+		<header class="panel_header" for="header_employee_edit_statistics" table="company">
+			<h2 class="title"><TMPL_VAR NAME='LNG_FieldsetStatistics'></h2>
+		</header>
+		<div class="content-body">
+			<div class="row">
+				<div class="col-md-6 form-group">
+					<label class="form-label"><TMPL_VAR NAME='LNG_StatisticsMonthlyStatisticsDate'></label><br />
+					<input type="text" name="monthly_statistics_date" class="form-control datepicker" data-min-view-mode="months" data-format="mm.yyyy"/>
+				</div>
+				<div class="col-md-6 form-group">
+					<label class="form-label">&nbsp;</label><br />
+					<button type="button" class="btn btn-primary" id="statistics-show"><TMPL_VAR NAME='LNG_StatisticsShow'></button>
+				</div>
+			</div>
+			<div id="statistics-container">
+			</div>
+		</div>
+	</section>
+</div>
+<div class="row">
+	<TMPL_IF NAME='employee_id'>
+		<TMPL_LOOP NAME='VoucherGroupList'>
+			<section class="box">
+				<header class="panel_header" for="header_employee_edit_<TMPL_VAR NAME='code'>_voucher_list" table="company">
+					<h2 class="title"><TMPL_VAR NAME='title_translation'></h2>
+				</header>
+				<div class="content-body">
+					<div class="row">
+						<div class="col-md-12">
+							<TMPL_IF NAME="Admin">
+								<TMPL_IF NAME="show_benefit_voucher_generate">
+									<div class="row">
+										<div class="col-md-2 form-group">
+											<label class="form-label"><TMPL_VAR NAME='LNG_GenerateBenefitVouchersDate'></label>
+											<input type="text" class="form-control datepicker" name="generate_bvs_vouchers_date" id="generate_bvs_vouchers_date">
+										</div>
+										<div class="col-md-4 form-group">
+											<label class="form-label hidden-xs">&nbsp;</label><br />
+											<button type="submit" id="generate-bvs-vouchers" class="btn btn-primary btn-icon right15 invoice-preview">
+												<i class="fa fa-file-alt"></i><TMPL_VAR NAME='LNG_GenerateBenefitVouchers'>
+											</button>
+										</div>
+									</div>
+								</TMPL_IF>
+							</TMPL_IF>
+							<TMPL_IF NAME="Admin">
+								<a class="btn btn-primary" href="<TMPL_VAR NAME='MODULE_URL'>&<TMPL_VAR NAME='ParamsForUrl'>Section=voucher&employee_id=<TMPL_VAR NAME='employee_id'>&group_id=<TMPL_VAR NAME='group_id'>&ActiveTab=3&voucher_id="><TMPL_VAR NAME='LNG_VoucherAdd'></a></br>
+							<TMPL_ELSE>
+								<TMPL_IF NAME='no_contract'>
+								<TMPL_ELSE>
+									<TMPL_UNLESS NAME='EmployeeViewer'>
+										<a class="btn btn-primary" href="<TMPL_VAR NAME='MODULE_URL'>&<TMPL_VAR NAME='ParamsForUrl'>Section=voucher&employee_id=<TMPL_VAR NAME='employee_id'>&group_id=<TMPL_VAR NAME='group_id'>&ActiveTab=3&voucher_id="><TMPL_VAR NAME='LNG_VoucherAdd'></a></br>
+									</TMPL_UNLESS>
+								</TMPL_IF>
+							</TMPL_IF>
+							<TMPL_IF NAME='voucher_list'>
+								<table class="table">
+									<thead>
+									<tr>
+										<th>#</th>
+										<th><TMPL_VAR NAME='LNG_VoucherDate'></th>
+										<th><TMPL_VAR NAME='LNG_VoucherEndDate'></th>
+										<th><TMPL_VAR NAME='LNG_VoucherCreated'></th>
+										<th><TMPL_VAR NAME='LNG_VoucherCreatedUser'></th>
+										<th><TMPL_VAR NAME='LNG_VoucherAmount'></th>
+										<th><TMPL_VAR NAME='LNG_VoucherAmountLeft'></th>
+										<TMPL_IF NAME="replace_reasons_with_goods">
+											<th><TMPL_VAR NAME='LNG_SetOfGoods'></th>
+										<TMPL_ELSE>
+											<th><TMPL_VAR NAME='LNG_VoucherReason'></th>
+										</TMPL_IF>
+										<th class="text-center" width="5%"><TMPL_VAR NAME='LNG_VoucherRecurring'></th>
+										<th class="text-center"><TMPL_VAR NAME='LNG_VoucherRecurrenceFrequency'></th>
+										<th class="text-center" width="5%"><TMPL_VAR NAME='LNG_Generated'></th>
+										<th width="3%"></th>
+									</tr>
+									</thead>
+									<tbody>
+									<TMPL_LOOP NAME='voucher_list'>
+										<TMPL_IF NAME='archive' VALUE='N'>
+											<tr>
+										<TMPL_ELSE/>
+											<tr class="inactive">
+										</TMPL_IF>
+										<td>
+											<TMPL_UNLESS NAME='EmployeeViewer'>
+												<a href="<TMPL_VAR NAME='MODULE_URL'>&<TMPL_VAR NAME='ParamsForUrl'>Section=voucher&employee_id=<TMPL_VAR NAME='employee_id'>&group_id=<TMPL_VAR NAME='group_id'>&ActiveTab=3&voucher_id=<TMPL_VAR NAME='voucher_id'>"><TMPL_VAR NAME='voucher_id'></a></br>
+											<TMPL_ELSE>
+												<a href="#" class="voucher-receipts" voucher_id="<TMPL_VAR NAME='voucher_id'>"><TMPL_VAR NAME='voucher_id'></a>
+											</TMPL_UNLESS>
+										</td>
+										<td><TMPL_VAR NAME='voucher_date' FORMAT='date'></td>
+										<td><TMPL_VAR NAME='end_date' FORMAT='date'></td>
+										<td><TMPL_VAR NAME='created' FORMAT='datetime'></td>
+										<td>
+											<TMPL_UNLESS NAME='EmployeeViewer'>
+												<a href="<TMPL_VAR NAME='ADMIN_PATH'>user.php?user_id=<TMPL_VAR NAME='created_user_id'>"><TMPL_VAR NAME='created_user_name'></a>
+											<TMPL_ELSE>
+												<TMPL_VAR NAME='created_user_name'>
+											</TMPL_UNLESS>
+										</td>
+										<td><TMPL_VAR NAME='amount' FORMAT='price'>€</td>
+										<td><TMPL_VAR NAME='amount_left' FORMAT='price'>€</td>
+										<td><TMPL_VAR NAME='reason'></td>
+										<td class="text-center"><TMPL_VAR NAME='recurring'></td>
+										<td class="text-center"><TMPL_VAR NAME='recurring_frequency_title'></td>
+										<td class="text-center">
+											<TMPL_IF NAME='file'>
+												Y
+											</TMPL_IF>
+										</td>
+										<td class="text-right">
+											<TMPL_IF NAME="can_remove">
+												<TMPL_IF NAME='archive' VALUE='N'>
+													<a href="<TMPL_VAR NAME='MODULE_URL'>&<TMPL_VAR NAME='ParamsForUrl'>Section=employee&employee_id=<TMPL_VAR NAME='employee_id'>&ActiveTab=3&Do=Remove&VoucherIDs[]=<TMPL_VAR NAME='voucher_id'>" class="confirm-remove" title="<TMPL_VAR NAME='voucher_id'>"><i class='fa fa-close delete'></i></a>
+												<TMPL_ELSE/>
+													<a href="<TMPL_VAR NAME='MODULE_URL'>&<TMPL_VAR NAME='ParamsForUrl'>Section=employee&employee_id=<TMPL_VAR NAME='employee_id'>&ActiveTab=3&Do=Activate&VoucherIDs[]=<TMPL_VAR NAME='voucher_id'>" class="confirm-activate" title="<TMPL_VAR NAME='voucher_id'>"><i class='fa fa-check activate'></i></a>
+												</TMPL_IF>
+											</TMPL_IF>
+										</td>
+										</tr>
+									</TMPL_LOOP>
+									</tbody>
+								</table>
+								<TMPL_IF NAME='paging'>
+									<div class="text-center">
+										<ul class="pagination">
+											<TMPL_VAR NAME='paging' ESCAPE='none'>
+										</ul>
+									</div>
+								</TMPL_IF>
+							</TMPL_IF>
+						</div>
+					</div>
+				</div>
+			</section>
+		</TMPL_LOOP>
+	</TMPL_IF>
+</div>

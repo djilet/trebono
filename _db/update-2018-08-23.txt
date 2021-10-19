@@ -1,0 +1,35 @@
+--lst_control
+CREATE TABLE public.receipt_history
+(
+    value_id integer NOT NULL,
+    receipt_id integer NOT NULL,
+    property_name character varying(255) NOT NULL,
+    value character varying(255) NOT NULL,
+    created timestamp without time zone NOT NULL,
+    user_id integer NOT NULL
+);
+CREATE TABLE public.user_history
+(
+    value_id integer NOT NULL,
+    end_user_id integer NOT NULL,
+    property_name character varying(255) NOT NULL,
+    value character varying(255) NOT NULL,
+    created timestamp without time zone NOT NULL,
+    start_user_id integer NOT NULL
+);
+CREATE SEQUENCE "public"."receipt_history_ReceiptID_seq" INCREMENT 1;
+ALTER TABLE "public"."receipt_history" ALTER COLUMN "value_id" SET DEFAULT nextval('"receipt_history_ReceiptID_seq"'::regclass);
+CREATE SEQUENCE "public"."user_history_UserID_seq" INCREMENT 1;
+ALTER TABLE "public"."user_history" ALTER COLUMN "value_id" SET DEFAULT nextval('"user_history_UserID_seq"'::regclass);
+ALTER TABLE public.company_unit_contract
+    SET WITHOUT OIDS;
+ALTER TABLE public.company_unit_history
+    SET WITHOUT OIDS;
+ALTER TABLE public.employee_contract
+    SET WITHOUT OIDS;
+ALTER TABLE public.employee_history
+    SET WITHOUT OIDS;
+ALTER TABLE public.operation
+    SET WITHOUT OIDS;
+ALTER TABLE public.option_value_history
+    SET WITHOUT OIDS;

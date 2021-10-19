@@ -1,0 +1,315 @@
+<div class="floating-button-row">
+
+	<div class="row">
+		<section class="box no-margin">
+			<header class="panel_header" id="floating-top" for="header_company_unit_edit" table="company">
+				<TMPL_IF NAME='company_unit_id'>
+					<TMPL_IF NAME='parent_unit_id'>
+						<h1 class="title"><TMPL_VAR NAME='LNG_EditDepartment'> <TMPL_VAR NAME='title'></h1>
+						<TMPL_ELSE>
+							<h1 class="title"><TMPL_VAR NAME='LNG_EditCompany'> <TMPL_VAR NAME='title'></h1>
+					</TMPL_IF>
+					<TMPL_ELSE>
+						<h1 class="title"><TMPL_VAR NAME='LNG_AddCompanyUnit'></h1>
+				</TMPL_IF>
+			</header>
+			<div class="row floating-top">
+				<TMPL_IF NAME='ErrorList'>
+					<div class="alert alert-danger alert-no-margin">
+						<TMPL_LOOP NAME='ErrorList'>
+							<TMPL_VAR NAME='Message'><TMPL_UNLESS NAME='__LAST__'><br /></TMPL_UNLESS>
+						</TMPL_LOOP>
+					</div>
+				</TMPL_IF>
+				<TMPL_IF NAME='MessageList'>
+					<div class="alert alert-success alert-no-margin">
+						<TMPL_LOOP NAME='MessageList'>
+							<TMPL_VAR NAME='Message'><TMPL_UNLESS NAME='__LAST__'><br /></TMPL_UNLESS>
+						</TMPL_LOOP>
+					</div>
+				</TMPL_IF>
+				<ul class="nav nav-tabs ul-floating-top">
+					<li <TMPL_IF NAME='ActiveTab' VALUE='1'>class="active"<TMPL_ELSEIF NAME='ActiveTab' VALUE=''>class="active"</TMPL_IF>><a href="#tab-1" data-toggle='tab' for="nav_tab1_company_unit_edit" table="company"><TMPL_VAR NAME='LNG_TabCompanyInfo'></a></li>
+					<li <TMPL_IF NAME='ActiveTab' VALUE='2'>class="active"</TMPL_IF>><a href="#tab-2" data-toggle='tab' for="nav_tab2_company_unit_edit" table="company"><TMPL_VAR NAME='LNG_TabCloudServices'></a></li>
+					<TMPL_IF NAME="Admin">
+						<li <TMPL_IF NAME='ActiveTab' VALUE='3'>class="active"</TMPL_IF>><a href="#tab-3" data-toggle='tab' for="nav_tab3_company_unit_edit" table="company"><TMPL_VAR NAME='LNG_TabActivity'></a></li>
+					</TMPL_IF>
+					<TMPL_IF NAME="HistoryAdmin">
+						<li <TMPL_IF NAME='ActiveTab' VALUE='4'>class="active"</TMPL_IF>><a href="#tab-4" data-toggle='tab' for="nav_tab4_company_unit_edit" table="company"><TMPL_VAR NAME='LNG_TabStatistics'></a></li>
+					</TMPL_IF>
+					<TMPL_IF NAME="HistoryAdmin">
+						<li <TMPL_IF NAME='ActiveTab' VALUE='5'>class="active"</TMPL_IF>><a href="#tab-5" data-toggle='tab' for="nav_tab5_company_unit_edit" table="company"><TMPL_VAR NAME='LNG_TabDocuments'></a></li>
+					</TMPL_IF>
+					<TMPL_IF NAME="Admin">
+						<li <TMPL_IF NAME='ActiveTab' VALUE='6'>class="active"</TMPL_IF>><a href="#tab-6" data-toggle='tab' for="nav_tab6_company_unit_edit" table="company"><TMPL_VAR NAME='LNG_TabReports'></a></li>
+					</TMPL_IF>
+					<TMPL_IF NAME="Admin">
+						<li <TMPL_IF NAME='ActiveTab' VALUE='7'>class="active"</TMPL_IF>><a href="#tab-7" data-toggle='tab' for="nav_tab7_company_unit_edit" table="company"><TMPL_VAR NAME="LNG_BillableRecords"></a></li>
+					</TMPL_IF>
+				</ul>
+			</div>
+			<div class="content-body padding-3">
+				<div class="row row-new">
+					<form action="<TMPL_VAR NAME='MODULE_URL'>" method="post" class="enter-to-tab <TMPL_IF NAME='ErrorList'>floating-form-big-gap<TMPL_ELSEIF NAME='MessageList'>floating-form-big-gap<TMPL_ELSE>floating-form</TMPL_IF>" data-validation="true" autocomplete="off" enctype="multipart/form-data">
+						<div class="tab-content">
+							<div id="tab-1" class="tab-pane <TMPL_IF NAME='ActiveTab' VALUE='1'>active<TMPL_ELSEIF NAME='ActiveTab' VALUE=''>active</TMPL_IF>">
+								<TMPL_INCLUDE FILE='company_unit_edit_tab_1.html'>
+							</div>
+							<div id="tab-2" class="tab-pane <TMPL_IF NAME='ActiveTab' VALUE='2'>active</TMPL_IF>">
+								<TMPL_INCLUDE FILE='company_unit_edit_tab_2.html'>
+							</div>
+							<div id="tab-3" class="tab-pane <TMPL_IF NAME='ActiveTab' VALUE='3'>active</TMPL_IF>">
+								<TMPL_INCLUDE FILE='company_unit_edit_tab_3.html'>
+							</div>
+							<div id="tab-4" class="tab-pane <TMPL_IF NAME='ActiveTab' VALUE='4'>active</TMPL_IF>">
+								<TMPL_INCLUDE FILE='company_unit_edit_tab_4.html'>
+							</div>
+							<div id="tab-5" class="tab-pane <TMPL_IF NAME='ActiveTab' VALUE='5'>active</TMPL_IF>">
+								<TMPL_INCLUDE FILE='company_unit_edit_tab_5.html'>
+							</div>
+							<div id="tab-6" class="tab-pane <TMPL_IF NAME='ActiveTab' VALUE='6'>active</TMPL_IF>">
+								<TMPL_INCLUDE FILE='company_unit_edit_tab_6.html'>
+							</div>
+							<div id="tab-7" class="tab-pane <TMPL_IF NAME='ActiveTab' VALUE='7'>active</TMPL_IF>">
+								<TMPL_INCLUDE FILE='company_unit_edit_tab_7.html'>
+							</div>
+							<input type="hidden" name="Save" value="1" />
+							<input type="hidden" name="Do" value="InvoicePreview" />
+							<input type="hidden" name="company_unit_id" value="<TMPL_VAR NAME='company_unit_id'>" />
+							<input type="hidden" name="company_id" value="<TMPL_VAR NAME='company_id'>" />
+							<input type="hidden" name="invoice_for_period_after" value="1" />
+							<input type="hidden" name="invoice_voucher_for_period_after" value="1" />
+							<input type="hidden" name="contract_file_name">
+							<input type="hidden" name="rename">
+							<input type="hidden" name="ActiveTab" value="<TMPL_VAR NAME='ActiveTab'>">
+							<input type="hidden" name="ScrollTop" value="<TMPL_VAR NAME='ScrollTop'>">
+							<TMPL_VAR NAME='ParamsForForm' ESCAPE='none'/>
+							<div id="floating-button">
+								<button type="submit" class="btn btn-primary" id="save" onclick="$('form').attr('target', '');"><TMPL_VAR NAME='LNG_OptionSave'/></button>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</section>
+	</div>
+</div>
+<script type="text/javascript">
+	var isCompanyUnitAdmin = "<TMPL_VAR NAME='IsCompanyUnitAdmin'>";
+	var isContractUser = "<TMPL_VAR NAME='IsContractUser'>";
+	var companyUnitID = "<TMPL_VAR NAME='company_unit_id'>";
+	var productAjax = "<TMPL_VAR NAME='PROJECT_PATH'>module/product/ajax.php";
+	var companyAjax = "<TMPL_VAR NAME='PROJECT_PATH'>module/company/ajax.php";
+	var removeMessage = "<TMPL_VAR NAME='LNG_RemoveMessage'>";
+	var activateMessage = '<TMPL_VAR NAME="LNG_ActivateMessage">';
+	var errorMessage = "<TMPL_VAR NAME='LNG_Error'>";
+	var invoicePreviewEmptyDate = "<TMPL_VAR NAME='LNG_InvoicePreviewEmptyDate'>";
+	var invoiceVoucherPreviewEmptyDate = "<TMPL_VAR NAME='LNG_InvoiceVoucherPreviewEmptyDate'>";
+	var documentFileEmpty = "<TMPL_VAR NAME='LNG_CompanyDocumentUploadFileEmpty'>";
+	var documentFillName = "<TMPL_VAR NAME='LNG_CompanyDocumentFillName'>";
+	var documentFileNameEmpty = "<TMPL_VAR NAME='LNG_CompanyDocumentEmptyName'>";
+	var documentUpdate = "<TMPL_VAR NAME='LNG_CompanyDocumentUpdate'>";
+	var documentFillNewName = "<TMPL_VAR NAME='LNG_CompanyDocumentFillNewName'>";
+	var payrollResetEmptyDate = "<TMPL_VAR NAME='LNG_PayrollResetEmptyDate'>";
+
+	var isDepartment;
+	"<TMPL_IF NAME='company_unit_id'>"
+		isDepartment = "<TMPL_IF NAME='parent_unit_id'>true<TMPL_ELSE>false</TMPL_IF>";
+		UpdateFormState();
+
+		$("[name='yearly_statistics_date']").each(function() {
+			$(this).datepicker({
+				format: "yyyy",
+				viewMode: "years",
+				minViewMode: "years"
+			}).datepicker('setDate', new Date());
+		});
+		yearlyStatisticsDate =  $("[name='yearly_statistics_date']").first().val();
+		$(".statistics-container").each(function() {
+			$(this).html('<div class="text-center"><i class="fa fa-spinner fa-pulse icon-md"></i></div>');
+			productGroupID = $(this).attr("group-id");
+			FetchVoucherStatistics(yearlyStatisticsDate, productGroupID);
+		});
+
+		$(".statistics-show").click(function(e){
+			productGroupID = $(this).attr("group-id");
+			yearlyStatisticsDate = $("[name='yearly_statistics_date'][group-id="+productGroupID+"]").val();
+			$(".statistics-container[group-id="+productGroupID+"]").html('<div class="text-center"><i class="fa fa-spinner fa-pulse icon-md"></i></div>');
+			FetchVoucherStatistics(yearlyStatisticsDate, productGroupID);
+		});
+
+
+		// not voucher services
+		yearlyStatisticsDate =  $("[name='yearly_statistics_date']").first().val();
+		$(".not-voucher-statistics-container").each(function() {
+			$(this).html('<div class="text-center"><i class="fa fa-spinner fa-pulse icon-md"></i></div>');
+			productGroupID = $(this).attr("group-id");
+			FetchNotVoucherStatistics(yearlyStatisticsDate, productGroupID);
+		});
+
+		$(".statistics-show").click(function(e){
+			productGroupID = $(this).attr("group-id");
+			yearlyStatisticsDate = $("[name='yearly_statistics_date'][group-id="+productGroupID+"]").val();
+			$(".not-voucher-statistics-container[group-id="+productGroupID+"]").html('<div class="text-center"><i class="fa fa-spinner fa-pulse icon-md"></i></div>');
+			FetchNotVoucherStatistics(yearlyStatisticsDate, productGroupID);
+		});
+
+		// billable services
+		$(".billable-statistics-container").each(function() {
+			$(this).html('<div class="text-center"><i class="fa fa-spinner fa-pulse icon-md"></i></div>');
+			FetchBillableStatistics();
+		});
+
+	"<TMPL_ELSE>"
+		$('input[name=IsDepartment]').change(function(){
+			isDepartment = $(this).is(':checked');
+			UpdateFormState();
+		});
+		$('input[name=IsDepartment]').change();
+	"</TMPL_IF>"
+
+	function UpdateFormState(){
+		if(isDepartment == true || isDepartment == 'true'){
+			$('.company-only').slideUp().find('input, select').val('');
+			$('.department-only').slideDown();
+		}else{
+			$('.company-only').slideDown();
+			$('.department-only').slideUp().find('input, select').val('');
+		}
+	}
+
+	function FetchVoucherStatistics(yearlyStatisticsDate, productGroupID) {
+		$.ajax({
+			url: companyAjax,
+			type: 'GET',
+			dataType: 'JSON',
+			data:{
+				Action: 'GetVoucherStatisticsHTML',
+				company_unit_id: companyUnitID,
+				yearly_statistics_date: yearlyStatisticsDate,
+				product_group_id: productGroupID
+			},
+			success: function(data){
+				if (typeof data.HTML != 'undefined') {
+					$(".statistics-container[group-id="+data.ProductGroupID+"]").html(data.HTML);
+				}
+			}
+		});
+	}
+
+	// not voucher services statistics
+	function FetchNotVoucherStatistics(yearlyStatisticsDate, productGroupID) {
+		$.ajax({
+			url: companyAjax,
+			type: 'GET',
+			dataType: 'JSON',
+			data:{
+				Action: 'GetNotVoucherStatisticsHTML',
+				company_unit_id: companyUnitID,
+				yearly_statistics_date: yearlyStatisticsDate,
+				product_group_id: productGroupID
+			},
+			success: function(data){
+				if (typeof data.HTML != 'undefined') {
+					$(".not-voucher-statistics-container[group-id="+data.ProductGroupID+"]").html(data.HTML);
+				}
+			}
+		});
+	}
+	// billable service
+	function FetchBillableStatistics() {
+		$.ajax({
+			url: companyAjax,
+			type: 'GET',
+			dataType: 'JSON',
+			data:{
+				Action: 'GetBillableStatisticsHTML',
+				company_unit_id: companyUnitID,
+				PageId: 1,
+			},
+			success: function(data){
+				if (typeof data.HTML != 'undefined') {
+					$(".billable-statistics-container").html(data.HTML);
+				}
+			}
+		});
+	}
+
+
+	$(".upload-contract-file").click(function (e) {
+		e.preventDefault();
+		$("[name='Save']").val(0);
+		$("[name='Do']").val("UploadContractFile");
+
+		if (!$("[name='contract_file']").val())
+		{
+			ModalAlert(errorMessage, documentFileEmpty);
+		}
+		else
+		{
+			ModalInputField(documentFillName, "file_name", false, documentFileNameEmpty, function (filename) {
+				$("[name='contract_file_name']").val(filename);
+				$("form").submit();
+			})
+		}
+	});
+
+	$(".update-contract-file").click(function (e) {
+		e.preventDefault();
+		$("[name='Save']").val(0);
+		$("[name='Do']").val("UploadContractFile");
+		var documentID = $(this).attr('document_id');
+
+		ModalInputField(documentUpdate, "update_contract_file", true, documentFileEmpty, function (file) {
+			$("#update_contract_file_box").html(file);
+			$("[name='update_contract_id']").val(documentID);
+			$("[name='ActiveTab']").val(5);
+			$("form").submit();
+		})
+	});
+
+	$(".rename-contract-file").click(function (e) {
+		e.preventDefault();
+		$("[name='Save']").val(0);
+		$("[name='Do']").val("RenameContractFile");
+		var documentID = $(this).attr('document_id');
+		var documentName = $(this).attr('document_name');
+
+		ModalInputField(documentFillNewName, "file_name", false, documentFileNameEmpty, function (filename) {
+			$("[name='contract_file_name']").val(filename);
+			$("[name='rename_contract_id']").val(documentID);
+			$("[name='rename']").val(true);
+			$("form").submit();
+		})
+		$("[name='file_name']").val(documentName);
+	});
+
+	var field = "";
+	var fieldFirst = "";
+	var tab = "";
+	var div = "";
+	"<TMPL_LOOP NAME='ErrorFieldList'>"
+		"<TMPL_IF NAME='__FIRST__'>"
+			fieldFirst = "<TMPL_VAR NAME='Message'>";
+		"</TMPL_IF>"
+
+		field = "<TMPL_VAR NAME='Message'>";
+		div = $("[name='"+field+"']").closest(".form-group");
+		if (div.length === 0) {
+			div = $("[name='"+field+"']").closest(".input-group");
+		}
+		div.addClass("has-error");
+		parents = $("[name='"+field+"']").parents();
+		parents.each(function(element) {
+			if ($(this).hasClass("collapsed"))
+			{
+				$(this).removeClass("collapsed");
+			}
+		});
+	"</TMPL_LOOP>"
+	if (fieldFirst) {
+		tab = $("[name='"+fieldFirst+"']").closest(".tab-pane").attr('id');
+		$('a[href="#'+tab+'"]').click();
+		$("[name='"+fieldFirst+"']").focus();
+	}
+</script>

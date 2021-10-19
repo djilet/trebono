@@ -1,0 +1,39 @@
+<nav class="navbar navbar-default navbar-primary">
+	<div class="container-fluid">
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#header-navbar">
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+		</div>
+		<div class="collapse navbar-collapse" id="header-navbar">
+			<ul class="nav navbar-nav">
+				<TMPL_LOOP NAME='SectionList'>
+					<li <TMPL_IF NAME='Selected'>class="active"</TMPL_IF>>
+						<a href="<TMPL_VAR NAME='ADMIN_PATH'>config.php?Section=<TMPL_VAR NAME='Section'>"><TMPL_VAR NAME='Title'></a>
+					</li>
+				</TMPL_LOOP>
+				<TMPL_LOOP NAME='PushSectionList'>
+					<li <TMPL_IF NAME='Selected'>class="active"</TMPL_IF>>
+					<a href="<TMPL_VAR NAME='ADMIN_PATH'>push_history.php?Section=<TMPL_VAR NAME='Section'>"><TMPL_VAR NAME='Title'></a>
+					</li>
+				</TMPL_LOOP>
+				<TMPL_LOOP NAME='CronSectionList'>
+					<li <TMPL_IF NAME='Selected'>class="active"</TMPL_IF>>
+					<a href="<TMPL_VAR NAME='ADMIN_PATH'>logging_cron.php?Section=<TMPL_VAR NAME='Section'>&FilterDateRange=<TMPL_VAR NAME='FilterDateRange'>"><TMPL_VAR NAME='Title'></a>
+					</li>
+				</TMPL_LOOP>
+				<TMPL_LOOP NAME='TechDashboardSectionList'>
+					<li <TMPL_IF NAME='Selected'>class="active"</TMPL_IF>>
+					<a href="<TMPL_VAR NAME='ADMIN_PATH'>technical_dashboard.php?Section=<TMPL_VAR NAME='Section'>"><TMPL_VAR NAME='Title'></a>
+				</TMPL_LOOP>
+				<TMPL_LOOP NAME='VoucherDashboardSectionList'>
+					<li <TMPL_IF NAME='Selected'>class="active"</TMPL_IF>>
+					<a href="<TMPL_VAR NAME='ADMIN_PATH'>voucher_dashboard.php?Section=<TMPL_VAR NAME='Section'>"><TMPL_VAR NAME='Title'></a>
+					</li>
+				</TMPL_LOOP>
+			</ul>
+		</div>
+	</div>
+</nav>

@@ -1,0 +1,5 @@
+ALTER TABLE "public"."company_unit_option_value" DROP CONSTRAINT "company_unit_option_fk0";
+ALTER TABLE "public"."company_unit_option_value" DROP CONSTRAINT "company_unit_option_fk1";
+ALTER TABLE "public"."company_unit_option_value" ADD FOREIGN KEY ("company_unit_id") REFERENCES "public"."company_unit"("company_unit_id")  ON DELETE CASCADE;
+ALTER TABLE "public"."company_unit_option_value" ADD FOREIGN KEY ("option_id") REFERENCES "public"."option"("option_id")  ON DELETE CASCADE;
+ALTER TABLE "public"."company_unit_history" ADD FOREIGN KEY ("company_unit_id") REFERENCES "public"."company_unit"("company_unit_id")  ON UPDATE CASCADE ON DELETE CASCADE;

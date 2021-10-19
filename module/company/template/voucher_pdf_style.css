@@ -1,0 +1,87 @@
+body{
+	background-image: url('admin/template/images/voucher-background.png');
+	background-attachment: fixed;
+	background-position: center;
+	color: #006989;
+	z-index: 1;
+	font-weight: normal;
+}
+.header{
+	color: #006989;
+	text-align: left;
+	font-size:24pt;
+	font-weight: bold;
+}
+.10pt{
+	font-size:10pt;
+}
+.8pt{
+	font-size:8pt;
+}
+.14pt{
+	font-size:14pt;
+}
+.22pt{
+	font-size:22pt;
+}
+.content{
+	text-align: left;
+	margin-right:100px!important;
+	width: 320px;
+}
+.header-logo{
+	position: absolute;
+	top: 40px;
+	right: 40px;
+	color: #595654;
+	float: right!important;
+	text-align: right;
+}
+.footer{
+	position: absolute;
+	bottom: 30px;
+	left: 70px;	
+}
+img{
+	margin-left:20px;
+	margin-right:10px;
+}
+.underlined{
+	border-bottom: 0.1px dashed #006989;
+}
+.reason{
+	position: absolute;
+	top: 225px;
+	left: 600px;
+	width: 500px;
+}
+.amount{
+	position: absolute;
+	top: 500px;
+	left: 600px;
+	color: #fff;
+}
+.issue-date{
+	position: absolute;
+	top: 570px;
+	left: 600px;
+	color: #fff;
+}
+.valid-until{
+	position: absolute;
+	top: 570px;
+	left: 800px;
+	color: #fff;
+}
+.bold{
+	font-weight: bold;
+}
+.white{
+	color: #fff;
+}
+.granit{
+	color:#595654;
+}
+.sonnenblume{
+	color:#f7af1b;
+}

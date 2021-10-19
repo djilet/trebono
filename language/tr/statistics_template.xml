@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Root>
+    <admin>
+        <block_statistics.html>
+            <Monthly>Monat</Monthly>
+            <Yearly>YTD</Yearly>
+            <Total>Gesamt</Total>
+            <Available>Verfügbar</Available>
+            <Approved>Genehmigt</Approved>
+            <Units>Einheiten</Units>
+        </block_statistics.html>
+    </admin>
+</Root>

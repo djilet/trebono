@@ -1,0 +1,131 @@
+<div class="row">
+	<TMPL_IF NAME='Admin'>
+		<div class="col-md-6 padding-3">
+			<section class="box">
+				<header class="panel_header" for="header_company_unit_edit_export" table="company">
+					<h2 class="title"><TMPL_VAR NAME='LNG_Export'></h2>
+				</header>
+				<div class="content-body">
+					<div class="row">
+						<div class="col-md-12 col-sm-12 col-xs-12">
+							<TMPL_IF NAME='company_unit_id'>
+								<h5><strong><TMPL_VAR NAME='LNG_ExportDatev'></strong></h5>
+								<div class="row">
+									<div class="col-md-4 form-group">
+										<label class="form-label"><TMPL_VAR NAME='LNG_ExportDateFrom'></label>
+										<input type="text" class="form-control datepicker" id="export-datev-date-from">
+									</div>
+									<div class="col-md-4 form-group">
+										<label class="form-label"><TMPL_VAR NAME='LNG_ExportDateTo'></label>
+										<input type="text" class="form-control datepicker" id="export-datev-date-to">
+									</div>
+									<div class="col-md-4 form-group">
+										<label class="form-label hidden-xs">&nbsp;</label><br />
+										<a href="<TMPL_VAR NAME='MODULE_URL'>&<TMPL_VAR NAME='ParamsForURL'>&Do=ExportDatev&company_unit_id=<TMPL_VAR NAME='company_unit_id'>" id="export-datev-submit" class="btn btn-primary"><TMPL_VAR NAME='LNG_Export'></a>
+									</div>
+								</div>
+								<TMPL_ELSE/>
+								<div class="alert alert-warning"><TMPL_VAR NAME='LNG_ExportAccessNote'></div>
+							</TMPL_IF>
+						</div>
+					</div>
+				</div>
+			</section>
+		</div>
+		<div class="col-md-6 padding-3">
+			<section class="box">
+				<header class="panel_header" for="header_company_unit_edit_payroll" table="company">
+					<h2 class="title"><TMPL_VAR NAME='LNG_Payroll'></h2>
+				</header>
+				<div class="content-body">
+					<div class="row">
+						<div class="col-md-12 col-sm-12 col-xs-12">
+							<TMPL_IF NAME='company_unit_id'>
+								<h5><strong><TMPL_VAR NAME='LNG_PayrollReset'></strong></h5>
+								<div class="row">
+									<div class="col-md-4 form-group">
+										<label class="form-label"><TMPL_VAR NAME='LNG_PayrollDate'></label>
+										<input type="text" class="form-control datepicker" name="reset_payroll_date" id="reset-payroll-date">
+									</div>
+									<div class="col-md-4 form-group">
+										<label class="form-label hidden-xs">&nbsp;</label><br />
+										<button type="submit" id="reset-payroll" class="btn btn-primary btn-icon right15 reset-payroll" onclick="$('form').attr('target', '');">
+											<i class="fa fa-file-alt"></i><TMPL_VAR NAME='LNG_Reset'>
+										</button>
+									</div>
+								</div>
+								<TMPL_ELSE/>
+								<div class="alert alert-warning"><TMPL_VAR NAME='LNG_PayrollAccessNote'></div>
+							</TMPL_IF>
+						</div>
+					</div>
+				</div>
+			</section>
+		</div>
+	</TMPL_IF>
+</div>
+<div class="row">
+	<div class="col-md-6 padding-3">
+		<section class="box">
+			<header class="panel_header" for="header_company_unit_edit_preview" table="company">
+				<h2 class="title"><TMPL_VAR NAME='LNG_Preview'></h2>
+			</header>
+			<div class="content-body">
+				<div class="row">
+					<div class="col-md-12 col-sm-12 col-xs-12">
+						<TMPL_IF NAME='company_unit_id'>
+							<h5><strong><TMPL_VAR NAME='LNG_InvoicePreview'></strong></h5>
+							<div class="row">
+								<div class="col-md-4 form-group">
+									<label class="form-label"><TMPL_VAR NAME='LNG_InvoicePreviewDate'></label>
+									<input type="text" class="form-control datepicker" name="invoice_preview_date" id="invoice-preview-date-from">
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-4 form-group">
+									<button type="submit" id="invoice-preview-before" class="btn btn-primary btn-icon right15 invoice-preview" onclick="$('form').attr('target', '_blank');">
+										<i class="fa fa-file-alt"></i><TMPL_VAR NAME='LNG_InvoicePreviewBefore'>
+									</button>
+								</div>
+								<div class="col-md-4 form-group">
+									<button type="submit" id="invoice-preview-after" class="btn btn-primary btn-icon right15 invoice-preview" onclick="$('form').attr('target', '_blank');">
+										<i class="fa fa-file-alt"></i><TMPL_VAR NAME='LNG_InvoicePreviewAfter'>
+									</button>
+								</div>
+							</div>
+							<TMPL_ELSE/>
+							<div class="alert alert-warning"><TMPL_VAR NAME='LNG_InvoicePreviewNoID'></div>
+						</TMPL_IF>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-12 col-sm-12 col-xs-12">
+						<TMPL_IF NAME='company_unit_id'>
+							<h5><strong><TMPL_VAR NAME='LNG_InvoiceVoucherPreview'></strong></h5>
+							<div class="row">
+								<div class="col-md-4 form-group">
+									<label class="form-label"><TMPL_VAR NAME='LNG_InvoiceVoucherPreviewDate'></label>
+									<input type="text" class="form-control datepicker" name="invoice_voucher_preview_date" id="invoice-voucher-preview-date-from">
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-4 form-group">
+									<button type="submit" id="invoice-voucher-preview-before" class="btn btn-primary btn-icon right15 invoice-voucher-preview" onclick="$('form').attr('target', '_blank');">
+										<i class="fa fa-file-alt"></i><TMPL_VAR NAME='LNG_InvoiceVoucherPreviewBefore'>
+									</button>
+								</div>
+								<div class="col-md-4 form-group">
+									<button type="submit" id="invoice-voucher-preview-after" class="btn btn-primary btn-icon right15 invoice-voucher-preview" onclick="$('form').attr('target', '_blank');">
+										<i class="fa fa-file-alt"></i><TMPL_VAR NAME='LNG_InvoiceVoucherPreviewAfter'>
+									</button>
+								</div>
+							</div>
+							<TMPL_ELSE/>
+							<div class="alert alert-warning"><TMPL_VAR NAME='LNG_InvoicePreviewNoID'></div>
+						</TMPL_IF>
+					</div>
+				</div>
+			</div>
+		</section>
+	</div>
+</div>

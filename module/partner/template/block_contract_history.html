@@ -1,0 +1,63 @@
+<div class="modal modal-wide fade" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="ultraModal-Label" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+				<h4 class="modal-title"><TMPL_VAR NAME='LNG_ContractHistory'> - <TMPL_VAR NAME='PropertyNameTranslation'></h4>
+			</div>
+			<div class="modal-body">
+				<TMPL_IF NAME='ContractList'>
+					<table class="table">
+						<thead>
+							<tr>
+								<th>#</th>
+								<th><TMPL_VAR NAME="LNG_Company"/></th>
+								<th><TMPL_VAR NAME="LNG_PartnerType"/></th>
+								<th><TMPL_VAR NAME="LNG_Commission"/></th>
+								<th><TMPL_VAR NAME="LNG_ImplementationFee"/></th>
+								<th><TMPL_VAR NAME="LNG_Long"/></th>
+								<th><TMPL_VAR NAME="LNG_StartDate"/></th>
+								<th><TMPL_VAR NAME="LNG_EndDate"/></th>
+							</tr>
+						</thead>
+						<tbody>
+							<TMPL_LOOP NAME='ContractList'>
+								<tr>
+									<th scope="row"><TMPL_VAR NAME='__ROWNUM__'></th>
+									<td>
+										<a href="<TMPL_VAR NAME='ADMIN_PATH'>module.php?load=company&company_unit_id=<TMPL_VAR NAME='company_unit_id'>">
+											<TMPL_VAR NAME="company_unit"/>
+										</a>
+									</td>
+									<td>
+										<TMPL_VAR NAME="partner_type"/>
+									</td>
+									<td>
+										<TMPL_VAR NAME="commission"/>
+									</td>
+									<td>
+										<TMPL_VAR NAME="implementation_fee"/>
+									</td>
+									<td>
+										<TMPL_VAR NAME="long" ESCAPE="none"/>
+									</td>
+									<td>
+										<TMPL_VAR NAME="start_date" FORMAT="datepicker"/>
+									</td>
+									<td>
+										<TMPL_VAR NAME="end_date" FORMAT="datepicker"/>
+									</td>
+								</tr>
+							</TMPL_LOOP>
+						</tbody>
+					</table>
+				<TMPL_ELSE>
+					<div class="alert alert-success"><TMPL_VAR NAME='LNG_Empty'></div>
+				</TMPL_IF>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-info" data-dismiss="modal"><TMPL_VAR NAME='LNG_Close'></button>
+			</div>
+		</div>
+	</div>
+</div>

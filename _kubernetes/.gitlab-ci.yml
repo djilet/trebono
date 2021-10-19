@@ -1,0 +1,71 @@
+image: alpine:3.7
+# before_script:
+#   - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+
+stages:
+  - build
+  - test
+  - deploy
+
+variables:
+  RELEASE: ${CI_COMMIT_REF_SLUG}-${CI_COMMIT_SHORT_SHA}
+
+before_script:
+  - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+
+build-ci-docker:
+  stage: build
+  image: poc-trebono-git.da-rz.net:5050/root/cicd-utils/docker-build-and-push
+  tags:
+    - gitlab
+  before_script:
+    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+  variables:
+    REGISTRY: poc-trebono-git.da-rz.net:5050
+  script:
+    - make release-ci
+  only:
+    changes:
+      - CI.Dockerfile
+
+build-docker:
+  stage: build
+  image: poc-trebono-git.da-rz.net:5050/root/cicd-utils/docker-build-and-push
+  tags:
+    - gitlab
+  before_script:
+    - mkdir -p ~/.docker
+    - printf "$DOCKER_AUTH_CONFIG" > ~/.docker/config.json
+  script:
+    - docker-build-and-push trebono/trebono ${CI_COMMIT_REF_SLUG}-${CI_COMMIT_SHORT_SHA}
+  # only:
+  # - master
+  # when: manual
+
+deploy-test:
+  stage: deploy
+  image: poc-trebono-git.da-rz.net:5050/root/cicd-utils/deploy
+  before_script:
+    - mkdir -p ~/.docker
+    - printf "$DOCKER_AUTH_CONFIG" > ~/.docker/config.json
+    - mkdir -p ~/.kube
+    - printf "$KUBE_AUTH_CONFIG" > ~/.kube/config
+  environment:
+    name: trebono
+    url: trebono.poc-trebono-k8s.da-rz.net
+  variables:
+    DEPLOY_DIR: deploy/trebono-demo
+    KUBE_NAMESPACE: trebono
+    KUBE_APPLICATION: $CI_PROJECT_NAME
+    VAR_FILE: "deploy/vars/test.yaml"
+    CHART_DIR: "deploy/$CI_PROJECT_NAME"
+    IMAGE_TAG: ${CI_COMMIT_REF_SLUG}-${CI_COMMIT_SHORT_SHA}
+    INGRESS_URL: $CI_ENVIRONMENT_URL
+  script:
+    - echo $CI_PROJECT_NAME
+    - deployment
+  tags:
+    - gitlab
+  # only:
+  #   - master
+  # when: manual

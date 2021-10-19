@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Root>
+    <section-company>Unternehmen</section-company>
+    <company-removed>Kunde ist de-aktiviert: %Count%</company-removed>
+    <title-company-edit>Kundenstammdaten ändern</title-company-edit>
+    <title-company-add>Neuen Kunden anlegen</title-company-add>
+    <company-title-empty>Eingabe Kundenname</company-title-empty>
+    <module-title>Kunden</module-title>
+
+    <title-company-unit-edit>Unternehmensdaten ändern</title-company-unit-edit>
+    <title-company-unit-add>Neuen Kunden anlegen</title-company-unit-add>
+    <company-unit-title-empty>Abteilungsnamen eingeben</company-unit-title-empty>
+    <company-unit-parent-empty>Auswahl Mutterunternehmen</company-unit-parent-empty>
+    <company-unit-data-removed>Organisation unit ID %id% "%title%" was totally removed</company-unit-data-removed>
+
+    <title-contact-edit>Kontaktperson ändern</title-contact-edit>
+    <title-contact-add>Kontakt hinzufügen</title-contact-add>
+    <contact-first-name-empty>Eingabe Vorname</contact-first-name-empty>
+    <contact-last-name-empty>Eingabe Nachname</contact-last-name-empty>
+    <contact-type-management>Geschäftsführer/Eigentümer</contact-type-management>
+    <contact-type-hr>Personalmanager</contact-type-hr>
+    <contact-type-finance>Finanzmanager</contact-type-finance>
+    <contact-type-it>IT-Manager</contact-type-it>
+    <contact-type-other>Sonst.</contact-type-other>
+    <contat-for-invoice>E-Rechnung</contat-for-invoice>
+    <contat-for-contract>Vertrag</contat-for-contract>
+    <contat-for-service>Service</contat-for-service>
+    <contat-for-support>Support</contat-for-support>
+    <contat-for-payroll_export>Lohn Export Datei</contat-for-payroll_export>
+
+    <section-employee>Mitarbeiter</section-employee>
+    <title-employee-edit>Mitarbeiter ändern</title-employee-edit>
+    <title-employee-add>Mitarbeiter hinzufügen</title-employee-add>
+    <employee-company-unit-empty>Unternehmen auswählen</employee-company-unit-empty>
+    <working-days-mandatory>"Arbeitstage pro Woche" Feld ist ein Pflichtfeld</working-days-mandatory>
+
+    <company-file-title-empty>Überprüfen Sie den Kundennamen in Ihrer Datei</company-file-title-empty>
+    <company-file-contact-list-empty>Es gibt keine Kontaktperson in Ihrer Datei</company-file-contact-list-empty>
+
+    <unknown-image-name>Unbekannter Dateiname</unknown-image-name>
+    <file-not-found>die Datei wurde nicht gefunden</file-not-found>
+    <file-not-removed>Fehler beim Löschen der Datei</file-not-removed>
+
+    <section-voucher>Gutschein</section-voucher>
+    <title-voucher-edit>Gutschein bearbeiten</title-voucher-edit>
+    <title-voucher-add>Gutschein hinzufügen</title-voucher-add>
+    <voucher-value-empty>Gutscheinwert eingeben</voucher-value-empty>
+    <voucher-value-incorrect>Der Gutscheinwert ist falsch</voucher-value-incorrect>
+    <voucher-reason-empty>Gutscheingrund eingeben</voucher-reason-empty>
+    <voucher-date-empty>Gutscheindatum eingeben</voucher-date-empty>
+    <voucher-end-date-empty>Geben Sie das Enddatum des Gutscheins ein</voucher-end-date-empty>
+    <voucher-end-date-empty>Geben Sie das Enddatum des Gutscheins ein</voucher-end-date-empty>
+    <voucher-frequency-empty>Geben Sie die Häufigkeit des Gutscheins ein</voucher-frequency-empty>
+    <voucher-date-incorrect>Das Startdatum des Moduls Prämie ist nach dem Gutscheindatum. Bitte ändern Sie das Gutschein
+        Startdatum.
+    </voucher-date-incorrect>
+    <voucher-contract-empty>Das Modul Prämie ist nicht aktiviert.</voucher-contract-empty>
+    <voucher-yearly-limit-exceeded>Jahreslimit der Prämien überschritten</voucher-yearly-limit-exceeded>
+
+    <send-email-voucher> <![CDATA[ Guten Tag %salutation% %first_name% %last_name%,<br /><br />
+	
+	wir wünschen Ihnen besonders viel Freude mit Ihrem Gutschein.<br /><br />
+	
+	Mit freundlichen Grüßen<br />
+	Ihr trebono Team<br />
+	<br /><br /><br />
+	 
+	
+	<img src="cid:logo" /><br />
+	2KS Cloud Services GmbH<br />
+	Bahnhofstrasse 54, 64 367 Darmstadt, Germany<br /><br />
+	
+	Tel.: +49 6151 493 411-0<br />
+	Web: www.trebono.de<br />
+	Email: support@trebono.de<br /><br />
+	
+	Geschäftsführer/Managing Directors: Jörg Klingler, Thorsten Stein<br />
+	Handelsregister/Commercial Register: Amtsgericht Darmstadt HRB 87964<br /><br />
+	
+	<small>*This message and any attachments are solely for the intended recipient and may contain confidential or privileged information. If you are not the intended recipient, any disclosure, copying, use, or distribution of the information included in this message and any attachments is prohibited. If you have received this communication in error, please notify us by reply e-mail and immediately and permanently delete this message and any attachments.</small>
+	<br />
+	<br />
+	<br />
+	 ]]></send-email-voucher>
+</Root>

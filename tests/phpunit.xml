@@ -1,0 +1,24 @@
+<phpunit bootstrap="../vendor/autoload.php"
+		 convertErrorsToExceptions="false"
+		 convertNoticesToExceptions="false"
+		 convertWarningsToExceptions="false">
+	<testsuites>
+		<testsuite name="init">
+			<file>init/PrepareDBTest.php</file>
+		</testsuite>
+		<testsuite name="environment">
+			<file>environment/EnvTest.php</file>
+		</testsuite>
+		<testsuite name="user">
+			<file>user/UserTest.php</file>
+		</testsuite>
+		<testsuite name="billing">
+			<file>billing/PayrollTest.php</file>
+		</testsuite>
+	</testsuites>
+	<php>
+		<ini name="error_reporting" value="E_ALL &amp; ~E_DEPRECATED" />
+		<ini name="display_errors" value="true" />
+		<ini name="display_startup_errors" value="true" />
+	</php>
+</phpunit>

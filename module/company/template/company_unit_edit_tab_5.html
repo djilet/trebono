@@ -1,0 +1,95 @@
+<div class="row">
+	<TMPL_IF NAME='HistoryAdmin'>
+		<div class="col-md-6 padding-3">
+			<section class="box">
+				<header class="panel_header" for="header_company_unit_edit_documents" table="company">
+					<h2 class="title"><TMPL_VAR NAME='LNG_Documents'></h2>
+				</header>
+				<div class="content-body">
+					<TMPL_IF NAME='company_unit_id'>
+						<TMPL_IF NAME='Admin'>
+							<div class="row">
+								<TMPL_IF NAME='ContractLimitReached' VALUE="1">
+									<div><TMPL_VAR NAME='LNG_ContractLimitReached'></div>
+									<TMPL_ELSE>
+										<div class="col-md-12 form-group">
+											<label class="form-label"><TMPL_VAR NAME='LNG_UploadContractFile'></label>
+											<div class="form-group" id="contract_file-box"></div>
+											<button type="submit" class="upload-contract-file btn btn-primary btn-icon right15">
+												<i class="fa fa-file-alt"></i><TMPL_VAR NAME='LNG_UploadContractFile'>
+											</button>
+										</div>
+								</TMPL_IF>
+							</div>
+						</TMPL_IF>
+						<TMPL_IF NAME='ContractDocumentList'>
+							<table class="table">
+								<TMPL_LOOP NAME='ContractDocumentList'>
+									<TMPL_IF NAME='archive' VALUE='N'>
+										<tr>
+											<TMPL_ELSE/>
+										<tr class="inactive">
+									</TMPL_IF>
+									<td><a href="<TMPL_VAR NAME='MODULE_URL'>&Do=DownloadContractFile&ContractDocumentID=<TMPL_VAR NAME='document_id'>&company_unit_id=<TMPL_VAR NAME='company_unit_id'>" target="_blank"><TMPL_VAR NAME='title'></a></td>
+									<TMPL_IF NAME='Admin'>
+										<td align="right" width="15%">
+											<TMPL_IF NAME='archive' VALUE='N'>
+											<td align="center" width="10%"><a href="#" class="update-contract-file" document_id="<TMPL_VAR NAME='document_id'>" document_name="<TMPL_VAR NAME='title'>" title="<TMPL_VAR NAME='LNG_CompanyDocumentUpdate'>"><i class='fa fa-upload'></i></a></td>
+											<td align="right" width="5%"><a href="#" class="rename-contract-file" document_id="<TMPL_VAR NAME='document_id'>" document_name="<TMPL_VAR NAME='title'>" title="<TMPL_VAR NAME='LNG_CompanyDocumentRename'>"><i class='fa fa-edit'></i></a></td>
+											<td align="right" width="5%"><a href="<TMPL_VAR NAME='MODULE_URL'>&Do=DeactivateContractFile&ContractDocumentID=<TMPL_VAR NAME='document_id'>&company_unit_id=<TMPL_VAR NAME='company_unit_id'>&ActiveTab=5" class="confirm-remove" title="<TMPL_VAR NAME='title'>"><i class='fa fa-close delete'></i></a></td>
+										<TMPL_ELSE/>
+											<td></td>
+											<td></td>
+											<td align="right" width="5%"><a href="<TMPL_VAR NAME='MODULE_URL'>&Do=ActivateContractFile&ContractDocumentID=<TMPL_VAR NAME='document_id'>&company_unit_id=<TMPL_VAR NAME='company_unit_id'>&ActiveTab=5" class="confirm-activate" title="<TMPL_VAR NAME='title'>"><i class='fa fa-check activate'></i></a></td>
+									</TMPL_IF>
+						</TMPL_IF>
+						<TMPL_IF NAME='HistoryAdmin'>
+							<td align="right" width="15%">
+								(<a href="#" class="property-history" property_name="company_document_archive" document_id="<TMPL_VAR NAME='document_id'>"><TMPL_VAR NAME='LNG_RevisionHistory'></a>)
+							</td>
+						</TMPL_IF>
+						<TMPL_IF NAME='Admin'>
+							<td align="right" width="10%"><a href="<TMPL_VAR NAME='MODULE_URL'>&Do=DeleteContractFile&ContractDocumentID=<TMPL_VAR NAME='document_id'>&company_unit_id=<TMPL_VAR NAME='company_unit_id'>&ActiveTab=5" class="confirm-remove" title="<TMPL_VAR NAME='title'>"><i class='fa fa-trash delete'></i></a></td>
+						</TMPL_IF>
+						</tr>
+						</TMPL_LOOP>
+						</table>
+						<div class="hidden" id="update_contract_file_box"></div>
+						<input name="update_contract_id" id="update_contract_id" type="hidden" />
+						<input name="rename_contract_id" id="rename_contract_id" type="hidden" />
+					</TMPL_IF>
+					<TMPL_IF NAME='ContractDocumentPaging'>
+						<div class="text-center">
+							<ul class="pagination">
+								<TMPL_VAR NAME='ContractDocumentPaging' ESCAPE='none'>
+							</ul>
+						</div>
+					</TMPL_IF>
+					<TMPL_ELSE/>
+					<div class="alert alert-warning"><TMPL_VAR NAME='LNG_ContractListAccessNote'></div>
+	</TMPL_IF>
+</div>
+</section>
+</div>
+<div class="col-md-6 padding-3">
+	<section class="box">
+		<header class="panel_header" for="header_company_unit_edit_business_terms" table="company">
+			<h2 class="title"><TMPL_VAR NAME='LNG_BusinessTerms'></h2>
+		</header>
+		<div class="content-body">
+			<TMPL_IF NAME='BusinessTerms'>
+				<TMPL_LOOP NAME='BusinessTerms'>
+					<div>
+						<TMPL_IF NAME='value'>
+							<a href="<TMPL_VAR NAME='value_download_url'>" target="_blank"><TMPL_VAR NAME='translation'></a>
+						</TMPL_IF>
+					</div>
+				</TMPL_LOOP>
+				<TMPL_ELSE>
+					<div class="alert alert-success"><TMPL_VAR NAME='LNG_Empty'></div>
+			</TMPL_IF>
+		</div>
+	</section>
+</div>
+</TMPL_IF>
+</div>

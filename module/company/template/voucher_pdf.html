@@ -1,0 +1,30 @@
+<div class="header-logo">
+	<TMPL_IF NAME='voucher_logo'><img src="<TMPL_VAR NAME='voucher_logo'>"></TMPL_IF>
+</div>
+<div class="main">
+	<p class="header bold">Gutschein Nr.: <TMPL_VAR NAME='voucher_id'></p>
+	<br />
+	<br />
+	<br />
+	<br />
+	<br />
+	<p class="content 14pt">Für Mitarbeiter:</p>
+	<p class="content 22pt underlined"><TMPL_VAR NAME='employee_first_name'><br /><TMPL_VAR NAME='employee_last_name'></p>
+	<p class="content 14pt">
+		<TMPL_VAR NAME='short_text'><br />
+		<TMPL_VAR NAME='company_title'><br />
+		<TMPL_VAR NAME='company_street'> <TMPL_VAR NAME='company_house'><br />
+		<TMPL_VAR NAME='company_zip_code'> <TMPL_VAR NAME='company_city'>
+	</p> 
+</div>
+<p class="reason 14pt">
+	Kategorie: <span class="bold 22pt"><TMPL_VAR NAME='reason'></span><br /><br />
+	<TMPL_VAR NAME='long_text'>
+</p>
+<p class="amount 14pt">Betrag: <span class="bold 22pt"><TMPL_VAR NAME='amount' FORMAT='price'> </span></p>
+<p class="issue-date 14pt">Ausstellungsdatum:<br /><TMPL_VAR NAME='voucher_date' FORMAT='date'></p>
+<p class="valid-until 14pt">Gültig bis:<br /><TMPL_VAR NAME='end_date' FORMAT='date'></p>
+<div class="footer">
+	<span class="white 10pt">Erstellt von:</span><br /><span class="bold 22pt white">treb<span class="sonnenblume">o</span>no</span><br />
+	<span class="white 8pt">Ein Gutschein der 2KS Gutschein Handels GmbH</span>
+</div>

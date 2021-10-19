@@ -1,0 +1,11 @@
+ALTER TABLE "public"."company_unit" ADD COLUMN "acc_meal_value_tax_flat" character varying(255);
+ALTER TABLE "public"."company_unit" ADD COLUMN "acc_food_subsidy_tax_free" character varying(255);
+ALTER TABLE "public"."company_unit" ADD COLUMN "acc_gross_salary" character varying(255);
+ALTER TABLE "public"."company_unit" ADD COLUMN "acc_grant_of_materials" character varying(255);
+ALTER TABLE "public"."company_unit" ADD COLUMN "acc_internet_subsidy_tax" character varying(255);
+ALTER TABLE "public"."company_unit" ADD COLUMN "acc_mobile_subsidy_tax_free" character varying(255);
+ALTER TABLE "public"."company_unit" ADD COLUMN "acc_recreation_subsidy_tax_flat" character varying(255);
+ALTER TABLE "public"."company_unit" ADD COLUMN "acc_net_income" character varying(255);
+ALTER TABLE "public"."receipt" ADD COLUMN "store_name" character varying(255);
+ALTER TABLE "public"."receipt" DROP COLUMN "document_date";
+ALTER TABLE "public"."receipt" ADD COLUMN "document_date" timestamp without time zone;

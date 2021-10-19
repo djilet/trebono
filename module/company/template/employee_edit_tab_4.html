@@ -1,0 +1,29 @@
+<div class="row">
+	<TMPL_LOOP NAME='PaymentVoucherProductGroupList'>
+		<div class="col-md-12 padding-3">
+			<section class="box">
+				<header class="panel_header" for="header_employee_edit_export" table="company">
+					<h2 class="title"><TMPL_VAR NAME='statistics-translation'></h2>
+				</header>
+				<div class="content-body">
+					<TMPL_IF NAME='employee_id'>
+						<div class="row">
+							<div class="col-md-6 form-group">
+								<label class="form-label"><TMPL_VAR NAME='yearly-statistics-translation'></label><br />
+								<input type="text" name="yearly_statistics_date" group-id="<TMPL_VAR NAME='group_id'>" class="form-control datepicker" data-min-view-mode="years" data-format="yyyy"/>
+							</div>
+							<div class="col-md-6 form-group">
+								<label class="form-label">&nbsp;</label><br />
+								<button type="button" class="btn btn-primary statistics-show" group-id="<TMPL_VAR NAME='group_id'>"><TMPL_VAR NAME='LNG_VoucherStatisticsShow'></button>
+							</div>
+						</div>
+						<div class="statistics-container" group-id="<TMPL_VAR NAME='group_id'>">
+						</div>
+						<TMPL_ELSE/>
+						<div class="alert alert-warning"><TMPL_VAR NAME='LNG_StatisticAccessNote'></div>
+					</TMPL_IF>
+				</div>
+			</section>
+		</div>
+	</TMPL_LOOP>
+</div>

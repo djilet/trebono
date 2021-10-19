@@ -1,0 +1,78 @@
+<div class="row">
+	<section class="box no-margin">
+		<header class="panel_header" for="header_dashboard" table="core">
+			<TMPL_IF NAME='type' VALUE='not_used'>
+				<h2 class="title"><TMPL_VAR NAME='LNG_VoucherDashboardDetailsNotUsed'></h2>
+				<TMPL_ELSE>
+					<h2 class="title"><TMPL_VAR NAME='LNG_VoucherDashboardDetailsPartiallyUsed'></h2>
+			</TMPL_IF>
+		</header>								
+		<div class="content-body">
+			<div class="row">
+				<table class="table bvs-table no-margin table-with-scrollbar">
+					<tbody>
+						<tr>
+							<td class="text-center text-bold"><TMPL_VAR NAME='LNG_Employee'></td>
+							<TMPL_LOOP NAME='MonthTitleList'>
+								<td class="text-center text-bold"><TMPL_VAR NAME='title'></td>
+							</TMPL_LOOP>
+							<td class="text-center text-bold"><TMPL_VAR NAME='LNG_StatisticsTotal'></td>
+						</tr>
+					</tbody>
+					<TMPL_LOOP NAME='StatisticsList'>
+						<tbody class="no-margin">
+							<tr>
+								<td class="text-center">
+									<a href="<TMPL_VAR NAME='MODULE_URL'>module.php?load=company&<TMPL_VAR NAME='ParamsForUrl'>Section=employee&employee_id=<TMPL_VAR NAME='employee_id'>&ActiveTab=3" target="_blank"><TMPL_VAR NAME='employee_name'></a></br>
+									<a href="" class="moreLinkStatistics" data-employee="<TMPL_VAR NAME='employee_id'>"><TMPL_VAR NAME="LNG_Expand"></a>
+								</td>
+								<TMPL_LOOP NAME='month_list'>
+									<td>
+										<TMPL_IF NAME='amount_left' OP='>' VALUE='0'>
+											<p class="text-center"><TMPL_VAR NAME='amount_left' FORMAT='price'>€</p>
+										</TMPL_IF>
+									</td>
+								</TMPL_LOOP>
+								<td>
+									<p class="text-center"><TMPL_VAR NAME='amount_left' FORMAT='price'>€</p>
+								</td>
+							</tr>
+						</tbody>
+						<tbody class="no-margin" data-employee="<TMPL_VAR NAME='employee_id'>" style="display: none;">
+							<tr class="gray">
+								<td class="text-center"></td>
+								<TMPL_LOOP NAME='month_list'>
+									<td>
+										<TMPL_LOOP NAME='voucher_list'>
+											<TMPL_IF NAME='amount_left' OP='>' VALUE='0'>
+												<a href="<TMPL_VAR NAME='MODULE_URL'>module.php?load=company&Section=voucher&employee_id=<TMPL_VAR NAME='employee_id'>&group_id=<TMPL_VAR NAME='group_id'>&ActiveTab=3&voucher_id=<TMPL_VAR NAME='voucher_id'>" target="_blank"><TMPL_VAR NAME='voucher_id'/></a>
+												(<TMPL_VAR NAME='amount_left' FORMAT='price'>€)<TMPL_UNLESS NAME='__LAST__'>, </TMPL_UNLESS>
+											</TMPL_IF>
+										</TMPL_LOOP>
+									</td>
+								</TMPL_LOOP>
+								<td></td>
+							</tr>
+						</tbody>
+					</TMPL_LOOP>
+				</table>
+			</div>
+		</div>
+	</section>
+</div>
+
+<script type="text/javascript">
+	$(document).ready(function(){
+		$("a.moreLinkStatistics").click(function(e){
+			if($(this).is('.open')){
+				$(this).removeClass('open').text('<TMPL_VAR NAME="LNG_Expand">');
+				$("tbody[data-employee='"+$(this).attr('data-employee')+"']").fadeOut(300);
+			}
+			else{
+				$(this).addClass('open').text('<TMPL_VAR NAME="LNG_Collapse">');
+				$("tbody[data-employee='"+$(this).attr('data-employee')+"']").fadeIn(300);
+			}
+			e.preventDefault();
+		});
+	});
+</script>

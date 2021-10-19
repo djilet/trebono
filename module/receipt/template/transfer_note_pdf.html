@@ -1,0 +1,149 @@
+<htmlpageheader name="firstpage" style="display:none">
+	<div class="transfer-note-header">
+		<br />
+		<div class="image">
+			<img align="right" src="<TMPL_VAR NAME='PROJECT_PATH'>module/<TMPL_VAR NAME='Module'>/template/images/logo.png">
+		</div>	
+	</div>
+</htmlpageheader>
+
+<htmlpageheader name="otherpages" style="display:none">
+    <div class="transfer-note-header">
+		<br />
+		<div class="image">
+			<img align="right" src="<TMPL_VAR NAME='PROJECT_PATH'>module/<TMPL_VAR NAME='Module'>/template/images/logo.png">
+		</div>
+		<table width="100%" border="0">
+			<tr>
+				<td width="33%"><strong>Transfervermerk Beleg Nr. <TMPL_VAR NAME='receipt_legal_receipt_id'></strong></td>
+				<td width="33%" align="right"><strong>Seite: {PAGENO} von {nb}</strong></td>
+			</tr>
+		</table>
+	</div>
+</htmlpageheader>
+
+<sethtmlpageheader name="firstpage" value="on" show-this-page="1" />
+<sethtmlpageheader name="otherpages" value="on" />
+
+<htmlpagefooter name="footer" style="display:none">
+	<hr>
+	
+	 <table class="footer">
+		<tr>
+			<td class="leftcol">
+				<p>2KS Vertraulich</p>
+			</td>
+			<td>
+				<p>Transfervermerk Beleg Nr. <TMPL_VAR NAME='receipt_legal_receipt_id'></p>
+			</td>
+			<td><p align="center">Seite: {PAGENO} von {nb} </p></td>
+		</tr>
+	 </table>
+</htmlpagefooter>
+
+<sethtmlpagefooter name="footer" value="on" show-this-page="1" />
+
+<div class="main">
+	<h1 class="header">
+		Transfervermerk Beleg Nr. <TMPL_VAR NAME='receipt_legal_receipt_id'>
+	</h1>
+</div>
+
+<hr>
+
+<table width="100%" border="0">
+	<tbody>
+		<tr>
+			<th width="40%" class="first">Unternehmen:</th>
+			<th class="second">
+				<TMPL_VAR NAME='company_unit_title'><br />
+				<TMPL_VAR NAME='company_unit_street'> <TMPL_VAR NAME='company_unit_house'><br />
+				<TMPL_VAR NAME='company_zip_code'> <TMPL_VAR NAME='company_unit_city'>
+			</th>
+		</tr>
+		<tr>
+			<th width="40%" class="first">Mitarbeiter:</th>
+			<th class="second">
+				<TMPL_VAR NAME='employee_first_name'> <TMPL_VAR NAME='employee_last_name'><br />
+				geb. am <TMPL_VAR NAME='employee_birthday'><br />
+				<TMPL_VAR NAME='employee_street'> <TMPL_VAR NAME='employee_house'><br />
+				<TMPL_VAR NAME='employee_zip_code'> <TMPL_VAR NAME='employee_city'><br />
+				Mitarbeiternummer: <TMPL_VAR NAME='employee_employee_id'>
+			</th>
+		</tr>
+		<tr>
+			<th width="40%" class="first">Beleginformationen:</th>
+			<th class="second">
+				Beleg Nummer: <TMPL_VAR NAME='receipt_legal_receipt_id'><br />
+				Art des Beleges: <TMPL_VAR NAME='product_group_title'><br />
+				Erstellungsdatum: 	<TMPL_VAR NAME='receipt_created' FORMAT='datetimefull'><br />
+				Freigabe Datum:	<TMPL_VAR NAME='receipt_status_updated' FORMAT='datetimefull'><br />
+			</th>
+		</tr>
+	</tbody>
+</table>
+	
+	<br />
+
+	<TMPL_VAR NAME='org_guideline_block_html' ESCAPE='none'>
+	
+	<TMPL_LOOP NAME='ReceiptFileList'>
+		<p class="bold">Nachweis Dokumentation: weitere Dokumente zum Scan-Prozess Bild Nr. <TMPL_VAR NAME='receipt_file_id'></p> 
+	
+		<table width="100%" border="0" class="page-break">
+			<tbody>
+				<tr>
+					<th width="40%" class="first">Ergebnis des ersten Hash:</th>
+					<th class="second"><TMPL_VAR NAME='hash'></th>
+				</tr>
+				<tr>
+					<th width="40%" class="first">Vergleich-Hash:</th>
+					<th class="second"><TMPL_VAR NAME='signature_report_hash'></th>
+				</tr>
+				<tr>
+					<th width="40%" class="first">Zeitstempel des Vergleich-Hash: </th>
+					<th class="second"><TMPL_VAR NAME='signature_report_date' FORMAT='datetimefull'></th>
+				</tr>
+				<tr>
+					<th width="40%" class="first">Vergleichsergebnis:</th>
+					<th class="second"><TMPL_VAR NAME='compare_hash_result'></th>
+				</tr>
+				<tr>
+					<th width="40%" class="first">Vergleichsdatum:</th>
+					<th class="second"><TMPL_VAR NAME='signature_report_date' FORMAT='datetimefull'></th>
+				</tr>
+				<TMPL_IF NAME='signature_report_file'>
+					<tr>
+						<th width="40%" class="first">Signatur Datei:</th>
+						<th class="second"><TMPL_VAR NAME='signature_file'><br /></th>
+					</tr>
+					<tr>
+						<th width="40%" class="first">Verifikation Datei:</th>
+						<th class="second"><TMPL_VAR NAME='signature_report_file'><br /></th>
+					</tr>
+					<tr>
+						<th width="40%" class="first">Hash-Wert Verifikation:</th>
+						<th class="second"><TMPL_VAR NAME='signature_report_hash'><br /></th>
+					</tr>
+				</TMPL_IF>
+			</tbody>
+		</table>
+	</TMPL_LOOP>
+
+	<br />
+
+	<TMPL_IF NAME='ReceiptCommentList'>
+		<p class="bold">Chat - Verlauf:</p>
+		<table width="100%" border="0" class="comments">
+			<tbody>
+			<TMPL_LOOP NAME='ReceiptCommentList'>
+				<tr>
+					<th width="20%" class="date"><TMPL_VAR NAME='created'></th>
+					<th width="20%" class="first"><TMPL_VAR NAME='first_name'> <TMPL_VAR NAME='last_name'>:</th>
+					<th class="second"><TMPL_VAR NAME='content' ESCAPE='nl2br'></th>
+				</tr>
+			</TMPL_LOOP>
+			</tbody>
+		</table>
+	</TMPL_IF>
+

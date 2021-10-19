@@ -1,0 +1,218 @@
+<div class="row">
+	<section class="box no-margin">
+		<header class="panel_header" for="header_stored_data_filter" table="stored_data">
+			<h2 class="title pull-left"><TMPL_VAR NAME='LNG_Filter'></h2>
+			<div class="actions panel_actions pull-left">
+				<i class="box_toggle fa fa-chevron-down"></i>
+			</div>
+		</header>								
+		<div class="content-body">
+			<form action="<TMPL_VAR NAME='MODULE_URL'>&Section=stored_data" method="post">
+				<div class="row">   
+					<div class="col-md-3">
+						<div class="form-group">
+							<label class="form-label"><TMPL_VAR NAME='LNG_FilterCreatedRange'></label><br />
+							<input type="text" name="FilterCreatedRange" class="form-control daterange active" value="<TMPL_VAR NAME='FilterCreatedRange'>" data-time-picker-increment="1" data-time-picker="true">
+						</div>
+					</div>	
+					<div class="col-md-3">
+						<div class="form-group">
+							<label class="form-label"><TMPL_VAR NAME='LNG_FilterTitle'></label>
+							<select class="select2" name="FilterCompanyUnitId" data-allow-clear="true">
+								<option value=""></option>
+								<TMPL_LOOP NAME='CompanyUnitList'>
+									<TMPL_IF NAME='Selected'>
+										<option value="<TMPL_VAR NAME='company_unit_id'>" selected><TMPL_VAR NAME='select_prefix'> <TMPL_VAR NAME='title'></option>
+									<TMPL_ELSEIF NAME='archive' VALUE='N'>
+										<option value="<TMPL_VAR NAME='company_unit_id'>"><TMPL_VAR NAME='select_prefix'> <TMPL_VAR NAME='title'></option>
+									</TMPL_IF>
+								</TMPL_LOOP>
+							</select>
+						</div>
+					</div>
+					<div class="col-md-2">
+						<div class="form-group">
+							<label class="form-label hidden-xs">&nbsp;</label><br />
+							<button type="submit" class="btn btn-primary btn-icon"><i class="fa fa-search"></i> <TMPL_VAR NAME='LNG_FilterApply'></button>
+						</div>
+					</div>
+					<TMPL_IF NAME='Admin'>
+						<div class="col-md-2">
+							<div class="form-group">
+								<label class="form-label hidden-xs"><TMPL_VAR NAME='LNG_GenerationFrequency'></label><br />
+								<select class="form-control m-bot15" name="GenerationFrequency">
+									<option value="monthly" selected><TMPL_VAR NAME='LNG_Monthly'></option>
+									<option value="quarterly"><TMPL_VAR NAME='LNG_Quarterly'></option>
+									<option value="yearly"><TMPL_VAR NAME='LNG_Yearly'></option>
+								</select>
+							</div>
+						</div>
+						<div class="col-md-2">
+							<div class="form-group">
+								<label class="form-label hidden-xs">&nbsp;</label><br />
+								<button id="create_stored_data" type="submit" class="btn btn-primary btn-icon"><TMPL_VAR NAME='LNG_GenerateButton'></button>
+							</div>
+						</div>
+					</TMPL_IF>
+				</div>
+				<TMPL_VAR NAME='ParamsForFilter' ESCAPE='none'/>
+			</form>
+		</div>
+	</section>
+</div>
+<div class="row">
+	<section class="box no-margin">
+		<header class="panel_header" for="header_stored_data_list" table="stored_data">
+			<h2 class="title"><TMPL_VAR NAME='LNG_StoredData'></h2>
+		</header>								
+		<div class="content-body">
+			<div class="row">
+				<div class="col-md-12 col-sm-12 col-xs-12">
+					<TMPL_IF NAME='StoredDataList'>
+						<div class="row">
+							<div class="col-md-6 form-group text-center-xs">
+								<span><TMPL_VAR NAME='ListInfo'/></span>
+							</div>
+							<div class="col-md-6 form-group text-right text-center-xs">
+								<form action="<TMPL_VAR NAME='MODULE_URL'>&Section=stored_data" method="post" class="form-inline">
+									<span class="right15 visible-xs-block visible-sm-inline visible-md-inline visible-lg-inline"><TMPL_VAR NAME='LNG_DocumentsOnPage'/></span>
+									<select name="ItemsOnPage" class="form-control">
+										<TMPL_LOOP NAME='ItemsOnPageList'>
+											<option <TMPL_IF NAME='Selected'>selected</TMPL_IF> value="<TMPL_VAR NAME='Value'>"><TMPL_IF NAME='Value'><TMPL_VAR NAME='Value'><TMPL_ELSE><TMPL_VAR NAME='LNG_All'></TMPL_IF></option>
+										</TMPL_LOOP>
+									</select>
+									<TMPL_VAR NAME='ParamsForItemsOnPage' ESCAPE='none'>
+								</form>
+							</div>
+						</div>
+						<table class="table table-striped">
+							<thead>
+								<tr>
+									<th><TMPL_VAR NAME='LNG_CompanyUnitTitle'></th>
+									<th><TMPL_VAR NAME='LNG_Employee'></th>
+									<th><TMPL_VAR NAME='LNG_Created'></th>
+									<th><TMPL_VAR NAME='LNG_Period'></th>
+									<th><TMPL_VAR NAME='LNG_Status'></th>
+									<th class="text-center" width="13%"><TMPL_VAR NAME='LNG_Cron'></th>
+									<th class="text-center" width="7%"><TMPL_VAR NAME='LNG_Export'></th>
+									<th width="3%"></th>
+									<th width="7%"></th>
+								</tr>
+							</thead>
+							<tbody>
+								<TMPL_LOOP NAME='StoredDataList'>
+									<tr>
+										<td><TMPL_VAR NAME='title'/></td>
+										<td><TMPL_VAR NAME='employees_title'/></td>
+										<td><TMPL_VAR NAME='created' FORMAT='datetime'/></td>
+										<td><TMPL_VAR NAME='date_from' FORMAT='date'> - <TMPL_VAR NAME='date_to' FORMAT='date'></td>
+										<td><TMPL_VAR NAME='status_title'/></td>
+										<td class="text-center">
+											<TMPL_IF NAME='cron' VALUE='Y'>
+												<TMPL_VAR NAME='LNG_Yes'>
+											<TMPL_ELSE/>
+												<TMPL_VAR NAME='LNG_No'>
+											</TMPL_IF>
+										</td>
+										<td class="text-center">
+											<a rel="tooltip" data-toggle="tooltip" data-original-title="<TMPL_VAR NAME='LNG_DownloadExport'>" data-placement="top" href="<TMPL_VAR NAME='MODULE_URL'>&<TMPL_VAR NAME='ParamsForURL'>&Action=GetStoredDataExport&stored_data_id=<TMPL_VAR NAME='stored_data_id'>"><i class="fa fa-file-pdf-o"></i></a>
+										</td>
+										<td class="text-right">
+											<TMPL_IF NAME='Admin'>
+												<TMPL_IF NAME='archive' VALUE='N'>
+													<a href="<TMPL_VAR NAME='MODULE_URL'>&<TMPL_VAR NAME='ParamsForURL'>&Do=Remove&StoredDataIDs[]=<TMPL_VAR NAME='stored_data_id'>" class="confirm-remove" title="<TMPL_VAR NAME='LNG_StoredDataFor'> '<TMPL_VAR NAME='title'>' <TMPL_VAR NAME='LNG_Created'> <TMPL_VAR NAME='created' FORMAT='datetime'>"><i class='fa fa-close delete'></i></a>
+												<TMPL_ELSE/>
+													<a href="<TMPL_VAR NAME='MODULE_URL'>&<TMPL_VAR NAME='ParamsForURL'>&Do=Activate&StoredDataIDs[]=<TMPL_VAR NAME='stored_data_id'>" class="confirm-activate" title="<TMPL_VAR NAME='LNG_StoredDataFor'> '<TMPL_VAR NAME='title'>' <TMPL_VAR NAME='LNG_Created'> <TMPL_VAR NAME='created' FORMAT='datetime'>"><i class='fa fa-check activate'></i></a>
+												</TMPL_IF>
+											</TMPL_IF>
+										</td>
+										<td>
+											<TMPL_IF NAME='HistoryAdmin'>
+												(<a href="#" class="property-history" property_name="archive" stored_data_id="<TMPL_VAR NAME='stored_data_id'>"><TMPL_VAR NAME='LNG_RevisionHistory'></a>)
+											</TMPL_IF>
+										</td>
+									</tr>
+								</TMPL_LOOP>
+							</tbody>
+						</table>
+						<div class="text-center">
+							<ul class="pagination">
+								<TMPL_VAR NAME='Paging' ESCAPE='none'>
+							</ul>
+						</div>		
+					<TMPL_ELSE>
+						<div class="alert alert-success"><TMPL_VAR NAME='LNG_Empty'></div>
+					</TMPL_IF>
+				</div>
+			</div>
+		</div>
+	</section>
+</div>
+
+<script type="text/javascript">
+	$(document).ready(function(){
+		$('select[name=ItemsOnPage]').change(function(){
+			$(this).closest('form').submit();
+		});
+
+		$('.property-history').click(function(e){
+            var propertyName = $(this).attr('property_name');
+            var storedDataID = $(this).attr('stored_data_id');
+            $.ajax({
+                url: '<TMPL_VAR NAME='PROJECT_PATH'>module/billing/ajax.php',
+                type: 'GET',
+                dataType: 'JSON',
+                data:{
+                    Action: 'GetPropertyHistoryStoredDataHTML',
+                    property_name: propertyName,
+                    stored_data_id: storedDataID
+                },
+                success: function(data){
+                    if(typeof data.HTML != 'undefined'){
+                        $(data.HTML).modal('show').on('hidden.bs.modal', function () {
+                            $(this).remove();
+                        });
+                    }
+                }
+            });
+            e.preventDefault();
+        });
+
+		$('#create_stored_data').click(function(e){
+			e.preventDefault();
+			var periodRange = $("[name=FilterCreatedRange]").val().trim();
+			var companyUnitID = $("[name=FilterCompanyUnitId]").val().trim();
+			var frequency = $("[name=GenerationFrequency]").val().trim();
+
+			if (periodRange.length > 0 && companyUnitID.length > 0 && frequency.length > 0) {
+				$.ajax({
+					url: '<TMPL_VAR NAME='PROJECT_PATH'>module/billing/cron/stored_data_create.php?',
+					type: 'GET',
+					dataType: 'JSON',
+					data:{
+						period_range: periodRange,
+						company_unit_id: companyUnitID,
+						frequency: frequency,
+						is_cron: "N",
+						language_code: '<TMPL_VAR NAME='LanguageCode'>'
+					},
+					success: function(data){
+						if (typeof data.HTML != 'undefined'){
+							$('header[for=header_stored_data_filter]').after(
+								'<div class="row">' +
+									'<div class="alert alert-danger" style="margin: 5px 20px">' +
+										data.HTML +
+									"</div>" +
+								"</div>"
+							);
+						} else {
+							setTimeout(function() {
+								location.href = "<TMPL_VAR NAME='PROJECT_PATH'>admin/module.php?load=billing&Section=stored_data"
+							}, 4000);
+						}
+					}
+				});
+			}
+		});
+	});
+</script>

@@ -1,0 +1,134 @@
+<div class="row">
+	<TMPL_IF NAME='ErrorList'>
+		<div class="alert alert-danger alert-no-margin">
+			<TMPL_LOOP NAME='ErrorList'>
+				<TMPL_VAR NAME='Message'><TMPL_UNLESS NAME='__LAST__'><br /></TMPL_UNLESS>
+			</TMPL_LOOP>
+		</div>
+	</TMPL_IF>
+	<TMPL_IF NAME='MessageList'>
+		<div class="alert alert-success alert-no-margin">
+			<TMPL_LOOP NAME='MessageList'>
+				<TMPL_VAR NAME='Message'><TMPL_UNLESS NAME='__LAST__'><br /></TMPL_UNLESS>
+			</TMPL_LOOP>
+		</div>
+	</TMPL_IF>
+	<section class="box no-margin">
+		<header class="panel_header" for="header_partner_list" table="partner">
+			<h2 class="title"><TMPL_VAR NAME='LNG_PartnerList'></h2>
+		</header>								
+		<div class="content-body">
+			<form action="<TMPL_VAR NAME='MODULE_URL'>" method="post" autocomplete="off">
+				<div class="row">										
+					<div class="col-md-2 col-sm-3">
+						<div class="form-group">
+							<label class="form-label"><TMPL_VAR NAME='LNG_FilterTitle'></label>
+							<input type="text" placeholder="<TMPL_VAR NAME='LNG_FilterTitlePlaceholder'>" class="form-control" name="FilterTitle" value="<TMPL_VAR NAME='FilterTitle'>">
+						</div>
+					</div>
+					<div class="col-md-2 col-sm-3">
+						<label class="form-label"><TMPL_VAR NAME='LNG_IsActive'/></label>
+						<select name="FilterArchive" class="form-control">
+							<option value=""><TMPL_VAR NAME='LNG_All'/></option>
+							<option value="N" <TMPL_IF NAME='FilterArchive' value='N'>selected</TMPL_IF>><TMPL_VAR NAME='LNG_IsActiveY'/></option>
+							<option value="Y" <TMPL_IF NAME='FilterArchive' value='Y'>selected</TMPL_IF>><TMPL_VAR NAME='LNG_IsActiveN'/></option>
+						</select>
+					</div>
+					<div class="col-md-1 col-sm-2">
+						<div class="form-group">
+							<label class="form-label hidden-xs">&nbsp;</label>
+							<button type="submit" class="btn btn-primary btn-icon"><i class="fa fa-search"></i> <TMPL_VAR NAME='LNG_FilterApply'></button>
+						</div>
+					</div>
+					<TMPL_IF NAME='Admin'>
+					<div class="col-md-7 col-sm-3 text-right">
+						<div class="form-group">
+							<label class="form-label hidden-xs">&nbsp;</label><br />
+							<a href="<TMPL_VAR NAME='MODULE_URL'>&<TMPL_VAR NAME='ParamsForURL'>&partner_id=" class="btn btn-primary btn-icon"><i class="fa fa-plus"></i> <TMPL_VAR NAME='LNG_Add'></a>
+						</div>
+					</div>
+					</TMPL_IF>
+				</div>
+				<TMPL_VAR NAME='ParamsForFilter' ESCAPE='none'>
+			</form>
+			
+			<TMPL_IF NAME='PartnerList'>
+				<div class="row">
+					<div class="col-md-6 form-group text-center-xs">
+						<span><TMPL_VAR NAME='ListInfo'></span>
+					</div>
+					<div class="col-md-6 form-group text-right text-center-xs">
+						<form action="<TMPL_VAR NAME='MODULE_URL'>" method="post" class="form-inline">
+							<span class="right15 visible-xs-block visible-sm-inline visible-md-inline visible-lg-inline"><TMPL_VAR NAME='LNG_PartnersOnPage'></span>
+							<select name="ItemsOnPage" class="form-control">
+								<TMPL_LOOP NAME='ItemsOnPageList'>
+									<option <TMPL_IF NAME='Selected'>selected</TMPL_IF> value="<TMPL_VAR NAME='Value'>"><TMPL_IF NAME='Value'><TMPL_VAR NAME='Value'><TMPL_ELSE><TMPL_VAR NAME='LNG_All'></TMPL_IF></option>
+								</TMPL_LOOP>
+							</select>
+							<TMPL_VAR NAME='ParamsForItemsOnPage' ESCAPE='none'>
+						</form>
+					</div>
+				</div>
+					
+				<div class="row">
+					<div class="col-md-12 col-sm-12 col-xs-12">
+						<table class="table table-hover table-tree">
+							<thead>
+								<tr>
+									<th class="col-md-3"><TMPL_VAR NAME='LNG_Title'></th>
+									<th class="col-md-4"><TMPL_VAR NAME='LNG_Address'></th>
+									<th class="col-md-4"><TMPL_VAR NAME='LNG_Contacts'></th>
+									<th class="col-md-1"></th>
+								</tr>
+							</thead>
+							<tbody>
+								<TMPL_LOOP NAME='PartnerList'>
+									<tr data-id="<TMPL_VAR NAME='partner_id'>"<TMPL_IF NAME="archive" VALUE="Y"> class="inactive"</TMPL_IF>>
+										<td data-column="name"><a href="<TMPL_VAR NAME='MODULE_URL'>&<TMPL_VAR NAME='ParamsForURL'>&partner_id=<TMPL_VAR NAME='partner_id'>"><TMPL_VAR NAME='title'/></a></td>
+										<td>
+											<TMPL_IF NAME='city'><TMPL_VAR NAME='city'>, </TMPL_IF>
+											<TMPL_IF NAME='street'><TMPL_VAR NAME='street'>, </TMPL_IF>
+											<TMPL_VAR NAME='house'>
+										</td>
+										<td>
+											<TMPL_LOOP NAME='ContactList'>
+												<a href="<TMPL_VAR NAME='MODULE_URL'>&<TMPL_VAR NAME='ParamsForURL'>&partner_id=<TMPL_VAR NAME='partner_id'>&contact_id=<TMPL_VAR NAME='contact_id'>"><TMPL_VAR NAME='first_name'> <TMPL_VAR NAME='last_name'></a>
+												<TMPL_UNLESS NAME='__LAST__'>
+													<br />
+												</TMPL_UNLESS>
+											</TMPL_LOOP>
+										</td>
+									<td class="text-right">
+										<TMPL_IF NAME="Admin">
+											<TMPL_IF NAME="archive" VALUE="N">
+												<a href="<TMPL_VAR NAME='MODULE_URL'>&<TMPL_VAR NAME='ParamsForURL'>&Do=RemovePartner&PartnerIDs[]=<TMPL_VAR NAME='partner_id'>" class="" title="<TMPL_VAR NAME='title'>"><i class='fa fa-close delete'></i></a>
+												<TMPL_ELSE/>
+												<a href="<TMPL_VAR NAME='MODULE_URL'>&<TMPL_VAR NAME='ParamsForURL'>&Do=ActivatePartner&PartnerIDs[]=<TMPL_VAR NAME='partner_id'>" class="" title="<TMPL_VAR NAME='title'>"><i class='fa fa-check activate'></i></a>
+											</TMPL_IF>
+										</TMPL_IF>
+									</td>
+									</tr>
+								</TMPL_LOOP>
+							</tbody>
+						</table>  
+						<div class="text-center">
+							<ul class="pagination">
+								<TMPL_VAR NAME='Paging' ESCAPE='none'>
+							</ul>
+						</div>				  
+					</div>
+				</div>
+			<TMPL_ELSE>
+				<div class="alert alert-success"><TMPL_VAR NAME='LNG_Empty'></div>
+			</TMPL_IF>
+		</div>											
+	</section>
+</div>   
+
+<script type="text/javascript">
+	$(document).ready(function(){
+		$('select[name=ItemsOnPage]').change(function(){
+			$(this).closest('form').submit();
+		});
+	});
+</script>

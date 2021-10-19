@@ -1,0 +1,185 @@
+<div class="row floating-button-row">
+	<TMPL_INCLUDE FILE='_navigation.html'>
+	
+	<TMPL_IF NAME='ErrorList'>
+		<div class="alert alert-danger">
+			<TMPL_LOOP NAME='ErrorList'>
+				<TMPL_VAR NAME='Message'><TMPL_UNLESS NAME='__LAST__'><br /></TMPL_UNLESS>
+			</TMPL_LOOP>
+		</div>
+	</TMPL_IF>
+	<TMPL_IF NAME='MessageList'>
+		<div class="alert alert-success">
+			<TMPL_LOOP NAME='MessageList'>
+				<TMPL_VAR NAME='Message'><TMPL_UNLESS NAME='__LAST__'><br /></TMPL_UNLESS>
+			</TMPL_LOOP>
+		</div>
+	</TMPL_IF>
+
+	<form action="<TMPL_VAR NAME='MODULE_URL'>" method="post" autocomplete="off" class="option-form">
+		<TMPL_LOOP NAME='ProductGroupList'>
+			<section class="box no-margin">
+					<header class="panel_header">
+						<h2 class="title pull-left"><TMPL_VAR NAME='title_translation'></h2>
+					</header>
+					<div class="content-body padding-3">
+						<div class="row row-new">
+							<TMPL_LOOP NAME='ProductList'>
+								<TMPL_IF NAME='OptionList'>
+									<div class="col-md-6 padding-3">
+										<section class="box">
+											<header class="panel_header">
+												<h2 class="title pull-left"><TMPL_VAR NAME='title_translation'></h2>
+												<TMPL_UNLESS NAME='__FIRST__'>
+													<div class="actions panel_actions pull-left">
+														<i class="box_toggle fa fa-chevron-up"></i>
+													</div>
+												</TMPL_UNLESS>
+											</header>
+											<div class="content-body <TMPL_UNLESS NAME='__FIRST__'>collapsed</TMPL_UNLESS>">
+												<TMPL_IF NAME='Admin'>
+													<div class="input-group date-of-params" style="display: inline-block;">
+														(<label class="form-label" for="date-of-params" table="core"><TMPL_VAR NAME="LNG_DateOfParams"/></label>:
+														<a href="#"><span class="date-of-param"><TMPL_IF NAME="date_of_params"><TMPL_VAR NAME="date_of_params" FORMAT="date"/><TMPL_ELSE><TMPL_VAR NAME="DateOfParams" FORMAT="date"/></TMPL_IF></span></a>)
+														<input type="text" class="datepicker" name="Product[<TMPL_VAR NAME='ProductList.product_id'>][date_of_params]" style="visibility: hidden; height: 0" VALUE="<TMPL_VAR NAME='date_of_params' FORMAT='date'/>">
+													</div>
+												</TMPL_IF>
+												<div class="row">
+													<TMPL_LOOP NAME='OptionList'>
+														<TMPL_IF NAME='show_group'>
+															<div class="col-md-12">
+																<h3><TMPL_VAR NAME='group_title_translation'></h3>
+															</div>
+														</TMPL_IF>
+														<div class="col-md-6 form-group">
+															<div>
+																<label class="form-label" for="<TMPL_VAR NAME='code'>" table="option"><TMPL_VAR NAME='title_translation'></label>
+																(<a href="#" class="option-value-history" option_id="<TMPL_VAR NAME='option_id'>"><TMPL_VAR NAME='LNG_History'></a>)
+															</div>
+															<TMPL_IF NAME='type' VALUE='monthly-yearly-select'>
+																<select class="form-control m-bot15" name="Product[<TMPL_VAR NAME='ProductList.product_id'>][Option][<TMPL_VAR NAME='option_id'>]">
+																	<option value=""></option>
+																	<option value="monthly" <TMPL_IF NAME="value" VALUE='monthly'>selected</TMPL_IF>><TMPL_VAR NAME='LNG_Monthly'></option>
+																	<option value="yearly" <TMPL_IF NAME="value" VALUE='yearly'>selected</TMPL_IF>><TMPL_VAR NAME='LNG_Yearly'></option>
+																</select>
+															<TMPL_ELSEIF NAME='type' VALUE='custom-select'>
+																<select class="form-control m-bot15" name="Product[<TMPL_VAR NAME='ProductList.product_id'>][Option][<TMPL_VAR NAME='option_id'>]" <TMPL_IF NAME='disabled'>disabled</TMPL_IF>>
+																<TMPL_LOOP NAME='SelectList'>
+																	<option value="<TMPL_VAR NAME='Key'>" <TMPL_IF NAME='Selected'>selected</TMPL_IF>><TMPL_VAR NAME='Reason'></option>
+																</TMPL_LOOP>
+																</select>
+															<TMPL_ELSEIF NAME='type' VALUE='flag'>
+																<input type="checkbox" class="jtoggler" data-jtmulti-state
+																	   name="Product[<TMPL_VAR NAME='ProductList.product_id'>][Option][<TMPL_VAR NAME='option_id'>]"
+																	   value="<TMPL_VAR NAME='value'>" checked>
+															<TMPL_ELSEIF NAME='type' VALUE='salary-select'>
+																<select class="form-control m-bot15" name="Product[<TMPL_VAR NAME='ProductList.product_id'>][Option][<TMPL_VAR NAME='option_id'>]">
+																	<option value=""></option>
+																	<option value="Z" <TMPL_IF NAME="value" VALUE='Z'>selected</TMPL_IF>><TMPL_VAR NAME='LNG_Z'></option>
+																	<option value="V" <TMPL_IF NAME="value" VALUE='V'>selected</TMPL_IF>><TMPL_VAR NAME='LNG_V'></option>
+															</select>
+															<TMPL_ELSEIF NAME='type' VALUE='monthly-quarterly-yearly-select'>
+																<select class="form-control m-bot15" name="Product[<TMPL_VAR NAME='ProductList.product_id'>][Option][<TMPL_VAR NAME='option_id'>]">
+																	<option value="monthly" <TMPL_IF NAME="value" VALUE='monthly'>selected</TMPL_IF>><TMPL_VAR NAME='LNG_Monthly'></option>
+																	<option value="quarterly" <TMPL_IF NAME="value" VALUE='quarterly'>selected</TMPL_IF>><TMPL_VAR NAME='LNG_Quarterly'></option>
+																	<option value="yearly" <TMPL_IF NAME="value" VALUE='yearly'>selected</TMPL_IF>><TMPL_VAR NAME='LNG_Yearly'></option>
+																</select>
+															<TMPL_ELSEIF NAME='type' VALUE='textarea'>
+																<textarea class="form-control" name="Product[<TMPL_VAR NAME='ProductList.product_id'>][Option][<TMPL_VAR NAME='option_id'>]"><TMPL_VAR NAME='value'></textarea>
+															<TMPL_ELSE>
+																<input type="text" class="form-control" name="Product[<TMPL_VAR NAME='ProductList.product_id'>][Option][<TMPL_VAR NAME='option_id'>]" 
+																<TMPL_IF NAME='type' VALUE='currency'>
+																	value="<TMPL_VAR NAME='value' FORMAT='price'>"
+																<TMPL_ELSEIF NAME='type' VALUE='float'>
+																	value="<TMPL_VAR NAME='value' FORMAT='price'>"
+																<TMPL_ELSE>
+																	value="<TMPL_VAR NAME='value'>"
+																</TMPL_IF>/>
+															</TMPL_IF>
+														</div>	
+													</TMPL_LOOP>
+												</div>
+					
+											</div>
+										</section>
+									</div>
+								</TMPL_IF>
+							</TMPL_LOOP>
+						</div>
+					</div>											
+				</section>
+		</TMPL_LOOP>
+		
+		<input type="hidden" name="Save" value="1" />
+		<input type="hidden" name="ScrollTop" value="<TMPL_VAR NAME='ScrollTop'>">
+		<TMPL_VAR NAME='ParamsForForm' ESCAPE='none'>
+
+		<div id="floating-button">
+			<button type="submit" class="btn btn-primary"><TMPL_VAR NAME='LNG_Save'></button>
+		</div>
+	</form>
+</div>
+
+
+
+
+<script type="text/javascript">
+	$(document).ready(function(){
+
+		$('.jtoggler').jtoggler();
+
+		$('.jtoggler').each(function() {
+			if ($(this).attr('value') == 'Y') {
+				$(this).next().addClass('is-fully-active');
+				$(this).next().children().eq(2).addClass('is-active');
+			} else if ($(this).attr('value') == 'N') {
+				$(this).next().addClass('is-fully-disabled');
+				$(this).next().children().eq(0).addClass('is-active');
+			} else {
+				$(this).next().children().eq(1).addClass('is-active');
+			}
+		});
+
+		$(document).on('jt:toggled:multi', function (event, target) {
+			index = $(target).parent().index();
+			if (index == 2) {
+				$(target).parent().parent().prev().attr('value', 'Y');
+			} else if (index == 0) {
+				$(target).parent().parent().prev().attr('value', 'N');
+			} else {
+				$(target).parent().parent().prev().attr('value', '');
+			}
+		});
+
+		$('.option-value-history').click(function(e){
+			var optionID = $(this).attr('option_id');
+			
+			$.ajax({
+				url: '<TMPL_VAR NAME='MODULE_PATH'>ajax.php?<TMPL_VAR NAME='ParamsForURL'>',
+				type: 'GET',
+				dataType: 'JSON',
+				data:{
+					Action: 'GetOptionValueHistoryGlobalHTML',
+					option_id: optionID
+				},
+				success: function(data){
+					if(typeof data.HTML != 'undefined'){
+						$(data.HTML).modal('show').on('hidden.bs.modal', function () {
+							$(this).remove();
+						});
+					}
+				}
+			});
+			
+			e.preventDefault();
+		});
+        
+        $(".date-of-params a").on("click",function(e){
+			e.preventDefault();
+	    	$(this).next("input").datepicker("show");
+        });
+		$(".date-of-params input").on("changeDate", function(){
+			$(this).closest("div").find(".date-of-param").text($(this).val());
+		});
+	});
+</script>

@@ -1,0 +1,272 @@
+<TMPL_IF NAME='Admin'>
+    <div class="row">
+            <div class="alert alert-danger alert-no-margin" id="billMessageError">
+            </div>
+            <div class="alert alert-success alert-no-margin" id="billMessageSuccess">
+            </div>
+        <section class="box no-margin">
+            <header class="panel_header" for="header_voucher_edit" table="company">
+                <h2 class="title">
+                    <TMPL_IF NAME="billId" OP="!=" VALUE="0">
+                        <TMPL_VAR NAME="LNG_EditBill">
+                    <TMPL_ELSE>
+                        <TMPL_VAR NAME="LNG_AddNewBill">
+                    </TMPL_IF>
+                </h2>
+            </header>
+            <div class="content-body">
+                <div class="row">
+                    <div class="col-md-6 col-sm-6 col-xs-6">
+                        <TMPL_IF NAME="created">
+                            <label class="form-label"><TMPL_VAR NAME='LNG_Created'><TMPL_VAR NAME="LNG_BillCreated"> <TMPL_VAR NAME='created' FORMAT='datetime'></label>
+                        </TMPL_IF>
+                        <form action="<TMPL_VAR NAME='MODULE_URL'>" method="post" class="enter-to-tab" data-validation="true" autocomplete="off" enctype="multipart/form-data">
+                            <div class="form-group">
+                                <label class="form-label required" for="item_name" table="voucher">
+                                    <TMPL_VAR NAME="LNG_SBI">
+                                </label>
+                                <div class="controls">
+                                    <select class="selectReasons form-control m-bot15" name="select" data-value='1'>
+                                        <option value="" selected></option>
+                                        <TMPL_LOOP NAME="selectValue">
+                                            <option  class="optionReason" value="<TMPL_VAR NAME='name'>" data-value="<TMPL_VAR NAME='value'>">
+                                                <TMPL_VAR NAME="name">
+                                            </option>
+                                        </TMPL_LOOP>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label required" for="quantity" table="voucher">
+                                    <TMPL_VAR NAME="LNG_BillQuantity">
+                                </label>
+                                <div class="controls">
+                                    <input type="text" class="form-control" name="quantity" value="<TMPL_VAR NAME='quantity'>">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label required" for="amount" table="voucher">
+                                    <TMPL_VAR NAME="LNG_BillItemName">
+                                </label>
+                                <div class="controls">
+                                    <input type="text" class="form-control" name="name" value="<TMPL_VAR NAME='itemName'>">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label required" for="amount" table="voucher">
+                                    <TMPL_VAR NAME="LNG_BillAmount">
+                                </label>
+                                <div class="controls">
+                                    <input type="text" class="form-control" name="amount" value="<TMPL_VAR NAME='amount'>">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label required" for="discount" table="voucher">
+                                    <TMPL_VAR NAME="LNG_BillDiscount">
+                                </label>
+                                <div class="controls">
+                                    <input type="text" class="form-control" name="discount" value="<TMPL_VAR NAME='discount'>">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label required" for="date_start" table="voucher"><TMPL_VAR NAME="LNG_BillStartDate"></label>
+                                <div class="controls"><input type="text" class="form-control datepicker" name="date_start" value="<TMPL_VAR NAME='dateStart'>"></div>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label required" for="date_end" table="voucher"><TMPL_VAR NAME="LNG_BillEndDate"></label>
+                                <div class="controls"><input type="text" class="form-control datepicker" name="date_end" value="<TMPL_VAR NAME='dateEnd'>"></div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4 col-sm-4 col-xs-4">
+                                    <TMPL_IF NAME="billId" OP="!=" VALUE="0">
+                                        <button type="submit" class="editBill btn btn-primary"><TMPL_VAR NAME="LNG_EditBill"></button>
+                                    <TMPL_ELSE>
+                                        <button type="submit" class="addBill btn btn-primary"><TMPL_VAR NAME="LNG_AddNewBill"></button>
+                                    </TMPL_IF>
+                                    <a class="btn btn-icon" href="<TMPL_VAR NAME='ADMIN_PATH'>module.php?load=company&<TMPL_VAR NAME='ParamForURL'>"><i class="fa fa-ban"></i><TMPL_VAR NAME='LNG_Cancel'></a>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</TMPL_IF>
+<script type="text/javascript">
+    var inInvoice= "<TMPL_VAR NAME='inInvoice'>";
+
+    if (inInvoice) {
+        $("input").prop("disabled", true);
+        $("select").prop("disabled", true);
+        $("button").prop("disabled", true);
+    }
+
+    $("#billMessageError").css({"display": "none"});
+    $("#billMessageSuccess").css({"display": "none"});
+
+
+    $(".selectReasons").change(function() {
+        var amount1 = $('.optionReason:selected').attr('data-value');
+        var amount2 = $('.optionReason:selected').attr('value');
+        $("input[name='amount']").val(amount1);
+        $("input[name='name']").val(amount2);
+    });
+
+
+
+    var companyAjax = "<TMPL_VAR NAME='PROJECT_PATH'>module/company/ajax.php";
+
+    var userId= "<TMPL_VAR NAME='userId'>";
+
+    var billableItemId = "<TMPL_VAR NAME='billId'>";
+
+    var companyId = "<TMPL_VAR NAME='companyId'>";
+
+    $(".addBill").click(function(e){
+        $('body,html').animate({scrollTop: 0}, 400); 
+        e.preventDefault();
+        $("#billMessageError").css({"display": "none"});
+        $("#billMessageSuccess").css({"display": "none"});
+
+        var quantity = parseInt($("input[name='quantity']").val());
+        var reason = $("input[name='name']").val();
+        var amount = parseFloat($("input[name='amount']").val().split(',').join('.'));
+        var discount = parseFloat($("input[name='discount']").val());
+
+        var dateStart = $("input[name='date_start']").val().split('.').reverse().join("-");
+        var dateEnd = $("input[name='date_end']").val().split('.').reverse().join("-");
+
+        if (quantity && reason && amount && dateStart && dateEnd && (discount || discount === 0)) {
+            if (typeof(discount) === 'number' && typeof(quantity) === 'number' && typeof(amount) === 'number') {
+                if (Number(discount) < 100) {
+                    if (new Date(dateStart) <= new Date(dateEnd)) {
+                        $.ajax({
+                            url: companyAjax,
+                            type: 'POST',
+                            dataType: 'JSON',
+                            data:{
+                                Action: 'EditBill',
+                                billable_item_id: Number(billableItemId),
+                                company_unit_id: Number(companyId),
+                                user_id: Number(userId),
+                                quantity: Number(quantity),
+                                reason: reason,
+                                amount: Number(amount),
+                                discount: Number(discount),
+                                date_start: dateStart,
+                                date_end: dateEnd,
+                            },
+                            success: function(data){
+                                if(data.add){
+                                    $("#billMessageSuccess").css({"display": "block"});
+                                    $("#billMessageSuccess").html("<TMPL_VAR NAME='LNG_BillEdit'>");
+                                    $("input[name='quantity']").val("");
+                                    $("input[name='discount']").val("");
+                                    $("input[name='amount']").val("");
+                                    $("input[name='date_start']").val("");
+                                    $("input[name='date_end']").val("");
+                                    $("input[name='name']").val("");
+                                }
+                                else {
+                                    CreateMessage('ups, server error', 'error');
+                                }
+                            },
+                            error: function() {
+                                CreateMessage('ups, server error', 'error');
+                            }
+                        });
+                    }
+                    else {
+                        $("#billMessageError").css({"display": "block"});
+                        $("#billMessageError").html("<TMPL_VAR NAME='LNG_BillError'>");
+                    }
+                }
+                else {
+                    $("#billMessageError").css({"display": "block"});
+                    $("#billMessageError").html("<TMPL_VAR NAME='LNG_BillError'>");
+                }
+            }
+            else {
+                $("#billMessageError").css({"display": "block"});
+                $("#billMessageError").html("<TMPL_VAR NAME='LNG_BillError'>");
+            }
+        }
+        else {
+            $("#billMessageError").css({"display": "block"});
+            $("#billMessageError").html("<TMPL_VAR NAME='LNG_BillError'>");
+        }
+        
+    });
+
+
+    $(".editBill").click(function(e){
+        $('body,html').animate({scrollTop: 0}, 400); 
+        e.preventDefault();
+        $("#billMessageError").css({"display": "none"});
+        $("#billMessageSuccess").css({"display": "none"});
+
+        var quantity = parseInt($("input[name='quantity']").val());
+        var reason = $("input[name='name']").val();
+        var amount = parseFloat($("input[name='amount']").val());
+        var discount = parseFloat($("input[name='discount']").val());
+
+        var dateStart = $("input[name='date_start']").val().split('.').reverse().join("-");
+        var dateEnd = $("input[name='date_end']").val().split('.').reverse().join("-");
+
+        if (quantity && reason && amount && dateStart && dateEnd && (discount || discount === 0)) {
+            if (typeof(discount) === 'number' && typeof(quantity) === 'number' && typeof(amount) === 'number') {
+                if (Number(discount) < 100) {
+                    if (new Date(dateStart) <= new Date(dateEnd)) {
+                        $.ajax({
+                            url: companyAjax,
+                            type: 'POST',
+                            dataType: 'JSON',
+                            data:{
+                                Action: 'EditBill',
+                                billable_item_id: Number(billableItemId),
+                                company_unit_id: Number(companyId),
+                                user_id: Number(userId),
+                                quantity: Number(quantity),
+                                reason: reason,
+                                amount: Number(amount),
+                                discount: Number(discount),
+                                date_start: dateStart,
+                                date_end: dateEnd,
+                            },
+                            success: function(data){
+                                if(data.edit){
+                                    $("#billMessageSuccess").css({"display": "block"});
+                                    $("#billMessageSuccess").html("<TMPL_VAR NAME='LNG_BillEdit'>");
+                                }
+                                else {
+                                    CreateMessage('ups, server error', 'error');
+                                }
+                            },
+                            error: function() {
+                                CreateMessage('ups, server error', 'error');
+                            }
+                        });
+                    }
+                    else {
+                        $("#billMessageError").css({"display": "block"});
+                        $("#billMessageError").html("<TMPL_VAR NAME='LNG_BillError'>");
+                    }
+                }
+                else {
+                    $("#billMessageError").css({"display": "block"});
+                    $("#billMessageError").html("<TMPL_VAR NAME='LNG_BillError'>");
+                }
+            }
+            else {
+                $("#billMessageError").css({"display": "block"});
+                $("#billMessageError").html("<TMPL_VAR NAME='LNG_BillError'>");
+            }
+        }
+        else {
+            $("#billMessageError").css({"display": "block"});
+            $("#billMessageError").html("<TMPL_VAR NAME='LNG_BillError'>");
+        }
+        
+    });
+</script>

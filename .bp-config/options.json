@@ -1,0 +1,35 @@
+{
+  "ADMIN_EMAIL": "test@test.com",
+  "WEB_SERVER": "httpd",
+  "PHP_VERSION": "{PHP_71_LATEST}",
+  "PHP_EXTENSIONS": [
+    "curl",
+    "fileinfo",
+    "gd",
+    "mbstring",
+    "mcrypt",
+    "openssl",
+    "pgsql",
+    "pdo",
+    "pdo_pgsql",
+    "zip",
+    "zlib",
+    "soap",
+    "bcmath",
+    "sockets"
+  ],
+  "ZEND_EXTENSIONS": [],
+  "WEBDIR": "htdocs",
+  "COMPOSER_VENDOR_DIR": "htdocs/vendor",
+  "COMPOSER_BIN_DIR": "htdocs/vendor/bin",
+  "ADDITIONAL_PREPROCESS_CMDS": [
+    "chmod -R 777 /app/htdocs/var/",
+    "htdocs/vendor/bin/phinx migrate -c htdocs/phinx_main.php -e the_only",
+    "htdocs/vendor/bin/phinx migrate -c htdocs/phinx_personal.php -e the_only",
+    "htdocs/vendor/bin/phinx migrate -c htdocs/phinx_control.php -e the_only",
+    "php htdocs/module/receipt/workers/signature_create.php &>> /app/htdocs/var/log/test.log &",
+    "php htdocs/module/receipt/workers/signature_verify.php &>> /app/htdocs/var/log/test.log &",
+    "php htdocs/module/receipt/workers/line_recognize.php &>> /app/htdocs/var/log/test.log &",
+    "php htdocs/admin/workers/send_mail.php &>> /app/htdocs/var/log/test.log &"
+  ]
+}

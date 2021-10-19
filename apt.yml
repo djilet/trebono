@@ -1,0 +1,8 @@
+keys:
+  - https://keyserver.ubuntu.com/pks/lookup?op=get&search=0xA4BCBD87CEF9E52D
+  - https://www.postgresql.org/media/keys/ACCC4CF8.asc
+repos:
+  - deb http://ppa.launchpad.net/alex-p/tesseract-ocr/ubuntu trusty main
+  - deb http://apt.postgresql.org/pub/repos/apt/ trusty-pgdg main
+packages:
+  - postgresql-client-10

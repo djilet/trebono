@@ -1,0 +1,51 @@
+body{
+	font-type:MuseoSans-300;
+}
+table{
+	border:2pt solid black;
+	border-collapse:collapse;
+}
+th, td{
+	vertical-align:top;
+	padding-right:5px;
+	padding-left:5px;
+	border: 1px solid black;
+}
+th{
+	font-weight:bold;
+	background: #d9d9d9;
+	border:2pt solid black;
+}
+th.rownum{
+	width: 30pt;
+	padding: 0;
+}
+td{
+	text-align: right;
+}
+tr.odd{
+	background: #f2f2f2;
+}
+tr.employee td{
+	border-top:2pt solid black;
+}
+.erfasst{
+	border-left:2pt solid black;
+}
+table.footer  {
+	border: 0;
+    width:  100%;
+    border-spacing: 0;
+	font-size: 12px;
+}
+table.footer td {
+  	border: 0;
+    width: 20%;
+    vertical-align: middle;
+    text-align: right;
+}
+table.footer td.leftcol {
+   	vertical-align: top;
+   	width: 80%;
+   	text-align: left;
+}

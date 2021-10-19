@@ -1,0 +1,140 @@
+<div class="floating-button-row">
+	<div class="row">
+		<section class="box no-margin">
+			<div class="content-body padding-3">
+				<div class="row row-new">
+					<header class="panel_header" id="floating-top" for="header_employee_edit" table="company">
+						<TMPL_IF NAME='employee_id'>
+							<h2 class="title"><TMPL_VAR NAME='LNG_EditEmployee'> <TMPL_VAR NAME='first_name'> <TMPL_VAR NAME='last_name'> <TMPL_VAR NAME='LNG_From'> <TMPL_VAR NAME='CompanyUnitTitle'></h2>
+							<TMPL_ELSE>
+								<h2 class="title"><TMPL_VAR NAME='LNG_AddEmployee'></h2>
+						</TMPL_IF>
+					</header>
+					<div class="row floating-top" id="errorList">
+						<TMPL_IF NAME='ErrorList'>
+							<div class="alert alert-danger alert-no-margin">
+								<TMPL_LOOP NAME='ErrorList'>
+									<TMPL_VAR NAME='Message'><TMPL_UNLESS NAME='__LAST__'><br /></TMPL_UNLESS>
+								</TMPL_LOOP>
+							</div>
+						</TMPL_IF>
+						<TMPL_IF NAME='MessageList'>
+							<div class="alert alert-success alert-no-margin">
+								<TMPL_LOOP NAME='MessageList'>
+									<TMPL_VAR NAME='Message'><TMPL_UNLESS NAME='__LAST__'><br /></TMPL_UNLESS>
+								</TMPL_LOOP>
+							</div>
+						</TMPL_IF>
+						<ul class="nav nav-tabs ul-floating-top">
+							<li <TMPL_IF NAME='ActiveTab' VALUE='1'>class="active"<TMPL_ELSEIF NAME='ActiveTab' VALUE=''>class="active"</TMPL_IF>><a href="#tab-1" data-toggle='tab' for="nav_tab1_employee_edit" table="company"><TMPL_VAR NAME='LNG_TabEmployeeInfo'></a></li>
+							<li <TMPL_IF NAME='ActiveTab' VALUE='2'>class="active"</TMPL_IF>><a href="#tab-2" data-toggle='tab' for="nav_tab2_employee_edit" table="company"><TMPL_VAR NAME='LNG_TabCloudServices'></a></li>
+							<li <TMPL_IF NAME='ActiveTab' VALUE='3'>class="active"</TMPL_IF>><a href="#tab-3" data-toggle='tab' for="nav_tab3_employee_edit" table="company"><TMPL_VAR NAME='LNG_TabActivity'></a></li>
+							<TMPL_IF NAME='ShowStatistics'><li <TMPL_IF NAME='ActiveTab' VALUE='4'>class="active"</TMPL_IF>><a href="#tab-4" data-toggle='tab' for="nav_tab4_employee_edit" table="company"><TMPL_VAR NAME='LNG_TabStatistics'></a></li></TMPL_IF>
+						</ul>
+					</div>
+					<form action="<TMPL_VAR NAME='MODULE_URL'>" enctype="multipart/form-data" method="post" class="enter-to-tab <TMPL_IF NAME='ErrorList'>floating-form-big-gap<TMPL_ELSEIF NAME='MessageList'>floating-form-big-gap<TMPL_ELSE>floating-form</TMPL_IF>" data-validation="true" autocomplete="off" id="employee-edit">
+						<input class="fake-hide" type="password" name="fakepasswordremembered" autocomplete="on"/>
+						<div class="tab-content">
+							<div id="tab-1" class="tab-pane <TMPL_IF NAME='ActiveTab' VALUE='1'>active<TMPL_ELSEIF NAME='ActiveTab' VALUE=''>active</TMPL_IF>">
+								<TMPL_INCLUDE FILE="employee_edit_tab_1.html">
+							</div>
+							<div id="tab-2" class="tab-pane <TMPL_IF NAME='ActiveTab' VALUE='2'>active</TMPL_IF>">
+								<TMPL_INCLUDE FILE="employee_edit_tab_2.html">
+							</div>
+							<div id="tab-3" class="tab-pane <TMPL_IF NAME='ActiveTab' VALUE='3'>active</TMPL_IF>">
+								<TMPL_INCLUDE FILE="employee_edit_tab_3.html">
+							</div>
+							<TMPL_IF NAME='ShowStatistics'>
+								<div id="tab-4" class="tab-pane <TMPL_IF NAME='ActiveTab' VALUE='4'>active</TMPL_IF>">
+									<TMPL_INCLUDE FILE="employee_edit_tab_4.html">
+								</div>
+							</TMPL_IF>
+							<input type="hidden" name="Save" value="1" />
+							<input type="hidden" name="employee_id" value="<TMPL_VAR NAME='employee_id'>" />
+							<input type="hidden" name="user_id" value="<TMPL_VAR NAME='user_id'>" />
+							<input type="hidden" name="ScrollTop" value="<TMPL_VAR NAME='ScrollTop'>">
+							<input type="hidden" name="ActiveTab" value="<TMPL_VAR NAME='ActiveTab'>">
+							<TMPL_VAR NAME='ParamsForForm' ESCAPE='none' />
+							<div id="floating-button">
+								<button type="submit" class="btn btn-primary"><TMPL_VAR NAME='LNG_OptionSave'/></button>
+								<TMPL_IF NAME="Admin">
+									<a href="<TMPL_VAR NAME='MODULE_URL'>&<TMPL_VAR NAME='ParamsForURL'>&employee_id=<TMPL_VAR NAME='employee_id'>&ResendEmail=1" class="btn btn-secondary btn-icon resend-btn">
+										<i class="fa fa-envelope"></i> <TMPL_VAR NAME='LNG_ResendForEmployeeAdmin'>
+									</a>
+								</TMPL_IF>
+								<TMPL_IF NAME='IsEmployeeAdmin' VALUE='Y'>
+									<a href="<TMPL_VAR NAME='MODULE_URL'>&<TMPL_VAR NAME='ParamsForURL'>&employee_id=<TMPL_VAR NAME='employee_id'>&ResendEmail=1" class="btn btn-secondary btn-icon resend-btn">
+										<i class="fa fa-envelope"></i> <TMPL_VAR NAME='LNG_ResendForEmployeeAdmin'>
+									</a>
+								</TMPL_IF>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</section>
+	</div>
+</div>
+<script type="text/javascript">
+	var isEmployee = "<TMPL_VAR NAME='EmployeeViewer'>";
+	var isEmployeeAdmin = "<TMPL_VAR NAME='IsEmployeeAdmin'>";
+	var isEmployeeSelf = "<TMPL_VAR NAME='EmployeeViewerSelf'>";//employee sees his edit page
+	var employeeID = "<TMPL_VAR NAME='employee_id'>";
+	var productAjax = "<TMPL_VAR NAME='PROJECT_PATH'>module/product/ajax.php";
+	var companyAjax = "<TMPL_VAR NAME='PROJECT_PATH'>module/company/ajax.php";
+	var statisticsAjax = "<TMPL_VAR NAME='PROJECT_PATH'>module/statistics/ajax.php";
+	var path2main = "<TMPL_VAR NAME='PATH2MAIN'>";
+	var removeMessage = "<TMPL_VAR NAME='LNG_RemoveMessage'>";
+	var activateMessage = '<TMPL_VAR NAME="LNG_ActivateMessage">';
+	var companyUnitID = "<TMPL_VAR NAME='company_unit_id'>";
+	var emptyFileMessage = "<TMPL_VAR NAME='LNG_UploadReceiptEmptyFile'>";
+	var invalidFileMessage = "<TMPL_VAR NAME='LNG_UploadReceiptInvalidFileFormat'>";
+
+
+	var field = "";
+	var fieldFirst = "";
+	var tab = "";
+	var div = "";
+	"<TMPL_LOOP NAME='ErrorFieldList'>"
+	"<TMPL_IF NAME='__FIRST__'>"
+	fieldFirst = "<TMPL_VAR NAME='Message'>";
+	"</TMPL_IF>"
+	field = "<TMPL_VAR NAME='Message'>";
+	div = $("[name='"+field+"']").closest(".form-group");
+	if (div.length === 0) {
+		div = $("[name='"+field+"']").closest(".input-group");
+	}
+	div.addClass("has-error");
+	parents = $("[name='"+field+"']").parents();
+	parents.each(function(element) {
+		if ($(this).hasClass("collapsed"))
+		{
+			$(this).removeClass("collapsed");
+		}
+	});
+	"</TMPL_LOOP>"
+	if (fieldFirst) {
+		tab = $("[name='"+fieldFirst+"']").closest(".tab-pane").attr('id');
+		$('a[href="#'+tab+'"]').click();
+		$("[name='"+fieldFirst+"']").focus();
+	}
+
+	$("#generate-bvs-vouchers").click(function (e) {
+		e.preventDefault();
+
+		var date = $("[name='generate_bvs_vouchers_date']").val().split('.');
+		if(date.length == 3)
+		{
+			$.ajax({
+				url: '<TMPL_VAR NAME='PROJECT_PATH'>module/company/cron/benefit_voucher.php?date=' + date[2] + '-' + date[1] + '-' + date[0] + "&employee_id=" + employeeID,
+				complete: function(data){
+					window.location.href = window.location.href + "&ActiveTab=3";
+				}
+			});
+		}
+		else
+		{
+			ModalAlert("<TMPL_VAR NAME='LNG_Error'>", "<TMPL_VAR NAME='LNG_GenerateBenefitVouchersEmptyDate'>");
+		}
+	});
+</script>

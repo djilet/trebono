@@ -1,0 +1,428 @@
+<div class="row">
+	<TMPL_INCLUDE FILE='_config_navigation.html'>
+</div>
+<div class="row">
+    <TMPL_IF NAME='ErrorList'>
+		<div class="alert alert-danger alert-no-margin">
+			<TMPL_LOOP NAME='ErrorList'>
+				<TMPL_VAR NAME='Message'><TMPL_UNLESS NAME='__LAST__'><br /></TMPL_UNLESS>
+			</TMPL_LOOP>
+		</div>
+	</TMPL_IF>
+	<TMPL_IF NAME='MessageList'>
+		<div class="alert alert-success alert-no-margin">
+			<TMPL_LOOP NAME='MessageList'>
+				<TMPL_VAR NAME='Message'><TMPL_UNLESS NAME='__LAST__'><br /></TMPL_UNLESS>
+			</TMPL_LOOP>
+		</div>
+	</TMPL_IF>
+</div>
+
+<TMPL_IF NAME='Section' VALUE='receipt'>
+	<div class="row">
+		<section class="box no-margin">
+			<header class="panel_header">
+				<h2 class="title pull-left"><TMPL_VAR NAME='LNG_TechnicalDashboard'></h2>
+			</header>
+			<div class="content-body">
+				<form action="<TMPL_VAR NAME='MODULE_URL'>" method="post" autocomplete="off">
+					<div class="row">
+						<div class="form-group">
+							<div class="col-md-3 form-group">
+								<label class="form-label"><TMPL_VAR NAME='LNG_DateRange'></label>
+								<input type="text" name="DateRange" class="form-control daterange active" value="<TMPL_VAR NAME='DateRange'>" data-time-picker-increment="1" data-time-picker="true">
+							</div>
+
+							<div class="col-md-3 col-sm-2">
+								<label class="form-label"><TMPL_VAR NAME='LNG_TimeGroup'></label>
+								<select name="TimeGroup" class="form-control">
+									<option value="hour" <TMPL_IF NAME='TimeGroup' VALUE='hour'>selected</TMPL_IF>><TMPL_VAR NAME='LNG_Hour'></option>
+									<option value="minute" <TMPL_IF NAME='TimeGroup' VALUE='minute'>selected</TMPL_IF>><TMPL_VAR NAME='LNG_Minute'></option>
+									<option value="second" <TMPL_IF NAME='TimeGroup' VALUE='second'>selected</TMPL_IF>><TMPL_VAR NAME='LNG_Second'></option>
+								</select>
+							</div>
+							<div class="col-md-2 form-group">
+								<label class="form-label hidden-xs">&nbsp;</label><br />
+								<button type="submit" class="btn btn-primary btn-icon"><i class="fa fa-search"></i> <TMPL_VAR NAME='LNG_FilterApply'></button>
+							</div>
+						</div>
+					</div>
+					<input class="hidden" name="Filter" value="1" />
+				</form>
+			</div>
+		</section>
+	</div>
+	<div class="row">
+		<section class="box no-margin">
+			<header class="panel_header">
+				<h2 class="title pull-left"><TMPL_VAR NAME='LNG_QueueStatistics'></h2>
+				<div class="actions panel_actions pull-left">
+					<i class="box_toggle fa fa-chevron-down"></i>
+				</div>
+			</header>
+			<div class="content-body">
+				<div class="row">
+					<div class="col-md-6 form-group text-center-xs">
+						<TMPL_LOOP NAME="QueueList">
+							<span><TMPL_VAR NAME='title_translation'>: <TMPL_VAR NAME='count'>, <TMPL_VAR NAME='status'></span></br>
+						</TMPL_LOOP>
+					</div>
+				</div>
+			</div>
+		</section>
+		<div class="row row-new">
+			<section class="box no-margin">
+				<header class="panel_header">
+					<h2 class="title pull-left"><TMPL_VAR NAME='LNG_ReceiptOCRStatistics'></h2>
+					<div class="actions panel_actions pull-left">
+						<i class="box_toggle fa fa-chevron-down"></i>
+					</div>
+				</header>
+				<div class="content-body">
+					<div class="row">
+						<div class="col-md-3 col-sm-3 col-lg-3">
+							<form id="rickshaw_side_panel">
+								<section><div id="legend"></div></section>
+								<section>
+									<h4><TMPL_VAR NAME='LNG_ReceiptOCRRange'></h4>
+									<div id="preview" class="rickshaw_ext_preview"></div>
+								</section>
+							</form>
+						</div>
+
+						<div class="col-md-9 col-sm-9 col-lg-9">
+							<div id="chart_container" class="rickshaw_ext">
+								<div id="chart"></div>
+								<div id="timeline"></div>
+							</div>
+						</div>
+
+					</div>
+				</div>
+			</section>
+		</div>
+		<div class="row row-new">
+			<section class="box no-margin">
+				<header class="panel_header">
+					<h2 class="title pull-left"><TMPL_VAR NAME='LNG_OCRStatistics'></h2>
+					<div class="actions panel_actions pull-left">
+						<i class="box_toggle fa fa-chevron-down"></i>
+					</div>
+				</header>
+				<div class="content-body">
+					<div class="row">
+						<div class="col-md-3 col-sm-3 col-lg-3">
+							<form id="rickshaw_side_panel">
+								<section><div id="legend-ocr"></div></section>
+								<section>
+									<h4><TMPL_VAR NAME='LNG_ReceiptOCRRange'></h4>
+									<div id="preview-ocr" class="rickshaw_ext_preview"></div>
+								</section>
+							</form>
+						</div>
+
+						<div class="col-md-9 col-sm-9 col-lg-9">
+							<div id="chart_container" class="rickshaw_ext">
+								<div id="chart-ocr"></div>
+								<div id="timeline-ocr"></div>
+							</div>
+						</div>
+
+					</div>
+				</div>
+			</section>
+		</div>
+	</div>
+
+	<script type="text/javascript">
+		$(document).ready(function(){
+			"<TMPL_IF NAME='ReceiptOCRStatisticsForGraph'>"
+				CreateReceiptOCRGraph();
+				CreateOCRGraph();
+			"</TMPL_IF>"
+		});
+
+		function CreateReceiptOCRGraph(){
+			var day_data = [<TMPL_LOOP NAME='ReceiptOCRStatisticsForGraph'>{
+				"x": new Date("<TMPL_VAR NAME='date'>").getTime() / 1000,
+				"y": <TMPL_VAR NAME='receipt_count'>
+				},</TMPL_LOOP>];
+
+				var day_data_label = [<TMPL_LOOP NAME='ReceiptOCRStatisticsForLabelReceipt'>{
+				"date": new Date("<TMPL_VAR NAME='date'>").getTime() / 1000,
+				"employee": "<TMPL_VAR NAME='employee'>",
+				"receipt_count": <TMPL_VAR NAME='receipt_count'>,
+				},</TMPL_LOOP>];
+
+				var graph = new Rickshaw.Graph({
+				element: document.getElementById("chart"),
+				width: 700,
+				height: 500,
+				renderer: 'area',
+				stroke: true,
+				preserve: true,
+				series: [{
+				color: '#1fb5ac',
+				data: day_data,
+				name: "<TMPL_VAR NAME='LNG_ReceiptCreateCount'>",
+				data_label: day_data_label
+			}]
+			});
+
+				graph.render();
+
+				var preview = new Rickshaw.Graph.RangeSlider({
+				graph: graph,
+				element: document.getElementById('preview'),
+			});
+
+				var hoverDetail = new Rickshaw.Graph.HoverDetail({
+				graph: graph,
+				formatter: function(series, x, y) {
+
+				var dataLabelFilter = series.data_label.filter(obj => obj.date === x);
+				var html = "";
+				dataLabelFilter.forEach(function(item, i, arr) {
+				html += "<div><TMPL_VAR NAME='LNG_User'>: " + item.employee;
+				html += ", " + series.name + ": " + item.receipt_count + "</div>";
+			});
+
+				return new Date(x * 1000).toString() + html;
+			}
+			});
+
+				var annotator = new Rickshaw.Graph.Annotate({
+				graph: graph,
+				element: document.getElementById('timeline')
+			});
+
+				var legend = new Rickshaw.Graph.Legend({
+				graph: graph,
+				element: document.getElementById('legend')
+
+			});
+
+				var order = new Rickshaw.Graph.Behavior.Series.Order({
+				graph: graph,
+				legend: legend
+			});
+
+				var highlighter = new Rickshaw.Graph.Behavior.Series.Highlight({
+				graph: graph,
+				legend: legend
+			});
+
+				var ticksTreatment = 'glow';
+
+				var xAxis = new Rickshaw.Graph.Axis.Time({
+				graph: graph,
+				ticksTreatment: ticksTreatment,
+				timeFixture: new Rickshaw.Fixtures.Time.Local()
+			});
+
+				xAxis.render();
+
+				var yAxis = new Rickshaw.Graph.Axis.Y({
+				graph: graph,
+				tickFormat: Rickshaw.Fixtures.Number.formatKMBT,
+				ticksTreatment: ticksTreatment
+			});
+
+				yAxis.render();
+
+
+				var controls = new RenderControls({
+				element: document.querySelector('form#rickshaw_side_panel'),
+				graph: graph
+			});
+			}
+
+			function CreateOCRGraph(){
+				var day_data2 = [<TMPL_LOOP NAME='ReceiptOCRStatisticsForGraph'>{"test": "<TMPL_VAR NAME='date'>", "x": new Date("<TMPL_VAR NAME='date'>").getTime() / 1000, "y": <TMPL_VAR NAME='ocr_receipt_count'>},</TMPL_LOOP>];
+				var day_data3 = [<TMPL_LOOP NAME='ReceiptOCRStatisticsForGraph'>{"test": "<TMPL_VAR NAME='date'>", "x": new Date("<TMPL_VAR NAME='date'>").getTime() / 1000, "y": <TMPL_VAR NAME='ocr_no_receipt_count'>},</TMPL_LOOP>];
+				var day_data4 = [<TMPL_LOOP NAME='ReceiptOCRStatisticsForGraph'>{"test": "<TMPL_VAR NAME='date'>", "x": new Date("<TMPL_VAR NAME='date'>").getTime() / 1000, "y": <TMPL_VAR NAME='ocr_unsuccessful_count'>},</TMPL_LOOP>];
+
+				var day_data_label2 = [<TMPL_LOOP NAME='ReceiptOCRStatisticsForLabelOcrRequest'>{
+				"date": new Date("<TMPL_VAR NAME='date'>").getTime() / 1000,
+				"user": "<TMPL_VAR NAME='user'>",
+				"ocr_request_count": <TMPL_VAR NAME='ocr_receipt_count'>,
+				},</TMPL_LOOP>];
+
+				var day_data_label3 = [<TMPL_LOOP NAME='ReceiptOCRStatisticsForLabelOcrRequest'>{
+				"date": new Date("<TMPL_VAR NAME='date'>").getTime() / 1000,
+				"user": "<TMPL_VAR NAME='user'>",
+				"ocr_request_count": <TMPL_VAR NAME='ocr_no_receipt_count'>,
+				},</TMPL_LOOP>];
+
+				var day_data_label4 = [<TMPL_LOOP NAME='ReceiptOCRStatisticsForLabelOcrRequest'>{
+				"date": new Date("<TMPL_VAR NAME='date'>").getTime() / 1000,
+				"user": "<TMPL_VAR NAME='user'>",
+				"ocr_request_count": <TMPL_VAR NAME='ocr_unsuccessful_count'>,
+				},</TMPL_LOOP>];
+
+				var graph = new Rickshaw.Graph({
+				element: document.getElementById("chart-ocr"),
+				width: 700,
+				height: 500,
+				renderer: 'area',
+				stroke: true,
+				preserve: true,
+				series: [
+			{
+				color: '#FDB45C',
+				data: day_data2,
+				name: "<TMPL_VAR NAME='LNG_OCRReceiptCount'>",
+				data_label: day_data_label2
+			},
+			{
+				color: '#9972b5',
+				data: day_data3,
+				name: "<TMPL_VAR NAME='LNG_OCRNoReceiptCount'>",
+				data_label: day_data_label3
+			},
+			{
+				color: '#1fb5ac',
+				data: day_data4,
+				name: "<TMPL_VAR NAME='LNG_OCRUnsuccessfulCount'>",
+				data_label: day_data_label4
+			}]
+			});
+
+				graph.render();
+
+				var preview = new Rickshaw.Graph.RangeSlider({
+				graph: graph,
+				element: document.getElementById('preview-ocr'),
+			});
+
+				var hoverDetail = new Rickshaw.Graph.HoverDetail({
+				graph: graph,
+
+				formatter: function(series, x, y) {
+
+				var dataLabelFilter = series.data_label.filter(obj => obj.date === x);
+				var html = "";
+
+				dataLabelFilter.forEach(function(item, i, arr) {
+				html += "<div><TMPL_VAR NAME='LNG_User'>: " + item.user;
+				html += ", " + series.name + ": " + item.ocr_request_count + "</div>";
+			});
+
+				return new Date(x * 1000).toString() + html;
+			}
+			});
+
+				var annotator = new Rickshaw.Graph.Annotate({
+				graph: graph,
+				element: document.getElementById('timeline-ocr')
+			});
+
+				var legend = new Rickshaw.Graph.Legend({
+				graph: graph,
+				element: document.getElementById('legend-ocr')
+
+			});
+
+				var order = new Rickshaw.Graph.Behavior.Series.Order({
+				graph: graph,
+				legend: legend
+			});
+
+				var highlighter = new Rickshaw.Graph.Behavior.Series.Highlight({
+				graph: graph,
+				legend: legend
+			});
+
+				var ticksTreatment = 'glow';
+
+				var xAxis = new Rickshaw.Graph.Axis.Time({
+				graph: graph,
+				ticksTreatment: ticksTreatment,
+				timeFixture: new Rickshaw.Fixtures.Time.Local()
+			});
+
+				xAxis.render();
+
+				var yAxis = new Rickshaw.Graph.Axis.Y({
+				graph: graph,
+				tickFormat: Rickshaw.Fixtures.Number.formatKMBT,
+				ticksTreatment: ticksTreatment
+			});
+
+				yAxis.render();
+
+
+				var controls = new RenderControls({
+				element: document.querySelector('form#rickshaw_side_panel'),
+				graph: graph
+			});
+			}
+
+	</script>
+</TMPL_IF>
+
+<TMPL_IF NAME='Section' VALUE='storage'>
+	<div class="row">
+		<section class="box no-margin">
+			<header class="panel_header">
+				<h2 class="title pull-left"><TMPL_VAR NAME='LNG_SwiftStorageStatistics'></h2>
+			</header>
+			<div class="content-body">
+				<TMPL_LOOP NAME='ContainerList'>
+					<table class="table table-striped">
+						<thead>
+						<tr>
+							<col width="300">
+							<col width="150">
+							<col width="150">
+							<th ><TMPL_VAR NAME='name'></th>
+							<th weight="50px"><TMPL_VAR NAME='LNG_SpaceUsed'></th>
+							<th weight="50px"><TMPL_VAR NAME='LNG_ObjectCount'></th>
+						</tr>
+						</thead>
+						<tbody>
+						<TMPL_LOOP NAME='count_and_size'>
+							<tr>
+								<td><TMPL_VAR NAME='types_object'></td>
+								<td><TMPL_VAR NAME='size'></td>
+								<td><TMPL_VAR NAME='count'></td>
+							</tr>
+						</TMPL_LOOP>
+						<tr>
+							<th><TMPL_VAR NAME='LNG_Total'></th>
+							<th><TMPL_VAR NAME='total_size'></th>
+							<th><TMPL_VAR NAME='total_count'></th>
+						</tr>
+						</tr>
+				</TMPL_LOOP>
+				</tbody>
+				</table>
+			</div>
+		</section>
+	</div>
+	<div class="row">
+		<section class="box no-margin">
+			<header class="panel_header">
+				<h2 class="title pull-left"><TMPL_VAR NAME='LNG_DatabaseStatistics'></h2>
+			</header>
+			<div class="content-body">
+				<table class="table table-striped">
+					<thead>
+					<tr>
+						<th><TMPL_VAR NAME='LNG_DatabaseName'></th>
+						<th><TMPL_VAR NAME='LNG_SpaceUsed'></th>
+					</tr>
+					</thead>
+					<tbody>
+					<TMPL_LOOP NAME='DatabaseList'>
+						<tr>
+							<td><TMPL_VAR NAME='db_name'></td>
+							<td><TMPL_VAR NAME='db_size'></td>
+						</tr>
+					</TMPL_LOOP>
+					</tbody>
+				</table>
+			</div>
+		</section>
+	</div>
+</TMPL_IF>

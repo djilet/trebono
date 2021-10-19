@@ -1,0 +1,19 @@
+---
+applications:
+  - name: lst
+    memory: 1024M
+    instances: 1
+    path: .
+    buildpack: https://github.com/cloudfoundry/multi-buildpack.git
+    routes:
+      - route: demo.trebono.de
+    services:
+      - lst_main
+      - lst_personal
+      - lst_control
+      - swift
+      - rabbitmq
+    env:
+      TESSDATA_PREFIX: /home/vcap/deps/0/apt/usr/share/tesseract-ocr/4.00/tessdata/
+      PHP_INI_SCAN_DIR: .bp-config/php/conf.d
+  

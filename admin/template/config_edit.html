@@ -1,0 +1,101 @@
+<div class="row">
+	<TMPL_IF NAME='ErrorList'>
+		<div class="alert alert-danger alert-no-margin">
+			<TMPL_LOOP NAME='ErrorList'>
+				<TMPL_VAR NAME='Message'><TMPL_UNLESS NAME='__LAST__'><br /></TMPL_UNLESS>
+			</TMPL_LOOP>
+		</div>
+	</TMPL_IF>
+	<TMPL_IF NAME='MessageList'>
+		<div class="alert alert-success alert-no-margin">
+			<TMPL_LOOP NAME='MessageList'>
+				<TMPL_VAR NAME='Message'><TMPL_UNLESS NAME='__LAST__'><br /></TMPL_UNLESS>
+			</TMPL_LOOP>
+		</div>
+	</TMPL_IF>
+	<section class="box no-margin">
+		<header class="panel_header" for="header_config_edit" table="core">
+			<h2 class="title"><TMPL_VAR NAME='LNG_EditConfig'></h2>
+		</header>
+		<div class="content-body">
+			<form action="<TMPL_VAR NAME='ADMIN_PATH'>config.php" method="post" autocomplete="off" <TMPL_IF NAME='editor' VALUE='file'>enctype="multipart/form-data"</TMPL_IF>>		
+				<div class="row">
+					<div class="col-md-12">
+						<h3><TMPL_VAR NAME='title_translation'></h3>
+						<TMPL_IF NAME='Admin'>
+							<div class="form-group date-of-params" style="display: inline-block;">
+								(<a href="#"><TMPL_VAR NAME="LNG_DateOfParams"/>: <span><TMPL_IF NAME="date_of_params"><TMPL_VAR NAME="date_from" FORMAT="date"/><TMPL_ELSE><TMPL_VAR NAME="DateOfParams" FORMAT="date"/></TMPL_IF></span></a>)
+								<input type="text" class="datepicker" name="date_from" style="visibility: hidden; height: 0" VALUE="<TMPL_VAR NAME='date_from' FORMAT='date'/>">
+							</div>
+							</br>
+						</TMPL_IF>
+						<TMPL_IF NAME='editor' VALUE='file'>
+							<div class="form-group" id="config_file-box"></div>
+						<TMPL_ELSEIF NAME='editor' VALUE='flag'>
+							<input type="checkbox" name="value" value="Y" class="iswitch iswitch-md iswitch-primary"<TMPL_IF NAME='value' VALUE='Y'> checked</TMPL_IF>/>
+						<TMPL_ELSEIF NAME="editor_type" VALUE="field"/>
+							<div class="form-group col-md-8 col-sm-9 col-xs-10 no-padding">
+							<input type="text" name="value" class="form-control" value="<TMPL_VAR NAME='value'>">
+							</div>
+						<TMPL_ELSE>
+							<div class="form-group">
+								<textarea class="form-control" name="value" rows="20" id="Content"><TMPL_VAR NAME='value'></textarea>
+							</div>
+						</TMPL_IF>					
+					</div>
+				</div>
+				<TMPL_IF NAME="Replacements">
+					<div class="templates" style="margin: 30px 0">
+						<h4>
+							<TMPL_VAR NAME="LNG_AvailableVariables" />
+							<small><TMPL_VAR NAME='LNG_AvailableVariablesComment' /></small>
+						</h4>
+						<TMPL_LOOP NAME="Replacements">
+							<a href="#" data-template="<TMPL_VAR NAME='template'>"><TMPL_VAR NAME="translation" /></a> <br>
+						</TMPL_LOOP>
+					</div>
+					<script>
+						jQuery(document).ready(function($) {
+							$('.templates a').click(function(e) {
+								e.preventDefault();
+								CKEDITOR.instances.Content.insertText($(this).data('template').trim());
+								CKEDITOR.instances.Content.focus();
+							});
+						});
+					</script>
+				</TMPL_IF>
+				<div>
+					<button type="submit" class="btn btn-primary btn-icon right15"><i class="fa fa-save"></i><TMPL_VAR NAME='LNG_Save'></button>
+					<a class="btn btn-icon" href="<TMPL_VAR NAME='ReturnPath'>"><i class="fa fa-ban"></i><TMPL_VAR NAME='LNG_Cancel'></a>
+				</div>
+				<input type="hidden" name="return_path" value="<TMPL_VAR NAME='ReturnPath'>" />
+				<input type="hidden" name="config_id" value="<TMPL_VAR NAME='config_id'>" />
+				<input type="hidden" name="Save" value="1" />
+			</form>
+		</div>
+	</section>
+	
+	<TMPL_IF NAME="editor" VALUE="ckeditor">
+		<script>
+            createCKEditor('Content');
+		</script>
+	<TMPL_ELSEIF NAME="editor" VALUE="file">
+		<script type="text/javascript">
+			$(document).ready(function(){
+				CreateFileInput('config_file', '<TMPL_VAR NAME='value'>', '<TMPL_VAR NAME='value_download_url'>');
+			});	
+		</script>
+	</TMPL_IF>
+
+	<script type="text/javascript">
+        $(document).ready(function(){
+            $(".date-of-params a").on("click",function(e){
+                e.preventDefault();
+                $(this).next("input").datepicker("show");
+            });
+            $(".date-of-params input").on("changeDate", function(){
+                $(this).closest("div").find("span").text($(this).val());
+            });
+        });
+	</script>
+</div>

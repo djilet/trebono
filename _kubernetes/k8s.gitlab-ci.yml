@@ -1,0 +1,71 @@
+image: alpine:3.7
+# before_script:
+#   - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+
+stages:
+  - k8sbuild
+  - k8stest
+  - k8sdeploy
+
+build-ci-docker:
+  stage: k8sbuild
+  only:
+    variables: ($SYSTEM_CF_OR_K8S == "CF")
+  image: poc-trebono-git.da-rz.net:5050/root/cicd-utils/docker-build-and-push
+  tags:
+    - gitlab
+  before_script:
+    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+  variables:
+    REGISTRY: poc-trebono-git.da-rz.net:5050
+    RELEASE: ${CI_COMMIT_REF_SLUG}-${CI_COMMIT_SHORT_SHA}
+  script:
+    - make release-ci
+  only:
+    changes:
+      - _kubernetes/docker/CI.Dockerfile
+
+build-docker:
+  stage: k8sbuild
+  only:
+    variables: ($SYSTEM_CF_OR_K8S == "CF")
+  image: poc-trebono-git.da-rz.net:5050/root/cicd-utils/docker-build-and-push
+  tags:
+    - gitlab
+  before_script:
+    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+    - mkdir -p ~/.docker
+    - printf "$DOCKER_AUTH_CONFIG" > ~/.docker/config.json
+  variables:
+    RELEASE: ${CI_COMMIT_REF_SLUG}-${CI_COMMIT_SHORT_SHA}
+  script:
+    - docker-build-and-push trebono/trebono ${CI_COMMIT_REF_SLUG}-${CI_COMMIT_SHORT_SHA}
+
+deploy-test:
+  stage: k8sdeploy
+  only:
+    variables: ($SYSTEM_CF_OR_K8S == "CF")
+  image: poc-trebono-git.da-rz.net:5050/root/cicd-utils/deploy
+  before_script:
+    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+    - mkdir -p ~/.docker
+    - printf "$DOCKER_AUTH_CONFIG" > ~/.docker/config.json
+    - mkdir -p ~/.kube
+    - printf "$KUBE_AUTH_CONFIG" > ~/.kube/config
+  environment:
+    name: trebono
+    url: trebono.poc-trebono-k8s.da-rz.net
+  variables:
+    DEPLOY_DIR: deploy/trebono-demo
+    KUBE_NAMESPACE: trebono
+    KUBE_APPLICATION: $CI_PROJECT_NAME
+    VAR_FILE: "deploy/vars/test.yaml"
+    CHART_DIR: "deploy/$CI_PROJECT_NAME"
+    IMAGE_TAG: ${CI_COMMIT_REF_SLUG}-${CI_COMMIT_SHORT_SHA}
+    INGRESS_URL: $CI_ENVIRONMENT_URL
+    RELEASE: ${CI_COMMIT_REF_SLUG}-${CI_COMMIT_SHORT_SHA}
+  script:
+    - echo $CI_PROJECT_NAME
+    - deployment
+  tags:
+    - gitlab

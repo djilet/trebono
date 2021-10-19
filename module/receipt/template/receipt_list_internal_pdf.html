@@ -1,0 +1,105 @@
+<htmlpagefooter name="footer" style="display:none">
+	 <table class="footer">
+		<tr>
+			<td class="leftcol">
+				<p><TMPL_VAR NAME='file_name'></p>
+				<p>Erstellt von trebono&reg; Cloud Service </p>
+				<p>am <TMPL_VAR NAME='export_day_month_year'></p>
+			</td>
+			<td><p align="center"><TMPL_VAR NAME='LNG_Page'>: {PAGENO} <TMPL_VAR NAME='LNG_Of'> {nb} </p></td>
+		</tr>
+	 </table>
+</htmlpagefooter>
+<htmlpageheader name="header" style="display:none">
+	<h3 align="center">Sachlohnliste für den Monat <TMPL_VAR NAME='export_month_year'/> der<br>
+		<TMPL_VAR NAME='COMPANY_UNIT_title'/></h3>
+</htmlpageheader>
+
+<sethtmlpagefooter name="footer" value="on" show-this-page="1" />
+<sethtmlpageheader name="header" value="on" show-this-page="1" />
+
+<table width="100%">
+	<tbody>
+		<tr>
+			<th class="rownum"><TMPL_VAR NAME='LNG_Rownum'></th>
+			<th><TMPL_VAR NAME='LNG_EmployeeGUID'></th>
+			<th><TMPL_VAR NAME='LNG_Employee'></th>
+			<th><TMPL_VAR NAME="LNG_Steuerpflichtig" ESCAPE="none"/></th>
+			<th><TMPL_VAR NAME="LNG_Steuerfrei"/></th>
+			<th><TMPL_VAR NAME='LNG_ReceiptIDs'></th>
+			<th><TMPL_VAR NAME="LNG_Erfasst"/></th>
+		</tr>
+		<TMPL_LOOP NAME="EmployeeList">
+		<TMPL_IF NAME='product_group_list'>
+			<tr class="employee">
+				<td><TMPL_VAR NAME="__ROWNUM__"/></td>
+				<td><TMPL_VAR NAME="employee_guid"/></td>
+				<td align="left"><strong><TMPL_VAR NAME="last_name"/> <TMPL_VAR NAME="first_name"/></strong></td>
+				<td> </td>
+				<td> </td>
+				<td> </td>
+				<td class="erfasst"> </td>
+			</tr>
+			<TMPL_IF NAME='birthday'>
+				<tr>
+					<td>&nbsp;</td>
+					<td> </td>
+					<td><TMPL_VAR NAME='birthday' FORMAT="date"></td>
+					<td> </td>
+					<td> </td>
+					<td> </td>
+					<td class="erfasst"> </td>
+				</tr>
+			</TMPL_IF>
+		<TMPL_LOOP NAME='product_group_list'>
+			<tr<TMPL_IF NAME="__ODD__"> class="odd"</TMPL_IF>>
+				<td> </td>
+				<td> </td>
+				<td><TMPL_VAR NAME="title_translation"/></td>
+				<td><TMPL_IF NAME="tax_flat"><TMPL_VAR NAME="tax_flat" FORMAT="price"/> </TMPL_IF></td>
+				<td><TMPL_IF NAME="tax_free"><TMPL_VAR NAME="tax_free" FORMAT="price"/> </TMPL_IF></td>
+				<td>
+					<TMPL_IF NAME='trip_ids'>
+						<TMPL_LOOP NAME='trip_ids'>
+							<TMPL_VAR NAME='trip_id'>
+								(
+								<TMPL_LOOP NAME='receipt_ids'>
+									<a href="<TMPL_VAR NAME='PROJECT_PATH'>admin/module.php?load=receipt&Section=receipt&receipt_id=<TMPL_VAR NAME='receipt_id'>" target="_blank"><TMPL_VAR NAME='legal_receipt_id'/></a><TMPL_UNLESS NAME='__LAST__'>, </TMPL_UNLESS>
+								</TMPL_LOOP>
+								)
+							<a href="<TMPL_VAR NAME='PROJECT_PATH'>admin/module.php?load=receipt&Section=receipt&receipt_id=<TMPL_VAR NAME='receipt_id'>" target="_blank"><TMPL_VAR NAME='legal_receipt_id'/></a><TMPL_UNLESS NAME='__LAST__'>, </TMPL_UNLESS>
+						</TMPL_LOOP>
+						<TMPL_ELSE>
+							<TMPL_LOOP NAME="receipt_ids">
+								<a href="<TMPL_VAR NAME='PROJECT_PATH'>admin/module.php?load=receipt&Section=receipt&receipt_id=<TMPL_VAR NAME='receipt_id'>" target="_blank"><TMPL_VAR NAME='legal_receipt_id'/></a><TMPL_UNLESS NAME='__LAST__'>, </TMPL_UNLESS>
+							</TMPL_LOOP>
+							<TMPL_UNLESS NAME="receipt_ids">
+								<TMPL_IF NAME="service_voucher_ids">
+									<TMPL_IF NAME="service_voucher_count" VALUE="1">
+										Gutschein:
+										<TMPL_ELSE>
+											Gutscheine:
+									</TMPL_IF>
+									<TMPL_LOOP NAME="service_voucher_ids">
+										<a href="<TMPL_VAR NAME='PROJECT_PATH'>admin/module.php?load=company&Section=employee&employee_id=<TMPL_VAR NAME='employee_id'>&group_id=<TMPL_VAR NAME='group_id'>&voucher_id=<TMPL_VAR NAME='voucher_id'>" target="_blank"><TMPL_VAR NAME='voucher_id'/></a><TMPL_UNLESS NAME='__LAST__'>, </TMPL_UNLESS>
+									</TMPL_LOOP>
+								</TMPL_IF>
+							</TMPL_UNLESS>
+					</TMPL_IF>
+				</td>
+				<td class="erfasst"> </td>
+			</tr>
+		</TMPL_LOOP>
+			<tr>
+				<td>&nbsp;</td>
+				<td> </td>
+				<td> </td>
+				<td> </td>
+				<td> </td>
+				<td> </td>
+				<td class="erfasst"> </td>
+			</tr>
+			</TMPL_IF>
+		</TMPL_LOOP>
+	</tbody>
+</table>

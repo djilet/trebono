@@ -1,0 +1,2 @@
+ALTER TABLE "public"."receipt" ADD COLUMN "real_amount_approved" numeric(10,2);
+UPDATE "public"."receipt" SET real_amount_approved=amount_approved;

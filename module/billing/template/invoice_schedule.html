@@ -1,0 +1,60 @@
+<section class="box ">
+	<div class="content-body">
+		<form action="<TMPL_VAR NAME='MODULE_URL'>" method="post" autocomplete="off">
+			<div class="row">   
+				<div class="col-md-3">
+					<div class="form-group">
+						<label class="form-label">From</label><br />
+						<input type="text" name="DateFrom" class="form-control datepicker" value="<TMPL_VAR NAME='DateFrom'>" >
+					</div>
+				</div>	
+				<div class="col-md-3">
+					<div class="form-group">
+						<label class="form-label">To</label><br />
+						<input type="text" name="DateTo" class="form-control datepicker" value="<TMPL_VAR NAME='DateTo'>" >
+					</div>
+				</div>
+				<div class="col-md-3">
+					<div class="form-group">
+						<label class="form-label hidden-xs">&nbsp;</label><br />
+						<button type="submit" class="btn btn-primary btn-icon"><i class="fa fa-search"></i> Generate</button>
+					</div>
+				</div>
+			</div>
+			<input type="hidden" name="Action" value="Generate" />
+			<TMPL_VAR NAME='ParamsForForm' ESCAPE='none'>
+		</form>
+	</div>
+</section>
+
+<section class="box">
+	<header class="panel_header" for="header_invoice_schedule" table="billing">
+		<h2 class="title">Invoice schedule</h2>
+	</header>								
+	<div class="content-body">
+		<div class="row">
+			<div class="col-md-12 col-sm-12 col-xs-12">
+				<TMPL_IF NAME='DateList'>
+					<table class="table table-striped">
+						<TMPL_LOOP NAME='DateList'>
+							<tr class="purple">
+								<td colspan="5"><TMPL_VAR NAME='date' FORMAT='date'></td>
+							</tr>
+							<TMPL_LOOP NAME='CompanyUnitList'>
+								<tr>
+									<td><TMPL_VAR NAME='title'></td>
+									<td><TMPL_VAR NAME='date_from'> - <TMPL_VAR NAME='date_to'></td>
+									<td><TMPL_VAR NAME='payment_type'></td>
+									<td><TMPL_VAR NAME='invoice_date'></td>
+									<td><TMPL_VAR NAME='customer_guid'></td>
+								</tr>
+							</TMPL_LOOP>
+						</TMPL_LOOP>
+					</table>
+				<TMPL_ELSE>
+					<div class="alert alert-success"><TMPL_VAR NAME='LNG_Empty'></div>
+				</TMPL_IF>
+			</div>
+		</div>
+	</div>
+</section>

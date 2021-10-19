@@ -1,0 +1,200 @@
+<div class="row">
+    <table class="table bvs-table no-margin">
+        <thead>
+            <tr class="text-center text-bold">
+                <td >#</td>
+                <td><TMPL_VAR NAME="LNG_BillPeriod"></td>
+                <td><TMPL_VAR NAME="LNG_BillCreated"></td>
+                <td><TMPL_VAR NAME="LNG_CreatedBillUser"></td>
+                <td><TMPL_VAR NAME="LNG_BillPrice"></td>
+                <td><TMPL_VAR NAME="LNG_BillItemName"></td>
+                <td><TMPL_VAR NAME="LNG_BillDiscount"></td>
+                <td><TMPL_VAR NAME="LNG_BillQuantity"></td>
+                <td><TMPL_VAR NAME="LNG_BillTotal"></td>
+                <td></td>
+                <td></td>
+            </tr>
+        </thead>
+        <TMPL_LOOP NAME="Statistics">
+            <tbody class="no-margin" data-item-id='<TMPL_VAR NAME="item_id">'>
+            <tr class="text-center <TMPL_IF NAME='archive' VALUE='Y'>inactive</TMPL_IF>">
+                <td><a href="<TMPL_VAR NAME='MODULE_URL'>&Section=bill&company_unit_id=<TMPL_VAR NAME='companyId'>&billable_item_id=<TMPL_VAR NAME='item_id'>"><TMPL_VAR NAME="item_id"></a></td>
+                <td><TMPL_VAR NAME="date_start"> - <TMPL_VAR NAME="date_end"></td>
+                <td><TMPL_VAR NAME="created"></td>
+                <td><TMPL_VAR NAME="created_user_name"></td>
+                <td><TMPL_VAR NAME="price"></td>
+                <td><TMPL_VAR NAME="item_name"></td>
+                <td><TMPL_VAR NAME="discount">%</td>
+                <td><TMPL_VAR NAME="quantity"></td>
+                <td><TMPL_VAR NAME="total">€</td>
+                <td>
+                    <TMPL_UNLESS NAME="invoice_id">
+                        <TMPL_IF NAME="archive" OP="==" VALUE="N">
+                            <i class='fa fa-close delete' data="delete"  data-item-id='<TMPL_VAR NAME="item_id">'></i>
+                        <TMPL_ELSE>
+                            <i class='fa fa-check activate' data="activate"  data-item-id='<TMPL_VAR NAME="item_id">'></i>
+                        </TMPL_IF>
+                    </TMPL_UNLESS>
+                </td>
+                <td>
+                    <TMPL_UNLESS NAME="invoice_id">
+                        <button class="delete-billable-item delete-button btn btn-danger" data-page="<TMPL_VAR NAME='currentPage'>" data-item-id='<TMPL_VAR NAME="item_id">'><TMPL_VAR NAME="LNG_BillRemove"></button>
+                    </TMPL_UNLESS>
+                </td>
+            </tr>
+        </tbody>
+    </TMPL_LOOP>
+    </table>
+    <TMPL_IF NAME='billablePaging'>
+        <div class="text-center">
+            <ul class="billablePagination pagination">
+                <TMPL_VAR NAME='billablePaging' ESCAPE='none'>
+            </ul>
+        </div>
+    </TMPL_IF>
+</div>
+
+<script type="text/javascript">
+
+var companyAjax = "<TMPL_VAR NAME='PROJECT_PATH'>module/company/ajax.php";
+var confirmMsg = "<TMPL_VAR NAME='LNG_AreYouSure'>";
+var disabledMsg = "<TMPL_VAR NAME='LNG_SuccessfullyDisabled'>";
+var activatedMsg = "<TMPL_VAR NAME='LNG_SuccessfullyActivated'>";
+
+
+// pagination
+$(".billablePagination li").click(function(e){
+    e.preventDefault();
+    var checkActive = $(this).attr('class');
+    var href = $(this).children("a").attr("href");
+    if (checkActive != 'active'){
+        var currentPage = parseInt(href.slice(-1));
+        $.ajax({
+			url: companyAjax,
+			type: 'GET',
+			dataType: 'JSON',
+			data:{
+				Action: 'GetBillableStatisticsHTML',
+				company_unit_id: companyUnitID,
+				PageId: currentPage,
+			},
+			success: function(data){
+				if (typeof data.HTML != 'undefined') {
+					$(".billable-statistics-container").html(data.HTML);
+				}
+			}
+		});
+    }
+    
+});
+
+//  delete billable item ******************************************8
+$(".delete-billable-item").click(function(e){
+    e.preventDefault();
+    var billId = $(this).attr('data-item-id');
+    var pageId = $(this).attr('data-page');
+    ModalConfirm(confirmMsg, function(){
+            $.ajax({
+                url: companyAjax,
+                type: 'POST',
+                dataType: 'JSON',
+                data:{
+                    Action: 'DeleteBillableItem',
+                    billable_item_id: billId,
+                },
+                success: function(data){
+                    if(data.deleted){
+                        CreateMessage('removed', 'info');
+                        $("tbody[data-item-id='" + billId + "']").remove();
+                        // reload billable list
+                            $.ajax({
+                                url: companyAjax,
+                                type: 'GET',
+                                dataType: 'JSON',
+                                data:{
+                                    Action: 'GetBillableStatisticsHTML',
+                                    company_unit_id: companyUnitID,
+                                    PageId: pageId,
+                                },
+                                success: function(data){
+                                    if (typeof data.HTML != 'undefined') {
+                                        $(".billable-statistics-container").html(data.HTML);
+                                    }
+                                }
+                            });
+                    }
+                    else {
+                        CreateMessage('ups, server error', 'error');
+                    }
+                },
+                error: function() {
+                    CreateMessage('ups, server error', 'error');
+                }
+            });
+        });
+    });
+
+
+
+$(".fa[data='delete']").one('click', DisableBillableItem);
+
+$(".fa[data='activate']").one('click', ActivateBillableItem);
+
+
+
+function DisableBillableItem(e){
+    var currentItem = $(this);
+    var billId = $(this).attr('data-item-id');
+    $.ajax({
+			url: companyAjax,
+			type: 'POST',
+			dataType: 'JSON',
+			data:{
+				Action: 'DisableBillableItem',
+				billable_item_id: billId,
+			},
+			success: function(data){
+                if(data.disabled){
+                    CreateMessage(disabledMsg, 'info');
+                    currentItem.closest("tr").toggleClass("inactive");
+                    currentItem.replaceWith("<i class='fa fa-check activate' data='activate' data-item-id='" + billId + "'></i>");
+                    $(".fa[data-item-id='" + billId + "']").one('click', ActivateBillableItem);
+                }
+                else {
+                    CreateMessage('ups, server error', 'error');
+                }
+			},
+            error: function() {
+                CreateMessage('ups, server error', 'error');
+            }
+		});
+}
+
+function ActivateBillableItem(e){ 
+    var currentElement = $(this);
+    var billId = $(this).attr('data-item-id');
+    $.ajax({
+			url: companyAjax,
+			type: 'POST',
+			dataType: 'JSON',
+			data:{
+				Action: 'ActiveBillableItem',
+				billable_item_id: billId,
+			},
+			success: function(data) {
+                if(data.activated){
+                    CreateMessage(activatedMsg, 'info');
+                    currentElement.closest("tr").toggleClass("inactive");
+                    currentElement.replaceWith("<i class='fa fa-close delete' data='delete' data-item-id='" + billId + "'></i>");
+                    $(".fa[data-item-id='" + billId + "']").one('click', DisableBillableItem);
+                }
+                else {
+                    CreateMessage('ups, server error', 'error');
+                }
+			},
+            error: function() {
+                CreateMessage('ups, server error', 'error');
+            }
+		});
+}
+</script>

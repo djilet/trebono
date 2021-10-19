@@ -1,0 +1,42 @@
+#SecFilterEngine Off
+
+#allow ajax-requests from another domain
+Header add Access-Control-Allow-Origin "*"
+Header add Access-Control-Allow-Headers "origin, x-requested-with, content-type"
+Header add Access-Control-Allow-Methods "GET, POST, PUT, PATCH, DELETE, OPTIONS"
+
+<IfModule mod_expires.c>
+    ExpiresActive On
+
+    ExpiresByType image/gif "access plus 7 days"
+    ExpiresByType image/jpg "access plus 7 days"
+	ExpiresByType image/jpeg "access plus 7 days"
+	ExpiresByType image/png "access plus 7 days"
+</IfModule>
+
+<IfModule mod_rewrite.c>
+  RewriteEngine on
+  Options +FollowSymlinks
+  Options -MultiViews
+  
+  RewriteCond %{HTTP_HOST} lst-test.cf.eu-de-darz.msh.host
+  RewriteRule (.*) https://fineasy-test.2kscs.de/$1 [R=301,L]
+
+  RewriteCond %{HTTP_HOST} !=localhost
+  RewriteCond %{HTTP:X-Forwarded-Proto} !https
+  RewriteCond %{HTTPS} off
+  RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301,NE]
+
+#Standard rules of FokCMS
+  #temporary redirect. remove when static content will not be used
+  RewriteRule ^(.*)api/static/(.*)$ api/static/$2 [L]
+  
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteRule ^(.*)api/(.*)$ api.php/$2 [L]
+  RewriteRule ^(.*)api_web/(.*)$ api_web.php/$2 [L]
+  
+  RewriteRule ^images/(.*)$ image.php?s=$1 [L]
+  RewriteRule ^download/(.*)$ download.php?Path=$1&%{QUERY_STRING} [L]
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteRule ^(.*)$ index.php
+</IfModule>

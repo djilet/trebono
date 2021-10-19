@@ -1,0 +1,2 @@
+--lst-main
+ALTER TABLE "public"."receipt_comment" ADD COLUMN "read_by_employee" flag NOT NULL DEFAULT 'N';

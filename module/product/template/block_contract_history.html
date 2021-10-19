@@ -1,0 +1,49 @@
+<div class="modal modal-wide fade" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="ultraModal-Label" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+				<h4 class="modal-title"><TMPL_VAR NAME='LNG_ContractHistory'></h4>
+			</div>
+			<div class="modal-body">
+				<TMPL_IF NAME='ContractList'>
+					<table class="table">
+						<thead>
+							<tr>
+								<th>#</th>
+								<th><TMPL_VAR NAME='LNG_StartDate'></th>
+								<th><TMPL_VAR NAME='LNG_EndDate'></th>
+								<th><TMPL_VAR NAME='LNG_StartUserName'></th>
+								<th><TMPL_VAR NAME='LNG_EndUserName'></th>
+								<th><TMPL_VAR NAME='LNG_StartUserWebApi'></th>
+								<th><TMPL_VAR NAME='LNG_EndUserWebApi'></th>
+								<th><TMPL_VAR NAME='LNG_Created'></th>
+								<th><TMPL_VAR NAME='LNG_EndDateCreated'></th>
+							</tr>
+						</thead>
+						<tbody>
+							<TMPL_LOOP NAME='ContractList'>
+								<tr>
+									<th scope="row"><TMPL_VAR NAME='__ROWNUM__'></th>
+									<td><TMPL_VAR NAME='start_date' FORMAT='date'></td>
+									<td><TMPL_VAR NAME='end_date' FORMAT='date'></td>
+									<td><TMPL_VAR NAME='start_first_name'> <TMPL_VAR NAME='start_last_name'></td>
+									<td><TMPL_VAR NAME='end_first_name'> <TMPL_VAR NAME='end_last_name'></td>
+									<td><TMPL_VAR NAME='start_from'></td>
+									<td><TMPL_VAR NAME='end_from'></td>
+									<td><TMPL_VAR NAME='created' FORMAT='datetime'></td>
+									<td><TMPL_VAR NAME='end_date_created' FORMAT='datetime'></td>
+								</tr>
+							</TMPL_LOOP>
+						</tbody>
+					</table>
+				<TMPL_ELSE>
+					<div class="alert alert-success"><TMPL_VAR NAME='LNG_Empty'></div>
+				</TMPL_IF>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-info" data-dismiss="modal"><TMPL_VAR NAME='LNG_Close'></button>
+			</div>
+		</div>
+	</div>
+</div>

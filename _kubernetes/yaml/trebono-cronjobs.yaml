@@ -1,0 +1,265 @@
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: 1.5min-rmq-workers-check
+spec:
+  schedule: "*/5 * * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+            - name: ${KUBE_NAMESPACE}-crons
+              image: busybox
+              args:
+                - /bin/sh
+                - -c
+                - wget -O /dev/null -t 1 --timeout=0 "https://${KUBE_NAMESPACE}.poc-trebono-k8s.da-rz.net/admin/cron/check_workers.php"
+          restartPolicy: OnFailure
+---
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: 2.daily-process-errorlog
+spec:
+  schedule: "0 5 * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+            - name: ${KUBE_NAMESPACE}-crons
+              image: busybox
+              args:
+                - /bin/sh
+                - -c
+                - wget -O /dev/null -t 1 --timeout=0 "https://${KUBE_NAMESPACE}.poc-trebono-k8s.da-rz.net/cron/error_log.php"
+          restartPolicy: OnFailure
+---
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: 3.daily-invoice-creation
+spec:
+  schedule: "0 21 * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+            - name: ${KUBE_NAMESPACE}-crons
+              image: busybox
+              args:
+                - /bin/sh
+                - -c
+                - wget -O /dev/null -t 1 --timeout=0 "https://${KUBE_NAMESPACE}.poc-trebono-k8s.da-rz.net/module/billing/cron/invoice_create.php"
+          restartPolicy: OnFailure
+---
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: 4.monthly-generate-voucher-invoice
+spec:
+  schedule: "30 21 1 * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+            - name: ${KUBE_NAMESPACE}-crons
+              image: busybox
+              args:
+                - /bin/sh
+                - -c
+                - wget -O /dev/null -t 1 --timeout=0 "https://${KUBE_NAMESPACE}.poc-trebono-k8s.da-rz.net/module/billing/cron/invoice_voucher_create.php"
+          restartPolicy: OnFailure
+---
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: 5.daily-create-payroll
+spec:
+  schedule: "0 18 * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+            - name: ${KUBE_NAMESPACE}-crons
+              image: busybox
+              args:
+                - /bin/sh
+                - -c
+                - wget -O /dev/null -t 1 --timeout=0 "https://${KUBE_NAMESPACE}.poc-trebono-k8s.da-rz.net/module/billing/cron/payroll_create.php"
+          restartPolicy: OnFailure
+---
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: 6.daily-stored-data-create
+spec:
+  schedule: "0 12 * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+            - name: ${KUBE_NAMESPACE}-crons
+              image: busybox
+              args:
+                - /bin/sh
+                - -c
+                - wget -O /dev/null -t 1 --timeout=0 "https://${KUBE_NAMESPACE}.poc-trebono-k8s.da-rz.net/module/billing/cron/stored_data_create.php"
+          restartPolicy: OnFailure
+---
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: 7.daily-generate-benefit-voucher
+spec:
+  schedule: "5 2 * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+            - name: ${KUBE_NAMESPACE}-crons
+              image: busybox
+              args:
+                - /bin/sh
+                - -c
+                - wget -O /dev/null -t 1 --timeout=0 "https://${KUBE_NAMESPACE}.poc-trebono-k8s.da-rz.net/module/company/cron/benefit_voucher.php"
+          restartPolicy: OnFailure
+---
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: 8.daily-generate-food-voucher
+spec:
+  schedule: "5 3 * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+            - name: ${KUBE_NAMESPACE}-crons
+              image: busybox
+              args:
+                - /bin/sh
+                - -c
+                - wget -O /dev/null -t 1 --timeout=0 "https://${KUBE_NAMESPACE}.poc-trebono-k8s.da-rz.net/module/company/cron/food_voucher.php"
+          restartPolicy: OnFailure
+---
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: 9.daily-generate-vouchers
+spec:
+  schedule: "1 1 * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+            - name: ${KUBE_NAMESPACE}-crons
+              image: busybox
+              args:
+                - /bin/sh
+                - -c
+                - wget -O /dev/null -t 1 --timeout=0 "https://${KUBE_NAMESPACE}.poc-trebono-k8s.da-rz.net/module/company/cron/voucher.php"
+          restartPolicy: OnFailure
+---
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: 10.daily-deactivate-companyunit
+spec:
+  schedule: "0 1 * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+            - name: ${KUBE_NAMESPACE}-crons
+              image: busybox
+              args:
+                - /bin/sh
+                - -c
+                - wget -O /dev/null -t 1 --timeout=0 "https://${KUBE_NAMESPACE}.poc-trebono-k8s.da-rz.net/module/company/cron/company_unit_deactivate.php"
+          restartPolicy: OnFailure
+---
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: 11.daily-deactivate-employee
+spec:
+  schedule: "0 1 * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+            - name: ${KUBE_NAMESPACE}-crons
+              image: busybox
+              args:
+                - /bin/sh
+                - -c
+                - wget -O /dev/null -t 1 --timeout=0 "https://${KUBE_NAMESPACE}.poc-trebono-k8s.da-rz.net/module/company/cron/employee_deactivate.php"
+          restartPolicy: OnFailure
+---
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: 12.5m-clean-receipts-no-images
+spec:
+  schedule: "*/5 * * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+            - name: ${KUBE_NAMESPACE}-crons
+              image: busybox
+              args:
+                - /bin/sh
+                - -c
+                - wget -O /dev/null -t 1 --timeout=0 "https://${KUBE_NAMESPACE}.poc-trebono-k8s.da-rz.net/module/receipt/cron/clean.php"
+          restartPolicy: OnFailure
+---
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: 13.30min-ocr-check
+spec:
+  schedule: "*/30 * * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+            - name: ${KUBE_NAMESPACE}-crons
+              image: busybox
+              args:
+                - /bin/sh
+                - -c
+                - wget -O /dev/null -t 1 --timeout=0 "https://${KUBE_NAMESPACE}.poc-trebono-k8s.da-rz.net/admin/cron/ocr_check.php"
+          restartPolicy: OnFailure
+---
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: 14.daily-receipt-notification
+spec:
+  schedule: "0 9 * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+            - name: ${KUBE_NAMESPACE}-crons
+              image: busybox
+              args:
+                - /bin/sh
+                - -c
+                - wget -O /dev/null -t 1 --timeout=0 "https://${KUBE_NAMESPACE}.poc-trebono-k8s.da-rz.net/module/receipt/cron/push_notification.php"
+          restartPolicy: OnFailure

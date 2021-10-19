@@ -1,0 +1,29 @@
+--lst-control
+CREATE SEQUENCE public."user_permission_history_ValueID_seq";
+
+CREATE TABLE public.user_permission_history
+(
+    value_id integer NOT NULL,
+    end_user_id integer NOT NULL,
+    permission_id integer NOT NULL,
+    value character varying(255),
+    created timestamp without time zone NOT NULL,
+    start_user_id integer NOT NULL
+);
+ALTER TABLE "public"."user_permission_history" ALTER COLUMN "value_id" SET DEFAULT nextval('"user_permission_history_ValueID_seq"'::regclass);
+
+CREATE SEQUENCE public."user_contact_history_ValueID_seq";
+
+CREATE TABLE public.contact_history
+(
+    value_id integer DEFAULT nextval('"user_contact_history_ValueID_seq"'::regclass) NOT NULL,
+    contact_id integer NOT NULL,
+    property_name character varying(255) NOT NULL,
+    value character varying(255) NOT NULL,
+    created timestamp without time zone NOT NULL,
+    user_id integer NOT NULL
+);
+
+-- lst_main
+ALTER TABLE "public"."product" ADD COLUMN "base_for_api" "public"."flag" DEFAULT 'N' NOT NULL;
+UPDATE "product" SET "base_for_api" = 'Y' WHERE "product_id" IN(1,8,9,10,13,14,15);

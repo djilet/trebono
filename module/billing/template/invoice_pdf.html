@@ -1,0 +1,234 @@
+<div class="main">
+	<p class="company_name">
+		<u>
+			<strong>
+				<br />
+				2KS Cloud Services GmbH - Bahnhofstrasse 54 - 64367 Darmstadt 
+			</strong>
+		</u>
+	</p>
+	<p class="company_address">
+		<TMPL_VAR NAME='COMPANY_UNIT_title'>
+		<br />
+		<TMPL_LOOP NAME='COMPANY_UNIT_contact_list'>
+			<TMPL_IF NAME='__FIRST__'>
+				<TMPL_VAR NAME='first_name'> <TMPL_VAR NAME='last_name'>
+			</TMPL_IF>
+		</TMPL_LOOP>
+		<br />
+		<TMPL_VAR NAME='COMPANY_UNIT_street'> <TMPL_VAR NAME='COMPANY_UNIT_house'>
+	</p>
+	<p class="company_address"><TMPL_VAR NAME='COMPANY_UNIT_zip_code'> - <TMPL_VAR NAME='COMPANY_UNIT_city'></p>
+	<p class="company_address"><strong><TMPL_VAR NAME='COMPANY_UNIT_country'></strong></p>
+
+	<div class="contact-right">
+		<table width="100%">
+			<tr>
+				<td align="right">
+					<table  width="37%">
+						<tr>
+							<td width="40%">Kundennr.:</td>
+							<td width="50%"><TMPL_VAR NAME='COMPANY_UNIT_customer_guid'></td>
+						</tr>
+						<tr>
+							<td width="40%">Ihr Kontakt:</td>
+							<td width="50%">
+								Thorsten Stein
+							</td>
+						</tr>
+						<tr>
+							<td width="40%">E-Mail:</td>
+							<td width="50%">Rechnung@trebono.de</td>
+						</tr>
+						<tr>
+							<td width="40%">Datum:</td>
+							<td width="50%"><TMPL_VAR NAME='INVOICE_created' FORMAT='date_german'></td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+		</table>
+	</div>
+	<br />
+	<p class="text">
+		<strong>
+			Rechnung Nr. <TMPL_VAR NAME='INVOICE_invoice_guid'>
+			<TMPL_IF NAME='DeactivationDate'>
+				<span style="color: red">Storniert am <TMPL_VAR NAME='DeactivationDate' FORMAT='date_german'></span>
+			</TMPL_IF>
+		</strong>
+	</p>
+	<p></p>
+	<p class="text">
+		Sehr geehrte(r) 
+		<TMPL_LOOP NAME='COMPANY_UNIT_contact_list'>
+			<TMPL_IF NAME='__FIRST__'>
+				<TMPL_VAR NAME='salutation'> <TMPL_VAR NAME='last_name'>,
+			</TMPL_IF>
+		</TMPL_LOOP>
+	</p>
+	<p class="text">
+		anbei erhalten Sie ihre Rechnung für die gebuchten trebono Cloud Services für die Periode vom <TMPL_VAR NAME='INVOICE_date_from' FORMAT='date_german'>
+		bis <TMPL_VAR NAME='INVOICE_date_to' FORMAT='date_german'>.
+	</p>
+	<table width="100%" border="1" class="invoice">
+		<thead>
+			<tr>
+				<th width="7%">Pos.</th>
+				<th width="30%">Cloud Service</th>
+				<th width="13%">Periode</th>
+				<th width="10%">Nutzer</th>
+				<th width="12%"><nobr>Nutzer/</nobr><br>Monat</th>
+				<th width="10%">Rabatt</th>
+				<th width="18%">Gesamt</th>
+			</tr>
+		</thead>
+		<TMPL_LOOP NAME='INVOICE_line_list'>
+            <tr class="empty">
+                <td colspan="5">&nbsp;</td>
+                <td></td>
+                <td></td>
+            </tr>
+			<tr>
+				<td>&nbsp;</td>
+				<td><strong><TMPL_VAR NAME="SubUnitTitle"/></strong></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+			</tr>
+			<TMPL_LOOP NAME="OU_line_list">
+			<TMPL_IF NAME='show_type'>
+				<TMPL_IF NAME='type' VALUE='recurring'>
+					<tr class="empty">
+						<td>&nbsp;</td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+					</tr>
+				</TMPL_IF>
+				<tr>
+					<td></td>
+					<td>
+						<TMPL_IF NAME='type' VALUE='implementation'>
+							Einrichtungsgebühren – einmalig
+						<TMPL_ELSEIF NAME='type' VALUE='recurring'>
+							Monatliche Gebühren
+						<TMPL_ELSE NAME='type' VALUE='bill'>
+							Zusätzliche Leistungen
+						</TMPL_IF>
+					</td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+				</tr>
+			</TMPL_IF>
+			<TMPL_IF NAME='flex_quantity' OP='>' VALUE='0'>
+				<tr>
+					<td><TMPL_VAR NAME='__ROWNUM__'></td>
+					<td class="product_title">
+						<TMPL_VAR NAME='product_title_translation'/>
+					</td>
+					<td>
+						<TMPL_VAR NAME='global.INVOICE_date_from' FORMAT='date_recurring'> - <TMPL_VAR NAME='global.INVOICE_date_to' FORMAT='date_recurring'>
+					</td>
+					<td><TMPL_VAR NAME='flex_quantity'></td>
+					<td></td>
+					<td></td>
+					<td></td>
+				</tr>
+				<tr>
+					<td></td>
+					<td class="secondary_product">
+						<TMPL_VAR NAME='product_translation_unit_count_flex'/>
+					</td>
+					<td>
+						<TMPL_VAR NAME='global.INVOICE_date_from' FORMAT='date_recurring'> - <TMPL_VAR NAME='global.INVOICE_date_to' FORMAT='date_recurring'>
+					</td>
+					<td><TMPL_VAR NAME='flex_unit_count'></td>
+					<td><TMPL_VAR NAME='flex_unit_price' FORMAT='price'></td>
+					<td></td>
+					<td><TMPL_VAR NAME='flex_unit_sum' FORMAT='price'></td>
+				</tr>
+				<tr>
+					<td></td>
+					<td class="secondary_product">
+						<TMPL_VAR NAME='product_translation_total_amount_flex'/>
+					</td>
+					<td>
+						<TMPL_VAR NAME='global.INVOICE_date_from' FORMAT='date_recurring'> - <TMPL_VAR NAME='global.INVOICE_date_to' FORMAT='date_recurring'>
+					</td>
+					<td><TMPL_VAR NAME='flex_amount_sum' FORMAT='price'></td>
+					<td><TMPL_VAR NAME='flex_unit_percentage'>%</td>
+					<td></td>
+					<td><TMPL_VAR NAME='flex_percentage_sum' FORMAT='price'></td>
+				</tr>
+			</TMPL_IF>
+			<TMPL_IF NAME='quantity' OP='>' VALUE='0'>
+				<tr>
+					<td><TMPL_VAR NAME='__ROWNUM__'></td>
+					<td <TMPL_IF NAME='secondary_product'>class="secondary_product"<TMPL_ELSE>class="product_title"</TMPL_IF>>
+					<TMPL_VAR NAME='product_title_translation'/>
+					</td>
+					<td>
+						<TMPL_IF NAME='type' VALUE="recurring">
+							<TMPL_VAR NAME='global.INVOICE_date_from' FORMAT='date_recurring'> - <TMPL_VAR NAME='global.INVOICE_date_to' FORMAT='date_recurring'>
+						<TMPL_ELSEIF NAME='type' VALUE="implementation">
+							<TMPL_VAR NAME='date_from' FORMAT='date_implementation'><TMPL_IF NAME='date_to'> - <TMPL_VAR NAME='date_to' FORMAT='date_implementation'></TMPL_IF>
+						<TMPL_ELSEIF NAME='type' VALUE="bill">
+							<TMPL_VAR NAME='date_start' FORMAT='date_recurring'> - <TMPL_VAR NAME='date_end' FORMAT='date_recurring'>
+						</TMPL_IF>
+					</td>
+					<td><TMPL_VAR NAME='quantity'></td>
+					<td><TMPL_VAR NAME='user_per_month' FORMAT='price'></td>
+					<td><TMPL_IF NAME='discount'><TMPL_VAR NAME='discount'>%</TMPL_IF></td>
+					<td><TMPL_VAR NAME='cost' FORMAT='price'></td>
+				</tr>
+			</TMPL_IF>
+		</TMPL_LOOP>
+		<tr>
+			<td colspan="5"><TMPL_VAR NAME="SubUnitTitle"/> Gesamt Netto</td>
+			<td></td>
+				<td><TMPL_VAR NAME='OU_cost' FORMAT='price'/></td>
+		</tr>
+		</TMPL_LOOP>
+		<tr>
+			<td colspan="5">&nbsp;</td>
+			<td></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td colspan="5">Gesamt Netto</td>
+			<td></td>
+			<td><TMPL_VAR NAME='INVOICE_cost' FORMAT='price'></td>
+		</tr>
+		<tr>
+			<td colspan="2" style="border-right:none;">
+				MwSt. <TMPL_VAR NAME='VAT'>%
+			</td>
+			<td colspan="3" style="border-left:none;" align="right">
+				von <TMPL_VAR NAME='INVOICE_cost' FORMAT='price'/> Euro
+			</td>
+			<td></td>
+			<td><TMPL_VAR NAME='INVOICE_vat_amount' FORMAT='price'/></td>
+		</tr>
+		<tr class="total_amount">
+			<th colspan="5">Gesamtbetrag</th>
+			<th></th>
+			<th><TMPL_VAR NAME='INVOICE_cost_with_vat' FORMAT='price'></th>
+		</tr>
+	</table>
+	<TMPL_IF NAME='COMPANY_UNIT_payment_method' VALUE='sepa'><p class="text">Der Betrag in Höhe von <TMPL_VAR NAME='INVOICE_cost_with_vat' FORMAT='price'> wird am <TMPL_VAR NAME='INVOICE_payment_day' FORMAT='datepicker'> per Lastschrift von Ihrem Konto <TMPL_VAR NAME='COMPANY_UNIT_iban'> abgebucht.</p></TMPL_IF>
+	<p class="text">Wir bedanken uns für die Nutzung unserer trebono Cloud Services und freuen uns auf die weitere Zusammenarbeit.</p>
+	<br />
+	<p class="text">Mit freundlichen Grüßen</p>
+	<br />
+	<br />
+	<p class="text">2KS Cloud Services GmbH</p>
+</div>

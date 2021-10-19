@@ -1,0 +1,64 @@
+<div class="modal fade" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="ultraModal-Label" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+				<h4 class="modal-title"><TMPL_VAR NAME='LNG_PropertyValueHistory'> - <TMPL_VAR NAME='LNG_Archive'></h4>
+			</div>
+			<div class="modal-body">
+				<TMPL_IF NAME='ValueList'>
+					<table class="table">
+						<thead>
+							<tr>
+								<th>#</th>
+								<TMPL_UNLESS NAME="HideValue">
+								<th><TMPL_VAR NAME='LNG_Value'/></th>
+								</TMPL_UNLESS>
+								<th><TMPL_VAR NAME='LNG_UserName'></th>
+								<th><TMPL_VAR NAME='LNG_Created'></th>
+								<th></th>
+							</tr>
+						</thead>
+						<tbody>
+							<TMPL_LOOP NAME='ValueList'>
+								<tr>
+									<th scope="row"><TMPL_VAR NAME='__ROWNUM__'></th>
+									<TMPL_IF NAME='property_name' VALUE='archive'>
+										<td><TMPL_VAR NAME='value_text'/></td>
+									<TMPL_ELSE>
+										<td><TMPL_VAR NAME='value'/></td>
+									</TMPL_IF>
+									<td>
+										<TMPL_IF NAME=user_name>
+											<TMPL_VAR NAME='user_name'>
+											<TMPL_ELSE>
+												<TMPL_VAR NAME='first_name'> <TMPL_VAR NAME='last_name'>
+										</TMPL_IF>
+									</td>
+									<td><TMPL_VAR NAME='created' FORMAT='datetime'></td>
+									<td>
+										<TMPL_IF NAME='created_from' VALUE='web_api'>
+											<TMPL_VAR NAME='LNG_ChangedByApi'>
+										</TMPL_IF>
+									</td>
+									<TMPL_IF NAME='View'>
+										<td>
+											<a href="<TMPL_VAR NAME='MODULE_URL'>&<TMPL_VAR NAME='params_for_view_url'>" target="_blank">
+												<span class="fa fa-eye"></span> view
+											</a>
+										</td>
+									</TMPL_IF>
+								</tr>
+							</TMPL_LOOP>
+						</tbody>
+					</table>
+				<TMPL_ELSE>
+					<div class="alert alert-success"><TMPL_VAR NAME='LNG_Empty'></div>
+				</TMPL_IF>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-info" data-dismiss="modal"><TMPL_VAR NAME='LNG_Close'></button>
+			</div>
+		</div>
+	</div>
+</div>

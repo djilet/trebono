@@ -1,0 +1,452 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Root>
+    <close>Schliessen</close>
+    <delete-menu-confirm>Please confirm you want to remove menu "%Title%"</delete-menu-confirm>
+    <delete-page-confirm>Please confirm you want to remove page "%Title%"</delete-page-confirm>
+    <has-subpages>This page has subpages!</has-subpages>
+    <delete-link-confirm>Please confirm you want to remove link "%Title%"</delete-link-confirm>
+    <loading-menu>loading menu...</loading-menu>
+    <error-loading-menu>An error occured while loading menu</error-loading-menu>
+    <saving-menu>saving menu...</saving-menu>
+    <loading-seo>loadnig SEO information...</loading-seo>
+    <error-loading-seo>An error occured while loading SEO information</error-loading-seo>
+    <saving-seo>saving SEO information...</saving-seo>
+    <error-saving-sort>List of pages were changed. Update sort order is not possible. Please refresh page with [F5]
+    </error-saving-sort>
+    <page-activate>Activate page</page-activate>
+    <page-deactivate>Deactivate page</page-deactivate>
+    <page-preview>Page preview</page-preview>
+    <page-seo>Edit SEO information</page-seo>
+    <page-delete>Delete page "%Title%"</page-delete>
+    <page-edit>Edit page "%Title%"</page-edit>
+    <page-hide>Hide</page-hide>
+    <page-show>Show</page-show>
+    <page>Page</page>
+    <link-delete>Delete hyperlink '%Title%'</link-delete>
+    <link-edit>Edit hyperlink '%Title%'</link-edit>
+    <link>Link</link>
+    <menu-title>Sachbezugsart</menu-title>
+    <menu-description>Kurzbeschreibung</menu-description>
+    <menu-static-path>MENU_</menu-static-path>
+    <admin-menu-receipt>Beleg Überprüfung</admin-menu-receipt>
+    <admin-menu-support>Support</admin-menu-support>
+    <admin-menu-orgunit>Unternehmensdaten</admin-menu-orgunit>
+    <admin-menu-employees>Mitarbeiterdaten</admin-menu-employees>
+    <admin-menu-partner>Partner</admin-menu-partner>
+    <admin-menu-settings>Cloud Service Einstellungen</admin-menu-settings>
+    <admin-menu-reports>Rechnungen</admin-menu-reports>
+    <admin-menu-payroll>Lohnabrechnungen</admin-menu-payroll>
+    <admin-menu-config>Verschiedene Einstellungen</admin-menu-config>
+    <admin-menu-logging>Aktivitätenprotokolle</admin-menu-logging>
+    <admin-menu-push-log>Push-Benachrichtigung</admin-menu-push-log>
+    <admin-menu-dashboard>Dashboard</admin-menu-dashboard>
+    <admin-menu-user-list>Zugriffsrechte/Rollen Anwender</admin-menu-user-list>
+    <admin-menu-my-profile>Mein Profil</admin-menu-my-profile>
+    <admin-menu-logout>Logout</admin-menu-logout>
+    <menu-image-no>Not used</menu-image-no>
+    <menu-image-first-level>For first level only</menu-image-first-level>
+    <menu-image-all-levels>For all levels</menu-image-all-levels>
+    <meta-title>Meta Title</meta-title>
+    <meta-keywords>Meta Keywords</meta-keywords>
+    <meta-description>Meta Description</meta-description>
+    <attribute-title><![CDATA[Attribute title of the tag <a>]]></attribute-title>
+    <list-info1>%Page% von %Total%</list-info1>
+    <list-info2>By request "%Request%" found %Total%</list-info2>
+    <remove-image-confirm>Please confirm you want to remove this image</remove-image-confirm>
+    <removing-image>removing image...</removing-image>
+    <error-removing-image>An error occured while removing image</error-removing-image>
+    <save>Speichern</save>
+    <cancel>Speichern</cancel>
+    <msg-no-url>Please enter URL for the link</msg-no-url>
+    <msg-no-page-selected>Please choose a page from the list</msg-no-page-selected>
+    <msg-no-email>Please type the E-Mail address</msg-no-email>
+    <title-site-structure>Site Structure</title-site-structure>
+    <title-page-edit>Edit Page Content</title-page-edit>
+    <title-module-edit>Edit Module Page</title-module-edit>
+    <title-link-edit>Edit Link Information</title-link-edit>
+    <title-config-list>Einstellungen</title-config-list>
+    <title-config-edit>Einstellung bearbeiten</title-config-edit>
+    <title-config-value-view>%title_translation% anzeigen</title-config-value-view>
+    <title-logging>Aktivitätenprotokolle</title-logging>
+    <title-push-log>Push-Benachrichtigung Protokollierung</title-push-log>
+    <title-user-list>Zugriffsrechte Anwender</title-user-list>
+    <title-dashboard>Instrumententafel</title-dashboard>
+    <title-user-add>Add user</title-user-add>
+    <title-user-edit>Edit user</title-user-edit>
+    <page-description>Description</page-description>
+    <page-is-removed>Page %Title% has been removed</page-is-removed>
+    <title-empty>Title is required</title-empty>
+    <template-is-not-defined>Template is not defined</template-is-not-defined>
+    <templateset-is-not-defined>Template set is not defined</templateset-is-not-defined>
+    <static-path-empty>Page URL is required</static-path-empty>
+    <static-path-is-not-unique>This path (URL) already exists. Please choose another path.</static-path-is-not-unique>
+    <static-path-incorrect>Page URL incorrect! Use latin letters, numbers, hyphens (-), dots (.), and understrikes (_)
+        only.
+    </static-path-incorrect>
+    <static-path-empty-menu>Please enter value for MENU_</static-path-empty-menu>
+    <static-path-is-not-unique-menu>This value of the MENU_ already exists. Please choose another value.
+    </static-path-is-not-unique-menu>
+    <static-path-incorrect-menu>This value of the MENU_ incorrect! Use latin letters, numbers, hyphens (-), dots (.),
+        and understrikes (_) only.
+    </static-path-incorrect-menu>
+    <parent-is-not-defined>Parent is not defined!</parent-is-not-defined>
+    <parent-language-different>Language of the parent page is not equal to language of the current page. Can't be
+        saved.
+    </parent-language-different>
+    <password-is-changed-and-sent>Passwort erfolgreich geändert. Das neue Passwort wurde an Ihre hinterlegte E-Mail
+        geschickt!
+    </password-is-changed-and-sent>
+    <logged-out>Sie haben sich erfolgreich abgemeldet.</logged-out>
+    <wrong-login-password>Falscher Benutzername oder Passwort!</wrong-login-password>
+    <login-denied>Access denied</login-denied>
+    <no-more-login-attempts>Sie haben versucht sich 3 mal mit falschen Login Daten anzumelden. Ihr Zugang ist jetzt
+        gesperrt. Bitte klicken Sie auf den Link "Passwort vergessen", um Ihren Zugang freizuschalten und eine E-Mail
+        mit einem neuen Passwort zu erhalten.
+    </no-more-login-attempts>
+    <registration-password>Ihre trebono Registrierung - Passwort</registration-password>
+    <forgot-password>Anforderung neues trebono Passwort</forgot-password>
+    <open-calendar>Click here to expand calendar</open-calendar>
+    <your-session-expired>Ihre Sitzung ist abgelaufen. Bitte melden Sie sich erneut an.</your-session-expired>
+    <unknown-module>Module "%Module%" is not found</unknown-module>
+    <page-type-is-undefined>Page type is undefined</page-type-is-undefined>
+    <email-is-not-unique>Diese E-Mail wird bereits von einem anderen Anwender verwendet. Bitte verwenden sie eine andere
+        E-Mail.
+    </email-is-not-unique>
+    <incorrect-email-format>Bitte geben Sie dich richtige E-Mail ein!</incorrect-email-format>
+    <incorrect-email-address>Die eingebebene E-Mail ist für diesen Cloud Service nicht registriert!
+    </incorrect-email-address>
+    <wrong-old-password>Das alte Passwort ist falsch!</wrong-old-password>
+    <password-empty>Bitte neues Passowrt eingeben</password-empty>
+    <password-not-equal>Passwörter stimmen nicht überein!</password-not-equal>
+    <password-not-meeting-requirements>Passwort entspricht nicht den Anforderungen</password-not-meeting-requirements>
+    <first-name-required>Bitte Vorname eingeben!</first-name-required>
+    <last-name-required>Bitte Nachname eingeben!</last-name-required>
+    <website-undefined>Please choose website for the user</website-undefined>
+    <user-edit-access-denied>Keine Berechtigung zum Zugriff.</user-edit-access-denied>
+    <user-is-updated>Informationen des Anwenders wurden aktualisiert.</user-is-updated>
+    <public-user-is-registered>Sie sind erfolgreich registriert, herzlichen Glückwunsch und Willkommen bei trebono!
+    </public-user-is-registered>
+    <public-user-is-updated>Ihre Information wurde aktualisiert.</public-user-is-updated>
+    <user-is-removed>Anwender %UserList% ist erfolgreich de-aktiviert</user-is-removed>
+    <users-are-removed>Folgende Anwender wurden erfolgreich de-aktiviert: %UserList%. Gesamt Anzahl %UserCount%
+        Anwender
+    </users-are-removed>
+    <home-page>Home</home-page>
+    <sql-error>SQL query error. See log for details.</sql-error>
+    <sql-error-removing>Cannot delete selected object(s). Probably nested entities exist.</sql-error-removing>
+    <upload-max-file-size>Max size of the file: %UploadMaxFileSize%</upload-max-file-size>
+    <no-templates>You have to create file with name page.html under folder %Folder%</no-templates>
+    <push-sended>Push-Benachrichtigungen gesendet: "%text%"</push-sended>
+    <template-general>General</template-general>
+    <menu-image1>Icon 1</menu-image1>
+    <menu-image2>Icon 2</menu-image2>
+    <menu-image3>Icon 3</menu-image3>
+    <filesys-file-is-not-uploaded>File is not uploaded</filesys-file-is-not-uploaded>
+    <filesys-file-doesnt-exist>Source file doesn't exists</filesys-file-doesnt-exist>
+    <filesys-getimagesize-error>Can't get image size for the file %File%</filesys-getimagesize-error>
+    <filesys-unsupported-image-mime-type>Images with mime type "%MimeType%" are not supported
+    </filesys-unsupported-image-mime-type>
+    <filesys-unsupported-image-function>To complete image resizing function %Function% is required. But it is not
+        supported by your hosting provider
+    </filesys-unsupported-image-function>
+    <filesys-file-upload-error>Error occured durig file upload. Error number %ErrorNumber%</filesys-file-upload-error>
+    <filesys-incorrect-file-name>File name %FileName% is incorrect. Please rename file and upload it again
+    </filesys-incorrect-file-name>
+    <filesys-unsupported-file-mime-type>Files with mime type "%MimeType%" are not supported
+    </filesys-unsupported-file-mime-type>
+    <filesys-file-exists>File with name %FileName% already exists in folder %FolderName%</filesys-file-exists>
+    <filesys-copy-error>Error copy file from %From% to %To%</filesys-copy-error>
+    <phpmailer-provide-address>Sie müssen eine E-Mail Adresse eingeben!</phpmailer-provide-address>
+    <phpmailer-mailer-not-supported>%Mailer% mailer is not supported</phpmailer-mailer-not-supported>
+    <phpmailer-execute>Could not execute: %Sendmail%</phpmailer-execute>
+    <phpmailer-instantiate>Could not instantiate mail() function</phpmailer-instantiate>
+    <phpmailer-authenticate>SMTP Error: Could not authenticate</phpmailer-authenticate>
+    <phpmailer-from-failed>The following From address failed: %Address%</phpmailer-from-failed>
+    <phpmailer-recipients-failed>SMTP Error: The following recipients failed: %Address%</phpmailer-recipients-failed>
+    <phpmailer-data-not-accepted>SMTP Error: Data not accepted</phpmailer-data-not-accepted>
+    <phpmailer-connect-host>SMTP Error: Could not connect to SMTP host %Host%</phpmailer-connect-host>
+    <phpmailer-file-access>Could not access file: %File%</phpmailer-file-access>
+    <phpmailer-file-open>Could not open file: %File%</phpmailer-file-open>
+    <phpmailer-encoding>Unknown encoding: %Encoding%</phpmailer-encoding>
+    <error-sending-email>Your message has not been sent due to internal server error</error-sending-email>
+    <incorrect-captcha>You entered incorrect captcha code</incorrect-captcha>
+    <date-Sun>Son</date-Sun>
+    <date-Mon>Mon</date-Mon>
+    <date-Tue>Die</date-Tue>
+    <date-Wed>Mit</date-Wed>
+    <date-Thu>Don</date-Thu>
+    <date-Fri>Fre</date-Fri>
+    <date-Sat>Sam</date-Sat>
+    <date-Sunday>Sonntag</date-Sunday>
+    <date-Monday>Montag</date-Monday>
+    <date-Tuesday>Dienstag</date-Tuesday>
+    <date-Wednesday>Mittwoch</date-Wednesday>
+    <date-Thursday>Donnerstag</date-Thursday>
+    <date-Friday>Freitag</date-Friday>
+    <date-Saturday>Samstag</date-Saturday>
+    <date-Jan>Jan</date-Jan>
+    <date-Feb>Feb</date-Feb>
+    <date-Mar>Mär</date-Mar>
+    <date-Apr>Apr</date-Apr>
+    <date-May>Mai</date-May>
+    <date-Jun>Jun</date-Jun>
+    <date-Jul>Jul</date-Jul>
+    <date-Aug>Aug</date-Aug>
+    <date-Sep>Sep</date-Sep>
+    <date-Oct>Okt</date-Oct>
+    <date-Nov>Nov</date-Nov>
+    <date-Dec>Dez</date-Dec>
+    <date-January>Januar</date-January>
+    <date-February>Februar</date-February>
+    <date-March>März</date-March>
+    <date-April>April</date-April>
+    <date-June>Juni</date-June>
+    <date-July>Juli</date-July>
+    <date-August>August</date-August>
+    <date-September>September</date-September>
+    <date-October>Oktober</date-October>
+    <date-November>November</date-November>
+    <date-December>Dezember</date-December>
+    <add-image>Foto hochladen</add-image>
+    <change-image>Neues Foto hochladen</change-image>
+    <configure-image>Zuschneiden</configure-image>
+    <remove-image>Foto löschen</remove-image>
+    <set-sort-order-error>Error occured on position update</set-sort-order-error>
+    <xml-section-general>General</xml-section-general>
+    <php-messages>messages</php-messages>
+    <tag-name>Tag Name</tag-name>
+    <variable-value>Value</variable-value>
+    <incorrect-parameter>Incorrect parameter passed to the VariableList() class</incorrect-parameter>
+    <loading-edit-variable>loading variable info...</loading-edit-variable>
+    <saving-variable>saving variable info...</saving-variable>
+    <lightbox-image>Bild</lightbox-image>
+    <lightbox-of>von</lightbox-of>
+
+    <api-no-path>Incorrect API path</api-no-path>
+    <api-resource-not-found>API resource not found</api-resource-not-found>
+    <api-method-not-found>API method not defined for resource</api-method-not-found>
+    <api-bad-request>Bad request. Check your auth_device_id and other params</api-bad-request>
+
+    <confirm-action>Wirklich speichern?</confirm-action>
+    <confirm-remove>Sind Sie sicher sie wollen "%Title%" de-aktivieren?</confirm-remove>
+    <confirm-activate>Sind Sie sicher Sie wollen "%Title%" aktivieren??</confirm-activate>
+    <confirm-exception>Wollen Sie "%Title%" wirklich zu den Ausnahmen hinzufügen?</confirm-exception>
+    <confirm-tree-disactivate>Kunde "%Title%" hat aktive Anwender. Sind Sie sicher sie wollen den Kunden deaktivieren?
+    </confirm-tree-disactivate>
+    <confirm-tree-activate>Kunde "%Title%" hat keine aktiven Anwender. Sind Sie sicher das Sie alle Anwender aktivieren
+        wollen?
+    </confirm-tree-activate>
+    <object-removed>Zeilen gelöscht: %Count%</object-removed>
+    <object-activated>Zeilen aktiviert: %Count%</object-activated>
+    <object-disactivated>Zeilen de-aktiviert: %Count%</object-disactivated>
+    <error>Fehler</error>
+
+    <error-validation-float>Input value cannot be recognized as a number</error-validation-float>
+
+    <permission-root>Cloud Service Administrator</permission-root>
+    <permission-api>Mobil Anwender</permission-api>
+    <permission-support>Support Manager</permission-support>
+    <permission-company_unit>Administrator Unternehmen</permission-company_unit>
+    <permission-receipt>Belegverarbeitung</permission-receipt>
+    <permission-employee>Administrator Mitarbeiter</permission-employee>
+    <permission-invoice>Rechnungsempfänger</permission-invoice>
+    <permission-payroll>Lohnabrechnungsempfänger</permission-payroll>
+    <permission-tax_auditor>Steuerprüfer</permission-tax_auditor>
+
+    <config-vat_exception_7_shop>Nicht anerkennbare Produkte MwSt. 7%</config-vat_exception_7_shop>
+    <config-vat_exception_19_shop>Anerkennbare Produkte MwSt. 19%</config-vat_exception_19_shop>
+    <config-ocr_keywords>OCR Schlüsselwörter</config-ocr_keywords>
+    <config-vat_exception_restaurant>Liste ungültiger Produkte beim Verzehr im Restaurant
+    </config-vat_exception_restaurant>
+    <config-export_datev_tax_consultant_id>Datev Rechnungs Export: Steuerberater ID unseres Steuerberaters
+    </config-export_datev_tax_consultant_id>
+    <config-export_datev_client_id>Datev Rechnungs Export: unsere Mandaten ID</config-export_datev_client_id>
+    <config-export_datev_lug_ini>Datev Lug export ini file</config-export_datev_lug_ini>
+    <config-mobile_app_receipt_confirm_button>Mobile: Text auf Bestätigungsfeld
+    </config-mobile_app_receipt_confirm_button>
+    <config-mobile_app_receipt_confirm_description>Mobile: Beschreibungstext der Bestätigung
+    </config-mobile_app_receipt_confirm_description>
+    <config-mobile_app_employment_agreement_confirm_button>Mobile: Ergänzende Vereinbarung Text Bestätigungsfeld
+    </config-mobile_app_employment_agreement_confirm_button>
+    <config-mobile_app_employment_agreement_text_after_confirm>Ergänzende Vereinbarung: Meldung nach der Bestätigung
+    </config-mobile_app_employment_agreement_text_after_confirm>
+    <config-push_receipt_comment_new>Benachrichtigungstext: Neue Nachricht für den Anwender
+    </config-push_receipt_comment_new>
+    <config-push_receipt_payroll>Benachrichtigungstext: Hinweis für genehmigte Belege X Tage vor Lohnabrechnung, dass
+        Beleg noch Freigeben werden muss
+    </config-push_receipt_payroll>
+    <config-push_receipt_payroll_before_days>Benachrichtigungszeitpunkt noch nicht freigegebene Belege: Anzahl der Tage
+        vor dem Lohnabrechnungstag des Kunden
+    </config-push_receipt_payroll_before_days>
+    <config-push_receipt_denied>Benachrichtigungstext: Statusänderung auf "abgelehnt"</config-push_receipt_denied>
+    <config-push_receipt_processed>Benachrichtigungstext: Statusänderung auf "genehmigt_vorgeschlagen"
+    </config-push_receipt_processed>
+    <config-push_receipt_processed_remind>Benachrichtigungstext: Hinweis X Tage nach Statusänderung auf
+        "genehmigt_vorgeschlagen"
+    </config-push_receipt_processed_remind>
+    <config-push_receipt_processed_remind_after_days>Benachrichtigungszeitpunkt Status Änderung: Die Anzahl der Tage
+        nach Status Änderung
+    </config-push_receipt_processed_remind_after_days>
+    <config-push_receipt_benefit_1>Benachrichtigungstext: bei Ablauf des jährlichen Leistungsbelegs (Beginn des 12.
+        Monats)
+    </config-push_receipt_benefit_1>
+    <config-push_receipt_benefit_2_3>Benachrichtigungstext: bei Ablauf des jährlichen Leistungsbelegs (Ende des 13./14.
+        Monats)
+    </config-push_receipt_benefit_2_3>
+    <config-push_receipt_benefit_4>Benachrichtigungstext: bei Ablauf des jährlichen Leistungsbelegs (Beginn des 15.
+        Monats)
+    </config-push_receipt_benefit_4>
+    <config-message_automatic_denyal_month>Benachrichtigungstext: autom. Ablehnung wegen monatl. Limit Überschreitung
+    </config-message_automatic_denyal_month>
+    <config-message_automatic_denyal_year>Benachrichtigungstext: autom. Ablehnung wegen jährl. Limit Überschreitung
+    </config-message_automatic_denyal_year>
+    <config-message_automatic_denyal_integrity_check>Text für die automatische Ablehnung, wenn die Integrität beschädigt
+        ist
+    </config-message_automatic_denyal_integrity_check>
+    <config-message_for_approved_less_than_unit>Text zur Bestätigung der Quittung mit weniger als 1 Einheit
+    </config-message_for_approved_less_than_unit>
+    <config-message_automatic_deny_old_receipt>Text für die Ablehnung des alten Belegs (nach dem Abrechnungsdatum)
+    </config-message_automatic_deny_old_receipt>
+    <config-receipt_denial_comment>Benachrichtigungstext: für den Ablehnungsgrund</config-receipt_denial_comment>
+    <config-receipt_denial_reason>Liste Ablehnungsgründe</config-receipt_denial_reason>
+    <config-receipt_autodeny_month_limit>Monatliches Limit erreicht</config-receipt_autodeny_month_limit>
+    <config-receipt_autodeny_year_limit>Jahrliches Limit erreicht</config-receipt_autodeny_year_limit>
+    <config-receipt_autodeny_integrity_check>Integrität ist gebrochen</config-receipt_autodeny_integrity_check>
+    <config-receipt_autodeny_old_receipt>Beleg alt (frühere Abrechnungsperiode)</config-receipt_autodeny_old_receipt>
+    <config-push_remind_text>Benachrichtigungstext: noch nicht verwendetes Geld im Monat</config-push_remind_text>
+    <config-push_remind_text_food>Benachrichtigungstext: nicht verwendete Essensmarken im Monat
+    </config-push_remind_text_food>
+    <config-push_remind_text_bonus>Benachrichtigungstext, wenn der Mitarbeiter ungenutzte Gutscheine hat
+    </config-push_remind_text_bonus>
+    <config-log_push_notification>Push-Benachrichtigungen</config-log_push_notification>
+    <config-app_license>trebono Nutzungsbedingungen</config-app_license>
+    <config-app_guideline>trebono Richtline</config-app_guideline>
+    <config-get_started_document>Anhang Registrierungs E-Mail: Get Started</config-get_started_document>
+    <config-app_org_guideline>Organisationsanweisung</config-app_org_guideline>
+    <config-icon_actions>Aktionssymbol</config-icon_actions>
+    <config-icon_messages>Nachrichtensymbol</config-icon_messages>
+    <config-group-b_receipt_shop>OCR Digitale Essensmarke: Ausnahmen beim Einkauf</config-group-b_receipt_shop>
+    <config-group-c_receipt_restaurant>OCR Digitale Essensmarke: Ausnahmen Restaurant
+    </config-group-c_receipt_restaurant>
+    <config-group-o_ocr_misc>Andere Einstellungen</config-group-o_ocr_misc>
+    <config-group-e_export>EXPORT</config-group-e_export>
+    <config-group-m_mobile_app>Mobile App: Dynamische Inhalte</config-group-m_mobile_app>
+    <config-group-p_push>Push-Benachrichtigungseinstellungen</config-group-p_push>
+    <config-group-x_app_license>LIZENZBESTIMMUNGEN UND LEITLINIEN Texte</config-group-x_app_license>
+    <config-group-m_mobile_app_icons>Mobile App Andere Symbole</config-group-m_mobile_app_icons>
+    <config-group-o_option>Default values for options</config-group-o_option>
+    <config-group-r_autodeny>Texte automatische Ablehnung</config-group-r_autodeny>
+    <config-partnertype_updated>Partner Typ aktualisiert</config-partnertype_updated>
+    <config-no_such_partnertype>No such PartnerType</config-no_such_partnertype>
+    <config-message_records_updated>%number% Einträge aktualisiert</config-message_records_updated>
+    <config-group-misc>Sonstiges</config-group-misc>
+    <config-voucher_reason>Liste der Gründe für Bonus</config-voucher_reason>
+
+    <operation-section-receipt>Beleg Überprüfung</operation-section-receipt>
+    <operation-receipt_list>View the list of receipts</operation-receipt_list>
+    <operation-receipt_delete>Delete receipt</operation-receipt_delete>
+    <operation-receipt_activate>Activate receipt</operation-receipt_activate>
+    <operation-receipt_id>View the receipt</operation-receipt_id>
+    <operation-receipt_id_update>Update the receipt</operation-receipt_id_update>
+    <operation-receipt_line_id>View the line of receipt</operation-receipt_line_id>
+    <operation-receipt_line_id_save>Save the line of receipt</operation-receipt_line_id_save>
+    <operation-receipt_line_add>Add line to the receipt</operation-receipt_line_add>
+    <operation-receipt_comment_add>Add comment to the receipt</operation-receipt_comment_add>
+    <operation-section-company>Kunden</operation-section-company>
+    <operation-company_list>View the list of company units</operation-company_list>
+    <operation-company_delete>Delete company unit</operation-company_delete>
+    <operation-company_activate>Activate company unit</operation-company_activate>
+    <operation-company_id>View the company</operation-company_id>
+    <operation-company_id_save>Save the company unit</operation-company_id_save>
+    <operation-company_save_option>Save the option value of the company</operation-company_save_option>
+    <operation-contact_delete>Delete contact</operation-contact_delete>
+    <operation-contract_delete>Close partner contract</operation-contract_delete>
+    <operation-contact_id>View the company contact</operation-contact_id>
+    <operation-contact_id_save>Save the contact</operation-contact_id_save>
+    <operation-section-employee>Mitarbeiter</operation-section-employee>
+    <operation-employee_list>View the list of employee</operation-employee_list>
+    <operation-employee_delete>Delete employee</operation-employee_delete>
+    <operation-employee_activate>Activate employee</operation-employee_activate>
+    <operation-employee_id>View the employee</operation-employee_id>
+    <operation-employee_id_save>Save the employee</operation-employee_id_save>
+    <operation-employee_id_resend_email>Resend email for employee</operation-employee_id_resend_email>
+    <operation-employee_save_option>Save the option value of the employee</operation-employee_save_option>
+    <operation-voucher_id>Edit voucher</operation-voucher_id>
+    <operation-voucher_id_save>Save the voucher</operation-voucher_id_save>
+    <operation-employee_voucher_activate>Activate voucher</operation-employee_voucher_activate>
+    <operation-employee_voucher_remove>Delete voucher</operation-employee_voucher_remove>
+    <operation-section-product>Cloud Service Einstellungen</operation-section-product>
+    <operation-option_list>View the list of option</operation-option_list>
+    <operation-option_save>Wert gespeichert</operation-option_save>
+    <operation-section-billing>Rechnungsstellung</operation-section-billing>
+    <operation-invoice_list>View the list of invoice</operation-invoice_list>
+    <operation-invoice_delete>Delete invoice</operation-invoice_delete>
+    <operation-invoice_activate>Activate invoice</operation-invoice_activate>
+    <operation-section-config>Verschiedene einstellungen</operation-section-config>
+    <operation-config_id>View the exceptions for products</operation-config_id>
+    <operation-config_id_save>Save the exceptions for products</operation-config_id_save>
+    <operation-config_ou_remove>Remove organization unit</operation-config_ou_remove>
+    <operation-config_partner_type_edit>Edit default values for partner</operation-config_partner_type_edit>
+    <operation-config_save_option_values>Save OU options</operation-config_save_option_values>
+    <operation-section-logging>Logging</operation-section-logging>
+    <operation-operation_list>View the list of operations</operation-operation_list>
+    <operation-section-user>Anwender</operation-section-user>
+    <operation-user_list>View the list of users</operation-user_list>
+    <operation-user_delete>Delete user</operation-user_delete>
+    <operation-user_inactivate>Inactivate user(s)</operation-user_inactivate>
+    <operation-user_activate>Activate user</operation-user_activate>
+    <operation-user_id>View the user</operation-user_id>
+    <operation-user_id_save>Save the user</operation-user_id_save>
+    <operation-section-partner>Partner</operation-section-partner>
+    <operation-partner_id>View the partner information</operation-partner_id>
+    <operation-partner_list>View the list of partners</operation-partner_list>
+    <operation-partner_id_save>Save the partner</operation-partner_id_save>
+    <operation-partner_activate>Activate partner</operation-partner_activate>
+    <operation-partner_delete>Inactivate partner</operation-partner_delete>
+    <operation-commission_export>New commission export</operation-commission_export>
+    <operation-section-dashboard>Dashboard</operation-section-dashboard>
+    <operation-dashboard>View the dashboard</operation-dashboard>
+    <operation-section-push_history>Push Notification Logging</operation-section-push_history>
+    <operation-push_list>View list of push notifications</operation-push_list>
+
+    <image-removed>Datei gelöscht</image-removed>
+    <file-uploaded>Ihre Datei wurde erfolgreich hochgeladen!</file-uploaded>
+    <auto-save-success>Daten wurde automatisch gespeichert!</auto-save-success>
+    <auto-save-error>Fehler beim automatischen Speichern von Daten!</auto-save-error>
+
+    <ago-year>Jahr vor</ago-year>
+    <ago-years>Jahre vor</ago-years>
+    <ago-month>Monat vor</ago-month>
+    <ago-months>Monate vor</ago-months>
+    <ago-day>Tag vor</ago-day>
+    <ago-days>Tage vor</ago-days>
+    <ago-hour>Stunde vor</ago-hour>
+    <ago-hours>Stunden vor</ago-hours>
+    <ago-minute>Minute vor</ago-minute>
+    <ago-minutes>Minuten vor</ago-minutes>
+    <ago-second>Sekunde vor</ago-second>
+    <ago-seconds>Sekunden vor</ago-seconds>
+    <ago-now>vor weniger als eine Sekunde</ago-now>
+
+    <days>Tage</days>
+    <hours>Stunden</hours>
+    <minutes>Minuten</minutes>
+    <seconds>Sekunden</seconds>
+
+    <user-archive-y-message>%entity% wurde von User %username% am %datetime% de-aktiviert</user-archive-y-message>
+    <user-archive-n-message>%entity% wurde von User %username% am %datetime% aktiviert</user-archive-n-message>
+    <entity-user>Anwender</entity-user>
+    <entity-company_unit>Kunde</entity-company_unit>
+
+    <add-file>Datei hinzufügen</add-file>
+    <change-file>Datei ändern</change-file>
+    <download-file>Herunterladen Datei</download-file>
+
+    <section-ocr>OCR-Einstellung</section-ocr>
+    <section-push>Mitteilungen</section-push>
+    <section-others>Andere</section-others>
+
+    <app_version-empty>App-Version eingeben</app_version-empty>
+    <client-empty>Wählen Sie Client aus</client-empty>
+    <app_version-group-client>Client</app_version-group-client>
+</Root>

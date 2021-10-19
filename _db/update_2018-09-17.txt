@@ -1,0 +1,33 @@
+--lst-main
+CREATE TABLE public.partner_type
+(
+    partner_type_id integer NOT NULL,
+    title character varying NOT NULL,
+    abbreviation character varying NOT NULL,
+    commission character varying(20),
+    implementation_fee character varying(20),
+    "long" character varying,
+    period character varying,
+    report_date character varying,
+    PRIMARY KEY (partner_type_id)
+)
+WITH (
+    OIDS = FALSE
+);
+
+DELETE FROM partner_type WHERE partner_type_id=2;
+DELETE FROM partner_type WHERE partner_type_id=3;
+
+INSERT INTO partner_type (partner_type_id, title, abbreviation, commission, implementation_fee, long, period, report_date)
+    VALUES(1, 'Business Partner', 'BP', '5', '0', '18', 'quarter','quarter middle');
+INSERT INTO partner_type (partner_type_id, title, abbreviation, commission, implementation_fee, long, period, report_date)
+    VALUES(2, 'Kundenbetreuer', 'KB', '5', '5', '0', 'month','invoice date');
+INSERT INTO partner_type (partner_type_id, title, abbreviation, commission, implementation_fee, long, period, report_date)
+    VALUES(3, 'Lösungspartner', 'LP', '5', '5', '0', 'month','invoice date');
+
+--lst-control
+ALTER TABLE public.partner_contract
+    ADD COLUMN partner_type integer,
+    ALTER COLUMN "long" SET DEFAULT 0,
+    ALTER COLUMN commission SET DEFAULT 0,
+    ALTER COLUMN implementation_fee SET DEFAULT 0;

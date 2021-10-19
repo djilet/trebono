@@ -1,0 +1,2 @@
+CREATE SEQUENCE "public"."operation_OperationID_seq" INCREMENT 1;
+CREATE TABLE "public"."operation" ("operation_id" integer NOT NULL DEFAULT nextval('"operation_OperationID_seq"'::regclass), "date" timestamp without time zone NOT NULL, "user_id" integer NOT NULL, "ip" character varying(255) NOT NULL, "link" character varying(255) NOT NULL, "section" character varying(255) NOT NULL, "code" character varying(255) NOT NULL, "object_id" integer) WITHOUT OIDS;

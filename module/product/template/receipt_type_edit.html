@@ -1,0 +1,75 @@
+<div class="row">
+	<TMPL_INCLUDE FILE='_navigation.html'>
+	
+	<TMPL_IF NAME='ErrorList'>
+		<div class="alert alert-danger alert-no-margin">
+			<TMPL_LOOP NAME='ErrorList'>
+				<TMPL_VAR NAME='Message'><TMPL_UNLESS NAME='__LAST__'><br /></TMPL_UNLESS>
+			</TMPL_LOOP>
+		</div>
+	</TMPL_IF>
+	<TMPL_IF NAME='MessageList'>
+		<div class="alert alert-success alert-no-margin">
+			<TMPL_LOOP NAME='MessageList'>
+				<TMPL_VAR NAME='Message'><TMPL_UNLESS NAME='__LAST__'><br /></TMPL_UNLESS>
+			</TMPL_LOOP>
+		</div>
+	</TMPL_IF>
+	
+	<section class="box no-margin">
+		<header class="panel_header" for="header_receipt_type_edit" table="product">
+			<TMPL_IF NAME='app_version_id'>
+				<h2 class="title"><TMPL_VAR NAME='LNG_EditReceiptType'></h2>
+			<TMPL_ELSE>
+				<h2 class="title"><TMPL_VAR NAME='LNG_AddReceiptType'></h2>
+			</TMPL_IF>
+		</header>
+		<div class="content-body">
+			<form action="<TMPL_VAR NAME='MODULE_URL'>" method="post" enctype="multipart/form-data" autocomplete="off">
+				<h1><TMPL_VAR NAME='title_translation'></h1>
+				<label for="receipt_type_image-box"><TMPL_VAR NAME='LNG_Icon'></label>
+				<div class="form-group" id="receipt_type_image-box"></div>
+				<script type="text/javascript">
+					$(document).ready(function(){
+						params = new Array();
+						<TMPL_LOOP NAME='ReceiptTypeImageParamList'>
+							params.push({
+								"Name" : "<TMPL_VAR NAME='SourceName'>",
+								"Width" : "<TMPL_VAR NAME='Width'>",
+								"Height" : "<TMPL_VAR NAME='Height'>",
+								"Resize" : "<TMPL_VAR NAME='Resize'>",
+								"X1" : "<TMPL_VAR NAME='X1'>",
+								"X2" : "<TMPL_VAR NAME='X2'>",
+								"Y1" : "<TMPL_VAR NAME='Y1'>",
+								"Y2" : "<TMPL_VAR NAME='Y2'>"
+							});
+						</TMPL_LOOP>
+						CreateImageInput('receipt_type_image', '<TMPL_VAR NAME='receipt_type_image_admin_path'>', '<TMPL_VAR NAME='receipt_type_image_full_path'>', '<TMPL_VAR NAME='receipt_type_image'>', '<TMPL_VAR NAME='receipt_type_id'>', 'RemoveReceiptTypeImage', '<TMPL_VAR NAME='MODULE_PATH'>ajax.php', 0, params);
+					});	
+				</script>
+				<div class="form-group">
+					<label for="code"><TMPL_VAR NAME='LNG_Code'></label>
+					<input class="form-control required" type="text" name="code" id="code" value="<TMPL_VAR NAME='code'>" />
+				</div>
+				<TMPL_IF NAME='LanguageList'>
+					<div class="form-group">
+						<label for="translation_list"><TMPL_VAR NAME='LNG_Translation'></label>
+						<TMPL_LOOP NAME='LanguageList'>
+							<div class="form-group">
+								<label for="translation_list"><TMPL_VAR NAME='Name'></label>
+								<input class="form-control required" type="text" name="translation_list[<TMPL_VAR NAME='Folder'>]" value="<TMPL_VAR NAME='translation'>" />
+							</div>
+						</TMPL_LOOP>
+					</div>
+				</TMPL_IF>
+				<div>
+					<button type="submit" class="btn btn-primary btn-icon right15"><i class="fa fa-save"></i><TMPL_VAR NAME='LNG_Save'></button>
+					<a class="btn btn-icon" href="<TMPL_VAR NAME='MODULE_URL'>&<TMPL_VAR NAME='ParamsForURL'>"><i class="fa fa-ban"></i><TMPL_VAR NAME='LNG_Cancel'></a>
+				</div>
+				<TMPL_VAR NAME='ParamsForForm' ESCAPE='none'>
+				<input type="hidden" name="receipt_type_id" value="<TMPL_VAR NAME='receipt_type_id'>" />
+				<input type="hidden" name="Save" value="1" />
+			</form>
+		</div>
+	</section>
+</div>

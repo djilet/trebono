@@ -1,0 +1,44 @@
+<TMPL_UNLESS NAME='DoNotShowOptionList'>
+	<TMPL_LOOP NAME="ProductGroupOptionList">
+		<TMPL_UNLESS NAME="VoucherCategoryList">
+			<div class="col-md-4 form-group">
+				<TMPL_VAR NAME='ProductGroupOptionList.title_translation'>: <strong><TMPL_VAR NAME='ProductGroupOptionList.value'></strong>
+			</div>
+		</TMPL_UNLESS>
+	</TMPL_LOOP>
+</TMPL_UNLESS>
+<TMPL_IF NAME='ValidationFlatTaxRateActive'>
+	<div class="col-md-6">
+		<div class="alert alert-danger">
+			<TMPL_VAR NAME='ValidationFlatTaxRateActive'>
+		</div>
+	</div>
+</TMPL_IF>
+<TMPL_IF NAME='ShowVoucherTable'>
+	<table class="table table-bordered">
+		<thead>
+		<tr>
+			<TMPL_IF NAME='SetsOfGoodsList'>
+				<th width="25%"><TMPL_VAR NAME='LNG_SetOfGoods'></th>
+			</TMPL_IF>
+			<th><TMPL_VAR NAME='LNG_TotalAvailable'></th>
+			<th><TMPL_VAR NAME='LNG_AvailableVouchers'></th>
+			<th><TMPL_VAR NAME='LNG_ApprovedAtVouchers'></th>
+		</tr>
+		</thead>
+		<tbody>
+		<TMPL_LOOP NAME="ProductGroupOptionList">
+			<TMPL_LOOP NAME="VoucherCategoryList">
+				<tr>
+					<TMPL_IF NAME='SetsOfGoodsList'>
+						<td><TMPL_VAR NAME='sets_of_goods'></td>
+					</TMPL_IF>
+					<td><TMPL_VAR NAME='available_amount'></td>
+					<td><TMPL_VAR NAME='available_vouchers'></td>
+					<td><TMPL_VAR NAME='approved_vouchers'></td>
+				</tr>
+			</TMPL_LOOP>
+		</TMPL_LOOP>
+		</tbody>
+	</table>
+</TMPL_IF>

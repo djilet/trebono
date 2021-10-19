@@ -1,0 +1,30 @@
+--lst_main
+DROP TABLE "public"."company_unit_contract";
+ALTER TABLE "public"."company_unit" RENAME COLUMN "payment_period" TO "invoice_date";
+
+ALTER TABLE public.receipt
+  ADD COLUMN archive flag NOT NULL DEFAULT 'N';
+
+ALTER TABLE public.company_unit
+  ADD COLUMN archive flag NOT NULL DEFAULT 'N';
+
+--lst_personal
+CREATE TABLE device (
+    device_id character varying(255) NOT NULL,
+    client character varying(10) NOT NULL,
+    private_key character varying(255) NOT NULL,
+    push_token character varying(255),
+    user_id integer,
+    created timestamp without time zone NOT NULL
+);
+ALTER TABLE ONLY device ADD CONSTRAINT device_pkey PRIMARY KEY (device_id);
+ALTER TABLE ONLY device ADD CONSTRAINT device_user_id_fkey FOREIGN KEY (user_id) REFERENCES user_info(user_id);
+
+CREATE TYPE public.flag AS ENUM
+('Y', 'N');
+
+ALTER TABLE public.employee
+  ADD COLUMN archive flag NOT NULL DEFAULT 'N';
+
+ALTER TABLE public.user_info
+  ADD COLUMN archive flag NOT NULL DEFAULT 'N';

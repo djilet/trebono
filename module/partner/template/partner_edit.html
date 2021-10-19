@@ -1,0 +1,1016 @@
+<div class="row">
+	<TMPL_IF NAME='ErrorList'>
+		<div class="alert alert-danger alert-no-margin">
+			<TMPL_LOOP NAME='ErrorList'>
+				<TMPL_VAR NAME='Message'><TMPL_UNLESS NAME='__LAST__'><br /></TMPL_UNLESS>
+			</TMPL_LOOP>
+		</div>
+	</TMPL_IF>
+	<TMPL_IF NAME='MessageList'>
+		<div class="alert alert-success alert-no-margin">
+			<TMPL_LOOP NAME='MessageList'>
+				<TMPL_VAR NAME='Message'><TMPL_UNLESS NAME='__LAST__'><br /></TMPL_UNLESS>
+			</TMPL_LOOP>
+		</div>
+	</TMPL_IF>
+</div>
+<div class="floating-button-row">
+	<div class="grid">
+		<div class="row">
+			<section class="box no-margin">
+				<header class="panel_header" for="header_partner_edit" table="partner">
+					<TMPL_IF NAME='partner_id'>
+						<h1 class="title"><TMPL_VAR NAME='LNG_EditPartner'></h1>
+					<TMPL_ELSE>
+						<h1 class="title"><TMPL_VAR NAME='LNG_AddPartner'></h1>
+					</TMPL_IF>
+				</header>
+				<div class="content-body padding-3">
+					<div class="row row-new">
+						<ul class="nav nav-tabs">
+							<li class="active"><a href="#tab-1" data-toggle='tab' for="nav_tab1_partner_edit" table="partner"><TMPL_VAR NAME='LNG_TabPartnerInfo'></a></li>
+							<li><a href="#tab-2" data-toggle='tab' for="nav_tab2_partner_edit" table="partner"><TMPL_VAR NAME='LNG_TabCloudServices'></a></li>
+						</ul>
+						<div class="tab-content">
+							<div id="tab-1" class="tab-pane active">
+								<div class="row">
+									<form action="<TMPL_VAR NAME='MODULE_URL'>" method="post" class="enter-to-tab" data-validation="true" autocomplete="off" enctype="multipart/form-data" id="partner_edit">
+										<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 padding-3">
+											<section class="box">
+												<header class="panel_header" for="header_partner_edit_general" table="partner">
+													<h2 class="title"><TMPL_VAR NAME='LNG_GeneralInfo'/></h2>
+												</header>
+												<div class="content-body">
+													<div class="row">
+														<div class="col-md-12 col-sm-12 col-xs-12">
+															<div class="form-group">
+																<label class="form-label required" for="title" table="partner"><TMPL_VAR NAME='LNG_Title'></label>
+																<TMPL_IF NAME="partner_id">
+																	<TMPL_IF NAME='HistoryAdmin'>
+																		(<a href="#" class="property-history" property_name="title"><TMPL_VAR NAME='LNG_RevisionHistory'></a>)
+																	</TMPL_IF>
+																</TMPL_IF>
+																<div class="controls"><input type="text" class="form-control" name="title" value="<TMPL_VAR NAME='title'>"></div>
+															</div>
+															<div class="form-group">
+																<label class="form-label" for="company_unit_id" table="partner"><TMPL_VAR NAME='LNG_CompanyUnitID'/></label>
+																<TMPL_IF NAME="partner_id">
+																	<TMPL_IF NAME='HistoryAdmin'>
+																		(<a href="#" class="property-history" property_name="company_unit_id"><TMPL_VAR NAME='LNG_RevisionHistory'></a>)
+																	</TMPL_IF>
+																</TMPL_IF>
+																<input type="hidden" name="company_unit_id" id="s2_company_unit_id" value="<TMPL_VAR NAME='company_unit_id'>"/>
+															</div>
+															<div class="row">
+																<div class="col-md-6">
+																	<div class="form-group">
+																		<label class="form-label" for="street" table="partner"><TMPL_VAR NAME='LNG_Street'></label>
+																		<TMPL_IF NAME="partner_id">
+																			<TMPL_IF NAME='HistoryAdmin'>
+																				(<a href="#" class="property-history" property_name="street"><TMPL_VAR NAME='LNG_RevisionHistory'></a>)
+																			</TMPL_IF>
+																		</TMPL_IF>
+																		<div class="controls"><input type="text" class="form-control" name="street" value="<TMPL_VAR NAME='street'>"></div>
+																	</div>
+																</div>
+																<div class="col-md-6">
+																	<div class="form-group">
+																		<label class="form-label" for="house" table="partner"><TMPL_VAR NAME='LNG_House'></label>
+																		<TMPL_IF NAME="partner_id">
+																			<TMPL_IF NAME='HistoryAdmin'>
+																				(<a href="#" class="property-history" property_name="house"><TMPL_VAR NAME='LNG_RevisionHistory'/></a>)
+																			</TMPL_IF>
+																		</TMPL_IF>
+																		<div class="controls"><input type="text" class="form-control" name="house" value="<TMPL_VAR NAME='house'>"></div>
+																	</div>
+																</div>
+															</div>
+															<div class="row">
+																<div class="col-md-6">
+																	<div class="form-group">
+																		<label class="form-label" for="zip_code" table="partner"><TMPL_VAR NAME='LNG_ZipCode'></label>
+																		<TMPL_IF NAME="partner_id">
+																			<TMPL_IF NAME='HistoryAdmin'>
+																				(<a href="#" class="property-history" property_name="zip_code"><TMPL_VAR NAME='LNG_RevisionHistory'></a>)
+																			</TMPL_IF>
+																		</TMPL_IF>
+																		<div class="controls"><input type="text" class="form-control" name="zip_code" value="<TMPL_VAR NAME='zip_code'>"></div>
+																	</div>
+																</div>
+																<div class="col-md-6">
+																	<div class="form-group">
+																		<label class="form-label" for="city" table="partner"><TMPL_VAR NAME='LNG_City'></label>
+																		<TMPL_IF NAME="partner_id">
+																			<TMPL_IF NAME='HistoryAdmin'>
+																				(<a href="#" class="property-history" property_name="city"><TMPL_VAR NAME='LNG_RevisionHistory'></a>)
+																			</TMPL_IF>
+																		</TMPL_IF>
+																		<div class="controls"><input type="text" class="form-control" name="city" value="<TMPL_VAR NAME='city'>"></div>
+																	</div>
+																</div>
+															</div>
+															<div class="form-group">
+																<label class="form-label" for="country" table="partner"><TMPL_VAR NAME='LNG_Country'></label>
+																<TMPL_IF NAME="partner_id">
+																	<TMPL_IF NAME='HistoryAdmin'>
+																		(<a href="#" class="property-history" property_name="country"><TMPL_VAR NAME='LNG_RevisionHistory'></a>)
+																	</TMPL_IF>
+																</TMPL_IF>
+																<div class="controls"><input type="text" class="form-control" name="country" value="<TMPL_VAR NAME='country'>"></div>
+															</div>
+															<div class="form-group">
+																<label class="form-label" for="phone" table="partner"><TMPL_VAR NAME='LNG_Phone'></label>
+																<TMPL_IF NAME="partner_id">
+																	<TMPL_IF NAME='HistoryAdmin'>
+																		(<a href="#" class="property-history" property_name="phone"><TMPL_VAR NAME='LNG_RevisionHistory'></a>)
+																	</TMPL_IF>
+																</TMPL_IF>
+																<div class="controls"><input type="text" class="form-control" name="phone" value="<TMPL_VAR NAME='phone'>" data-mask="phone"></div>
+															</div>
+															<div class="form-group">
+																<label class="form-label" for="email" table="partner"><TMPL_VAR NAME='LNG_Email'></label>
+																<TMPL_IF NAME="partner_id">
+																	<TMPL_IF NAME='HistoryAdmin'>
+																		(<a href="#" class="property-history" property_name="email"><TMPL_VAR NAME='LNG_RevisionHistory'></a>)
+																	</TMPL_IF>
+																</TMPL_IF>
+																<div class="controls"><input type="text" class="form-control" name="email" value="<TMPL_VAR NAME='email'>" data-validation-type="email"></div>
+															</div>
+															<div class="form-group">
+																<label class="form-label" for="comment" table="partner"><TMPL_VAR NAME='LNG_Comment'></label>
+																<TMPL_IF NAME="partner_id">
+																	<TMPL_IF NAME='HistoryAdmin'>
+																		(<a href="#" class="property-history" property_name="comment"><TMPL_VAR NAME='LNG_RevisionHistory'></a>)
+																	</TMPL_IF>
+																</TMPL_IF>
+																<div class="controls"><input type="text" class="form-control" name="comment" value="<TMPL_VAR NAME='comment'>"></div>
+															</div>
+															<div class="form-group company-only">
+																<label class="form-label" for="bank_details" table="partner"><TMPL_VAR NAME='LNG_BankDetails'></label>
+																<TMPL_IF NAME="partner_id">
+																	<TMPL_IF NAME='HistoryAdmin'>
+																		(<a href="#" class="property-history" property_name="bank_details"><TMPL_VAR NAME='LNG_RevisionHistory'></a>)
+																	</TMPL_IF>
+																</TMPL_IF>
+																<div class="controls"><input type="text" class="form-control" name="bank_details" value="<TMPL_VAR NAME='bank_details'>"></div>
+															</div>
+															<div class="form-group company-only">
+																<label class="form-label" for="iban" table="partner"><TMPL_VAR NAME='LNG_IBAN'></label>
+																<TMPL_IF NAME="partner_id">
+																	<TMPL_IF NAME='HistoryAdmin'>
+																		(<a href="#" class="property-history" property_name="iban"><TMPL_VAR NAME='LNG_RevisionHistory'></a>)
+																	</TMPL_IF>
+																</TMPL_IF>
+																<div class="controls"><input type="text" class="form-control" name="iban" value="<TMPL_VAR NAME='iban'>"></div>
+															</div>
+															<div class="form-group company-only">
+																<label class="form-label" for="bic" table="partner"><TMPL_VAR NAME='LNG_BIC'></label>
+																<TMPL_IF NAME="partner_id">
+																	<TMPL_IF NAME='HistoryAdmin'>
+																		(<a href="#" class="property-history" property_name="bic"><TMPL_VAR NAME='LNG_RevisionHistory'></a>)
+																	</TMPL_IF>
+																</TMPL_IF>
+																<div class="controls"><input type="text" class="form-control" name="bic" value="<TMPL_VAR NAME='bic'>"></div>
+															</div>
+															<div class="form-group company-only">
+																<label class="form-label" for="register" table="partner"><TMPL_VAR NAME='LNG_Register'></label>
+																<TMPL_IF NAME="partner_id">
+																	<TMPL_IF NAME='HistoryAdmin'>
+																		(<a href="#" class="property-history" property_name="register"><TMPL_VAR NAME='LNG_RevisionHistory'></a>)
+																	</TMPL_IF>
+																</TMPL_IF>
+																<div class="controls"><input type="text" class="form-control" name="register" value="<TMPL_VAR NAME='register'>"></div>
+															</div>
+															<div class="form-group company-only">
+																<label class="form-label" for="tax_number" table="partner"><TMPL_VAR NAME='LNG_TaxNumber'></label>
+																<TMPL_IF NAME="partner_id">
+																	<TMPL_IF NAME='HistoryAdmin'>
+																		(<a href="#" class="property-history" property_name="tax_number"><TMPL_VAR NAME='LNG_RevisionHistory'></a>)
+																	</TMPL_IF>
+																</TMPL_IF>
+																<div class="controls"><input type="text" class="form-control" name="tax_number" value="<TMPL_VAR NAME='tax_number'>"></div>
+															</div>
+															<div class="form-group company-only">
+																<label class="form-label" for="tax_consultant" table="partner"><TMPL_VAR NAME='LNG_TaxConsultant'></label>
+																<TMPL_IF NAME="partner_id">
+																	<TMPL_IF NAME='HistoryAdmin'>
+																		(<a href="#" class="property-history" property_name="tax_consultant"><TMPL_VAR NAME='LNG_RevisionHistory'></a>)
+																	</TMPL_IF>
+																</TMPL_IF>
+																<div class="controls"><input type="text" class="form-control" name="tax_consultant" value="<TMPL_VAR NAME='tax_consultant'>"></div>
+															</div>
+														</div>
+													</div>
+												</div>
+											</section>
+										</div>
+									</form>
+									<TMPL_IF NAME="partner_id">
+										<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 padding-3">
+											<section class="box">
+												<header class="panel_header" for="header_partner_edit_contact_list" table="partner">
+													<h2 class="title"><TMPL_VAR NAME='LNG_ContactList'/></h2>
+												</header>
+												<div class="content-body">
+													<div class="row">
+														<div class="col-md-12 col-sm-12 col-xs-12">
+															<TMPL_IF NAME='partner_id'>
+																<TMPL_IF NAME='ContactList'>
+																	<table class="table table-hover">
+																		<thead>
+																		<tr>
+																			<th><TMPL_VAR NAME='LNG_ContactName'/></th>
+																			<th><TMPL_VAR NAME='LNG_ContactType'/></th>
+																			<th><TMPL_VAR NAME='LNG_ContactEmail'/></th>
+																			<th><TMPL_VAR NAME='LNG_ContactPhone'/></th>
+																			<th>&nbsp;</th>
+																		</tr>
+																		</thead>
+																		<tbody>
+																		<TMPL_LOOP NAME='ContactList'>
+																			<tr>
+																				<td>
+																					<a href="<TMPL_VAR NAME='MODULE_URL'>&<TMPL_VAR NAME='ParamsForURL'>&partner_id=<TMPL_VAR NAME='partner_id'>&contact_id=<TMPL_VAR NAME='contact_id'>">
+																						<TMPL_VAR NAME='first_name'/> <TMPL_VAR NAME='last_name'/>
+																					</a>
+																				</td>
+																				<td><TMPL_VAR NAME='contact_type_title'/></td>
+																				<td><a href="mailto:<TMPL_VAR NAME='email'>"><TMPL_VAR NAME='email'/></a></td>
+																				<td>
+																					<TMPL_IF NAME='phone'>
+																						<div><a href="tel:<TMPL_VAR NAME='phone'>"><TMPL_VAR NAME='phone'/></a></div>
+																					</TMPL_IF>
+																					<TMPL_IF NAME='phone_job'>
+																						<div><a href="tel:<TMPL_VAR NAME='phone_job'>"><TMPL_VAR NAME='phone_job'/></a></div>
+																					</TMPL_IF>
+																				</td>
+																				<td class="text-nowrap">
+																					<a href="<TMPL_VAR NAME='MODULE_URL'>&<TMPL_VAR NAME='ParamsForURL'>&partner_id=<TMPL_VAR NAME='partner_id'>&Do=RemoveContact&ContactIDs[]=<TMPL_VAR NAME='contact_id'>" class="confirm-remove" title="<TMPL_VAR NAME='first_name'> <TMPL_VAR NAME='last_name'>"><i class="fa fa-close"></i></a>
+																				</td>
+																			</tr>
+																		</TMPL_LOOP>
+																		</tbody>
+																	</table>
+																	<TMPL_ELSE/>
+																	<div class="alert alert-success"><TMPL_VAR NAME='LNG_Empty'/></div>
+																</TMPL_IF>
+																<a href="<TMPL_VAR NAME='MODULE_URL'>&<TMPL_VAR NAME='ParamsForURL'>&partner_id=<TMPL_VAR NAME='partner_id'>&contact_id=" class="btn btn-primary btn-icon"><i class="fa fa-plus"></i> <TMPL_VAR NAME='LNG_AddContact'/></a>
+																<TMPL_ELSE/>
+																<div class="alert alert-warning"><TMPL_VAR NAME='LNG_ContactListAccessNote'/></div>
+															</TMPL_IF>
+														</div>
+													</div>
+												</div>
+											</section>
+											<TMPL_IF NAME="Admin">
+											<section class="box">
+												<header class="panel_header" for="header_partner_edit_commision" table="partner">
+													<h2 class="title"><TMPL_VAR NAME='LNG_FieldsetCommission'/></h2>
+												</header>
+												<div class="content-body">
+													<TMPL_IF NAME="CommissionList">
+														<table class="table">
+															<thead>
+															<tr>
+																<th><TMPL_VAR NAME='LNG_CommissionDate'/></th>
+																<th><TMPL_VAR NAME='LNG_CommissionSum'/></th>
+																<th><TMPL_VAR NAME='LNG_CommissionFile'/></th>
+															</tr>
+															</thead>
+															<tbody>
+															<TMPL_LOOP NAME="CommissionList">
+																<tr>
+																	<td>
+																		<TMPL_VAR NAME="date" FORMAT='datepicker'/>
+																	</td>
+																	<td><TMPL_VAR NAME="sum"/> </td>
+																	<td><a href="<TMPL_VAR NAME='ExportFile_download_path'>">
+																		<TMPL_VAR NAME="LNG_CommissionDownload"/>&nbsp;
+																		<i class="fa fa-file"></i>
+																	</a></td>
+																</tr>
+															</TMPL_LOOP>
+															</tbody>
+														</table>
+														<TMPL_IF NAME='CommissionPaging'>
+															<div class="text-center">
+																<ul class="pagination">
+																	<TMPL_VAR NAME='CommissionPaging' ESCAPE='none'/>
+																</ul>
+															</div>
+														</TMPL_IF>
+														<TMPL_ELSE/>
+														<div class="alert alert-success"><TMPL_VAR NAME='LNG_Empty'></div>
+													</TMPL_IF>
+													<form id="ExportCommission" action="<TMPL_VAR NAME='MODULE_URL'>&partner_id=<TMPL_VAR NAME='partner_id'>" method="post">
+														<input type="hidden" name="Do" value="Action">
+														<input type="hidden" name="Action" value="ExportCommission">
+														<div class="input-group">
+															<span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+															<input class="datepicker" type="text" name="ExportDate" value="<TMPL_VAR NAME='ExportDate' FORMAT='datepicker'>" />
+															<a href="#" class="export-commission btn btn-primary"><TMPL_VAR NAME="LNG_ExportCommission"/></a>
+														</div>
+													</form>
+												</div>
+											</section>
+											</TMPL_IF>
+										</div>
+									</TMPL_IF>
+									<div class="col-md-12 padding-3">
+										<div class="row row-new">
+											<TMPL_IF NAME="Admin">
+												<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 padding-3">
+													<form action="<TMPL_VAR NAME='MODULE_URL'>" method="post" class="enter-to-tab" data-validation="true" autocomplete="off" enctype="multipart/form-data" id="company_multi_select">
+														<section class="box">
+															<header class="panel_header" for="header_partner_edit_add_contracts" table="partner">
+																<h2 class="title"><TMPL_VAR NAME="LNG_CompanyAddContracts"/></h2>
+															</header>
+															<div class="content-body">
+																<div class="row">
+																	<div class="col-md-offset-3 col-md-6">
+																		<select name="company_unit_id" id="CompanyUnitForContract" data-allow-clear="true">
+																			<option value=""></option>
+																			<TMPL_VAR NAME="CompanyListHtml" ESCAPE="none"/>
+																		</select>
+																	</div>
+																</div>
+																<p class="top15">
+																	<TMPL_VAR NAME="LNG_CompanyMultiSelectMessage"/>
+																</p>
+																<div class="row">
+																	<div class="col-md-6" id="CompanyMultiSelectParams">
+																		<select name="partner_type" class="form-control select2-like placehold">
+																			<option class="placeholder" value=""><TMPL_VAR NAME="LNG_PartnerType"/></option>
+																			<option value="BP"><TMPL_VAR NAME="LNG_BusinessPartner"/></option>
+																			<option value="KB"><TMPL_VAR NAME="LNG_Kundenbetreuer"/></option>
+																			<option value="LP"><TMPL_VAR NAME="LNG_LosungPartner"/></option>
+																		</select>
+																		<br>
+																		<div class="row" data-type="0" hidden>
+																			<div class="col-md-4">
+																				<label for="commission"><TMPL_VAR NAME="LNG_Commission"/></label>
+																			</div>
+																			<div class="col-md-8">
+																				<input class="form-control input-sm" type="text" name="commission" id="commission">
+																			</div>
+																		</div>
+																		<div class="row" data-type="1" hidden>
+																			<div class="col-md-4">
+																				<label for="long"><TMPL_VAR NAME="LNG_Long"/></label>
+																			</div>
+																			<div class="col-md-8">
+																				<input class="form-control input-sm" type="text" name="long" id="long">
+																			</div>
+																		</div>
+																		<div class="row" data-type="2" hidden>
+																			<div class="col-md-4">
+																				<label for="implementation_fee"><TMPL_VAR NAME="LNG_ImplementationFee"/></label>
+																			</div>
+																			<div class="col-md-8">
+																				<input type="text" class="form-control input-sm" name="implementation_fee" id="implementation_fee">
+																			</div>
+																		</div>
+																	</div>
+																	<div class="col-md-6">
+																		<div>
+																			<select name="product_id[]" class="form-control select2-like placehold SelectProduct SelectProductForContract" data-placeholder="<TMPL_VAR NAME='LNG_ProductId'>">
+																				<option class="placeholder" value=""><TMPL_VAR NAME='LNG_ProductId'/></option>
+																				<TMPL_LOOP NAME='ProductGroupList'>
+																					<optgroup label="<TMPL_VAR NAME='title_translation'>">
+																						<TMPL_LOOP NAME="ProductList">
+																							<option value="<TMPL_VAR NAME='product_id'>"><TMPL_VAR NAME='title_translation'/></option>
+																						</TMPL_LOOP>
+																					</optgroup>
+																				</TMPL_LOOP>
+																			</select>
+																		</div>
+																		<br>
+																		<div class="col-md-6">
+																			<a href="#" class="CompanyOneMore"><TMPL_VAR NAME="LNG_CompanyOneMore"/></a>
+																		</div>
+																		<div class="col-md-6">
+																			<a href="#" class="CompanyAddAll"><TMPL_VAR NAME="LNG_CompanyAddAll"/></a>
+																		</div>
+																	</div>
+																	<div class="col-md-6">
+																		<input type="text" class="form-control datepicker" name="start_date" placeholder="<TMPL_VAR NAME='LNG_CompanyStartDate'>"/>
+																	</div>
+																	<div class="col-md-6">
+																		<input type="text" class="form-control datepicker" name="end_date" placeholder="<TMPL_VAR NAME='LNG_CompanyEndDate'>"/>
+																	</div>
+																</div>
+																<button id="CompanyMultiSelectCreate" class="btn btn-primary btn-icon right15 top15">
+																	<i class="fa fa-plus"></i><TMPL_VAR NAME="LNG_Create"/>
+																</button>
+															</div>
+														</section>
+														<input type="hidden" name="Action" value="CompanyMultiSelect">
+														<input type="hidden" name="partner_id" value="<TMPL_VAR NAME='partner_id'>">
+													</form>
+												</div>
+												<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 padding-3">
+													<form action="<TMPL_VAR NAME='MODULE_URL'>" method="post" class="enter-to-tab" data-validation="true" autocomplete="off" enctype="multipart/form-data" id="company_multy_remove">
+														<section class="box">
+															<header class="panel_header" for="header_partner_edit_delete_contracts" table="partner">
+																<h2 class="title"><TMPL_VAR NAME="LNG_CompanyDeleteContracts"/></h2>
+															</header>
+															<div class="content-body">
+																<div class="row">
+																	<div class="col-md-offset-3 col-md-6">
+																		<select name="company_unit_id" data-allow-clear="true">
+																			<option value=""></option>
+																			<TMPL_VAR NAME="CurrentCompanyListHtml" ESCAPE="none"/>
+																		</select>
+																	</div>
+																</div>
+																<div class="row top15">
+																	<div class="col-md-6">
+																		<div>
+																			<select name="product_id[]" class="form-control select2-like placehold SelectProduct" data-placeholder="<TMPL_VAR NAME='LNG_ProductId'>">
+																				<option class="placeholder" value=""><TMPL_VAR NAME='LNG_ProductId'/></option>
+																				<TMPL_LOOP NAME='ProductGroupList'>
+																					<optgroup label="<TMPL_VAR NAME='title_translation'>">
+																						<TMPL_LOOP NAME="ProductList">
+																							<option value="<TMPL_VAR NAME='product_id'>"><TMPL_VAR NAME='title_translation'/></option>
+																						</TMPL_LOOP>
+																					</optgroup>
+																				</TMPL_LOOP>
+																			</select>
+																		</div>
+																		<br>
+																		<div class="col-md-6">
+																			<a href="#" class="CompanyOneMore"><TMPL_VAR NAME="LNG_CompanyOneMore"/></a>
+																		</div>
+																		<div class="col-md-6">
+																			<a href="#" class="CompanyAddAll"><TMPL_VAR NAME="LNG_CompanyAddAll"/></a>
+																		</div>
+																	</div>
+																	<div class="col-md-6">
+																		<input type="text" class="form-control datepicker" name="end_date" placeholder="<TMPL_VAR NAME='LNG_CompanyEndDate'>"/>
+																	</div>
+																</div>
+																<button id="CompanyMultiSelectRemove" class="btn btn-primary btn-icon right15 top15">
+																	<i class="fa fa-minus"></i><TMPL_VAR NAME="LNG_Remove"/>
+																</button>
+															</div>
+														</section>
+														<input type="hidden" name="Action" value="CompanyMultiSelect">
+														<input type="hidden" name="Delete" value="1">
+														<input type="hidden" name="partner_id" value="<TMPL_VAR NAME='partner_id'>">
+													</form>
+												</div>
+											</TMPL_IF>
+										</div>
+									</div>
+								</div>
+							</div>
+
+							<div id="tab-2" class="tab-pane">
+								<div class="row">
+									<TMPL_IF NAME='partner_id'>
+										<TMPL_LOOP NAME='ProductGroupList'>
+											<section class="box no-margin">
+												<header class="panel_header">
+													<h2 class="title pull-left"><TMPL_VAR NAME='title_translation'/></h2>
+												</header>
+												<div class="content-body padding-3">
+													<div class="row row-new">
+														<div class="col-md-6 padding-3">
+														<TMPL_LOOP NAME='ProductList'>
+																<TMPL_IF NAME="__ROWNUM__" VALUE="2">
+															</div>
+														<div class="col-md-6 padding-3">
+															</TMPL_IF>
+															<section class="box">
+																<header class="panel_header">
+																	<h2 class="title pull-left"><TMPL_VAR NAME='title_translation'/> </h2>
+																	<span class="align-middle">(<TMPL_VAR NAME="CountContracts"/>)</span>
+
+																	<div class="actions panel_actions pull-left">
+																		<TMPL_UNLESS NAME='__FIRST__'>
+																			<i class="box_toggle fa fa-chevron-up"></i>
+																		</TMPL_UNLESS>
+																	</div>
+																	<div class="actions pull-right">
+																		<TMPL_IF NAME='HistoryAdmin'>
+																			<a href="#" class="contract-history" product_id="<TMPL_VAR NAME='product_id'>"><TMPL_VAR NAME='LNG_RevisionHistory'/></a>
+																		</TMPL_IF>
+																	</div>
+																</header>
+																<div class="no-padding content-body table-responsive <TMPL_UNLESS NAME='__FIRST__'>collapsed</TMPL_UNLESS>">
+
+																	<table id="ContractTable<TMPL_VAR NAME='product_id'>" class="bottom15 table">
+
+																		<tr <TMPL_UNLESS NAME="ContractList">class="hidden"</TMPL_UNLESS>>
+																		<th><TMPL_VAR NAME="LNG_Company"/></th>
+																		<th><TMPL_VAR NAME="LNG_PartnerType"/></th>
+																		<th><TMPL_VAR NAME="LNG_Commission"/></th>
+																		<th><TMPL_VAR NAME="LNG_ImplementationFee"/></th>
+																		<th><TMPL_VAR NAME="LNG_Long"/></th>
+																		<th><TMPL_VAR NAME="LNG_StartDate"/></th>
+																		<th><TMPL_VAR NAME="LNG_EndDate"/></th>
+																		<th></th>
+																		</tr>
+
+																		<TMPL_LOOP NAME='ContractList'>
+																			<tr>
+																				<td>
+																					<a href="<TMPL_VAR NAME='ADMIN_PATH'>module.php?load=company&company_unit_id=<TMPL_VAR NAME='company_unit_id'>">
+																						<TMPL_VAR NAME="company_unit"/>
+																					</a>
+																				</td>
+																				<td>
+																					<TMPL_VAR NAME="partner_type"/>
+																				</td>
+																				<td>
+																					<TMPL_VAR NAME="commission"/>
+																				</td>
+																				<td>
+																					<TMPL_VAR NAME="implementation_fee"/>
+																				</td>
+																				<td>
+																					<TMPL_VAR NAME="long" ESCAPE="none"/>
+																				</td>
+																				<td>
+																					<TMPL_VAR NAME="start_date" FORMAT="datepicker"/>
+																				</td>
+																				<td>
+																					<TMPL_VAR NAME="end_date" FORMAT="datepicker"/>
+																				</td>
+																				<td>
+																					<a href="#" class="remove-contract" data-id="<TMPL_VAR NAME='partner_contract_id'>"><i class="fa fa-close primary"></i></a>
+																				</td>
+																			</tr>
+																		</TMPL_LOOP>
+																	</table>
+
+																	<form class="createPartnerContract" id="ContractForm<TMPL_VAR NAME='product_id'>">
+																		<input type="hidden" name="product_id" value="<TMPL_VAR NAME='product_id'>">
+																		<input type="hidden" name="partner_id" value="<TMPL_VAR NAME='partner_id'>">
+																		<input type="hidden" name="Action" value="CreatePartnerContract">
+																		<div class="row margin15 new-contract">
+																			<label><TMPL_VAR NAME="LNG_NewContract"/>:</label>
+																			<select class="form-control" name="company_unit_id" data-allow-clear="true">
+																				<option value=""></option>
+																				<TMPL_VAR NAME="CompanyListHtml" ESCAPE="none"/>
+																			</select>
+																			<select class="form-control select2-like" name="partner_type">
+																				<option style="display:none"><TMPL_VAR NAME="LNG_PartnerType"/></option>
+																				<option value="BP"><TMPL_VAR NAME="LNG_BusinessPartner"/></option>
+																				<option value="KB"><TMPL_VAR NAME="LNG_Kundenbetreuer"/></option>
+																				<option value="LP"><TMPL_VAR NAME="LNG_LosungPartner"/></option>
+																			</select>
+																			<a href="#commission-settings" class="btn btn-primary btn-icon right15" data-toggle="modal">
+																				<i class="fa fa-plus"></i><TMPL_VAR NAME="LNG_Create"/>
+																			</a>
+																		</div>
+																	</form>
+																</div>
+															</section>
+														</TMPL_LOOP>
+													</div>
+													</div>
+												</div>
+											</section>
+										</TMPL_LOOP>
+									</TMPL_IF>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+		</div>
+	</div>
+
+		<input form="partner_edit" type="hidden" name="Save" value="1" />
+		<input form="partner_edit" type="hidden" name="partner_id" value="<TMPL_VAR NAME='partner_id'>" />
+		<input type="hidden" name="ScrollTop" value="<TMPL_VAR NAME='ScrollTop'>">
+		<input type="hidden" name="ActiveTab" value="<TMPL_VAR NAME='ActiveTab'>">
+		<TMPL_VAR NAME='ParamsForForm' ESCAPE='none'/>
+
+		<div id="floating-button">
+			<button form="partner_edit" type="submit" class="btn btn-primary"><TMPL_VAR NAME='LNG_OptionSave'/></button>
+		</div>
+	</div>
+</div>
+<!-- General section box modal start -->
+<div class="modal" id="commission-settings" tabindex="-1" role="dialog" aria-labelledby="ultraModal-Label" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title" data-type="1" hidden><TMPL_VAR NAME="LNG_ModalBPTitle"/></h4>
+				<h4 class="modal-title" data-type="2" hidden><TMPL_VAR NAME="LNG_ModalTitle"/></h4>
+			</div>
+            <div class="modal-body">
+                <div class="row">
+					<div class="col-md-3">
+                <label for="commission"><TMPL_VAR NAME="LNG_Commission"/></label>
+					</div>
+					<div class="col-md-6">
+                <input class="form-control" type="text" name="commission" form="">
+					</div>
+                </div>
+                <div class="row" data-type="1" hidden>
+					<div class="col-md-3">
+                    <label for="long"><TMPL_VAR NAME="LNG_Long"/></label>
+					</div>
+					<div class="col-md-6">
+                    <input class="form-control" type="text" name="long" form="">
+					</div>
+                </div>
+                <div class="row" data-type="2" hidden>
+					<div class="col-md-3">
+                    <label for="implementation_fee"><TMPL_VAR NAME="LNG_ImplementationFee"/></label>
+					</div>
+					<div class="col-md-6">
+                    <input type="text" class="form-control" name="implementation_fee" form="">
+					</div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3">
+                        <label for="start_date"><TMPL_VAR NAME="LNG_StartDate"/></label>
+                    </div>
+                    <div class="col-md-6">
+                        <input type="text" class="form-control datepicker" name="start_date" form="">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3">
+                        <label for="end_date"><TMPL_VAR NAME="LNG_EndDate"/></label>
+                    </div>
+                    <div class="col-md-6">
+                        <input type="text" class="form-control datepicker" name="end_date" form="">
+					</div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button data-dismiss="modal" class="btn btn-default" type="button"><TMPL_VAR NAME="LNG_Cancel"/></button>
+                <button class="btn btn-success" type="submit" form=""><TMPL_VAR NAME="LNG_Create"/></button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- modal end -->
+<!--Remove contract-->
+<form id="RemoveContract" method="post" action="<TMPL_VAR NAME='MODULE_URL'>&partner_id=<TMPL_VAR NAME='partner_id'>">
+	<input type="hidden" name="Do" value="Action">
+	<input type="hidden" name="Action" value="RemoveContract">
+	<input type="hidden" name="partner_contract_id" value="">
+</form>
+<!-- ! -->
+
+<script type="text/javascript">
+    //Fields for auto-fill
+	var propertyList = ["title", "street", "house", "zip_code", "city", "country", "phone", "email",
+        "bank_details", "iban", "bic", "register",
+        "comment", "tax_consultant", "tax_number"];
+
+	function GetPartnerTypeParameters(abbr){
+		var result = {
+            Title: "",
+            commission: "",
+            implementation_fee: "",
+            long: ""
+        };
+		switch(abbr){
+            //<TMPL_LOOP NAME="PartnerTypeList">
+
+			case "<TMPL_VAR NAME='abbreviation'>":
+			    result = {
+                    Title: "<TMPL_VAR NAME='title'>",
+                    commission: "<TMPL_VAR NAME='commission'>",
+                    implementation_fee: "<TMPL_VAR NAME='implementation_fee'>",
+                    long: "<TMPL_VAR NAME='long' ESCAPE='none'>"
+                };
+			    break;
+            //</TMPL_LOOP>
+
+		}
+		return result;
+	}
+
+	$("#CompanyMultiSelectCreate").click(function (e) {
+		e.preventDefault();
+
+		var companyUnitID = $("#CompanyUnitForContract").val();
+		var partnerID = "<TMPL_VAR NAME='partner_id'>";
+		var startDate = $("[name='start_date']").val();
+		var endDate = $("[name='end_date']").val();
+
+		var productIDs = [];
+		var productSelects = document.getElementsByClassName("SelectProductForContract");
+		for (var i = 0; i < productSelects.length; i++) {
+			productIDs.push(productSelects.item(i).value);
+		}
+
+		$.ajax({
+			url: "<TMPL_VAR NAME='MODULE_PATH'>ajax.php",
+			type: 'GET',
+			dataType: 'JSON',
+			data:{
+				Action: 'PartnerContractValidate',
+				partner_id: partnerID,
+				start_date: startDate,
+				end_date: endDate,
+				product_ids: productIDs,
+				company_unit_id: companyUnitID
+			},
+			success: function(data){
+				if(data.length > 0) {
+					var confirm = '';
+					data.forEach(function (item) {
+						confirm += item + '</br>';
+					});
+					confirm += "<TMPL_VAR NAME='LNG_ContractIntersectionIgnore'>";
+
+					ModalConfirm(confirm, function(){
+						$("#company_multi_select").submit();
+					});
+				}
+				else {
+					$("#company_multi_select").submit();
+				}
+			}
+		});
+	});
+
+    $(document).ready(function(){
+
+        //Company selectors
+        $("#select2-chosen-1").text("<TMPL_VAR NAME='company_title'>");
+        $("select[name=company_unit_id]").each(function (i) {
+			$(this).select2({placeholder: "<TMPL_VAR NAME='LNG_Company'>",
+				allowClear:true});
+        });
+        //--------
+        //Export (Commission)
+        if("<TMPL_VAR NAME='ExportCommissionFile'>"){
+			document.location.href = "<TMPL_VAR NAME='ExportCommissionFile'>";
+    	}
+        $("a.export-commission").on("click", function(e){
+			e.preventDefault();
+			ModalConfirm("<TMPL_VAR NAME='LNG_ConfirmExportCommission'>", function(){
+				$("#ExportCommission").submit();
+        	});
+    	});
+        //-----------------
+		//Product blocks
+        $("body").on("click", "a.remove-contract", function(e){
+			e.preventDefault();
+			$("#RemoveContract").find("[name=partner_contract_id]").val($(this).data("id"));
+			ModalConfirm("<TMPL_VAR NAME='LNG_ConfirmRemoveContract'>", function(){
+                $("#RemoveContract").submit();
+        	});
+    	});
+        $(".createPartnerContract a").on("click", function(e){
+            var form = $(this).closest("form"),
+				commissionSettings = $("#commission-settings"),
+				abbr = form.find("[name=partner_type]").val();
+
+            switch (abbr){
+                case "BP":
+                    commissionSettings.find("[data-type=1]").show();
+                    break;
+                case "KB":
+                case "LP":
+                    commissionSettings.find("[data-type=2]").show();
+                    break;
+                default:
+                    return;
+            }
+            commissionSettings.find("input").attr("form", form.attr("id"));
+            commissionSettings.find("button").attr("form", form.attr("id"));
+
+            var params = GetPartnerTypeParameters(abbr);
+            commissionSettings.find("input[name=commission]").val(params['commission']);
+            commissionSettings.find("input[name=implementation_fee]").val(params['implementation_fee']);
+            commissionSettings.find("input[name=long]").val(params['long']);
+        });
+
+        $("#commission-settings button[data-dismiss]").on("click", function(){
+            $("#commission-settings").find("[data-type=1]").hide();
+            $("#commission-settings").find("[data-type=2]").hide();
+        });
+        $(document).keyup(function(hand){
+            if (hand.key === "Escape") {
+                $(".modal").modal("hide");
+                $("#commission-settings button[data-dismiss]").trigger("click");
+            }
+        });
+        $(document).on("click", function (e) {
+			if($(e.target).hasClass("modal-backdrop")){
+                $("#commission-settings button[data-dismiss]").trigger("click");
+			}
+        });
+
+        $("form.createPartnerContract").on("submit", function(e){
+            e.preventDefault();
+            var form = $(this);
+            $.ajax({
+				url: "<TMPL_VAR NAME='MODULE_PATH'>ajax.php",
+				type: "POST",
+				data: form.serializeArray(),
+				success: function(resp){
+				    resp = JSON.parse(resp);
+				    if (resp.ok) {
+				        var endDate = resp.end_date ? resp.end_date:"";
+                        CreateMessage(GetTranslation("contract-created"), 'info');
+                        var company_unit_id = form.find("select[name=company_unit_id]").val();
+                        var href = "<TMPL_VAR NAME='ADMIN_PATH'>module.php?load=company&company_unit_id="+company_unit_id;
+                        var product_id = form.find("input[name=product_id]").val();
+                        var company = form.find("option[value="+company_unit_id+"]").attr("data-title");
+                        $("#ContractTable"+product_id).find("tr:first").removeClass("hidden");
+                        $("#ContractTable"+product_id).append("<tr><td>" +
+							"<a href='"+href+"'>"+company+"</a></td>" +
+							"<td>"+form.find("select[name=partner_type]").val()+"</td>" +
+							"<td>"+$("#commission-settings input[name=commission]").val()+"</td>" +
+							"<td>"+$("#commission-settings input[name=implementation_fee]").val()+"</td>" +
+							"<td>"+$("#commission-settings input[name=long]").val()+"</td>" +
+							"<td>"+resp.start_date+"</td>" +
+							"<td>"+endDate+"</td>" +
+							"<td><a href=\"#\" class=\"remove-contract\" data-id='"+resp.partner_contract_id+"'><i class=\"fa fa-close primary\"></i></a>" +
+                            "</td>"+
+							"</tr>");
+                    }
+				    else{
+                        CreateMessage(resp['Error'], 'error');
+					}
+				}
+			});
+            $("#commission-settings").modal("hide");
+            $("#commission-settings").find("[data-type=1]").hide();
+            $("#commission-settings").find("[data-type=2]").hide();
+            return false;
+		});
+        $(document).on('click','a.confirm-remove',function(e){
+            var a = $(this);
+            var title = a.attr('title');
+            var msg = '<TMPL_VAR NAME="LNG_RemoveMessage">'.replace(/%Title%/g, title);
+            ModalConfirm(msg, function(){
+                window.location.href = a.attr('href');
+            });
+            e.preventDefault();
+        });
+    });
+
+    $("#s2_company_unit_id").select2({
+        minimumInputLength: 1,
+        placeholder: 'Search',
+        allowClear: true,
+        ajax: {
+            url: "<TMPL_VAR NAME='MODULE_PATH'>ajax.php",
+            dataType: 'json',
+            quietMillis: 100,
+            data: function(term, page) {
+                return {
+                    limit: -1,
+                    q: term,
+                    Action: "SearchCompany"
+                };
+            },
+            results: function(data, page) {
+                return {
+                    results: data
+                }
+            }
+        },
+        formatResult: function(company) {
+            return "<div class='select2-company-result'>" + company.title + "</div>";
+        },
+        formatSelection: function(company) {
+			propertyList.forEach(function(v){
+                    $("input[name="+v+"]").val(company[v]);
+        	});
+            return company.title;
+        }
+
+    });
+
+	$(document).ready(function(){
+		/*<TMPL_IF NAME='partner_id'>*/
+			$('.property-history').click(function(e){
+				var propertyName = $(this).attr('property_name');
+				var partnerID = "<TMPL_VAR NAME='partner_id'>";
+				var propertyNameTranslation = $("label[for='" + propertyName + "']").text();
+
+				$.ajax({
+				url: "<TMPL_VAR NAME='MODULE_PATH'>ajax.php",
+					type: 'GET',
+					dataType: 'JSON',
+					data:{
+						Action: 'GetPropertyHistoryPartnerHTML',
+						property_name: propertyName,
+						partner_id: partnerID,
+						property_name_translation: propertyNameTranslation
+					},
+					success: function(data){
+						if(typeof data.HTML != 'undefined'){
+							$(data.HTML).modal('show').on('hidden.bs.modal', function () {
+								$(this).remove();
+							});
+						}
+					}
+				});
+				
+				e.preventDefault();
+			});
+
+        $('.contract-history').click(function(e){
+            var productID = $(this).attr('product_id');
+            var partnerID = "<TMPL_VAR NAME='partner_id'>";
+
+            $.ajax({
+                url: "<TMPL_VAR NAME='MODULE_PATH'>ajax.php",
+                type: 'POST',
+                dataType: 'JSON',
+                data:{
+                    Action: 'GetContractHistoryPartnerHTML',
+                    product_id: productID,
+                    partner_id: partnerID
+                },
+                success: function(data){
+                    if(typeof data.HTML != 'undefined'){
+                        $(data.HTML).modal('show').on('hidden.bs.modal', function () {
+                            $(this).remove();
+                        });
+                    }
+                }
+            });
+
+            e.preventDefault();
+        });
+
+		$("#company_multi_select select[name=partner_type]").on("change", function(e){
+			var multiSelectParams = $("#CompanyMultiSelectParams"),
+				abbr = $(this).val(),
+				params = GetPartnerTypeParameters(abbr);
+			multiSelectParams.find(".row").hide();
+			multiSelectParams.find("input").each(function(i, e){
+			    e.value = params[e.name];
+            });
+
+			if ($(this).val()){
+				multiSelectParams.find("[data-type=0]").show();
+        	}
+
+        	switch (abbr) {
+				case "BP":
+                    multiSelectParams.find("[data-type=1]").show();
+				    break;
+				case "KB":
+				case "LP":
+                    multiSelectParams.find("[data-type=2]").show();
+				    break;
+            }
+
+            e.preventDefault();
+    	});
+
+		$("a.CompanyOneMore").on("click", function(e){
+		    var SelectProduct = $(this).closest("section").find(".SelectProduct");
+		    var oneMoreSelect = SelectProduct.clone();
+		    oneMoreSelect.removeClass("SelectProduct");
+		    SelectProduct.closest("div").append(oneMoreSelect);
+				e.preventDefault();
+			});
+        $("a.CompanyAddAll").on("click", function(e){
+            var SelectProduct = $(this).closest("section").find(".SelectProduct");
+		    var all = SelectProduct.find("option[value!='']");
+		    var selected = $.map($(this).closest("form").find("select[name='product_id[]']"), function(item){
+				return item.value;
+        	});
+
+		    all.each(function(){
+				if(selected.indexOf($(this).val()) != -1)
+				    return;
+
+                var oneMoreSelect = SelectProduct.clone();
+                oneMoreSelect.removeClass("SelectProduct");
+                oneMoreSelect.find("option.placeholder").show().text("");
+				oneMoreSelect.find("[value="+$(this).val()+"]").prop("selected", true);
+				SelectProduct.closest("div").append(oneMoreSelect);
+        	});
+
+				e.preventDefault();
+			});
+		/*</TMPL_IF>*/
+
+		$("#CompanyMultiSelectRemove").on("click", function(e){
+		    e.preventDefault();
+            ModalConfirm("<TMPL_VAR NAME='LNG_ConfirmMultiRemoveContract'>", function(){
+                $("#company_multy_remove").submit();
+            });
+		});
+	});
+
+	$(document).ready(function(){
+		var isAdmin = "<TMPL_VAR NAME='Admin'>";
+		if (isAdmin != 'Y')
+		{
+			$(".fa-close").remove();
+			$(".new-contract").remove();
+		}
+	});
+</script>

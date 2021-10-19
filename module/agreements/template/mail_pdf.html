@@ -1,0 +1,60 @@
+<htmlpageheader name="header" style="display:none">
+    <TMPL_IF NAME="app_logo_image_api_path">
+        <div class="right-image-wrap">
+            <img src="<TMPL_VAR NAME='app_logo_image_pdf_path' />" class="right-image" >
+        </div>
+    </TMPL_IF>
+</htmlpageheader>
+<sethtmlpageheader name="header" value="on" show-this-page="1" />
+
+<htmlpagefooter name="footer" style="display:none">
+    <table class="bottom-pageheader">
+        <tr>
+            <td style="text-align: left">
+                <TMPL_IF NAME="IsConfirmation" VALUE="1">
+                    <TMPL_VAR NAME="LNG_ConfirmationOfVacation" />
+                    <TMPL_ELSE>
+                        <TMPL_VAR NAME="LNG_SupplementaryAgreement" />
+                </TMPL_IF>
+            </td>
+            <td style="text-align: center">
+                <TMPL_VAR NAME="LNG_FooterConfirmText" /> <TMPL_VAR NAME="first_name" /> <TMPL_VAR NAME="last_name" /> <TMPL_VAR NAME="LNG_FooterConfirmAm" /> <TMPL_VAR NAME="Date" FORMAT="datetime"/>
+            </td>
+            <td style="text-align: right">
+                <TMPL_VAR NAME='LNG_Page'> {PAGENO} <TMPL_VAR NAME='LNG_Of'> {nb}
+            </td>
+        </tr>
+    </table>
+    
+</htmlpagefooter>
+<sethtmlpagefooter name="footer" value="on" show-this-page="1" />
+
+
+<div class="contract"><TMPL_VAR NAME="content" ESCAPE="none" /></div>
+
+
+<table class="header-table">
+    <tr class="bordered">
+        <td><TMPL_VAR NAME="city" /></td>
+        <td><TMPL_VAR NAME="Date" FORMAT="date" /></td>
+    </tr>
+    <tr>
+        <td><TMPL_VAR NAME="LNG_City" /></td>
+        <td><TMPL_VAR NAME="LNG_Datum" /></td>
+    </tr>
+</table>
+
+<table class="bottom-table">
+    <tr class="bordered">
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>
+            <TMPL_VAR NAME="LNG_Signature" /> <TMPL_VAR NAME="title" />
+        </td>
+        <td>
+            <TMPL_VAR NAME="LNG_Signature" /> <TMPL_VAR NAME="first_name" /> <TMPL_VAR NAME="last_name" />
+        </td>
+    </tr>
+</table>

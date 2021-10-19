@@ -1,0 +1,234 @@
+image: alpine:3.7
+
+stages:
+  - cftest
+  - cfdeploy
+  - k8sbuild
+  - k8sdeploy
+
+################################# CloudFoundry #################################
+
+testing-test:
+  image: postgres:10-rc1-alpine
+  stage: cftest
+  only:
+    variables:
+      - $SYSTEM_CF_OR_K8S == "CF"
+  services:
+    - postgres:latest
+  variables:
+    POSTGRES_DB: personal
+    POSTGRES_USER: postgres
+    POSTGRES_PASSWORD: postgres
+  before_script:
+    - apk update && apk upgrade && apk add git && apk add curl
+    - apk add php7
+    - apk add php7-gd php7-pdo_mysql php7-bcmath php7-sockets php7-zip php7-json php7-phar php7-mbstring php7-ctype php7-dom php7-tokenizer
+    - apk add php7-fileinfo php7-xmlwriter php7-xml php7-iconv php7-simplexml php7-xmlreader php7-zlib
+    - curl -sS https://getcomposer.org/installer | php
+    - php composer.phar install
+    - set -ex && apk --no-cache add postgresql-dev
+    - apk add php7-pdo php7-pdo_pgsql php7-pgsql
+  script:
+    - apk add postgresql-client
+    - PGPASSWORD="postgres" psql -h "postgres" -U "$POSTGRES_USER" -c "CREATE DATABASE main;"
+    - PGPASSWORD="postgres" psql -h "postgres" -U "$POSTGRES_USER" -c "CREATE DATABASE control;"
+    - PGPASSWORD="postgres" psql -h "postgres" -U "$POSTGRES_USER" -d control -f ./_db/db_control.sql
+    - PGPASSWORD="postgres" psql -h "postgres" -U "$POSTGRES_USER" -d main -f ./_db/db_main.sql
+    - PGPASSWORD="postgres" psql -h "postgres" -U "$POSTGRES_USER" -d personal -f ./_db/db_personal.sql
+    - ./vendor/bin/phpunit -v --debug --configuration tests/phpunit.xml
+
+deployment-test:
+  stage: cfdeploy
+  only:
+    refs:
+      - test
+    variables:
+      - $SYSTEM_CF_OR_K8S == "CF"
+  script:
+    - apk update && apk add curl
+    - curl --location "https://cli.run.pivotal.io/stable?release=linux64-binary&source=github" | tar zx
+    - ./cf install-plugin -f -r CF-Community "autopilot"
+    - ./cf login -u $CF_TEST_USERNAME -p $CF_TEST_PASSWORD -a api.cf.eu-de-darz.msh.host
+    - ./cf zero-downtime-push lst -f manifest-test.yml
+
+deployment-release:
+  stage: cfdeploy
+  only:
+    refs:
+      - master
+    variables:
+      - $SYSTEM_CF_OR_K8S == "CF"
+  script:
+    - apk update && apk add curl
+    - curl --location "https://cli.run.pivotal.io/stable?release=linux64-binary&source=github" | tar zx
+    - ./cf install-plugin -f -r CF-Community "autopilot"
+    - ./cf login -u $CF_RELEASE_USERNAME -p $CF_RELEASE_PASSWORD -a api.cf.eu-de-darz.msh.host
+    - ./cf zero-downtime-push lst -f manifest-release.yml
+  when: manual
+
+deployment-demo:
+  stage: cfdeploy
+  only:
+    refs:
+      - master
+    variables:
+      - $SYSTEM_CF_OR_K8S == "CF"
+  script:
+    - apk update && apk add curl
+    - curl --location "https://cli.run.pivotal.io/stable?release=linux64-binary&source=github" | tar zx
+    - ./cf install-plugin -f -r CF-Community "autopilot"
+    - ./cf login -u $CF_DEMO_USERNAME -p $CF_DEMO_PASSWORD -a api.cf.eu-de-darz.msh.host
+    - ./cf zero-downtime-push lst -f manifest-demo.yml
+
+################################## Kubernetes ##################################
+
+build-ci-docker:
+  stage: k8sbuild
+  only:
+    refs:
+      - master
+      - test
+    variables:
+      - $SYSTEM_CF_OR_K8S == "K8S"
+  when: manual
+  image: poc-trebono-git.da-rz.net:5050/root/cicd-utils/docker-build-and-push
+  tags:
+    - gitlab
+  before_script:
+    - cp _kubernetes/docker/*file .
+    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+    - docker system prune -f
+  variables:
+    REGISTRY: poc-trebono-git.da-rz.net:5050
+    RELEASE: ${CI_COMMIT_REF_SLUG}-${CI_COMMIT_SHORT_SHA}
+  script:
+    - make release-ci
+
+build-docker:
+  stage: k8sbuild
+  only:
+    refs:
+      - master
+      - test
+    variables:
+      - $SYSTEM_CF_OR_K8S == "K8S"
+  image: poc-trebono-git.da-rz.net:5050/root/cicd-utils/docker-build-and-push
+  tags:
+    - gitlab
+  before_script:
+    - cp _kubernetes/docker/*file .
+    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+    - mkdir -p ~/.docker
+    - printf "$DOCKER_AUTH_CONFIG" > ~/.docker/config.json
+    - docker system prune -f
+  variables:
+    RELEASE: ${CI_COMMIT_REF_SLUG}-${CI_COMMIT_SHORT_SHA}
+  script:
+    - docker-build-and-push trebono/trebono ${CI_COMMIT_REF_SLUG}-${CI_COMMIT_SHORT_SHA}
+
+deploy-test:
+  stage: k8sdeploy
+  only:
+    refs:
+      - test
+    variables:
+      - $SYSTEM_CF_OR_K8S == "K8S"
+  image: poc-trebono-git.da-rz.net:5050/root/cicd-utils/deploy
+  before_script:
+    - mkdir -p ~/.docker
+    - printf "$DOCKER_AUTH_CONFIG" > ~/.docker/config.json
+    - mkdir -p ~/.kube
+    - printf "$KUBE_AUTH_CONFIG" > ~/.kube/config
+    - mkdir -p "_kubernetes/deploy/$CI_PROJECT_NAME"
+    - mkdir -p "deploy/trebono-test"
+    - cp _kubernetes/yaml/* deploy/trebono-test/
+  environment:
+    name: trebono-test
+    url: trebono-test.poc-trebono-k8s.da-rz.net
+  variables:
+    DEPLOY_DIR: deploy/trebono-test
+    KUBE_NAMESPACE: trebono-test
+    KUBE_APPLICATION: $CI_PROJECT_NAME
+    VAR_FILE: "_kubernetes/yaml/test.yaml"
+    CHART_DIR: "deploy/$CI_PROJECT_NAME"
+    IMAGE_TAG: ${CI_COMMIT_REF_SLUG}-${CI_COMMIT_SHORT_SHA}
+    INGRESS_URL: $CI_ENVIRONMENT_URL
+    RELEASE: ${CI_COMMIT_REF_SLUG}-${CI_COMMIT_SHORT_SHA}
+  script:
+    - echo $CI_PROJECT_NAME
+    - cp _kubernetes/docker/*file .
+    - deployment
+  tags:
+    - gitlab
+
+deploy-demo:
+  stage: k8sdeploy
+  only:
+    refs:
+      - master
+    variables:
+      - $SYSTEM_CF_OR_K8S == "K8S"
+  image: poc-trebono-git.da-rz.net:5050/root/cicd-utils/deploy
+  before_script:
+    - mkdir -p ~/.docker
+    - printf "$DOCKER_AUTH_CONFIG" > ~/.docker/config.json
+    - mkdir -p ~/.kube
+    - printf "$KUBE_AUTH_CONFIG" > ~/.kube/config
+    - mkdir -p "_kubernetes/deploy/$CI_PROJECT_NAME"
+    - mkdir -p "deploy/trebono-demo"
+    - cp _kubernetes/yaml/* deploy/trebono-demo/
+  environment:
+    name: trebono-demo
+    url: trebono-demo.poc-trebono-k8s.da-rz.net
+  variables:
+    DEPLOY_DIR: deploy/trebono-demo
+    KUBE_NAMESPACE: trebono-demo
+    KUBE_APPLICATION: $CI_PROJECT_NAME
+    VAR_FILE: "_kubernetes/yaml/test.yaml"
+    CHART_DIR: "deploy/$CI_PROJECT_NAME"
+    IMAGE_TAG: ${CI_COMMIT_REF_SLUG}-${CI_COMMIT_SHORT_SHA}
+    INGRESS_URL: $CI_ENVIRONMENT_URL
+    RELEASE: ${CI_COMMIT_REF_SLUG}-${CI_COMMIT_SHORT_SHA}
+  script:
+    - echo $CI_PROJECT_NAME
+    - cp _kubernetes/docker/*file .
+    - deployment
+  tags:
+    - gitlab
+
+deploy-release:
+  stage: k8sdeploy
+  only:
+    refs:
+      - master
+    variables:
+      - $SYSTEM_CF_OR_K8S == "K8S"
+  image: poc-trebono-git.da-rz.net:5050/root/cicd-utils/deploy
+  before_script:
+    - mkdir -p ~/.docker
+    - printf "$DOCKER_AUTH_CONFIG" > ~/.docker/config.json
+    - mkdir -p ~/.kube
+    - printf "$KUBE_AUTH_CONFIG" > ~/.kube/config
+    - mkdir -p "_kubernetes/deploy/$CI_PROJECT_NAME"
+    - mkdir -p "deploy/trebono"
+    - cp _kubernetes/yaml/* deploy/trebono/
+  environment:
+    name: trebono
+    url: trebono.poc-trebono-k8s.da-rz.net
+  variables:
+    DEPLOY_DIR: deploy/trebono
+    KUBE_NAMESPACE: trebono
+    KUBE_APPLICATION: $CI_PROJECT_NAME
+    VAR_FILE: "_kubernetes/yaml/test.yaml"
+    CHART_DIR: "deploy/$CI_PROJECT_NAME"
+    IMAGE_TAG: ${CI_COMMIT_REF_SLUG}-${CI_COMMIT_SHORT_SHA}
+    INGRESS_URL: $CI_ENVIRONMENT_URL
+    RELEASE: ${CI_COMMIT_REF_SLUG}-${CI_COMMIT_SHORT_SHA}
+  script:
+    - echo $CI_PROJECT_NAME
+    - cp _kubernetes/docker/*file .
+    - deployment
+  tags:
+    - gitlab
+  when: manual

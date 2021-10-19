@@ -1,0 +1,38 @@
+<div class="row">
+	<section class="box no-margin">
+		<header class="panel_header" for="header_dashboard" table="core">
+			<TMPL_IF NAME='type' VALUE='exported'>
+				<h2 class="title"><TMPL_VAR NAME='LNG_VatReportDetailsExported'></h2>
+				<TMPL_ELSE>
+					<h2 class="title"><TMPL_VAR NAME='LNG_VatReportDetailsApproved'></h2>
+			</TMPL_IF>
+		</header>								
+		<div class="content-body">
+			<div class="row">
+				<table class="table bvs-table no-margin table-with-scrollbar">
+					<tbody>
+						<tr class="fixed-row">
+							<td class="text-center text-bold"><TMPL_VAR NAME='LNG_LegalReceiptID'></td>
+							<td class="text-center text-bold">
+								<TMPL_VAR NAME='LNG_Amount'><br/><br/>
+								<TMPL_VAR NAME='TotalSum' FORMAT='price'>€
+							</td>
+							<td class="text-center text-bold"><TMPL_VAR NAME='LNG_Vat'></td>
+							<td class="text-center text-bold"><TMPL_VAR NAME='LNG_VoucherType'></td>
+						</tr>
+						<TMPL_LOOP NAME='ReceiptList'>
+							<tr>
+								<td class="text-center">
+									<a href="<TMPL_VAR NAME='MODULE_URL'>module.php?load=receipt&receipt_id=<TMPL_VAR NAME='receipt_id'>" target="_blank"><TMPL_VAR NAME='legal_receipt_id'></a>
+								</td>
+								<td class="text-center"><TMPL_VAR NAME='real_amount_approved' FORMAT='price'>€</td>
+								<td class="text-center"><TMPL_VAR NAME='vat'>%</td>
+								<td class="text-center"><TMPL_VAR NAME='voucher_type'></td>
+							</tr>
+						</TMPL_LOOP>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</section>
+</div>

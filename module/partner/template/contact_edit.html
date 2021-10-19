@@ -1,0 +1,247 @@
+<div class="row">
+	<TMPL_IF NAME='ErrorList'>
+		<div class="alert alert-danger alert-no-margin">
+			<TMPL_LOOP NAME='ErrorList'>
+				<TMPL_VAR NAME='Message'><TMPL_UNLESS NAME='__LAST__'><br /></TMPL_UNLESS>
+			</TMPL_LOOP>
+		</div>
+	</TMPL_IF>
+	<TMPL_IF NAME='MessageList'>
+		<div class="alert alert-success alert-no-margin">
+			<TMPL_LOOP NAME='MessageList'>
+				<TMPL_VAR NAME='Message'><TMPL_UNLESS NAME='__LAST__'><br /></TMPL_UNLESS>
+			</TMPL_LOOP>
+		</div>
+	</TMPL_IF>
+</div>
+<div class="row">
+	<section class="box no-margin">
+		<header class="panel_header" for="header_contact_edit" table="partner">
+				<TMPL_IF NAME='contact_id'>
+					<h2 class="title"><TMPL_VAR NAME='LNG_EditContact'></h2>
+				<TMPL_ELSE>
+					<h2 class="title"><TMPL_VAR NAME='LNG_AddContact'></h2>
+				</TMPL_IF>
+			</header>
+			<div class="content-body">
+				<div class="row">
+					<div class="col-md-6 col-sm-6 col-xs-6">
+						<form action="<TMPL_VAR NAME='MODULE_URL'>" method="post" class="enter-to-tab" data-validation="true" autocomplete="off">
+							<div class="form-group">
+								<label class="form-label" for="contact_type"><TMPL_VAR NAME='LNG_ContactType'></label>
+								<TMPL_IF NAME="contact_id">
+									<TMPL_IF NAME='HistoryAdmin'>
+										(<a href="#" class="property-history" property_name="contact_type"><TMPL_VAR NAME='LNG_RevisionHistory'></a>)
+									</TMPL_IF>
+								</TMPL_IF>
+								<select class="form-control m-bot15" name="contact_type">
+									<option value="management" <TMPL_IF NAME='contact_type' VALUE='management'>selected</TMPL_IF>><TMPL_VAR NAME='LNG_ContactTypeManagement'></option>
+									<option value="hr" <TMPL_IF NAME='contact_type' VALUE='hr'>selected</TMPL_IF>><TMPL_VAR NAME='LNG_ContactTypeHR'></option>
+									<option value="finance" <TMPL_IF NAME='contact_type' VALUE='finance'>selected</TMPL_IF>><TMPL_VAR NAME='LNG_ContactTypeFinance'></option>
+									<option value="it" <TMPL_IF NAME='contact_type' VALUE='it'>selected</TMPL_IF>><TMPL_VAR NAME='LNG_ContactTypeIT'></option>
+									<option value="other" <TMPL_IF NAME='contact_type' VALUE='other'>selected</TMPL_IF>><TMPL_VAR NAME='LNG_ContactTypeOther'></option>
+								</select>
+							</div>
+							<div class="form-group">
+								<label class="form-label" for="linked_user_id"><TMPL_VAR NAME="LNG_LinkedUser"/></label>
+								<TMPL_IF NAME="contact_id">
+									<TMPL_IF NAME='HistoryAdmin'>
+										(<a href="#" class="property-history" property_name="linked_user_id"><TMPL_VAR NAME='LNG_RevisionHistory'></a>)
+									</TMPL_IF>
+								</TMPL_IF>
+								<input type="hidden" name="linked_user_id" id="s2_linked_user_id" value="<TMPL_VAR NAME='linked_user_id'>"/>
+							</div>
+							<div class="form-group">
+								<label class="form-label" for="salutation"><TMPL_VAR NAME='LNG_Salutation'></label>
+								<TMPL_IF NAME="contact_id">
+									<TMPL_IF NAME='HistoryAdmin'>
+										(<a href="#" class="property-history" property_name="salutation"><TMPL_VAR NAME='LNG_RevisionHistory'></a>)
+									</TMPL_IF>
+								</TMPL_IF>
+								<div class="controls">
+									<select class="form-control" name="salutation">
+										<option value="Herr" <TMPL_IF NAME='salutation' VALUE='Herr'>selected</TMPL_IF>><TMPL_VAR NAME='LNG_SalutationMr'></option>
+										<option value="Frau" <TMPL_IF NAME='salutation' VALUE='Frau'>selected</TMPL_IF>><TMPL_VAR NAME='LNG_SalutationMs'></option>
+									</select>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="form-label required" for="first_name"><TMPL_VAR NAME='LNG_FirstName'></label>
+								<TMPL_IF NAME="contact_id">
+									<TMPL_IF NAME='HistoryAdmin'>
+										(<a href="#" class="property-history" property_name="first_name"><TMPL_VAR NAME='LNG_RevisionHistory'></a>)
+									</TMPL_IF>
+								</TMPL_IF>
+								<div class="controls"><input type="text" class="form-control" name="first_name" value="<TMPL_VAR NAME='first_name'>"></div>
+							</div>
+							<div class="form-group">
+								<label class="form-label required" for="last_name"><TMPL_VAR NAME='LNG_LastName'></label>
+								<TMPL_IF NAME="contact_id">
+									<TMPL_IF NAME='HistoryAdmin'>
+										(<a href="#" class="property-history" property_name="last_name"><TMPL_VAR NAME='LNG_RevisionHistory'></a>)
+									</TMPL_IF>
+								</TMPL_IF>
+								<div class="controls"><input type="text" class="form-control" name="last_name" value="<TMPL_VAR NAME='last_name'>"></div>
+							</div>
+							<div class="form-group">
+								<label class="form-label" for="position"><TMPL_VAR NAME='LNG_Position'></label>
+								<TMPL_IF NAME="contact_id">
+									<TMPL_IF NAME='HistoryAdmin'>
+										(<a href="#" class="property-history" property_name="position"><TMPL_VAR NAME='LNG_RevisionHistory'></a>)
+									</TMPL_IF>
+								</TMPL_IF>
+								<div class="controls"><input type="text" class="form-control" name="position" value="<TMPL_VAR NAME='position'>"></div>
+							</div>
+							<div class="form-group">
+								<label class="form-label" for="department"><TMPL_VAR NAME='LNG_Department'></label>
+								<TMPL_IF NAME="contact_id">
+									<TMPL_IF NAME='HistoryAdmin'>
+										(<a href="#" class="property-history" property_name="department"><TMPL_VAR NAME='LNG_RevisionHistory'></a>)
+									</TMPL_IF>
+								</TMPL_IF>
+								<div class="controls"><input type="text" class="form-control" name="department" value="<TMPL_VAR NAME='department'>"></div>
+							</div>
+							<div class="form-group">
+								<label class="form-label" for="email"><TMPL_VAR NAME='LNG_Email'></label>
+								<TMPL_IF NAME="contact_id">
+									<TMPL_IF NAME='HistoryAdmin'>
+										(<a href="#" class="property-history" property_name="email"><TMPL_VAR NAME='LNG_RevisionHistory'></a>)
+									</TMPL_IF>
+								</TMPL_IF>
+								<div class="controls"><input type="text" class="form-control" name="email" value="<TMPL_VAR NAME='email'>" data-validation-type="email"></div>
+							</div>
+							<div class="form-group">
+								<label class="form-label" for="phone"><TMPL_VAR NAME='LNG_Phone'></label>
+								<TMPL_IF NAME="contact_id">
+									<TMPL_IF NAME='HistoryAdmin'>
+										(<a href="#" class="property-history" property_name="phone"><TMPL_VAR NAME='LNG_RevisionHistory'></a>)
+									</TMPL_IF>
+								</TMPL_IF>
+								<div class="controls"><input type="text" class="form-control" name="phone" value="<TMPL_VAR NAME='phone'>" data-mask="phone"></div>
+							</div>
+							<div class="form-group">
+								<label class="form-label" for="phone_job"><TMPL_VAR NAME='LNG_PhoneJob'></label>
+								<TMPL_IF NAME="contact_id">
+									<TMPL_IF NAME='HistoryAdmin'>
+										(<a href="#" class="property-history" property_name="phone_job"><TMPL_VAR NAME='LNG_RevisionHistory'></a>)
+									</TMPL_IF>
+								</TMPL_IF>
+								<div class="controls"><input type="text" class="form-control" name="phone_job" value="<TMPL_VAR NAME='phone_job'>" data-mask="phone"></div>
+							</div>
+							<div class="form-group">
+								<label class="form-label" for="comment"><TMPL_VAR NAME='LNG_Comment'></label>
+								<TMPL_IF NAME="contact_id">
+									<TMPL_IF NAME='HistoryAdmin'>
+										(<a href="#" class="property-history" property_name="comment"><TMPL_VAR NAME='LNG_RevisionHistory'></a>)
+									</TMPL_IF>
+								</TMPL_IF>
+								<div class="controls"><input type="text" class="form-control" name="comment" value="<TMPL_VAR NAME='comment'>"></div>
+							</div>
+							<div class="form-group">
+								<label class="form-label" for="contact_for"><TMPL_VAR NAME='LNG_ContactFor'></label>
+								<TMPL_IF NAME="contact_id">
+									<TMPL_IF NAME='HistoryAdmin'>
+										(<a href="#" class="property-history" property_name="contact_for"><TMPL_VAR NAME='LNG_RevisionHistory'></a>)
+									</TMPL_IF>
+								</TMPL_IF>
+								<select class="" id="s2example-2" name="contact_for[]" multiple>
+									<option></option>
+									<option value="commission" <TMPL_IF NAME='contact_for_commission' VALUE='Y'>selected</TMPL_IF>><TMPL_VAR NAME='LNG_Commission'/></option>
+									<option value="contract" <TMPL_IF NAME='contact_for_contract' VALUE='Y'>selected</TMPL_IF>><TMPL_VAR NAME='LNG_Contract'/></option>
+									<option value="service" <TMPL_IF NAME='contact_for_service' VALUE='Y'>selected</TMPL_IF>><TMPL_VAR NAME='LNG_Services'/></option>
+									<option value="support" <TMPL_IF NAME='contact_for_support' VALUE='Y'>selected</TMPL_IF>><TMPL_VAR NAME='LNG_Support'/></option>
+								</select>
+							</div>
+							<div>
+								<button type="submit" class="btn btn-primary"><TMPL_VAR NAME='LNG_Save'></button>
+								<a href="<TMPL_VAR NAME='MODULE_URL'>&<TMPL_VAR NAME='ParamsForURL'>&contact_id=<TMPL_VAR NAME='contact_id'>" class="btn btn-purple"><TMPL_VAR NAME='LNG_Reset'></a>
+								<a href="<TMPL_VAR NAME='MODULE_URL'>&<TMPL_VAR NAME='ParamsForURL'>" class="btn btn-secondary"><TMPL_VAR NAME='LNG_Back'></a>
+							</div>
+							<input type="hidden" name="Save" value="1" />
+							<input type="hidden" name="contact_id" value="<TMPL_VAR NAME='contact_id'>" />
+							<input type="hidden" name="ScrollTop" value="<TMPL_VAR NAME='ScrollTop'>">
+							<TMPL_VAR NAME='ParamsForForm' ESCAPE='none'>
+						</form>
+					</div>
+				</div>
+			</div>
+		</section>
+</div>
+
+<script type="text/javascript">
+	$(document).ready(function(){
+	    $("#select2-chosen-1").text("<TMPL_VAR NAME='user_name'>");
+	});
+    $("#s2_linked_user_id").select2({
+        minimumInputLength: 1,
+        placeholder: 'Search',
+		allowClear: true,
+        ajax: {
+            url: "<TMPL_VAR NAME='MODULE_PATH'>ajax.php",
+            dataType: 'json',
+            quietMillis: 100,
+            data: function(term, page) {
+                return {
+                    limit: -1,
+                    q: term,
+					Action: "SearchUser"
+                };
+            },
+            results: function(data, page) {
+                return {
+                    results: data
+                }
+            }
+        },
+        formatResult: function(user) {
+            return "<div class='select2-user-result'>" + user.name + "</div>";
+        },
+        formatSelection: function(user) {
+            $("input[name=salutation]").val(user.salutation);
+            $("input[name=first_name]").val(user.first_name);
+            $("input[name=last_name]").val(user.last_name);
+            $("input[name=email]").val(user.email);
+            $("input[name=phone]").val(user.phone);
+            return user.name;
+        }
+
+    });
+    $("#s2_linked_user_id").on("change", function () {
+        if (!$(this).val()) {
+            $("input[name=salutation]").val("");
+            $("input[name=first_name]").val("");
+            $("input[name=last_name]").val("");
+            $("input[name=email]").val("");
+            $("input[name=phone]").val("");
+        }
+    });
+
+/*<TMPL_IF NAME="contact_id">*/
+    $('.property-history').click(function(e){
+        var propertyName = $(this).attr('property_name');
+        var contactID = "<TMPL_VAR NAME='contact_id'>";
+		var propertyNameTranslation = $("label[for='" + propertyName + "']").text();
+
+        $.ajax({
+            url: "<TMPL_VAR NAME='MODULE_PATH'>ajax.php",
+            type: 'GET',
+            dataType: 'JSON',
+            data:{
+                Action: 'GetPropertyHistoryContactHTML',
+                property_name: propertyName,
+                contact_id: contactID,
+				property_name_translation: propertyNameTranslation
+            },
+            success: function(data){
+                if(typeof data.HTML != 'undefined'){
+                    $(data.HTML).modal('show').on('hidden.bs.modal', function () {
+                        $(this).remove();
+                    });
+                }
+            }
+        });
+
+        e.preventDefault();
+    });
+/*</TMPL_IF>*/
+</script>

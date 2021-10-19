@@ -1,0 +1,92 @@
+<TMPL_IF NAME='ReceiptList'>
+	<div class="row">
+		<div class="col-md-6 form-group text-center-xs">
+			<span><TMPL_VAR NAME='ListInfo'></span>
+		</div>
+		<div class="col-md-6 form-group text-right text-center-xs">
+			<form action="<TMPL_VAR NAME='MODULE_URL'>" method="post" class="form-inline">
+				<span class="right15 visible-xs-block visible-sm-inline visible-md-inline visible-lg-inline"><TMPL_VAR NAME='LNG_ReceiptsOnPage'></span>
+				<select name="ItemsOnPage" class="form-control">
+					<TMPL_LOOP NAME='ItemsOnPageList'>
+						<option <TMPL_IF NAME='Selected'>selected</TMPL_IF> value="<TMPL_VAR NAME='Value'>"><TMPL_IF NAME='Value'><TMPL_VAR NAME='Value'><TMPL_ELSE><TMPL_VAR NAME='LNG_All'></TMPL_IF></option>
+					</TMPL_LOOP>
+				</select>
+				<TMPL_VAR NAME='ParamsForItemsOnPage' ESCAPE='none'>
+			</form>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-md-12 col-sm-12 col-xs-12">
+			<table class="table table-hover table-tree">
+				<thead>
+					<tr>
+						<th width="2%" class="text-center"><TMPL_VAR NAME='LNG_HasChat'/></th>
+						<th width="2%" class="text-center"><TMPL_VAR NAME='LNG_Booked'></th>
+						<th width="2%" class="text-center"><TMPL_VAR NAME='LNG_UnreadByAdmin'></th>
+						<th width="2%" class="text-center"><TMPL_VAR NAME='LNG_UnreadByEmployee'></th>
+						<th width="8%"><TMPL_VAR NAME='LNG_ReceiptID'></th>
+						<th width="15%"><TMPL_VAR NAME='LNG_Created'></th>
+						<th width="15%"><TMPL_VAR NAME='LNG_Name'></th>
+						<th width="13%"><TMPL_VAR NAME='LNG_ProductGroup'></th>
+						<th width="10%"><TMPL_VAR NAME='LNG_Status'></th>
+						<th width="15%"><TMPL_VAR NAME='LNG_StatusUpdated'></th>
+						<th width="15%"><TMPL_VAR NAME='LNG_Updated'></th>
+						<th width="3%"></th>
+					</tr>
+				</thead>
+				<tbody>
+					<TMPL_LOOP NAME='ReceiptList'>
+						<TMPL_IF NAME='archive' VALUE='N'>
+							<tr class="<TMPL_UNLESS NAME='is_processed'><TMPL_IF NAME='created_seconds_ago' OP='>=' VALUE='300'>danger<TMPL_ELSEIF NAME='created_seconds_ago' OP='>=' VALUE='120'>warning<TMPL_ELSE>success</TMPL_IF></TMPL_UNLESS>">
+						<TMPL_ELSE/>
+							<tr class="inactive">
+						</TMPL_IF>
+							<td class="text-center">
+								<TMPL_IF NAME="chat">
+									<TMPL_VAR NAME="LNG_HasChatY"/>
+									<TMPL_ELSE/>
+									<TMPL_VAR NAME="LNG_HasChatN"/>
+								</TMPL_IF>
+							</td>
+							<td class="text-center"><TMPL_VAR NAME='booked'></td>
+							<td class="text-center">
+								<TMPL_IF NAME='unread_comment_count_admin' OP='>' VALUE='0'>
+									<i class="fa fa-envelope-o icon-xs icon-danger"></i>
+								</TMPL_IF>
+							</td>
+							<td class="text-center">
+								<TMPL_IF NAME='unread_comment_count_employee' OP='>' VALUE='0'>
+									<i class="fa fa-envelope-o icon-xs icon-danger"></i>
+								</TMPL_IF>
+							</td>
+							<td><a href="<TMPL_VAR NAME='MODULE_URL'>&<TMPL_VAR NAME='ParamsForURL'>&receipt_id=<TMPL_VAR NAME='receipt_id'>"><TMPL_VAR NAME='legal_receipt_id'></a></td>
+							<td><TMPL_VAR NAME='created' FORMAT='datetime'></td>
+							<td><TMPL_VAR NAME='first_name'> <TMPL_VAR NAME='last_name'></td>
+							<td><TMPL_VAR NAME='group_title_translation'></td>
+							<td><TMPL_VAR NAME='status_title'></td>
+							<td><TMPL_VAR NAME='status_updated' FORMAT='datetime'></td>
+							<td><TMPL_VAR NAME='updated' FORMAT='datetime'></td>
+							<td class="text-right">
+								<TMPL_UNLESS NAME='tax_auditor'>
+									<TMPL_IF NAME='archive' VALUE='N'>
+										<a href="<TMPL_VAR NAME='MODULE_URL'>&<TMPL_VAR NAME='ParamsForURL'>&Do=Remove&ReceiptIDs[]=<TMPL_VAR NAME='receipt_id'>" class="confirm-remove" title="<TMPL_VAR NAME='legal_receipt_id'>"><i class='fa fa-close delete'></i></a>
+									<TMPL_ELSE/>
+										<a href="<TMPL_VAR NAME='MODULE_URL'>&<TMPL_VAR NAME='ParamsForURL'>&Do=Activate&ReceiptIDs[]=<TMPL_VAR NAME='receipt_id'>" class="confirm-activate" title="<TMPL_VAR NAME='legal_receipt_id'>"><i class='fa fa-check activate'></i></a>
+									</TMPL_IF>
+								</TMPL_UNLESS>
+							</td>
+						</tr>
+					</TMPL_LOOP>
+				</tbody>
+			</table>  
+			<div class="text-center">
+				<ul class="pagination">
+					<TMPL_VAR NAME='Paging' ESCAPE='none'>
+				</ul>
+			</div>				  
+		</div>
+	</div>
+<TMPL_ELSE>
+	<div class="alert alert-success"><TMPL_VAR NAME='LNG_Empty'></div>
+</TMPL_IF>

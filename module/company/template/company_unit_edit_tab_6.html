@@ -1,0 +1,97 @@
+<div class="row">
+	<section class="box no-margin">
+		<header class="panel_header" for="header_company_unit_edit_reports" table="billing">
+			<h2 class="title pull-left"><TMPL_VAR NAME='LNG_CreateReport'></h2>
+			<div class="actions panel_actions pull-left">
+				<i class="box_toggle fa fa-chevron-down"></i>
+			</div>
+		</header>
+		<div class="content-body">
+			<div class="row">
+				<div class="col-md-6 form-group">
+					<label class="form-label"><TMPL_VAR NAME='LNG_YearlyReportDate'></label><br />
+					<input type="text" name="yearly_report_date" class="form-control datepicker" data-min-view-mode="years" data-format="yyyy"/>
+				</div>
+				<div class="col-md-6 form-group">
+					<label class="form-label">&nbsp;</label><br />
+					<button type="button" class="btn btn-primary yearly-report"><TMPL_VAR NAME='LNG_YearlyReport'></button>
+				</div>
+			</div>
+		</div>
+	</section>
+</div>
+<div class="row">
+	<section class="box no-margin">
+		<header class="panel_header" for="header_company_unit_edit_reports" table="billing">
+			<h2 class="title pull-left"><TMPL_VAR NAME='LNG_Reports'></h2>
+			<div class="actions panel_actions pull-left">
+				<i class="box_toggle fa fa-chevron-down"></i>
+			</div>
+		</header>
+		<div class="content-body">
+			<div class="row">
+				<div class="col-md-12 col-sm-12 col-xs-12">
+					<TMPL_IF NAME='ReportList'>
+						<div class="row">
+							<div class="col-md-6 form-group text-center-xs">
+								<span><TMPL_VAR NAME='ListInfo'/></span>
+							</div>
+						</div>
+						<table class="table table-striped">
+							<thead>
+							<tr>
+								<th width="30%"><TMPL_VAR NAME='LNG_ReportTitle'></th>
+								<th width="15%"><TMPL_VAR NAME='LNG_CreatedBy'></th>
+								<th width="15%"><TMPL_VAR NAME='LNG_Created'></th>
+								<th width="15%"><TMPL_VAR NAME='LNG_ReportPeriod'></th>
+								<th></th>
+								<th></th>
+							</tr>
+							</thead>
+							<tbody>
+							<TMPL_LOOP NAME='ReportList'>
+								<TMPL_IF NAME='archive' VALUE='N'>
+									<tr>
+										<TMPL_ELSE/>
+									<tr class="inactive">
+								</TMPL_IF>
+								<td><TMPL_VAR NAME='file'/></td>
+								<td><TMPL_VAR NAME='created_by'/></td>
+								<td><TMPL_VAR NAME='created' FORMAT='datetime'/></td>
+								<td><TMPL_VAR NAME='date_from' FORMAT='datetime'/> - <TMPL_VAR NAME='date_to' FORMAT='datetime'/></td>
+								<td class="text-center">
+									<TMPL_IF NAME='file'>
+										<a rel="tooltip" data-toggle="tooltip" data-original-title="<TMPL_VAR NAME='LNG_DownloadReport'>" data-placement="top" href="<TMPL_VAR NAME='MODULE_URL'>&Do=GetReport&report_id=<TMPL_VAR NAME='report_id'>&company_unit_id=<TMPL_VAR NAME='company_unit_id'>"><i class="fa fa-file-pdf-o"></i></a>
+									</TMPL_IF>
+								</td>
+								<td class="text-right">
+									<TMPL_IF NAME='Admin'>
+										<TMPL_IF NAME='archive' VALUE='N'>
+											<a href="<TMPL_VAR NAME='MODULE_URL'>&<TMPL_VAR NAME='ParamsForURL'>&company_unit_id=<TMPL_VAR NAME='company_unit_id'>&ActiveTab=6&Do=RemoveReport&ReportIDs[]=<TMPL_VAR NAME='report_id'>" class="confirm-remove" title="'<TMPL_VAR NAME='file'>' <TMPL_VAR NAME='LNG_Created'> <TMPL_VAR NAME='created' FORMAT='datetime'>"><i class='fa fa-close delete'></i></a>
+											<TMPL_ELSE>
+												<a href="<TMPL_VAR NAME='MODULE_URL'>&<TMPL_VAR NAME='ParamsForURL'>&company_unit_id=<TMPL_VAR NAME='company_unit_id'>&ActiveTab=6&Do=ActivateReport&ReportIDs[]=<TMPL_VAR NAME='report_id'>" class="confirm-activate" title="<TMPL_VAR NAME='title'>"><i class='fa fa-check activate'></i></a>
+										</TMPL_IF>
+									</TMPL_IF>
+								</td>
+								<td>
+									<TMPL_IF NAME='HistoryAdmin'>
+										(<a href="#" class="report-property-history" property_name="archive" report_id="<TMPL_VAR NAME='report_id'>"><TMPL_VAR NAME='LNG_RevisionHistory'></a>)
+									</TMPL_IF>
+								</td>
+								</tr>
+							</TMPL_LOOP>
+							</tbody>
+						</table>
+						<div class="text-center">
+							<ul class="pagination">
+								<TMPL_VAR NAME='YearlyReportPaging' ESCAPE='none'>
+							</ul>
+						</div>
+						<TMPL_ELSE>
+							<div class="alert alert-success"><TMPL_VAR NAME='LNG_Empty'></div>
+					</TMPL_IF>
+				</div>
+			</div>
+		</div>
+	</section>
+</div>

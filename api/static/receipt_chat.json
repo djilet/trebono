@@ -1,0 +1,32 @@
+{
+  "Status": "success",
+  "Code": 200,
+  "ErrorList": null,
+  "MessageList": null,
+  "Data": [
+    {
+      "date": "2018-06-04 10:52:00",
+      "text": "Hello.",
+      "is_company": false,
+      "image": ""
+    },
+    {
+      "date": "2018-06-04 10:53:00",
+      "text": "Please tell me why my check is rejected?",
+      "is_company": false,
+      "image": ""
+    },
+    {
+      "date": "2018-06-04 11:14:00",
+      "text": "Hello! The date and the amount of the check are poorly visible in this photo.",
+      "is_company": true,
+      "image": ""
+    },
+    {
+      "date": "2018-06-04 11:19:00",
+      "text": "Thank you!",
+      "is_company": false,
+      "image": ""
+    }
+  ]
+}

@@ -1,0 +1,112 @@
+<div class="modal fade modal-wide-700" id="Modal" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="ultraModal-Label" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+				<h4 class="modal-title"><TMPL_VAR NAME='LNG_ReceiptList'></h4>
+			</div>
+			<div class="modal-body">
+				<div class="row">
+					<div class="col-md-4">
+						<div class="form-group">
+							<label class="form-label"><TMPL_VAR NAME='LNG_Service'/></label>
+							<select name="FilterProductGroup" class="form-control receipt-filter">
+								<option value=""><TMPL_VAR NAME='LNG_All'/></option>
+								<TMPL_LOOP NAME='ProductGroupList'>
+									<option value="<TMPL_VAR NAME='group_id'>" <TMPL_IF NAME='Selected'>selected</TMPL_IF>><TMPL_VAR NAME='title_translation'/></option>
+								</TMPL_LOOP>
+							</select>
+						</div>
+					</div>
+					<div class="col-md-4">
+						<label class="form-label"><TMPL_VAR NAME='LNG_Created'></label>
+						<div class="input-group date" data-link-field="dtpick_1">
+							<input id="date" class="form-control <TMPL_UNLESS NAME='close'>datepicker</TMPL_IF>" size="16" type="text" name="FilterCreatedDate" value="<TMPL_VAR NAME='FilterCreatedDate' FORMAT='date'>" tabindex="1" <TMPL_IF NAME='close'>readonly</TMPL_IF>>
+							<span class="input-group-addon"><span class="fa fa-calendar"></span></span>
+						</div>
+						<input type="hidden" id="dtpick_1" value="" <TMPL_IF NAME='close'>readonly</TMPL_IF>/>
+					</div>
+					<div class="col-md-4">
+						<label class="form-label"><TMPL_VAR NAME='LNG_Status'></label>
+						<select name="FilterStatus1" class="form-control">
+							<option value=""><TMPL_VAR NAME='LNG_All'/></option>
+							<TMPL_LOOP NAME='FilterStatusList'>
+								<option value="<TMPL_VAR NAME='value'>" <TMPL_IF NAME='selected'>selected</TMPL_IF>><TMPL_VAR NAME='title_translation'/></option>
+							</TMPL_LOOP>
+						</select>
+					</div>
+				</div>
+				<div class="form-group">
+					<button type="submit" class="btn btn-primary btn-icon" id="FilterReceipt"><i class="fa fa-search"></i> <TMPL_VAR NAME='LNG_Search'/></button>
+				</div>
+				<div class="text-center loading">
+					<img src="<TMPL_VAR NAME='PATH2MAIN' />images/loading.gif">
+				</div>
+				<div id="receipt-list-table"></div>
+				<script type="text/javascript">
+					$(document).ready(function(){
+						$('.loading').show();
+						var employeeID = "<TMPL_VAR NAME='employee_id'>";
+						var receiptID = "<TMPL_VAR NAME='receipt_id'>";
+						var page = '<TMPL_VAR NAME='Page'>';
+						ReloadTableAjax(employeeID, receiptID, page);
+					});
+					$(document).on('click', '#FilterReceipt', function(e){
+						$('.loading').show();
+						var employeeID = "<TMPL_VAR NAME='employee_id'>";
+						var receiptID = "<TMPL_VAR NAME='receipt_id'>";
+						var page = '<TMPL_VAR NAME='Page'>';
+						ReloadTableAjax(employeeID, receiptID, page);
+						e.preventDefault();
+					});
+                    $(document).on('click','ul.pagination li a',function(e){
+                        $('.loading').show();
+						var page = $(this).attr('href').split('=');
+						page = (page[Number(page.length)-1]);
+                        var employeeID = "<TMPL_VAR NAME='employee_id'>";
+                        var receiptID = "<TMPL_VAR NAME='receipt_id'>";
+						ReloadTableAjax(employeeID, receiptID, page);
+                        e.preventDefault();
+                    });
+					$(document).on('change', 'select[name=ItemsOnPage]', function(e){
+						$('.loading').show();
+						var employeeID = "<TMPL_VAR NAME='employee_id'>";
+						var receiptID = "<TMPL_VAR NAME='receipt_id'>";
+						var page = '<TMPL_VAR NAME='Page'>';
+						ReloadTableAjax(employeeID, receiptID, page);
+						e.preventDefault();
+					});
+
+					$('#date').datepicker({ modal: true, format: ('dd.mm.yyyy')});
+
+					function ReloadTableAjax(employeeID, receiptID, page) {
+						$.ajax({
+							url: '<TMPL_VAR NAME='PROJECT_PATH'>module/receipt/ajax.php',
+							type: 'GET',
+							dataType: 'JSON',
+							data:{
+								Action: 'ReloadTable',
+								Section: 'receipt',
+								employee_id: employeeID,
+								receipt_id: receiptID,
+								FilterProductGroup: $("[name='FilterProductGroup']").val(),
+								FilterCreatedDate: $("[name='FilterCreatedDate']").val(),
+								FilterStatus1: $("[name='FilterStatus1']").val(),
+								Page: page,
+								ItemsOnPage: $("[name='ItemsOnPage']").val(),
+							},
+							success: function(data){
+								if(typeof data.HTML != 'undefined')
+									$('#receipt-list-table').html(data.HTML);
+								$('.loading').hide();
+							}
+						});
+					}
+				</script>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-info" data-dismiss="modal"><TMPL_VAR NAME='LNG_Close'></button>
+			</div>
+		</div>
+	</div>
+</div>

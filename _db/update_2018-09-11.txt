@@ -1,0 +1,85 @@
+--lst-main
+ALTER TABLE public.partner DROP COLUMN "Title";
+ALTER TABLE public.partner DROP COLUMN "Address";
+ALTER TABLE public.partner DROP COLUMN "Phone";
+ALTER TABLE public.partner DROP COLUMN "Email";
+ALTER TABLE public.partner DROP COLUMN "Created";
+
+ALTER TABLE public.partner
+    ADD COLUMN company_unit_id integer,
+    ADD COLUMN title character varying(255) NOT NULL,
+    ADD COLUMN created timestamp without time zone NOT NULL,
+    ADD COLUMN phone character varying(255),
+    ADD COLUMN email character varying(255),
+    ADD COLUMN zip_code character varying(255),
+    ADD COLUMN city character varying(255),
+    ADD COLUMN street character varying(255),
+    ADD COLUMN house character varying(255),
+    ADD COLUMN country character varying(255),
+    ADD COLUMN comment character varying(255),
+    ADD COLUMN bank_details character varying(255),
+    ADD COLUMN iban character varying(255),
+    ADD COLUMN bic character varying(255),
+    ADD COLUMN register character varying(255),
+    ADD COLUMN tax_number character varying(255),
+    ADD COLUMN payment_type character varying(255),
+    ADD COLUMN invoice_date character varying(255),
+    ADD COLUMN financial_statement_date character varying(255),
+    ADD COLUMN tax_consultant character varying(255),
+    ADD COLUMN payment_method character varying(255),
+    ADD COLUMN archive public.flag DEFAULT 'N'::public.flag NOT NULL,
+    ADD COLUMN app_logo_image character varying(70),
+    ADD COLUMN app_logo_mini_image character varying(70);
+
+--lst-personal
+CREATE TABLE public.partner_contact (
+    partner_contact_id integer NOT NULL,
+    partner_id integer NOT NULL,
+    created timestamp without time zone NOT NULL,
+    contact_type character varying(255) NOT NULL,
+    "position" character varying(255) NOT NULL,
+    department character varying(255) NOT NULL,
+    first_name character varying(255) NOT NULL,
+    last_name character varying(255) NOT NULL,
+    email character varying(255) NOT NULL,
+    phone character varying(255) NOT NULL,
+    phone_job character varying(255) NOT NULL,
+    comment character varying(255),
+    salutation character varying(255),
+    user_id integer
+);
+
+CREATE SEQUENCE public."partner_contact_ContactID_seq"
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+ALTER TABLE ONLY public.partner_contact ALTER COLUMN partner_contact_id SET DEFAULT nextval('public."partner_contact_ContactID_seq"'::regclass);
+
+ALTER TABLE ONLY public.partner_contact
+    ADD CONSTRAINT partner_contact_pk PRIMARY KEY (partner_contact_id);
+
+--lst-control
+CREATE SEQUENCE public."partner_history_PartnerID_seq";
+CREATE TABLE public.partner_history (
+    value_id integer DEFAULT nextval('public."partner_history_PartnerID_seq"'::regclass) NOT NULL,
+    partner_id integer NOT NULL,
+    property_name character varying(255) NOT NULL,
+    value character varying(255) NOT NULL,
+    created timestamp without time zone NOT NULL,
+    user_id integer NOT NULL
+);
+
+ALTER TABLE "public"."contact_history" ALTER COLUMN "value_id" SET DEFAULT nextval('"user_contact_history_ValueID_seq"'::regclass);
+
+CREATE SEQUENCE public."partner_contact_history_ValueID_seq";
+CREATE TABLE public.partner_contact_history (
+    value_id integer DEFAULT nextval('public."partner_contact_history_ValueID_seq"'::regclass) NOT NULL,
+    contact_id integer NOT NULL,
+    property_name character varying(255) NOT NULL,
+    value character varying(255) NOT NULL,
+    created timestamp without time zone NOT NULL,
+    user_id integer NOT NULL
+);

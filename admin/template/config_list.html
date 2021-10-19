@@ -1,0 +1,1023 @@
+<div class="row">
+	<TMPL_INCLUDE FILE='_config_navigation.html'>
+	<TMPL_IF NAME='ErrorList'>
+		<div class="alert alert-danger alert-no-margin">
+			<TMPL_LOOP NAME='ErrorList'>
+				<TMPL_VAR NAME='Message'><TMPL_UNLESS NAME='__LAST__'><br /></TMPL_UNLESS>
+			</TMPL_LOOP>
+		</div>
+	</TMPL_IF>
+	<TMPL_IF NAME='MessageList'>
+		<div class="alert alert-success alert-no-margin">
+			<TMPL_LOOP NAME='MessageList'>
+				<TMPL_VAR NAME='Message'><TMPL_UNLESS NAME='__LAST__'><br /></TMPL_UNLESS>
+			</TMPL_LOOP>
+		</div>
+	</TMPL_IF>
+
+	<TMPL_LOOP NAME="ConfigList">
+
+		<TMPL_IF NAME="show_group">
+			<TMPL_IF NAME="__ROWNUM__" OP=">" VALUE="1">
+							</table>
+						</div>
+				</section>
+			</TMPL_IF>
+
+			<section class="box no-margin">
+				<header class="panel_header" for="header_config_list_group_list" table="core">
+					<h2 class="title pull-left"><TMPL_VAR NAME='group_title_translation'/></h2>
+					<div class="actions panel-actions pull-left">
+						<i class="box_toggle fa fa-chevron-down"></i>
+					</div>
+				</header>
+				<div class="content-body">
+
+					<table class="table">
+						<tr>
+							<th><TMPL_VAR NAME='LNG_Title'></th>
+							<TMPL_IF NAME="editor_type" VALUE="field">
+								<th><TMPL_VAR NAME="LNG_CurrentValue"/></th>
+								<TMPL_ELSE>
+									<th></th>
+							</TMPL_IF>
+						</tr>
+		</TMPL_IF>
+
+		<tr>
+			<td class="col-md-6">
+				<a href="<TMPL_VAR NAME='ADMIN_PATH'>config.php?config_id=<TMPL_VAR NAME='config_id'>&return_path=<TMPL_VAR NAME='ReturnPath'>">
+					<TMPL_VAR NAME='title_translation'/>
+				</a>
+				<TMPL_IF NAME="history">
+					(<a href="#" class="config-history" data-id="<TMPL_VAR NAME='config_id'>"><TMPL_VAR NAME="LNG_RevisionHistory"/></a>)
+				</TMPL_IF>
+			</td>
+			<TMPL_IF NAME="show_value" VALUE="1">
+				<td><TMPL_VAR NAME="value"/></td>
+				<TMPL_ELSE>
+					<td></td>
+			</TMPL_IF>
+		</tr>
+
+	</TMPL_LOOP>
+	</table>
+	</div>
+	</section>
+
+	<TMPL_IF NAME='Section' VALUE='push'>
+		<section class="box no-margin">
+			<header class="panel_header" for="header_config_list_push_all" table="core">
+				<h2 class="title"><TMPL_VAR NAME='LNG_SendPushForAll'/></h2>
+			</header>
+			<div class="content-body">
+				<form action="<TMPL_VAR NAME='ADMIN_PATH'>config.php?Section=<TMPL_VAR NAME='Section'>" method="post">
+				<div class="row">
+					<div class="col-md-12">
+						<div class="form-group">
+							<textarea class="form-control" name="push_for_all_text" rows="2" id="Content"><TMPL_VAR NAME='value'></textarea>
+						</div>
+					</div>
+				</div>
+				<div>
+					<input type="hidden" name="Do" value="SendPushForAll"/>
+					<button type="submit" class="btn btn-primary btn-icon right15"><i class="fa fa fa-send"></i><TMPL_VAR NAME='LNG_SendForAll'></button>
+				</div>
+				</form>
+			</div>
+		</section>
+
+		<TMPL_IF NAME='CloudAdmin'>
+			<section class="box no-margin">
+				<header class="panel_header" for="header_config_list_push_few" table="core">
+					<h2 class="title"><TMPL_VAR NAME="LNG_SendPushOrEmailForFew"/></h2>
+				</header>
+				<div class="content-body">
+					<div class="alert alert-success alert-no-margin filter-message-list" style="display: none;"></div><br/>
+					<form action="<TMPL_VAR NAME='ADMIN_PATH'>config.php?Section=<TMPL_VAR NAME='Section'>" method="post" id="PushForFew">
+						<div class="row">
+							<div class="col-md-5 no-padding">
+								<div class="col-md-6">
+									<select id="WhoToSendPush" name="WhoToSendPush" class="form-control select2-like">
+										<option value="employee"><TMPL_VAR NAME="LNG_Employee"/>Employee</option>
+										<option value="contact"><TMPL_VAR NAME="LNG_ContactPerson"/>Contact</option>
+									</select>
+								</div>
+								<div class="col-md-6">
+									<select id="HowToChoosePush" class="form-control select2-like">
+										<option value="1"><TMPL_VAR NAME="LNG_AutochangeSelectOne"/></option>
+										<option value="2"><TMPL_VAR NAME="LNG_AutochangeSelectAll"/></option>
+										<option value="3"><TMPL_VAR NAME="LNG_AutochangeSelectFilter"/></option>
+										<option value="4"><TMPL_VAR NAME="LNG_AutochangeEmployeeSelectFilter"/></option>
+									</select>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-3 OUFilter hidden">
+								<br/>
+								<select name="filter_option" class="form-control select2-like placehold">
+									<option class="placeholder" value=""><TMPL_VAR NAME="LNG_AutochangeFilterPlaceholder"/></option>
+									<TMPL_LOOP NAME="ProductList">
+										<optgroup label="<TMPL_VAR NAME='title_translation'>">
+											<TMPL_LOOP NAME="OptionList">
+												<option value="<TMPL_VAR NAME='option_id'>" data-type="<TMPL_VAR NAME='type'>" <TMPL_IF NAME='product_id'>product-id="<TMPL_VAR NAME='product_id'>"</TMPL_IF>><TMPL_VAR NAME="title_translation"/></option>
+											</TMPL_LOOP>
+										</optgroup>
+									</TMPL_LOOP>
+								</select>
+							</div>
+							<div class="col-md-1 OUFilter  hidden">
+								<br/>
+								<select name="option_operation" class="form-control select2-like placehold">
+									<option value="="> = </option>
+									<option value=">"> > </option>
+									<option value="<"> < </option>
+									<option value=">="> >= </option>
+									<option value="<="> <= </option>
+								</select>
+							</div>
+							<div class="col-md-3 OUFilter hidden"><br/>
+								<input type="text" name="filter_value" class="form-control" placeholder="<TMPL_VAR NAME='LNG_AutochangeFilterValuePlaceholder'>">
+								<input type="text" name="filter_value_datepicker" class="form-control datepicker hidden" placeholder="<TMPL_VAR NAME='LNG_AutochangeFilterValuePlaceholder'>">
+								<input type="hidden" name="filter_by" value="company">
+							</div>
+							<div class="col-md-1 OUFilter hidden">
+								<br/><button class="btn btn-primary" id="CompanyUnitFilter"><TMPL_VAR NAME="LNG_AutochangeDoFilter"/></button>
+							</div>
+						</div>
+						<div class="row">
+							<br/>
+							<div class="col-md-5 no-padding">
+								<div class="col-md-6">
+									<select name="company_unit_id[]" class="form-control select2" multiple data-allow-clear="true" data-placeholder="<TMPL_VAR NAME='LNG_AutochangeCompanyPlaceholder'>">
+										<TMPL_VAR NAME="CompanyListHtml" ESCAPE="none"/>
+									</select>
+									<input type="text" class="form-control hidden AllCompanies" value="" disabled>
+								</div>
+								<div class="ForEmployee">
+									<div class="col-md-4">
+										<label class="form-label"><TMPL_VAR NAME='LNG_SendPushVersionPlaceholder'></label>
+									</div>
+									<div class="col-md-1 no-padding">
+										<select name="version_operation" class="form-control select2-like placehold">
+											<option value="="> = </option>
+											<option value=">" <TMPL_IF NAME='FilterOptionOperation' value='>'>selected</TMPL_IF>> > </option>
+											<option value="<" <TMPL_IF NAME='FilterOptionOperation' value='<'>selected</TMPL_IF>> < </option>
+											<option value=">=" <TMPL_IF NAME='FilterOptionOperation' value='>='>selected</TMPL_IF>> >= </option>
+											<option value="<=" <TMPL_IF NAME='FilterOptionOperation' value='<='>selected</TMPL_IF>> <= </option>
+										</select>
+									</div>
+								</div>
+							</div>
+							<div class="col-md-5 no-padding">
+								<div class="col-md-6">
+									<select name="version[]" class="form-control select2" multiple data-allow-clear="true" data-placeholder="<TMPL_VAR NAME='LNG_SendPushVersionPlaceholder'>">
+										<TMPL_VAR NAME="VersionListHtml" ESCAPE="none"/>
+									</select>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<br/>
+							<div class="col-md-5 no-padding">
+								<div class="col-md-6">
+									<select name="employee_id[]" class="form-control select2" multiple data-allow-clear="true" data-placeholder="<TMPL_VAR NAME='LNG_SendPushEmployeePlaceholder'>">
+										<TMPL_VAR NAME="EmployeeListHtml" ESCAPE="none"/>
+									</select>
+								</div>
+							</div>
+						</div>
+						<div class="row ContactFilter hidden">
+							<div class="col-md-5 no-padding">
+								<br/>
+								<div class="col-md-6">
+									<select name="contact_type[]" class="form-control select2" multiple data-allow-clear="true" data-placeholder="<TMPL_VAR NAME='LNG_SendPushContactTypePlaceholder'>">
+									</select>
+								</div>
+								<div class="col-md-6">
+									<select class="form-control select2" name="contact_for[]" multiple data-allow-clear="true" data-placeholder="<TMPL_VAR NAME='LNG_SendPushContactForPlaceholder'>">
+									</select>
+								</div>
+							</div>
+							<div class="col-md-5 no-padding">
+								<br>
+								<div class="col-md-6">
+									<select name="contact_id[]" class="form-control select2" multiple data-allow-clear="true" data-placeholder="<TMPL_VAR NAME='LNG_SendPushContactPlaceholder'>">
+										<TMPL_VAR NAME="ContactPersonListHtml" ESCAPE="none"/>
+									</select>
+								</div>
+							</div>
+						</div>
+						<br/>
+						<div class="row">
+							<div class="col-md-5 no-padding">
+								<div class="col-md-6">
+									<select id="WhatToSend" name="WhatToSend" class="form-control select2-like">
+										<option value="push"><TMPL_VAR NAME="LNG_SendPush"/></option>
+										<option value="email"><TMPL_VAR NAME="LNG_SendEmail"/></option>
+									</select>
+								</div>
+								<div class="loading">
+									<img src="<TMPL_VAR NAME='PATH2MAIN' />images/loading.gif">
+								</div>
+							</div>
+						</div>
+						<br/>
+						<div class="row">
+							<div class="col-md-12">
+								<div class="form-group" id="PushContent">
+									<textarea class="form-control" name="push_for_few_text" rows="2"><TMPL_VAR NAME='value'></textarea>
+								</div>
+								<div class="form-group" id="EmailContent" style="display: none;">
+									<input type="text" class="form-control" name="email_subject" placeholder="<TMPL_VAR NAME='LNG_SendEmailSubjectPlaceholder'>">
+									<br>
+									<div class="clearfix"></div>
+									<textarea class="form-control" name="email_for_few_text" rows="20" cols="80" id="CKEmailContent"><TMPL_VAR NAME='value'></textarea>
+								</div>
+							</div>
+						</div>
+						<div class="templates" style="margin-bottom: 10px;">
+							<h4>
+								<TMPL_VAR NAME="LNG_AvailableVariables" />
+								<small><TMPL_VAR NAME='LNG_AvailableVariablesComment' /></small>
+							</h4>
+
+							<div id="EmployeeAvailableVariables">
+								<TMPL_LOOP NAME="EmployeeReplacements">
+									<a href="#" data-template="<TMPL_VAR NAME='template'>"><TMPL_VAR NAME="translation" /></a> <br>
+								</TMPL_LOOP>
+							</div>
+							<div id="ContactAvailableVariables" class="hidden">
+								<TMPL_LOOP NAME="ContactReplacements">
+									<a href="#" data-template="<TMPL_VAR NAME='template'>"><TMPL_VAR NAME="translation" /></a> <br>
+								</TMPL_LOOP>
+							</div>
+							<TMPL_LOOP NAME="CompanyUnitReplacements">
+								<a href="#" data-template="<TMPL_VAR NAME='template'>"><TMPL_VAR NAME="translation" /></a> <br>
+							</TMPL_LOOP>
+							<div id="ProductGroupAvailableVariables">
+								<TMPL_LOOP NAME="ProductGroupReplacements">
+									<a href="#" data-template="<TMPL_VAR NAME='template'>"><TMPL_VAR NAME="translation" /></a> <br>
+								</TMPL_LOOP>
+							</div>
+						</div>
+
+						<div>
+							<input type="hidden" name="Do" value="SendPushForFew"/>
+							<button id="SendPushForFew" type="submit" class="btn btn-primary btn-icon right15"><i class="fa fa fa-send"></i><TMPL_VAR NAME='LNG_SendPushOrEmail'></button>
+							<button id="PushForFewUserList" class="btn btn-primary btn-icon right15"><i class="fa fa fa-child"></i><TMPL_VAR NAME='LNG_PushForFewUserList'></button>
+							<button id="PushForFewExportEmail" type="submit" class="btn btn-primary btn-icon right15 hidden"><i class="fa fa fa fa-envelope"></i><TMPL_VAR NAME='LNG_PushForFewExportEmail'></button>
+						</div>
+					</form>
+				</div>
+			</section>
+		</TMPL_IF>
+	</TMPL_IF>
+
+<TMPL_IF NAME='Section' VALUE='others'>
+	<section class="box no-margin">
+		<header class="panel_header" for="header_config_list_remove_org_unit" table="core">
+			<h2 class="title"><TMPL_VAR NAME='LNG_RemoveOrganizationUnit'/></h2>
+		</header>
+		<div class="content-body">
+			<form action="<TMPL_VAR NAME='ADMIN_PATH'>config.php?Section=<TMPL_VAR NAME='Section'>" method="post">
+				<div class="col-md-3">
+					<select name="company_unit_id" class="select2" data-placeholder="<TMPL_VAR NAME='LNG_Company'>" data-allow-clear="true">
+						<option value=""></option>
+						<TMPL_VAR NAME="CompanyListHtml" ESCAPE="none"/>
+					</select>
+				</div>
+				<button class="btn btn-primary" type="submit" id="RemoveOUData">OK</button>
+				<input type="hidden" name="Do" value="RemoveImportedData"/>
+				<input type="hidden" name="Template" value="1"/>
+			</form>
+		</div>
+	</section>
+
+	<section class="box no-margin">
+		<header class="panel_header" for="header_config_list_partner_type_params" table="core">
+			<h2 class="title"><TMPL_VAR NAME='LNG_PartnerTypeParams'/></h2>
+		</header>
+		<div class="content-body">
+			<div class="row">
+				<form action="<TMPL_VAR NAME='ADMIN_PATH'>config.php?Section=<TMPL_VAR NAME='Section'>" method="post" id="PartnerTypeParams">
+					<div class="col-md-3">
+						<select name="partner_type" class="form-control select2-like placehold">
+							<option class="placeholder" value=""><TMPL_VAR NAME="LNG_PartnerType"/></option>
+							<option value="BP"><TMPL_VAR NAME="LNG_BusinessPartner"/></option>
+							<option value="KB"><TMPL_VAR NAME="LNG_Kundenbetreuer"/></option>
+							<option value="LP"><TMPL_VAR NAME="LNG_LosungPartner"/></option>
+						</select>
+					</div>
+					<div class="col-md-3"><input type="text" name="commission" class="form-control" placeholder="<TMPL_VAR NAME='LNG_Commission'>"></div>
+					<div class="col-md-3"><input type="text" name="implementation_fee" class="form-control" placeholder="<TMPL_VAR NAME='LNG_Implementation'>"></div>
+					<div class="col-md-3"><input type="text" name="long" class="form-control" placeholder="<TMPL_VAR NAME='LNG_Long'>"></div>
+
+					<div class="col-md-2 margin15">
+						<button class="btn btn-primary" type="submit"><TMPL_VAR NAME="LNG_Save"/></button>
+					</div>
+					<input type="hidden" name="Do" value="PartnerTypeParams"/>
+					<input type="hidden" name="Template" value="1"/>
+				</form>
+			</div>
+		</div>
+	</section>
+
+	<section class="box no-margin">
+		<header class="panel_header" for="header_config_list_autochange" table="core">
+			<h2 class="title"><TMPL_VAR NAME="LNG_AutochangeTitle"/></h2>
+		</header>
+		<div class="content-body">
+			<div class="row">
+				<form action="<TMPL_VAR NAME='ADMIN_PATH'>config.php?Section=<TMPL_VAR NAME='Section'>" method="post" id="OUParams">
+					<div class="col-md-5 no-padding">
+						<div class="col-md-6">
+							<select id="HowToChoose" class="form-control select2-like">
+								<option value="1"><TMPL_VAR NAME="LNG_AutochangeSelectOne"/></option>
+								<option value="2"><TMPL_VAR NAME="LNG_AutochangeSelectAll"/></option>
+								<option value="3"><TMPL_VAR NAME="LNG_AutochangeSelectFilter"/></option>
+							</select>
+						</div>
+						<div class="col-md-6">
+							<select name="company_unit_id[]" class="form-control select2" multiple data-allow-clear="true" data-placeholder="<TMPL_VAR NAME='LNG_AutochangeCompanyPlaceholder'>">
+								<TMPL_VAR NAME="CompanyListHtml" ESCAPE="none"/>
+							</select>
+							<input type="text" class="form-control hidden AllCompanies" value="" disabled>
+						</div>
+					</div>
+					<div class="col-md-5 no-padding">
+						<div class="AutochangeOptionLine">
+							<div class="col-md-6">
+								<select name="option_id[]" class="form-control select2-like placehold">
+									<option class="placeholder" value=""><TMPL_VAR NAME="LNG_AutochangeOptionPlaceholder"/></option>
+									<TMPL_LOOP NAME="ProductList">
+										<optgroup label="<TMPL_VAR NAME='title_translation'>">
+											<TMPL_LOOP NAME="OptionList">
+												<option value="<TMPL_VAR NAME='option_id'>"><TMPL_VAR NAME="title_translation"/></option>
+											</TMPL_LOOP>
+										</optgroup>
+									</TMPL_LOOP>
+								</select>
+							</div>
+							<div class="col-md-6"><input type="text" name="option_value[]" class="form-control" placeholder="<TMPL_VAR NAME='LNG_AutochangeValuePlaceholder'>"></div>
+						</div>
+						<div class="col-md-6"><a href="#" class="AutochangeOneMore"><TMPL_VAR NAME="LNG_AutochangeOneMore"/></a></div>
+					</div>
+					<div class="col-md-2">
+						<button class="btn btn-primary" type="submit"><TMPL_VAR NAME="LNG_Save"/></button>
+					</div>
+					<input type="hidden" name="Do" value="SaveOptionValues">
+					<input type="hidden" name="Template" value="1">
+				</form>
+			</div>
+			<hr/>
+			<div class="row">
+				<div class="col-md-3 OUFilter hidden">
+					<select name="filter_option" class="form-control select2-like placehold">
+						<option class="placeholder" value=""><TMPL_VAR NAME="LNG_AutochangeFilterPlaceholder"/></option>
+						<TMPL_LOOP NAME="ProductList">
+							<optgroup label="<TMPL_VAR NAME='title_translation'>">
+								<TMPL_LOOP NAME="OptionList">
+									<option value="<TMPL_VAR NAME='option_id'>"><TMPL_VAR NAME="title_translation"/></option>
+								</TMPL_LOOP>
+							</optgroup>
+						</TMPL_LOOP>
+					</select>
+				</div>
+				<div class="col-md-3 OUFilter hidden"><input type="text" name="filter_value" class="form-control" placeholder="<TMPL_VAR NAME='LNG_AutochangeFilterValuePlaceholder'>"></div>
+				<div class="col-md-3 OUFilter hidden">
+					<button class="btn btn-primary" id="OUFilterButton" type="submit"><TMPL_VAR NAME="LNG_AutochangeDoFilter"/></button>
+				</div>
+			</div>
+		</div>
+	</section>
+</TMPL_IF>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        LoadEmployeeListByCompanyUnits();
+        
+        $('.config-history').click(function(e){
+            var id = $(this).data('id');
+
+            $.ajax({
+                url: '<TMPL_VAR NAME='MODULE_PATH'>ajax.php',
+                type: 'GET',
+                dataType: 'JSON',
+                data:{
+                    Action: 'GetConfigHistoryHTML',
+                    config_id: id
+                },
+                success: function(data){
+                    if(typeof data.HTML != 'undefined'){
+                        $(data.HTML).modal('show').on('hidden.bs.modal', function () {
+                            $(this).remove();
+                        });
+                    }
+                }
+            });
+
+            e.preventDefault();
+        });
+    });
+
+	$('.templates a').click(function(e) {
+		e.preventDefault();
+
+		if ($("#WhatToSend").val() == "push")
+		{
+			var pushTextarea = $("[name='push_for_few_text']");
+			var caretPos = pushTextarea[0].selectionStart;
+			var pushValue = pushTextarea.val();
+
+			pushTextarea.val(pushValue.substring(0, caretPos) + $(this).data('template').trim() + pushValue.substring(caretPos) );
+			pushTextarea.focus();
+		}
+		else
+		{
+			CKEDITOR.instances.CKEmailContent.insertText($(this).data('template').trim());
+			CKEDITOR.instances.CKEmailContent.focus();
+		}
+	});
+
+    function GetPartnerTypeParameters(abbr){
+        var result = {
+            Title: "",
+            commission: "",
+            implementation_fee: "",
+            long: ""
+        };
+        switch(abbr){
+				/*<TMPL_LOOP NAME="PartnerTypeList">*/
+            case "<TMPL_VAR NAME='abbreviation'>":
+                result = {
+                    Title: "<TMPL_VAR NAME='title'>",
+                    commission: "<TMPL_VAR NAME='commission'>",
+                    implementation_fee: "<TMPL_VAR NAME='implementation_fee'>",
+                    long: "<TMPL_VAR NAME='long' ESCAPE='none'>"
+                };
+                break;
+				/*</TMPL_LOOP>*/
+        }
+        return result;
+    }
+
+    $("#PartnerTypeParams select[name=partner_type]").on("change", function(e){
+        var partnerTypeParams = $("#PartnerTypeParams"),
+            abbr = $(this).val(),
+            params = GetPartnerTypeParameters(abbr);
+
+        for (var k in params){
+            partnerTypeParams.find("[name="+k+"]").val(params[k]);
+        };
+
+        e.preventDefault();
+    });
+
+    $("#RemoveOUData").on("click", function(e){
+        e.preventDefault();
+        var form = $(this).closest("form");
+        var companyUnit = form.find(":selected");
+
+        if (companyUnit.val())
+            ModalConfirm("<TMPL_VAR NAME='LNG_ConfirmRemoveOU'> "+companyUnit.text().replace(/^\-+/g, "")+"?",
+                function(){
+                    form.submit();
+                });
+
+    });
+
+    $("#OUParams [type=submit]").on("click", function (e) {
+        e.preventDefault();
+        if (!$("#OUParams [name='company_unit_id[]']").val()) {
+            CreateMessage("<TMPL_VAR NAME='LNG_AutochangeNoCompanies'>", "warning");
+            return;
+        }
+
+        ModalConfirm("<TMPL_VAR NAME='LNG_AutochangeModalQuestion'>", function(){
+            $("#OUParams").submit();
+        });
+    });
+
+    $("#SendPushForFew").on("click", function (e) {
+        e.preventDefault();
+        if ($("#WhatToSend").val() == "email" && !$("[name='email_subject']").val()) {
+            ModalAlert("<TMPL_VAR NAME='LNG_Error'>", "<TMPL_VAR NAME='LNG_SendEmailEmptySubject'>");
+        }
+		else if (!$("[name='company_unit_id[]']").val() && !$("[name='version[]']").val() && !$("[name='employee_id[]']").val()
+            && !$("[name='contact_type[]']").val() && !$("[name='contact_for[]']").val() && !$("[name='contact_id[]']").val()) {
+            ModalConfirm("<TMPL_VAR NAME='LNG_SendPushForFewConfirm'>", function(){
+                $("[name=Do]").val("SendPushForFew");
+                $("#PushForFew").submit();
+            });
+        }
+        else
+		{
+            $("[name=Do]").val("SendPushForFew");
+            $("#PushForFew").submit();
+		}
+    });
+
+    $("#PushForFewExportEmail").on("click", function (e) {
+        e.preventDefault();
+        $("[name=Do]").val("ExportEmail");
+		$("#PushForFew").submit();
+    });
+
+    $("#HowToChoose").on("change", function () {
+        var select = $("#OUParams [name='company_unit_id[]']");
+
+        switch (this.value){
+            case "1":
+                select.val([]).trigger("change");
+                $(".AllCompanies").addClass("hidden");
+                $(".OUFilter").addClass("hidden");
+                select.removeClass("hidden");
+                break;
+            case "2":
+                var opval = select.find("option").map(function(){ return $(this).val(); });
+                select.val(opval).trigger("change");
+                $(".OUFilter").addClass("hidden");
+                select.addClass("hidden");
+                $(".AllCompanies").removeClass("hidden");
+                $(".AllCompanies").val("<TMPL_VAR NAME='LNG_AutochangeAllCompanies'> ("+opval.length+")");
+                break;
+            case "3":
+                select.val([]).trigger("change");
+                $(".AllCompanies").addClass("hidden");
+                $(".OUFilter").removeClass("hidden");
+                select.removeClass("hidden");
+        }
+    });
+
+    $("#HowToChoosePush").on("change", function () {
+        var select = $("[name='company_unit_id[]']");
+
+        switch (this.value){
+            case "1":
+                select.val([]).trigger("change");
+                $(".AllCompanies").addClass("hidden");
+                $(".OUFilter").addClass("hidden");
+                select.removeClass("hidden");
+                break;
+            case "2":
+                var opval = select.find("option").map(function(){ return $(this).val(); });
+                select.val(opval).trigger("change");
+                $(".OUFilter").addClass("hidden");
+                select.addClass("hidden");
+                $(".AllCompanies").removeClass("hidden");
+                $(".AllCompanies").val("<TMPL_VAR NAME='LNG_AutochangeAllCompanies'> ("+opval.length+")");
+                break;
+            case "3":
+                select.val([]).trigger("change");
+                $(".AllCompanies").addClass("hidden");
+                $(".OUFilter").removeClass("hidden");
+                $("[name='filter_by']").val("company");
+                select.removeClass("hidden");
+                break;
+            case "4":
+                select.val([]).trigger("change");
+                $(".AllCompanies").addClass("hidden");
+                $(".OUFilter").removeClass("hidden");
+                $("[name='filter_by']").val("employee");
+                select.removeClass("hidden");
+        }
+    });
+
+    $("#WhoToSendPush").on("change", function () {
+        switch (this.value){
+            case "employee":
+                $(".ContactFilter").addClass("hidden");
+
+                $("[name='version[]']").removeClass('hidden');
+                $("[name='employee_id[]']").removeClass("hidden");
+                $(".ForEmployee").removeClass("hidden");
+
+                LoadEmployeeListByCompanyUnits();
+
+                $("#ContactAvailableVariables").addClass("hidden");
+                $("#EmployeeAvailableVariables").removeClass("hidden");
+                $("#ProductGroupAvailableVariables").removeClass("hidden");
+                break;
+            case "contact":
+                $(".ContactFilter").removeClass("hidden");
+
+                $("[name='version[]']").addClass("hidden");
+                $("[name='employee_id[]']").addClass("hidden");
+                $(".ForEmployee").addClass("hidden");
+
+                LoadContactPersonListByCompanyUnits();
+                $("#ContactAvailableVariables").removeClass("hidden");
+                $("#EmployeeAvailableVariables").addClass("hidden");
+                $("#ProductGroupAvailableVariables").addClass("hidden");
+			    break;
+        }
+
+    });
+
+    $("#WhatToSend").on("change", function () {
+        switch (this.value){
+            case "push":
+                $("#EmailContent").hide();
+                $("#PushContent").show();
+                $("#PushForFewExportEmail").addClass("hidden");
+                break;
+            case "email":
+                if ($("#cke_CKEmailContent").length == 0)
+                    createCKEditor('CKEmailContent');
+                $("#EmailContent").show();
+                $("#PushContent").hide();
+                $("#PushForFewExportEmail").removeClass("hidden");
+                break;
+        }
+        $("[name='company_unit_id[]']").trigger("change");
+
+    });
+
+    $("#OUFilterButton").on("click", function(){
+        var option = $(".OUFilter [name=filter_option]").val();
+        if (!option) {
+            CreateMessage("<TMPL_VAR NAME='LNG_AutochangeFilterWarning'>", "warning");
+            return;
+        }
+
+        var optionValue = $(".OUFilter [name=filter_value]").val();
+        var select = $("#OUParams [name='company_unit_id[]']");
+		$.ajax({
+			url: "<TMPL_VAR NAME='PROJECT_PATH'>module/company/ajax.php",
+			type: "POST",
+			dataType: "JSON",
+			data:{
+				Action: "GetCompanyListByOptionFilter",
+				"option" : option,
+				value : optionValue
+			},
+			success: function(data){
+				select.val(data).trigger("change");
+				if (!Array.isArray(data))
+					CreateMessage("<TMPL_VAR NAME='LNG_AutochangeFilterError'>", "error");
+			}
+		});
+    });
+
+    $("[name=filter_option]").on("change", function(){
+
+		if ($(this).find(':selected').attr('data-type') == "date")
+		{
+            $("[name=filter_value]").addClass("hidden");
+            $("[name=filter_value_datepicker]").removeClass("hidden");
+		}
+		else
+		{
+            $("[name=filter_value]").removeClass("hidden");
+            $("[name=filter_value_datepicker]").addClass("hidden");
+		}
+	});
+
+    $("#CompanyUnitFilter").on("click", function(e){
+        e.preventDefault();
+        $('.loading').show();
+        $(".filter-message-list").hide();
+
+        var option = $("[name=filter_option]").val();
+
+        var option_operation = $("[name=option_operation]").val();
+
+        if (!option) {
+            CreateMessage("<TMPL_VAR NAME='LNG_AutochangeFilterWarning'>", "warning");
+            return;
+        }
+
+        var optionValue;
+        var select, action;
+        if ($("[name='filter_by']").val() == "company")
+		{
+            select = $("[name='company_unit_id[]']");
+            action = "GetCompanyListByOptionFilter";
+		}
+        else
+		{
+            select = $("[name='employee_id[]']");
+            action = "GetEmployeeListByOptionFilter";
+		}
+        var type = $("[name=filter_option]").find(':selected').attr('data-type');
+        if (type == "date") {
+			var product_id= $("[name=filter_option]").find(':selected').attr('product-id');
+			optionValue = $("[name=filter_value_datepicker]").val();
+		}
+        else {
+			optionValue = $("[name=filter_value]").val();
+		}
+
+        $.ajax({
+            url: "<TMPL_VAR NAME='PROJECT_PATH'>module/company/ajax.php",
+            type: "POST",
+            dataType: "JSON",
+            data:{
+                Action: action,
+                product_id: product_id,
+                option_operation : option_operation,
+                option : option,
+				type : type,
+                value : optionValue
+            },
+            success: function(data){
+                if (data["Data"].length == 0)
+                    CreateStaticMessage("<TMPL_VAR NAME='LNG_PushFilterNoResults'>", 'warning');
+                else
+                    select.val(data["Data"]).trigger("change");
+                if (!Array.isArray(data["Data"]))
+                    CreateMessage("<TMPL_VAR NAME='LNG_AutochangeFilterError'>", "error");
+                else if (data["MessageList"])
+				{
+                    $(".filter-message-list").html(data["MessageList"]);
+                    $(".filter-message-list").show();
+				}
+                $('.loading').hide();
+            }
+        });
+    });
+
+    $("a.AutochangeOneMore").on("click", function(e){
+        e.preventDefault();
+        var AutochangeLine = $('div.AutochangeOptionLine:first').clone();
+        AutochangeLine.find("input").val("");
+        $('div.AutochangeOptionLine:last').after(AutochangeLine);
+    });
+
+    function SetSendMessageButtonCaption(amount)
+    {
+        var caption = "";
+
+        if ($("#WhatToSend").val() == "push")
+            caption = "<TMPL_VAR NAME='LNG_SendPushFor'>";
+        else
+            caption = "<TMPL_VAR NAME='LNG_SendEmailFor'>";
+
+        if (amount == undefined)
+            amount = 0;
+
+        caption += amount;
+
+        if (amount == 1)
+            caption += "<TMPL_VAR NAME='LNG_SendForUser'>";
+        else
+            caption += "<TMPL_VAR NAME='LNG_SendForUsers'>";
+
+        $("#SendPushForFew").html(caption);
+    }
+
+    function LoadEmployeeListByCompanyUnits()
+    {
+        var employeeSelect = $("[name='employee_id[]']");
+        var versionSelect = $("[name='version[]']");
+        var companyUnitIDs = $("[name='company_unit_id[]']").val();
+        $('.loading').show();
+
+        $.ajax({
+            url: "<TMPL_VAR NAME='PROJECT_PATH'>module/company/ajax.php",
+            type: "POST",
+            dataType: "JSON",
+            data:{
+                Action: "GetEmployeeListByCompanyIDs",
+                company_unit_ids : companyUnitIDs
+            },
+            success: function(data){
+                employeeSelect.select2("val", "");
+                versionSelect.select2("val", "");
+
+                var EmployeeListHTML = "";
+                for (var i = 0; i < data["EmployeeList"].length; i++) {
+                    EmployeeListHTML += '<option data-companyID="'+data["EmployeeList"][i]["company_unit_id"]+'" value="' + data["EmployeeList"][i]["employee_id"]+ '">' +
+                        data["EmployeeList"][i]["first_name"] + ' ' + data["EmployeeList"][i]["last_name"] + '</option>';
+                }
+                employeeSelect.empty().append(EmployeeListHTML);
+                SetSendMessageButtonCaption(data["EmployeeList"].length);
+
+                var VersionListHTML = "";
+                for (i = 0; i < data["VersionList"].length; i++) {
+                    VersionListHTML += '<option value="' + data["VersionList"][i]["client"]+ '-' +  data["VersionList"][i]["version"] + '">' +
+                        data["VersionList"][i]["client"] + ' ' + data["VersionList"][i]["version"] + '</option>';
+                }
+                versionSelect.empty().append(VersionListHTML);
+                $('.loading').hide();
+            }
+        });
+    }
+
+    function LoadEmployeeListByVersionList()
+	{
+        var employeeSelect = $("[name='employee_id[]']");
+        var versionList = $("[name='version[]']").val();
+        var companyUnitIDs = $("[name='company_unit_id[]']").val();
+        var versionOperation = $("[name='version_operation']").val();
+        $('.loading').show();
+
+        $.ajax({
+            url: "<TMPL_VAR NAME='PROJECT_PATH'>module/company/ajax.php",
+            type: "POST",
+            dataType: "JSON",
+            data:{
+                Action: "GetEmployeeListByVersion",
+                version_list : versionList,
+                company_unit_ids : companyUnitIDs,
+                version_operation: versionOperation
+            },
+            success: function(data){
+                employeeSelect.select2("val", "");
+
+                if (data["NoResults"])
+				{
+                    CreateStaticMessage("<TMPL_VAR NAME='LNG_PushFilterNoResults'>", 'warning');
+				}
+
+                var EmployeeListHTML = "";
+                for (var i = 0; i < data["EmployeeList"].length; i++)
+                {
+                    EmployeeListHTML += '<option data-companyID="'+data["EmployeeList"][i]["company_unit_id"]+'"  value="' + data["EmployeeList"][i]["employee_id"]+ '">' +
+                        data["EmployeeList"][i]["first_name"] + ' ' + data["EmployeeList"][i]["last_name"] + '</option>';
+                }
+                    
+                employeeSelect.empty().append(EmployeeListHTML);
+                SetSendMessageButtonCaption(data["EmployeeList"].length);
+                $('.loading').hide();
+            }
+        });
+    }
+
+    $("[name='company_unit_id[]']").on("change", function(){
+        if ($("#WhoToSendPush").val() == 'contact')
+            LoadContactPersonListByCompanyUnits();
+        else
+            LoadEmployeeListByCompanyUnits();
+    });
+
+    $("[name='version[]']").on("change", function(){
+        LoadEmployeeListByVersionList();
+    });
+    $("[name='version_operation']").on("change", function(){
+        LoadEmployeeListByVersionList();
+    });
+
+    $("[name='employee_id[]']").on("change", function(){
+        if ($(this).val() == null)
+            LoadEmployeeListByCompanyUnits();
+        else
+            SetSendMessageButtonCaption($(this).val().length);
+    });
+    $("[name='contact_id[]']").on("change", function(){
+        if ($(this).val() == null)
+            LoadContactPersonListByCompanyUnits();
+        else
+            SetSendMessageButtonCaption($(this).val().length);
+    });
+
+    $("[name='contact_type[]']").on("change", function(){
+
+        LoadContactPersonListByContactType();
+    });
+    $("[name='contact_for[]']").on("change", function(){
+
+        LoadContactPersonListByContactType();
+    });
+
+    function GetContactTypeNames() {
+        var ContactTypeList = [];
+        ContactTypeList["management"] = "<TMPL_VAR NAME='LNG_ContactTypeManagement'>";
+        ContactTypeList["hr"] = "<TMPL_VAR NAME='LNG_ContactTypeHR'>";
+        ContactTypeList["finance"] = "<TMPL_VAR NAME='LNG_ContactTypeFinance'>";
+        ContactTypeList["it"] = "<TMPL_VAR NAME='LNG_ContactTypeIT'>";
+        ContactTypeList["other"] = "<TMPL_VAR NAME='LNG_ContactTypeOther'>";
+
+        var ContactForList = [];
+        ContactForList["invoice"] = "<TMPL_VAR NAME='LNG_Invoice'>";
+        ContactForList["contract"] = "<TMPL_VAR NAME='LNG_Contract'>";
+        ContactForList["service"] = "<TMPL_VAR NAME='LNG_Services'>";
+        ContactForList["support"] = "<TMPL_VAR NAME='LNG_Support'>";
+        ContactForList["payroll_export"] = "<TMPL_VAR NAME='LNG_PayrollExport'>";
+
+        return [ContactTypeList, ContactForList];
+    }
+
+    function LoadContactPersonListByCompanyUnits()
+    {
+        var contactTypeNames = GetContactTypeNames();
+        var personListSelect = $("[name='contact_id[]']");
+        var companyUnitIDs = $("[name='company_unit_id[]']").val();
+        var contactTypeSelect = $("[name='contact_type[]']");
+        var contactForSelect = $("[name='contact_for[]']");
+        $('.loading').show();
+
+        $.ajax({
+            url: "<TMPL_VAR NAME='PROJECT_PATH'>module/company/ajax.php",
+            type: "POST",
+            dataType: "JSON",
+            data:{
+                Action: "GetContactPersonListByCompanyIDs",
+                company_unit_ids : companyUnitIDs
+            },
+            success: function(data){
+                personListSelect.select2("val", "");
+                contactTypeSelect.select2("val", "");
+                contactForSelect.select2("val", "");
+
+                var ContactPersonListHTML = "";
+                for (var i = 0; i < data["ContactList"].length; i++) {
+                    ContactPersonListHTML += '<option data-companyID="'+data["ContactList"][i]["company_unit_id"]+'" value="' + data["ContactList"][i]["contact_id"]+ '">' +
+                        data["ContactList"][i]["first_name"] + ' ' + data["ContactList"][i]["last_name"] + '</option>';
+                }
+                personListSelect.empty().append(ContactPersonListHTML);
+                SetSendMessageButtonCaption(data["ContactList"].length);
+
+                var ContactTypeListHTML = "";
+                for (i = 0; i < data["ContactTypeList"].length; i++) {
+                    ContactTypeListHTML += '<option value="' + data["ContactTypeList"][i]+ '">' +
+                        contactTypeNames[0][data["ContactTypeList"][i]] + '</option>';
+                }
+                contactTypeSelect.empty().append(ContactTypeListHTML);
+
+                var ContactForListHTML = "";
+                for (i = 0; i < data["ContactForList"].length; i++) {
+                    ContactForListHTML += '<option value="' + data["ContactForList"][i]+ '">' +
+                        contactTypeNames[1][data["ContactForList"][i]] + '</option>';
+                }
+                contactForSelect.empty().append(ContactForListHTML);
+                $('.loading').hide();
+            }
+        });
+    }
+
+    function LoadContactPersonListByContactType()
+    {
+        var personListSelect = $("[name='contact_id[]']");
+        var companyUnitIDs = $("[name='company_unit_id[]']").val();
+        var contactTypeList = $("[name='contact_type[]']").val();
+        var contactForList = $("[name='contact_for[]']").val();
+        $('.loading').show();
+
+        $.ajax({
+            url: "<TMPL_VAR NAME='PROJECT_PATH'>module/company/ajax.php",
+            type: "POST",
+            dataType: "JSON",
+            data:{
+                Action: "GetContactPersonListByContactType",
+                company_unit_ids: companyUnitIDs,
+                contact_type: contactTypeList,
+                contact_for: contactForList
+            },
+            success: function(data){
+                personListSelect.select2("val", "");
+
+                var ContactPersonListHTML = "";
+                for (var i = 0; i < data["ContactList"].length; i++) {
+                    ContactPersonListHTML += '<option data-companyID="'+data["ContactList"][i]["company_unit_id"]+'" value="' + data["ContactList"][i]["contact_id"]+ '">' +
+                        data["ContactList"][i]["first_name"] + ' ' + data["ContactList"][i]["last_name"] + '</option>';
+                }
+                personListSelect.empty().append(ContactPersonListHTML);
+                SetSendMessageButtonCaption(data["ContactList"].length);
+                $('.loading').hide();
+            }
+        });
+    }
+
+    $("#PushForFewUserList").on("click", function(e)
+    {
+        e.preventDefault();
+
+        var userList;
+        var type = $("#WhoToSendPush").val();
+
+        if (type == 'employee')
+            userList = $("[name='employee_id[]']").val();
+        else
+            userList = $("[name='contact_id[]']").val();
+
+        var versionOperation = $("[name='version_operation']").val();
+        
+        $.ajax({
+            url: "<TMPL_VAR NAME='PROJECT_PATH'>module/company/ajax.php",
+            type: 'GET',
+            dataType: 'JSON',
+            data:{
+                Action: 'GetSendPushOrEmailUserHTML',
+                type: type,
+                user_ids: userList,
+				company_unit_id: $("[name='company_unit_id[]']").val(),
+				version: $("[name='version[]']").val(),
+				contact_type: $("[name='contact_type[]']").val(),
+				contact_for: $("[name='contact_for[]']").val(),
+				version_operation: versionOperation
+            },
+            success: function(data){
+                if(typeof data.HTML != 'undefined'){
+                    $(data.HTML).modal('show').on('hidden.bs.modal', function () {
+                        $(this).remove();
+                    });
+                }
+            }
+        });
+    })
+
+</script>

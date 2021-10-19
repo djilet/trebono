@@ -1,0 +1,340 @@
+<TMPL_IF NAME='Admin'>
+	<div class="row">
+	<section class="box no-margin">
+		<header class="panel_header" for="header_payroll_list_filter" table="billing">
+			<h2 class="title pull-left"><TMPL_VAR NAME='LNG_Filter'></h2>
+			<div class="actions panel_actions pull-left">
+				<i class="box_toggle fa fa-chevron-down"></i>
+			</div>
+		</header>
+		<div class="content-body">
+			<form action="<TMPL_VAR NAME='MODULE_URL'>&Section=payroll" method="post">
+				<div class="row">
+					<div class="col-md-3">
+						<div class="form-group">
+							<label class="form-label"><TMPL_VAR NAME='LNG_FilterCreatedRange'></label><br />
+							<input type="text" name="FilterCreatedRange" class="form-control daterange active" value="<TMPL_VAR NAME='FilterCreatedRange'>" data-time-picker-increment="1" data-time-picker="true">
+						</div>
+					</div>
+					<div class="col-md-3">
+						<div class="form-group">
+							<label class="form-label"><TMPL_VAR NAME='LNG_FilterTitle'></label>
+							<input type="text" placeholder="<TMPL_VAR NAME='LNG_FilterTitlePlaceholder'>" class="form-control" name="FilterTitle" value="<TMPL_VAR NAME='FilterTitle'>">
+						</div>
+					</div>
+					<div class="col-md-3">
+						<div class="form-group">
+							<label class="form-label hidden-xs">&nbsp;</label><br />
+							<button type="submit" class="btn btn-primary btn-icon"><i class="fa fa-search"></i> <TMPL_VAR NAME='LNG_FilterApply'></button>
+						</div>
+					</div>
+				</div>
+				<TMPL_VAR NAME='ParamsForFilter' ESCAPE='none'/>
+			</form>
+			<hr>
+			<TMPL_IF NAME='ShowCreateBlock'>
+				<form action="<TMPL_VAR NAME='MODULE_URL'>&Section=payroll" method="post">
+					<div class="row">
+						<div class="col-md-3">
+							<div class="form-group">
+								<label class="form-label"><TMPL_VAR NAME='LNG_DateOfPayroll'/></label><br />
+								<input type="text" id="create_date" name="date" class="form-control datepicker" FORMAT='datepicker'>
+							</div>
+						</div>
+						<div class="col-md-3">
+							<div class="form-group">
+								<label class="form-label"><TMPL_VAR NAME='LNG_CompanyUnitID'></label>
+								<select class="select2" name="company_unit_id" data-allow-clear="true">
+									<option value=""></option>
+									<TMPL_LOOP NAME='CompanyUnitList'>
+										<TMPL_IF NAME='Selected'>
+											<option value="<TMPL_VAR NAME='company_unit_id'>" selected><TMPL_VAR NAME='select_prefix'> <TMPL_VAR NAME='title'></option>
+										<TMPL_ELSEIF NAME='archive' VALUE='N'>
+											<option value="<TMPL_VAR NAME='company_unit_id'>"><TMPL_VAR NAME='select_prefix'> <TMPL_VAR NAME='title'></option>
+										</TMPL_IF>
+									</TMPL_LOOP>
+								</select>
+							</div>
+						</div>
+						<div class="col-md-3">
+							<div class="form-group">
+								<label class="form-label hidden-xs">&nbsp;</label><br />
+								<button id="create_payroll" class="btn btn-primary btn-icon"> <TMPL_VAR NAME='LNG_CreatePayroll'/></button>
+							</div>
+						</div>
+					</div>
+					<TMPL_VAR NAME='ParamsForFilter' ESCAPE='none'>
+				</form>
+				<hr>
+				<form action="<TMPL_VAR NAME='MODULE_URL'>&Section=payroll" method="post">
+					<div class="row">
+						<div class="col-md-3">
+							<div class="form-group">
+								<label class="form-label"><TMPL_VAR NAME='LNG_DateOfExport'/></label><br />
+								<input type="text" id="create_date" name="date" class="form-control datepicker" FORMAT='datepicker'>
+							</div>
+						</div>
+						<div class="col-md-9">
+							<label class="form-label hidden-xs">&nbsp;</label><br />
+							<button type="submit" id="creditor_export" class="btn btn-primary btn-icon" name="Action" value="Export"> <TMPL_VAR NAME='LNG_CreditorExport'/></button>
+							<TMPL_IF NAME='Admin'>
+								<button type="submit" id="creditor_export_reset" class="btn btn-primary btn-icon" name="Action" value="ExportReset"> <TMPL_VAR NAME='LNG_CreditorExportReset'/></button>
+							</TMPL_IF>
+						</div>
+					</div>
+				</form>
+			</TMPL_IF>
+		</div>
+	</section>
+</div>
+</TMPL_IF>
+<div class="row">
+	<section class="box no-margin">
+		<div class="content-body padding-3">
+			<div class="row row-new">
+				<div class="row">
+					<ul class="nav nav-tabs left-align-title">
+						<li
+						<TMPL_IF NAME='Admin'>
+							<TMPL_IF NAME='ActiveTab' VALUE='1'>class="active"<TMPL_ELSEIF NAME='ActiveTab' VALUE=''>class="active"</TMPL_IF>
+						<TMPL_ELSE>class="active"
+						</TMPL_IF>>
+							<a href="#tab-1" data-toggle='tab' for="nav_tab2_payroll_list" table="payroll_list"><TMPL_VAR NAME='LNG_PayrollList'></a>
+						</li>
+						<TMPL_IF NAME='Admin'>
+							<li
+							<TMPL_IF NAME='ActiveTab' VALUE='2'>class="active"</TMPL_IF>>
+							<a href="#tab-2" data-toggle='tab' for="nav_tab1_voucher_export_list" table="voucher_export_list"><TMPL_VAR NAME='LNG_VoucherExportList'></a>
+							</li>
+						</TMPL_IF>
+					</ul>
+				</div>
+				<div class="tab-content">
+					<div id="tab-1" class="tab-pane
+						<TMPL_IF NAME='Admin'>
+							<TMPL_IF NAME='ActiveTab' VALUE='1'>active<TMPL_ELSEIF NAME='ActiveTab' VALUE=''>active</TMPL_IF>
+						<TMPL_ELSE>active
+						</TMPL_IF>">						<div class="row">
+							<section class="box no-margin">
+								<header class="panel_header" for="header_payroll_list" table="billing">
+									<h2 class="title"><TMPL_VAR NAME='LNG_PayrollList'></h2>
+								</header>
+								<div class="content-body">
+									<div class="row">
+										<div class="col-md-12 col-sm-12 col-xs-12">
+											<TMPL_IF NAME='PayrollList'>
+												<div class="row">
+													<div class="col-md-6 form-group text-center-xs">
+														<span><TMPL_VAR NAME='ListInfoPayroll'/></span>
+													</div>
+													<div class="col-md-6 form-group text-right text-center-xs">
+														<form action="<TMPL_VAR NAME='MODULE_URL'>&Section=payroll" method="post" class="form-inline">
+															<span class="right15 visible-xs-block visible-sm-inline visible-md-inline visible-lg-inline"><TMPL_VAR NAME='LNG_DocumentsOnPage'/></span>
+															<select name="ItemsOnPagePayroll" class="form-control">
+																<TMPL_LOOP NAME='ItemsOnPageListPayroll'>
+																	<option <TMPL_IF NAME='Selected'>selected</TMPL_IF> value="<TMPL_VAR NAME='Value'>"><TMPL_IF NAME='Value'><TMPL_VAR NAME='Value'><TMPL_ELSE><TMPL_VAR NAME='LNG_All'></TMPL_IF></option>
+																</TMPL_LOOP>
+															</select>
+															<TMPL_VAR NAME='ParamsForItemsOnPagePayroll' ESCAPE='none'>
+																<input type="hidden" name="ActiveTab" value="1">
+														</form>
+													</div>
+												</div>
+												<table class="table table-striped">
+													<thead>
+													<tr>
+														<th><TMPL_VAR NAME='LNG_CompanyUnitTitle'></th>
+														<th><TMPL_VAR NAME='LNG_Created'></th>
+														<th><TMPL_VAR NAME='LNG_Period'></th>
+														<th><TMPL_VAR NAME='LNG_Status'></th>
+														<th class="text-center"><TMPL_VAR NAME='LNG_PDF'></th>
+														<th class="text-center"><TMPL_VAR NAME='LNG_Lodas'></th>
+														<th class="text-center"><TMPL_VAR NAME='LNG_Lug'></th>
+														<th class="text-center"><TMPL_VAR NAME='LNG_Logga'></th>
+														<th class="text-center"><TMPL_VAR NAME='LNG_Topas'></th>
+														<th class="text-center"><TMPL_VAR NAME='LNG_Addison'></th>
+														<th class="text-center"><TMPL_VAR NAME='LNG_Lexware'></th>
+														<th class="text-center"><TMPL_VAR NAME='LNG_Perforce'></th>
+														<th class="text-center"><TMPL_VAR NAME='LNG_Sage'></th>
+														<th class="text-center"><TMPL_VAR NAME='LNG_LugIni'></th>
+													</tr>
+													</thead>
+													<tbody>
+													<TMPL_LOOP NAME='PayrollList'>
+														<tr>
+															<td><TMPL_VAR NAME='title'/></td>
+															<td><TMPL_VAR NAME='created' FORMAT='datetime'/></td>
+															<td><TMPL_VAR NAME='Period'/></td>
+															<td><TMPL_VAR NAME='status_title'/></td>
+															<td class="text-center">
+																<TMPL_IF NAME='pdf_file'>
+																	<a rel="tooltip" data-toggle="tooltip" data-original-title="<TMPL_VAR NAME='LNG_DownloadPDF'>" data-placement="top" target="_blank" href="<TMPL_VAR NAME='MODULE_URL'>&<TMPL_VAR NAME='ParamsForURL'>&Action=GetPayrollPDF&payroll_id=<TMPL_VAR NAME='payroll_id'>"><i class="fa fa-file-pdf-o"></i></a>
+																</TMPL_IF>
+															</td>
+															<td class="text-center">
+																<TMPL_IF NAME='lodas_file'>
+																	<a rel="tooltip" data-toggle="tooltip" data-original-title="<TMPL_VAR NAME='LNG_DownloadLodas'>" data-placement="top" href="<TMPL_VAR NAME='MODULE_URL'>&<TMPL_VAR NAME='ParamsForURL'>&Action=GetPayrollLodas&payroll_id=<TMPL_VAR NAME='payroll_id'>"><i class="fa fa-file-text-o"></i></a>
+																</TMPL_IF>
+															</td>
+															<td class="text-center">
+																<TMPL_IF NAME='lug_file'>
+																	<a rel="tooltip" data-toggle="tooltip" data-original-title="<TMPL_VAR NAME='LNG_DownloadLug'>" data-placement="top" href="<TMPL_VAR NAME='MODULE_URL'>&<TMPL_VAR NAME='ParamsForURL'>&Action=GetPayrollLug&payroll_id=<TMPL_VAR NAME='payroll_id'>"><i class="fa fa-file-text-o"></i></a>
+																</TMPL_IF>
+															</td>
+															<td class="text-center">
+																<TMPL_IF NAME='logga_file'>
+																	<a rel="tooltip" data-toggle="tooltip" data-original-title="<TMPL_VAR NAME='LNG_DownloadLogga'>" data-placement="top" href="<TMPL_VAR NAME='MODULE_URL'>&<TMPL_VAR NAME='ParamsForURL'>&Action=GetPayrollLogga&payroll_id=<TMPL_VAR NAME='payroll_id'>"><i class="fa fa-file-text-o"></i></a>
+																</TMPL_IF>
+															</td>
+															<td class="text-center">
+																<TMPL_IF NAME='topas_file'>
+																	<a rel="tooltip" data-toggle="tooltip" data-original-title="<TMPL_VAR NAME='LNG_DownloadTopas'>" data-placement="top" href="<TMPL_VAR NAME='MODULE_URL'>&<TMPL_VAR NAME='ParamsForURL'>&Action=GetPayrollTopas&payroll_id=<TMPL_VAR NAME='payroll_id'>"><i class="fa fa-file-text-o"></i></a>
+																</TMPL_IF>
+															</td>
+															<td class="text-center">
+																<TMPL_IF NAME='addison_file'>
+																	<a rel="tooltip" data-toggle="tooltip" data-original-title="<TMPL_VAR NAME='LNG_DownloadAddison'>" data-placement="top" href="<TMPL_VAR NAME='MODULE_URL'>&<TMPL_VAR NAME='ParamsForURL'>&Action=GetPayrollAddison&payroll_id=<TMPL_VAR NAME='payroll_id'>" data-placement="top"><i class="fa fa-file-text-o"></i></a>
+																</TMPL_IF>
+															</td>
+															<td class="text-center">
+																<TMPL_IF NAME='lexware_file'>
+																	<a rel="tooltip" data-toggle="tooltip" data-original-title="<TMPL_VAR NAME='LNG_DownloadLexware'>" data-placement="top" href="<TMPL_VAR NAME='MODULE_URL'>&<TMPL_VAR NAME='ParamsForURL'>&Action=GetPayrollLexware&payroll_id=<TMPL_VAR NAME='payroll_id'>" data-placement="top"><i class="fa fa-file-text-o"></i></a>
+																</TMPL_IF>
+															</td>
+															<td class="text-center">
+																<TMPL_IF NAME='perforce_file'>
+																	<a rel="tooltip" data-toggle="tooltip" data-original-title="<TMPL_VAR NAME='LNG_DownloadPerforce'>" data-placement="top" href="<TMPL_VAR NAME='MODULE_URL'>&<TMPL_VAR NAME='ParamsForURL'>&Action=GetPayrollPerforce&payroll_id=<TMPL_VAR NAME='payroll_id'>" data-placement="top"><i class="fa fa-file-text-o"></i></a>
+																</TMPL_IF>
+															</td>
+															<td class="text-center">
+																<TMPL_IF NAME='sage_file'>
+																	<a rel="tooltip" data-toggle="tooltip" data-original-title="<TMPL_VAR NAME='LNG_DownloadSage'>" data-placement="top" href="<TMPL_VAR NAME='MODULE_URL'>&<TMPL_VAR NAME='ParamsForURL'>&Action=GetPayrollSage&payroll_id=<TMPL_VAR NAME='payroll_id'>" data-placement="top"><i class="fa fa-file-text-o"></i></a>
+																</TMPL_IF>
+															</td>
+															<td class="text-center">
+																<TMPL_IF NAME='lug_ini_file'>
+																	<a rel="tooltip" data-toggle="tooltip" data-original-title="<TMPL_VAR NAME='LNG_DownloadLugIni'>" data-placement="top" href="<TMPL_VAR NAME='lug_ini_file_download_path'>"><i class="fa fa-file-text-o"></i></a>
+																</TMPL_IF>
+														</tr>
+													</TMPL_LOOP>
+													</tbody>
+												</table>
+												<div class="text-center">
+													<ul class="pagination">
+														<TMPL_VAR NAME='PagingPayroll' ESCAPE='none'>
+													</ul>
+												</div>
+												<TMPL_ELSE>
+													<div class="alert alert-success"><TMPL_VAR NAME='LNG_Empty'></div>
+											</TMPL_IF>
+										</div>
+									</div>
+								</div>
+							</section>
+						</div>
+					</div>
+					<div id="tab-2" class="tab-pane
+					<TMPL_IF NAME='ActiveTab' VALUE='2'>active</TMPL_IF>">
+						<TMPL_IF NAME='Admin'>
+							<div class="row">
+								<section class="box no-margin">
+									<header class="panel_header" for="header_voucher_export_list" table="billing">
+										<h2 class="title"><TMPL_VAR NAME='LNG_VoucherExportList'></h2>
+									</header>
+									<div class="content-body">
+										<div class="row">
+											<div class="col-md-12 col-sm-12 col-xs-12">
+												<TMPL_IF NAME='VoucherExportList'>
+													<div class="row">
+														<div class="col-md-6 form-group text-center-xs">
+															<span><TMPL_VAR NAME='ListInfoVoucher'/></span>
+														</div>
+														<div class="col-md-6 form-group text-right text-center-xs">
+															<form action="<TMPL_VAR NAME='MODULE_URL'>&Section=payroll" method="post" class="form-inline">
+																<span class="right15 visible-xs-block visible-sm-inline visible-md-inline visible-lg-inline"><TMPL_VAR NAME='LNG_DocumentsOnPage'/></span>
+																<select name="ItemsOnPageVoucher" class="form-control">
+																	<TMPL_LOOP NAME='ItemsOnPageListVoucher'>
+																		<option <TMPL_IF NAME='Selected'>selected</TMPL_IF> value="<TMPL_VAR NAME='Value'>"><TMPL_IF NAME='Value'><TMPL_VAR NAME='Value'><TMPL_ELSE><TMPL_VAR NAME='LNG_All'></TMPL_IF></option>
+																	</TMPL_LOOP>
+																</select>
+																<TMPL_VAR NAME='ParamsForItemsOnPageVoucher' ESCAPE='none'>
+
+																	<input type="hidden" name="ActiveTab" value="2">
+															</form>
+														</div>
+													</div>
+													<table class="table table-striped">
+														<thead>
+														<tr>
+															<th><TMPL_VAR NAME='LNG_Created'></th>
+															<th><TMPL_VAR NAME='LNG_Period'></th>
+															<th><TMPL_VAR NAME='LNG_CreatedUser'></th>
+															<th class="text-center"><TMPL_VAR NAME='LNG_VoucherExport'></th>
+														</tr>
+														</thead>
+														<tbody>
+														<TMPL_LOOP NAME='VoucherExportList'>
+															<tr>
+																<td><TMPL_VAR NAME='created' FORMAT='datetime'/></td>
+																<td><TMPL_VAR NAME='Period'/></td>
+																<td>
+																	<a href="<TMPL_VAR NAME='ADMIN_PATH'>user.php?user_id=<TMPL_VAR NAME='user_id'>">
+																		<TMPL_VAR NAME='created_user_name'>
+																	</a>
+																</td>
+																<td class="text-center">
+																	<a rel="tooltip" data-toggle="tooltip" data-original-title="<TMPL_VAR NAME='LNG_DownloadVoucherExport'>" data-placement="top" href="<TMPL_VAR NAME='MODULE_URL'>&<TMPL_VAR NAME='ParamsForURL'>&Action=GetVoucherExport&export_id=<TMPL_VAR NAME='export_id'>" data-placement="top"><i class="fa fa-file-text-o"></i></a>
+																</td>
+															</tr>
+														</TMPL_LOOP>
+														</tbody>
+													</table>
+													<div class="text-center">
+														<ul class="pagination">
+															<TMPL_VAR NAME='PagingVoucher' ESCAPE='none'>
+														</ul>
+													</div>
+													<TMPL_ELSE>
+														<div class="alert alert-success"><TMPL_VAR NAME='LNG_Empty'></div>
+												</TMPL_IF>
+											</div>
+										</div>
+									</div>
+								</section>
+							</div>
+						</TMPL_IF>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+</div>
+
+<script type="text/javascript">
+	$(document).ready(function() {
+		$('select[name=ItemsOnPagePayroll]').change(function() {
+			$(this).closest('form').submit();
+		});
+
+		$('select[name=ItemsOnPageVoucher]').change(function() {
+			$(this).closest('form').submit();
+		});
+
+		$('#create_payroll').click(function(e) {
+			e.preventDefault();
+			var date = $("#create_date").val().split('.');
+			if(date.length == 3) {
+				var companyUnitID = $("[name=company_unit_id]").val();
+				companyUnitID = companyUnitID ? '&company_unit_id=' + companyUnitID : '';
+				$.ajax({
+					url: '<TMPL_VAR NAME='PROJECT_PATH'>module/billing/cron/payroll_create.php?date=' + date[2] + '-' + date[1] + '-' + date[0] + companyUnitID,
+					complete: function(data) {
+						setTimeout(function() {
+							location.href = "<TMPL_VAR NAME='PROJECT_PATH'>admin/module.php?load=billing&Section=payroll&ActiveTab=1"
+						}, 4000);
+					}
+				});
+			}
+		});
+	});
+</script>

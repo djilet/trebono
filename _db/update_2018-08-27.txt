@@ -1,0 +1,4 @@
+INSERT INTO "public"."config" ("config_id","code","value","group_code","editor","updated")
+						VALUES (nextval('"config_ConfigID_seq"'::regclass),'export_datev_tax_consultant_id','2942241','e_export'::character varying,'plain'::character varying,timezone('utc'::text, now()));
+INSERT INTO "public"."config" ("config_id","code","value","group_code","editor","updated")
+						VALUES (nextval('"config_ConfigID_seq"'::regclass),'export_datev_client_id','11003','e_export'::character varying,'plain'::character varying,timezone('utc'::text, now()));

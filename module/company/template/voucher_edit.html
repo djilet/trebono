@@ -1,0 +1,334 @@
+<div class="row">
+	<TMPL_IF NAME='ErrorList'>
+		<div class="alert alert-danger alert-no-margin">
+			<TMPL_LOOP NAME='ErrorList'>
+				<TMPL_VAR NAME='Message'><TMPL_UNLESS NAME='__LAST__'><br /></TMPL_UNLESS>
+			</TMPL_LOOP>
+		</div>
+	</TMPL_IF>
+	<TMPL_IF NAME='MessageList'>
+		<div class="alert alert-success alert-no-margin">
+			<TMPL_LOOP NAME='MessageList'>
+				<TMPL_VAR NAME='Message'><TMPL_UNLESS NAME='__LAST__'><br /></TMPL_UNLESS>
+			</TMPL_LOOP>
+		</div>
+	</TMPL_IF>
+	<section class="box no-margin">
+		<header class="panel_header" for="header_voucher_edit" table="company">
+			<h2 class="title"><TMPL_VAR NAME='Title'></h2>
+		</header>
+		<div class="content-body">
+			<div class="row">
+				<div class="col-md-6 col-sm-6 col-xs-6">
+					<TMPL_IF NAME="created">
+						<label class="form-label"><TMPL_VAR NAME='LNG_Created'> <TMPL_VAR NAME='created' FORMAT='datetime'></label>
+					</TMPL_IF>
+					<form action="<TMPL_VAR NAME='MODULE_URL'>" method="post" class="enter-to-tab" data-validation="true" autocomplete="off" enctype="multipart/form-data">
+						<div class="form-group">
+							<label class="form-label required" for="amount" table="voucher">
+								<TMPL_IF NAME='Count'>
+									<TMPL_VAR NAME='LNG_Count'>
+								<TMPL_ELSE>
+									<TMPL_VAR NAME='LNG_Amount'>
+								</TMPL_IF>
+							</label>
+							<TMPL_IF NAME="voucher_id">
+								<TMPL_IF NAME='HistoryAdmin'>
+									(<a href="#" class="property-history" property_name="amount"><TMPL_VAR NAME='LNG_RevisionHistory'/></a>)
+								</TMPL_IF>
+							</TMPL_IF>
+							<div class="controls">
+								<TMPL_IF NAME='Count'>
+									<input type="text" class="form-control" name="count" value="<TMPL_VAR NAME='count'>">
+								<TMPL_ELSE>
+									<input type="text" class="form-control" name="amount" <TMPL_IF NAME='file'>disabled</TMPL_IF> value="<TMPL_VAR NAME='amount' FORMAT='price'>">
+								</TMPL_IF>
+							</div>
+						</div>
+						<TMPL_IF NAME='VoucherReasonList'>
+							<div class="form-group">
+								<label class="form-label required" for="reason" table="voucher"><TMPL_VAR NAME='LNG_Reason'></label>
+								<TMPL_IF NAME="voucher_id">
+									<TMPL_IF NAME='HistoryAdmin'>
+										(<a href="#" class="property-history" property_name="reason"><TMPL_VAR NAME='LNG_RevisionHistory'/></a>)
+									</TMPL_IF>
+								</TMPL_IF>
+								<select class="form-control m-bot15" name="reason" <TMPL_IF NAME='file'>disabled</TMPL_IF>>
+									<option value="">-</option>
+									<TMPL_LOOP NAME='VoucherReasonList'>
+										<option value="<TMPL_VAR NAME='Reason'>" <TMPL_IF NAME='Selected'>selected</TMPL_IF>><TMPL_VAR NAME='Reason'></option>
+									</TMPL_LOOP>
+								</select>
+							</div>
+						</TMPL_IF>
+						<TMPL_IF NAME='SetsOfGoodsList'>
+							<div class="form-group">
+								<label class="form-label required" for="reason" table="voucher"><TMPL_VAR NAME='LNG_SetOfGoods'></label>
+								<TMPL_IF NAME="voucher_id">
+									<TMPL_IF NAME='HistoryAdmin'>
+										(<a href="#" class="property-history" property_name="reason"><TMPL_VAR NAME='LNG_RevisionHistory'/></a>)
+									</TMPL_IF>
+								</TMPL_IF>
+								<select class="form-control m-bot15" name="reason" <TMPL_IF NAME='file'>disabled</TMPL_IF> <TMPL_IF NAME="HasReceipts">disabled</TMPL_IF>>
+									<TMPL_LOOP NAME='SetsOfGoodsList'>
+										<option value="<TMPL_VAR NAME='Reason'>" <TMPL_IF NAME='Selected'>selected</TMPL_IF>><TMPL_VAR NAME='Reason'></option>
+									</TMPL_LOOP>
+								</select>
+							</div>
+						</TMPL_IF>
+						<div class="form-group">
+							<label class="form-label required" for="voucher_date" table="voucher"><TMPL_VAR NAME='LNG_VoucherDate'></label>
+							<TMPL_IF NAME="voucher_id">
+								<TMPL_IF NAME='HistoryAdmin'>
+									(<a href="#" class="property-history" property_name="voucher_date"><TMPL_VAR NAME='LNG_RevisionHistory'/></a>)
+								</TMPL_IF>
+							</TMPL_IF>
+							<div class="controls"><input type="text" class="form-control datepicker" name="voucher_date" value="<TMPL_VAR NAME='voucher_date' FORMAT='date'>" <TMPL_IF NAME='file'>disabled</TMPL_IF>></div>
+						</div>
+						<div class="form-group">
+							<label class="form-label required" for="end_date" table="voucher"><TMPL_VAR NAME='LNG_VoucherEndDate'></label>
+							<TMPL_IF NAME="voucher_id">
+								<TMPL_IF NAME='HistoryAdmin'>
+									(<a href="#" class="property-history" property_name="end_date"><TMPL_VAR NAME='LNG_RevisionHistory'/></a>)
+								</TMPL_IF>
+							</TMPL_IF>
+							<div class="controls"><input type="text" class="form-control datepicker" name="end_date" value="<TMPL_VAR NAME='end_date' FORMAT='date'>" <TMPL_IF NAME='Admin'> <TMPL_ELSE> readonly="readonly" </TMPL_IF>></div>
+						</div>
+						<TMPL_IF NAME='Admin'>
+							<div class="form-group">
+								<label class="form-label"><TMPL_VAR NAME='LNG_Design'></label>
+								<div class="controls">
+									<ul class="list-unstyled">
+										<li>
+											<input tabindex="5" type="radio" id="minimal-radio-6" class="icheck-minimal-grey" checked>
+											<label class="iradio-label form-label" for="minimal-radio-6">Default</label>
+										</li>
+									</ul>
+								</div>
+							</div>
+						</TMPL_IF>
+						<TMPL_IF NAME='ShowRecurring'>
+							<div id="show-recurring">
+								<div class="form-group">
+									<label class="form-label" for="recurring" table="voucher"><TMPL_VAR NAME='LNG_Recurring'></label>
+									<TMPL_IF NAME="voucher_id">
+										<TMPL_IF NAME='HistoryAdmin'>
+											(<a href="#" class="property-history" property_name="recurring"><TMPL_VAR NAME='LNG_RevisionHistory'/></a>)
+										</TMPL_IF>
+									</TMPL_IF>
+									<div class="controls"><input type="checkbox" name="recurring" value="Y" class="iswitch iswitch-md iswitch-primary" <TMPL_IF NAME='recurring' VALUE='Y'>checked</TMPL_IF>></div>
+								</div>
+								<div class="form-group">
+									<label class="form-label" for="recurring_frequency" table="voucher"><TMPL_VAR NAME='LNG_Frequency'></label>
+									<TMPL_IF NAME="voucher_id">
+										<TMPL_IF NAME='HistoryAdmin'>
+											(<a href="#" class="property-history" property_name="recurring_frequency"><TMPL_VAR NAME='LNG_RevisionHistory'></a>)
+										</TMPL_IF>
+									</TMPL_IF>
+									<div class="controls">
+										<select class="form-control m-bot15" name="recurring_frequency">
+											<option value=""></option>
+											<option value="monthly" <TMPL_IF NAME="recurring_frequency" VALUE="monthly">selected</TMPL_IF>> <TMPL_VAR NAME='LNG_Monthly'></option>
+											<option value="quarterly" <TMPL_IF NAME="recurring_frequency" VALUE="quarterly">selected</TMPL_IF>> <TMPL_VAR NAME='LNG_Quarterly'></option>
+												<option value="yearly" <TMPL_IF NAME="recurring_frequency" VALUE="yearly">selected</TMPL_IF>> <TMPL_VAR NAME='LNG_Yearly'></option>
+										</select>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="form-label" for="recurring_end_date" table="voucher"><TMPL_VAR NAME='LNG_RecurringEndDate'></label>
+									<TMPL_IF NAME="voucher_id">
+										<TMPL_IF NAME='HistoryAdmin'>
+											(<a href="#" class="property-history" property_name="recurring_end_date"><TMPL_VAR NAME='LNG_RevisionHistory'/></a>)
+										</TMPL_IF>
+									</TMPL_IF>
+									<div class="controls"><input type="text" class="form-control datepicker" name="recurring_end_date" value="<TMPL_VAR NAME='recurring_end_date' FORMAT='date'>"></div>
+								</div>
+							</div>
+						</TMPL_IF>
+						<div class="row">
+							<div class="col-md-4 col-sm-4 col-xs-4">
+								<button type="submit" class="btn btn-primary" <TMPL_IF NAME='DisabledSaveButton'>disabled</TMPL_IF>><TMPL_VAR NAME='LNG_Save'></button>
+								<a class="btn btn-icon" href="<TMPL_VAR NAME='ADMIN_PATH'>module.php?load=company&<TMPL_VAR NAME='ParamForURL'>"><i class="fa fa-ban"></i><TMPL_VAR NAME='LNG_Cancel'></a>
+							</div>
+							<div class="col-md-4 col-sm-4 col-xs-4">
+								<TMPL_IF NAME='NewVoucherBotton'>
+									<a class="btn btn-primary" href="<TMPL_VAR NAME='MODULE_URL'>&<TMPL_VAR NAME='ParamsForUrl'>Section=voucher&employee_id=<TMPL_VAR NAME='employee_id'>&group_id=<TMPL_VAR NAME='group_id'>&ActiveTab=3&voucher_id="><TMPL_VAR NAME='LNG_AddNewVoucher'></a>
+								</TMPL_IF>
+							</div>
+						</div>
+						<input type="hidden" name="Save" value="1" />
+						<input type="hidden" name="voucher_id" value="<TMPL_VAR NAME='voucher_id'>" />
+						<input type="hidden" name="ScrollTop" value="<TMPL_VAR NAME='ScrollTop'>">
+						<TMPL_IF NAME='file'>
+							<input type="hidden" name="FileGenerated" value="1" />
+						</TMPL_IF>
+						<TMPL_VAR NAME='ParamsForForm' ESCAPE='none'/>
+					</form>
+				</div>
+				<TMPL_IF NAME="Admin">
+					<div class="col-md-6 col-sm-6 col-xs-6">
+						<TMPL_IF NAME='ReceiptList'>
+							<table class="table">
+								<thead>
+								<tr>
+									<th><TMPL_VAR NAME='LNG_ReceiptReceiptID'></th>
+									<th><TMPL_VAR NAME='LNG_ReceiptUpdated'></th>
+									<th><TMPL_VAR NAME='LNG_ReceiptDocumentDate'></th>
+									<th><TMPL_VAR NAME='LNG_Service'></th>
+									<th><TMPL_VAR NAME='LNG_ApprovedAmount'></th>
+									<th><TMPL_VAR NAME='LNG_ReceiptStatus'></th>
+									<th><TMPL_VAR NAME='LNG_DatePayment'></th>
+								</tr>
+								</thead>
+								<tbody>
+								<TMPL_LOOP NAME='ReceiptList'>
+									<tr>
+										<td>
+											<a href="<TMPL_VAR NAME='ADMIN_PATH'>module.php?load=receipt&Section=receipt&receipt_id=<TMPL_VAR NAME='receipt_id'>">
+												<TMPL_VAR NAME='legal_receipt_id'>
+											</a>
+										</td>
+										<td><TMPL_VAR NAME='updated' FORMAT='datetime'></td>
+										<td><TMPL_VAR NAME='document_date' FORMAT='datetime'></td>
+										<td><TMPL_VAR NAME='group_title_translation'></td>
+										<td><TMPL_VAR NAME='amount' FORMAT='price'>€</td>
+										<td><TMPL_VAR NAME='status_title'></td>
+										<td><TMPL_VAR NAME='date_payment' FORMAT='date'></td>
+									</tr>
+								</TMPL_LOOP>
+								</tbody>
+							</table>
+							<TMPL_ELSE>
+								<div class="alert alert-success"><TMPL_VAR NAME='LNG_Empty'></div>
+						</TMPL_IF>
+					</div>
+				</TMPL_IF>
+			</div>
+		</div>
+	</section>
+</div>
+
+<script type="text/javascript">
+$(document).ready(function(){
+	CheckShowRecurring();
+
+	if($("[name='end_date']").attr('readonly') == 'readonly') {
+		$("[name='end_date']").removeClass('datepicker');
+	}
+
+	$("[name='voucher_date']").on("changeDate", function(e){
+		var endOfYear;
+		var parts = $(this).val().split('.');
+		"<TMPL_IF NAME=SpecialEndDate>"
+			endOfYear = "31.12." + (parseInt(parts[2]) + 3);
+			$("[name='end_date']").val(endOfYear);
+			"<TMPL_ELSE>"
+				endOfYear = "31.12." + parts[2];
+				$("[name='end_date']").val(endOfYear);
+				$("[name='recurring_end_date']").val(endOfYear);
+		"</TMPL_IF>"
+
+		CheckShowRecurring();
+		UpdateDefaultReason();
+	});
+
+	function CheckShowRecurring() {
+		"<TMPL_IF NAME=IsFoodVoucher>"
+			$.ajax({
+				url: "<TMPL_VAR NAME='MODULE_PATH'>ajax.php",
+				type: 'GET',
+				dataType: 'JSON',
+				data:{
+					Action: 'CheckShowRecurring',
+					voucher_date: $("[name='voucher_date']").val(),
+					employee_id: "<TMPL_VAR NAME='employee_id'>"
+				},
+				success: function(data){
+					if(data === 'Y') {
+						$('#show-recurring').hide();
+					}
+					else {
+						$('#show-recurring').show();
+					}
+				}
+			});
+		"</TMPL_IF>"
+	}
+
+	function UpdateDefaultReason() {
+		"<TMPL_IF NAME=SetsOfGoodsList>"
+		"<TMPL_UNLESS NAME='file'>"
+		var reasonSelect = $("[name='reason']");
+		$.ajax({
+			url: "<TMPL_VAR NAME='MODULE_PATH'>ajax.php",
+			type: 'GET',
+			dataType: 'JSON',
+			data:{
+				Action: 'UpdateDefaultReason',
+				voucher_date: $("[name='voucher_date']").val(),
+				employee_id: "<TMPL_VAR NAME='employee_id'>",
+				group_id: "<TMPL_VAR NAME='group_id'>",
+				reason: reasonSelect.val()
+			},
+			success: function(data){
+				var reasonListHTML = "";
+				for (var i = 0; i < data["ReasonList"].length; i++)
+				{
+					reasonListHTML +=
+							'<option value="' + data["ReasonList"][i]["Reason"] + '"'
+							+ (data["ReasonList"][i]["Selected"] ? ' selected' : '')
+							+ '>'
+							+ data["ReasonList"][i]["Reason"] +
+							'</option>';
+				}
+
+				reasonSelect.empty().append(reasonListHTML);
+			}
+		});
+		"</TMPL_UNLESS>"
+		"</TMPL_IF>"
+	}
+
+	$('.property-history').click(function(e){
+		var propertyName = $(this).attr('property_name');
+		var voucherID = "<TMPL_VAR NAME='voucher_id'>";
+		var propertyNameTranslation = $("label[for='" + propertyName + "']").text();
+
+		$.ajax({
+			url: "<TMPL_VAR NAME='MODULE_PATH'>ajax.php",
+			type: 'GET',
+			dataType: 'JSON',
+			data:{
+				Action: 'GetPropertyHistoryVoucherHTML',
+				property_name: propertyName,
+				voucher_id: voucherID,
+				property_name_translation: propertyNameTranslation
+			},
+			success: function(data){
+				if(typeof data.HTML != 'undefined'){
+					$(data.HTML).modal('show').on('hidden.bs.modal', function () {
+						$(this).remove();
+					});
+				}
+			}
+		});
+
+		e.preventDefault();
+	});
+
+	var field = "";
+	var tab = "";
+	var div = "";
+	"<TMPL_LOOP NAME='ErrorFieldList'>"
+		field = "<TMPL_VAR NAME='Message'>";
+		div = $("[name='"+field+"']").closest(".form-group");
+		div.addClass("has-error");
+
+		"<TMPL_IF NAME='__FIRST__'>"
+			tab = $("[name='"+field+"']").closest(".tab-pane").attr('id');
+			$('a[href="#'+tab+'"]').click();
+			$("[name='"+field+"']").focus();
+		"</TMPL_IF>"
+	"</TMPL_LOOP>"
+});
+</script>

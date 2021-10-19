@@ -1,0 +1,1 @@
+ALTER TABLE "public"."receipt_file" ADD COLUMN "hash" character varying(255);

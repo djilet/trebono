@@ -1,0 +1,29 @@
+<TMPL_LOOP NAME='EmployeeList'>
+	<tr>
+		<td>
+			<a href="<TMPL_VAR NAME='ADMIN_PATH'>module.php?load=company&Section=employee&employee_id=<TMPL_VAR NAME='employee_id'>"><TMPL_VAR NAME='employee_name'>
+		</td>
+		<td>
+			<a href="<TMPL_VAR NAME='ADMIN_PATH'>module.php?load=company&Section=company_unit&company_unit_id=<TMPL_VAR NAME='company_unit_id'>"><TMPL_VAR NAME='title'>
+		</td>
+		<td><TMPL_VAR NAME='created' FORMAT='datetime'/></td>
+		<td>
+			<a href="<TMPL_VAR NAME='ADMIN_PATH'>user.php?user_id=<TMPL_VAR NAME='user_id'>">
+				<TMPL_VAR NAME='user_name'>
+			</a>
+		</td>
+	</tr>
+</TMPL_LOOP>
+<TMPL_LOOP NAME='CompanyUnitList'>
+	<tr>
+		<td>
+			<a href="<TMPL_VAR NAME='ADMIN_PATH'>module.php?load=company&Section=company_unit&company_unit_id=<TMPL_VAR NAME='company_unit_id'>"><TMPL_VAR NAME='title'>
+		</td>
+		<td><TMPL_VAR NAME='created' FORMAT='datetime'/></td>
+		<td>
+			<a href="<TMPL_VAR NAME='ADMIN_PATH'>user.php?user_id=<TMPL_VAR NAME='user_id'>">
+				<TMPL_VAR NAME='user_name'>
+			</a>
+		</td>
+	</tr>
+</TMPL_LOOP>

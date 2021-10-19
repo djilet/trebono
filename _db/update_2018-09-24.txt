@@ -1,0 +1,17 @@
+--lst-main
+CREATE SEQUENCE public."commission_line_LineID_seq";
+
+CREATE TABLE public.commission_line
+(
+    commission_line_id integer NOT NULL,
+    partner_id integer NOT NULL,
+    company_unit_id integer NOT NULL,
+    product_id integer NOT NULL,
+    type character varying(4),
+    value numeric(10, 2),
+    date date,
+    PRIMARY KEY (commission_line_id)
+);
+
+ALTER TABLE public.commission_line
+    ALTER COLUMN commission_line_id SET DEFAULT nextval('"commission_line_LineID_seq"'::regclass);

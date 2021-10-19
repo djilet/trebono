@@ -1,0 +1,13 @@
+--lst-personal
+ALTER TABLE public.contact
+    ADD COLUMN user_id integer;
+
+INSERT INTO public.permission(
+	permission_id, name, title, link_to)
+	VALUES (7, 'invoice', 'Invoice receiver', 'company_unit');
+
+--lst-personal
+ALTER TABLE "public"."device" ADD COLUMN "owner_id" integer;
+
+--lst-main
+ALTER TABLE "public"."receipt" ADD COLUMN "device_id" character varying(255);

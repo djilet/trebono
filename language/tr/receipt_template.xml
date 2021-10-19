@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Root>
+    <admin>
+        <receipt_list.html>
+            <ReceiptList>Beleg Liste</ReceiptList>
+            <FilterCreatedRange>Zeitraum</FilterCreatedRange>
+            <FilterStatus>Bearbeitungsstatus</FilterStatus>
+            <FilterReceiptID>Beleg ID</FilterReceiptID>
+            <FilterReceiptIDPlaceholder>Eingabe ID</FilterReceiptIDPlaceholder>
+            <FilterName>Aufgenommen von Mitarbeiter</FilterName>
+            <FilterNamePlaceholder>Eingabe Name</FilterNamePlaceholder>
+            <FilterProductGroup>Service</FilterProductGroup>
+            <FilterHasUnreadMessages>Nur Belege mit ungelesenen Nachrichten</FilterHasUnreadMessages>
+            <FilterAutomaticProcessed>Automatisch vom System verarbeitet</FilterAutomaticProcessed>
+            <FilterApply>Suche</FilterApply>
+
+            <IsActive>Daten von:</IsActive>
+            <IsActiveY>aktiven</IsActiveY>
+            <IsActiveN>de-aktivierten</IsActiveN>
+        </receipt_list.html>
+        <block_receipt_list.html>
+            <ReceiptsOnPage>Anzahl Belege pro Seite</ReceiptsOnPage>
+
+            <HasChat>Chat</HasChat>
+            <HasChatY>J</HasChatY>
+            <HasChatN>N</HasChatN>
+            <UnreadByAdmin>A</UnreadByAdmin>
+            <UnreadByEmployee>M</UnreadByEmployee>
+            <ReceiptID>Beleg ID</ReceiptID>
+            <Updated>Letzte Änderung Metadaten</Updated>
+            <Created>Erstellt</Created>
+            <Name>Aufgenommen von Mitarbeiter</Name>
+            <ProductGroup>Service</ProductGroup>
+            <Status>Bearbeitungsstatus</Status>
+            <StatusUpdated>Datum Bearbeitungstatus</StatusUpdated>
+        </block_receipt_list.html>
+        <receipt_edit.html>
+            <EditReceipt>Beleg</EditReceipt>
+            <FileList>Beleg Bild</FileList>
+            <ProductSettings>Service Einstellungen des Mitarbeiters</ProductSettings>
+            <Device>Betriebssystem Gerät:</Device>
+            <Version>Version trebono:</Version>
+            <Owner>Ist Eigentümer des Geräts:</Owner>
+            <Created>Beleg erstellt am:</Created>
+            <SignatureLog>Signaturprotokoll</SignatureLog>
+            <EvidencePack>Beweismittelpaket</EvidencePack>
+            <BrokeImage>Brach das Bild</BrokeImage>
+            <UnitsPerWeek>Max. Einheiten pro Woche</UnitsPerWeek>
+            <Unit>Wert pro Einheit</Unit>
+            <option-food_main_unit>Wert pro Einheit</option-food_main_unit>
+            <MealValue>Sachbezugswert Hauptmahlzeit</MealValue>
+            <EmployerMealGrant>AG Essenszuschuss</EmployerMealGrant>
+            <EmployeeMealGrant>Zuzahlung Sachbezugswert AN</EmployeeMealGrant>
+            <ReceiptProcessing>Beleg Informationen</ReceiptProcessing>
+            <DocumentGUID>Rechnungsnr.</DocumentGUID>
+            <Status>Status</Status>
+            <StatusNew>Neu</StatusNew>
+            <StatusReview>In Bearbeitung</StatusReview>
+            <StatusSupervisor>für Vorgesetzten</StatusSupervisor>
+            <StatusApproveProposed>Beleg bestätigen</StatusApproveProposed>
+            <StatusApproved>Eingereicht Abrechnung</StatusApproved>
+            <StatusDenied>Nicht verwendbar</StatusDenied>
+            <AmountApproved>max. möglicher Betrag zum genehmigen</AmountApproved>
+            <RealAmountApproved>Final genehmigter Betrag (vom System)</RealAmountApproved>
+            <ProductGroup>Sachbezugsart</ProductGroup>
+            <DateTimeReceipt>Datum und Uhrzeit der eingereichten Rechnung</DateTimeReceipt>
+            <DocumentDateFrom>Zeitraum Beleg von</DocumentDateFrom>
+            <DocumentDateTo>Zeitraum Beleg bis</DocumentDateTo>
+            <StoreName>Geschäftsname</StoreName>
+            <DateTimeStatus>Datum und Uhrzeit des Status</DateTimeStatus>
+            <Type>Art</Type>
+            <TypeShop>Lebensmittelkauf</TypeShop>
+            <TypeRestaurant>Restaurant</TypeRestaurant>
+            <Reason>Grund:</Reason>
+            <ChooseReason>Wählen Sie den Ablehnungsgrund</ChooseReason>
+            <PleaseChooseReason>Bitte wählen Sie den Ablehnungsgrund</PleaseChooseReason>
+            <Choose>Wählen</Choose>
+
+            <LineAdd>Neuer Eintrag</LineAdd>
+            <LineFormLineNumber>Zeilennr.</LineFormLineNumber>
+            <LineFormSKU>Artikelnummer</LineFormSKU>
+            <LineFormTitle>Artikelname</LineFormTitle>
+            <LineFormQuantity>Anzahl</LineFormQuantity>
+            <LineFormPrice>Preis</LineFormPrice>
+
+            <VAT>MwSt.</VAT>
+            <Approved>7%</Approved>
+            <Denied>19%</Denied>
+            <NextReceipt>Nächster Beleg</NextReceipt>
+            <RevisionHistory>Historie</RevisionHistory>
+
+            <CommentList>Beleg Chat</CommentList>
+            <CommentCountSuffix>Nachrichten</CommentCountSuffix>
+            <CommentListAllReceipts>Alle Belege anzeigen</CommentListAllReceipts>
+            <CommentListSend>Senden</CommentListSend>
+            <CommentListContentPlaceholder>Was haben Sie auf dem Herzen?</CommentListContentPlaceholder>
+
+            <Comment>Kommentar</Comment>
+
+            <TravelPhotoInfo>Foto info</TravelPhotoInfo>
+            <TypeTicket>Fahrkosten</TypeTicket>
+            <TypeAccommodation>Unterkunft</TypeAccommodation>
+            <TypeHospitality>Bewirtung</TypeHospitality>
+            <TypeParking>Parken/Maut</TypeParking>
+            <TypeMeal>Verpflegung</TypeMeal>
+            <TypeOther>Sonstiges</TypeOther>
+        </receipt_edit.html>
+        <block_receipt_comment_list.html>
+            <CommentListAdministrator>Administrator</CommentListAdministrator>
+        </block_receipt_comment_list.html>
+        <block_receipt_line_list.html>
+            <LineListEmpty>Keine Artikelpositionen bisher vorhanden</LineListEmpty>
+            <LineSKU>Artikelnummer</LineSKU>
+            <LineTitle>Artikelname</LineTitle>
+            <LinePrice>Preis</LinePrice>
+            <LineQuantity>Anzahl</LineQuantity>
+            <LineCost>Gesamt</LineCost>
+            <LineVAT>MwSt.</LineVAT>
+            <TotalAmount>Gesamtbetrag:</TotalAmount>
+            <TotalAmountApprove>genehmigter Gesamtbetrag:</TotalAmountApprove>
+        </block_receipt_line_list.html>
+        <block_employee_receipt_list.html>
+            <ReceiptList>Beleg Liste</ReceiptList>
+            <ReceiptDate>Beleg Datum</ReceiptDate>
+            <ApprovedVal>Genehmigter Betrag / Einheiten</ApprovedVal>
+            <Created>Erstellt am:</Created>
+            <ReceiptID>Beleg ID:</ReceiptID>
+            <Status>Aktueller Status:</Status>
+            <Close>Schließen</Close>
+            <Service>Service</Service>
+        </block_employee_receipt_list.html>
+        <receipt_line_edit.html>
+            <AddReceiptLine>Eintrag hinzufügen</AddReceiptLine>
+            <EditReceiptLine>Eintrag bearbeiten</EditReceiptLine>
+            <LineNumber>Zeilennr.</LineNumber>
+            <SKU>Artikelnummer</SKU>
+            <Title>Artikelname</Title>
+            <Quantity>Anzahl</Quantity>
+            <Price>Preis</Price>
+            <Save>Speichern</Save>
+            <Reset>Wiederherstellen</Reset>
+            <VAT>MwSt.</VAT>
+            <Approved>7%</Approved>
+            <Denied>19%</Denied>
+        </receipt_line_edit.html>
+        <block_property_history.html>
+            <OptionValueHistory>Änderungshistorie</OptionValueHistory>
+            <Value>Werte</Value>
+            <UserName>Name</UserName>
+            <Created>Datum</Created>
+            <Close>Schließen</Close>
+        </block_property_history.html>
+        <receipt_list_internal_pdf.html>
+            <Company>Unternehmen</Company>
+            <Rownum>Lfd. Nr.</Rownum>
+            <EmployeeGUID>Personal-Nr.</EmployeeGUID>
+            <Employee>MA Name</Employee>
+            <ReceiptIDs>Belegnr.</ReceiptIDs>
+            <Page>Seite</Page>
+            <Of>von</Of>
+            <Steuerpflichtig><![CDATA[Steuer-<br>pflichtig]]></Steuerpflichtig>
+            <Steuerfrei>Steuerfrei</Steuerfrei>
+            <Erfasst>Erfasst</Erfasst>
+        </receipt_list_internal_pdf.html>
+        <block_receipt_error_list.html>
+            <ErrorList>Fehlerliste</ErrorList>
+            <Close>Schließen</Close>
+        </block_receipt_error_list.html>
+        <block_signature_log.html>
+            <SignatureLog>Signaturprotokoll</SignatureLog>
+            <Close>Schließen</Close>
+        </block_signature_log.html>
+    </admin>
+</Root>

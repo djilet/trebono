@@ -1,0 +1,3 @@
+--lst-main
+ALTER TABLE public.commission_line
+    ADD COLUMN revenue character varying NOT NULL DEFAULT '';

@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Root>
+    <section-receipt>Beleg Liste</section-receipt>
+    <module-title>Belege</module-title>
+
+    <title-receipt-edit>Beleg ändern</title-receipt-edit>
+    <receipt-status-new>Neu</receipt-status-new>
+    <receipt-status-review>In Bearbeitung</receipt-status-review>
+    <receipt-status-supervisor>für Vorgesetzten</receipt-status-supervisor>
+    <receipt-status-approve_proposed>Beleg bestätigen</receipt-status-approve_proposed>
+    <receipt-status-approved>Eingereicht Abrechnung</receipt-status-approved>
+    <receipt-status-denied>Nicht Verwendbar</receipt-status-denied>
+
+    <title-receipt-line-edit>Belegzeile bearbeiten</title-receipt-line-edit>
+    <receipt-line-title-empty>Bitte Artikelname eingeben</receipt-line-title-empty>
+    <receipt-line-count-incorrect>Bitte Anzahl eingeben</receipt-line-count-incorrect>
+    <receipt-line-price-incorrect>Bitte Preis eingeben</receipt-line-price-incorrect>
+
+    <receipt-file-doesnt-contain-receipt>Das hochgeladene Bild enthält keinen Beleg, ist aber trotzdem sehr schön. Bitte
+        machen Sie erneut ein Bild von dem Beleg.
+    </receipt-file-doesnt-contain-receipt>
+    <receipt-file-hash-is-not-unique>Hochgeladene Bilder sind nicht identisch</receipt-file-hash-is-not-unique>
+    <receipt-old>Der Beleg kann nicht genehmigt werden, da der Januar-Abrechnungstag des Unternehmens überschritten
+        ist.
+    </receipt-old>
+    <receipt-add-document-date>Bitte geben sie das Belegdatum ein.</receipt-add-document-date>
+    <receipt-is-not-unique>Die Belegnummer existiert bereits, Beleg kann nicht verwendet werden. Beleg nummer:
+        %legal_receipt_ids%
+    </receipt-is-not-unique>
+    <receipt-daily-unit-limit-exceed>Betrag kann diese Woche nicht mehr genehmigt werden, da das tägliche Limit
+        überschritten ist!
+    </receipt-daily-unit-limit-exceed>
+    <receipt-weekly-unit-limit-exceed>Betrag kann diese Woche nicht mehr genehmigt werden, da das wöchentliche Limit
+        überschritten ist!
+    </receipt-weekly-unit-limit-exceed>
+    <receipt-monthly-unit-limit-exceed>Betrag kann diesen Monat nicht mehr genehmigt werden, da das monatliche
+        Einheitenlimit überschritten ist!
+    </receipt-monthly-unit-limit-exceed>
+    <receipt-monthly-limit-exceed>Monatliches Limit überschritten!</receipt-monthly-limit-exceed>
+    <receipt-yearly-limit-exceed>Jahreslimit überschritten!</receipt-yearly-limit-exceed>
+    <receipt-case-count-limit-exceed>Fallanzahllimit überschritten!</receipt-case-count-limit-exceed>
+    <receipt-period-empty>Geben Sie den Empfangszeitraum ein</receipt-period-empty>
+    <receipt-period-intersection-found>Schnittpunkt der Belegperiode gefunden</receipt-period-intersection-found>
+    <receipt-benefit-unknown-receipt-option-value>Unbekannter Wert der Service-Service-Empfangoption (sollte monatlich /
+        jährlich sein)
+    </receipt-benefit-unknown-receipt-option-value>
+    <receipt-has-not-contract-date>Das Beleg Datum liegt an einem Datum, für den der aktuelle trebono Service nicht
+        gebucht ist. Bitte Beleg Datum mit dem Service Start Datum beim Mitarbeiter vergleichen.
+    </receipt-has-not-contract-date>
+    <receipt-unit-is-not-filled>Die Einheit ist nicht vollständig mit dem genehmigten Betrag gefüllt
+    </receipt-unit-is-not-filled>
+    <receipt-only-parts-of-units-left>Sie können Quittungen nur zu teilweise ausgefüllten Terminen genehmigen, da nur
+        noch nicht verwendete Einheiten übrig sind.
+    </receipt-only-parts-of-units-left>
+    <receipt-empty-real-approved-value>Der endgültige Genehmigungsbetrag ist gleich 0
+    </receipt-empty-real-approved-value>
+    <receipt-has-no-denial-reason>Bitte wählen Sie den Ablehnungsgrund</receipt-has-no-denial-reason>
+    <receipt-voucher-not-found>Beleg für Beleg nicht gefunden</receipt-voucher-not-found>
+    <receipt-future-date>Sie können den Beleg für zukünftige Termine nicht genehmigen</receipt-future-date>
+    <receipt-signature-not-exist>Die Unterschrift für den Erhalt ist noch nicht fertig. Bitte versuchen Sie es später
+        erneut
+    </receipt-signature-not-exist>
+    <receipt-hash-not-equals>Integritätsprüfung fehlgeschlagen Beleg abgelehnt.</receipt-hash-not-equals>
+
+    <receipt-comment-content-empty>Kommentartext ist leer</receipt-comment-content-empty>
+    <receipt-empty-approved-value>Sie können den Status nicht auf 'Beleg bestätigen' setzten, da noch kein Betrag
+        genehmigt wurde! Bitte zuerst einen Betrag genehmigen oder eingeben.
+    </receipt-empty-approved-value>
+    <receipt-signature-not-verified>Die Empfangsbestätigung ist noch nicht verifiziert. Bitte versuchen Sie es später
+        erneut.
+    </receipt-signature-not-verified>
+    <receipt-signature-verify-failed>Die Empfangsunterschrift ist nicht korrekt. Bitte wenden Sie sich an den Support.
+    </receipt-signature-verify-failed>
+
+    <api-receipt-approve-by-employee-success>Bitte vernichten Sie den Beleg oder schreiben 'Kopie' darauf! Sie dürfen
+        diesen Beleg nun nicht weiter verwenden (z.B. bei der Steuer einreichen, etc.) Vielen Dank dafür, Ihr trebono
+        Team.
+    </api-receipt-approve-by-employee-success>
+    <receipt-saved>Beleg gespeichert</receipt-saved>
+
+    <comment-monthly-limit-reached>Hallo %employee_name%, Sie haben Ihr monatliches Limit für den %service% Service
+        erreicht. Bitte schicken Sie für den Monat %month% keine Belege mehr. Vielen Dank, Ihr trebono Team.
+    </comment-monthly-limit-reached>
+    <comment-yearly-limit-reached>Hallo %employee_name%, Sie haben Ihr jährliches Limit für den %service% Service
+        erreicht. Bitte schicken Sie für das Jahre %year% keine Belege mehr. Vielen Dank, Ihr trebono Team.
+    </comment-yearly-limit-reached>
+
+    <receipt-group-employee>Mitarbeiter</receipt-group-employee>
+    <receipt-group-denial-reason>Ablehnungsgrund</receipt-group-denial-reason>
+
+    <receipt-file-transfer-note-org-guideline-html><![CDATA[
+		<p class="bold">Hinweis Verfahrensdokumentation:</p> 
+	
+		<p>Dieser TR-RESISCAN konforme Belegscan beruht auf der Verfahrensdokumentation Version %org_guideline_version% vom %org_guideline_create_date%.</p>	
+		
+		<a href="%org_guideline_url%">Verfahrensdokumentation Version</a>
+		
+		<p class="bold">Hinweis Befolgung der Verfahrensdokumentation:</p>
+		
+		<p>Die Organisationsanweisung der Verfahrensdokumentation wurden laut Verpflichtung des Mitarbeiters vom %org_guideline_accept_date% befolgt.</p>
+	]]></receipt-file-transfer-note-org-guideline-html>
+</Root>

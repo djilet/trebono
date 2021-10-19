@@ -1,0 +1,82 @@
+body{
+	font-type:MuseoSans-300;
+}
+.image{
+	text-align: right;
+}
+img { 
+	width: 230px; 
+	height: 82px; 
+	border: none;
+}
+.transfer-note-header table{
+	margin-right:35px;
+	margin-left:50px;
+}
+.transfer-note-header td{
+	font-size:8.5pt;
+}
+.transfer-note-header td{
+	padding-right:0px;
+	padding-left:0px;
+	color:#595654;
+}
+.header{
+	text-align:center;
+	color:#595654;
+}
+
+table.footer  {
+	border: 0;
+    width:  100%;
+    border-spacing: 0;
+}
+table.footer td {
+  	border: 0;
+    width: 15%;
+    vertical-align: middle;
+    text-align: right;
+    font-weight:normal;
+    color:#595654;
+    font-size:9pt;
+}
+table.footer td.leftcol {
+   	vertical-align: top;
+   	text-align: left;
+}
+
+
+table{
+	text-align:center;
+	margin:auto;
+}
+table th{
+	text-align:left;
+	line-height: 1.5;
+}
+th.first{
+	vertical-align:top;
+}
+th.second{
+	font-weight:normal;
+}
+p{
+    margin-top: 0.5em; /* Отступ сверху */
+    margin-bottom: 1em; /* Отступ снизу */
+}
+.bold{
+	font-weight:bold;
+}
+table.comments{
+	font-size:9pt;
+}
+th.date{
+	font-weight:normal;
+	font-size:9pt;
+	vertical-align: top;
+}
+@media print {
+	.page-break {
+		page-break-after: always;
+	}
+}

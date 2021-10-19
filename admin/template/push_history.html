@@ -1,0 +1,226 @@
+<div class="row">
+	<TMPL_INCLUDE FILE='_config_navigation.html'>
+</div>
+<div class="row">
+	<section class="box no-margin">
+		<header class="panel_header" for="header_push_history" table="core">
+			<h2 class="title"><TMPL_VAR NAME='LNG_Push'></h2>
+		</header>
+		<div class="content-body">
+			<form action="<TMPL_VAR NAME='ADMIN_PATH'>push_history.php?Section=<TMPL_VAR NAME='Section'>" method="post" autocomplete="off">
+				<div class="row">
+					<div class="col-md-3 col-sm-3">
+						<div class="form-group">
+							<label class="form-label"><TMPL_VAR NAME='LNG_FilterDateRange'></label>
+							<input type="text" name="FilterDateRange" class="form-control daterange active" value="<TMPL_VAR NAME='FilterDateRange'>" data-time-picker-increment="1" data-time-picker="true">
+						</div>
+					</div>
+					<TMPL_IF NAME='Section' OP='!=' VALUE='import'>
+						<div class="col-md-3 col-sm-3">
+							<div class="form-group">
+								<label class="form-label"><TMPL_VAR NAME='LNG_FilterCompanyUnitTitle'></label>
+								<input type="text" name="FilterCompanyUnitTitle" class="form-control" value="<TMPL_VAR NAME='FilterCompanyUnitTitle'>">
+							</div>
+						</div>
+						<div class="col-md-3 col-sm-3">
+							<div class="form-group">
+								<label class="form-label"><TMPL_VAR NAME='LNG_FilterName'></label>
+								<input type="text" name="FilterName" class="form-control" value="<TMPL_VAR NAME='FilterName'>">
+							</div>
+						</div>
+					</TMPL_IF>
+					<div class="col-md-2 col-sm-2">
+						<div class="form-group">
+							<label class="form-label hidden-xs">&nbsp;</label><br />
+							<button type="submit" class="btn btn-primary btn-icon"><i class="fa fa-search"></i> <TMPL_VAR NAME='LNG_Search'></button>
+						</div>
+					</div>
+				</div>
+			</form>
+			<div>
+				<TMPL_IF NAME='Section' VALUE='push'>
+					<TMPL_IF NAME='PushList'>
+						<div class="row">
+							<div class="col-md-6 form-group text-center-xs">
+								<span><TMPL_VAR NAME='ListInfo'></span>
+							</div>
+						</div>
+						<table class="table">
+							<tr>
+								<th width="10%"><TMPL_VAR NAME='LNG_Created'></th>
+								<th><TMPL_VAR NAME='LNG_Device'></th>
+								<th width="10%"><TMPL_VAR NAME='LNG_User'></th>
+								<th width="7%"><TMPL_VAR NAME='LNG_IsSended'></th>
+								<th><TMPL_VAR NAME='LNG_Text'></th>
+								<th width="20%"><TMPL_VAR NAME='LNG_ErrorMessage'></th>
+							</tr>
+							<TMPL_LOOP NAME='PushList'>
+								<tr <TMPL_IF NAME='is_sended' VALUE='N'>class="danger"</TMPL_IF>>
+									<td><TMPL_VAR NAME='created' FORMAT='datetime'></td>
+									<td>
+										<span title="<TMPL_VAR NAME='device_id'>">
+											<TMPL_IF NAME='client' VALUE='android'>
+												<i class="fa fa-android"></i>
+											<TMPL_ELSEIF NAME='client' VALUE='ios'>
+												<i class="fa fa-apple"></i>
+											</TMPL_IF>
+											<TMPL_VAR NAME='version'>
+										</span>
+									</td>
+									<td>
+										<a href="<TMPL_VAR NAME='ADMIN_PATH'>user.php?user_id=<TMPL_VAR NAME='user_id'>"><TMPL_VAR NAME='user_name'></a>
+									</td>
+									<td><TMPL_VAR NAME='is_sended'></td>
+									<td><TMPL_VAR NAME='text'></td>
+									<td><TMPL_VAR NAME='error_message'></td>
+								</tr>
+							</TMPL_LOOP>
+						</table>
+						<div class="text-center">
+							<ul class="pagination">
+								<TMPL_VAR NAME='Paging' ESCAPE='none'>
+							</ul>
+						</div>
+						<TMPL_ELSE>
+							<div class="alert alert-success"><TMPL_VAR NAME='LNG_Empty'></div>
+					</TMPL_IF>
+				</TMPL_IF>
+				<TMPL_IF NAME='Section' VALUE='email'>
+					<div class="row">
+						<div class="col-md-6 form-group text-center-xs">
+							<span><TMPL_VAR NAME='LNG_QueueCount'> <TMPL_VAR NAME='QueueCount'></span></br>
+							<span><TMPL_VAR NAME='LNG_SendedLastHour'> <TMPL_VAR NAME='SendedLastHour'></span></br>
+							<span><TMPL_VAR NAME='LNG_DoesStopped'> <TMPL_VAR NAME='DoesStopped'></span></br>
+							<span><TMPL_VAR NAME='LNG_Limit'> <TMPL_VAR NAME='Limit'></span></br>
+						</div>
+					</div>
+					<TMPL_IF NAME='EmailList'>
+						<div class="row">
+							<div class="col-md-6 form-group text-center-xs">
+								<span><TMPL_VAR NAME='EmailListInfo'></span>
+							</div>
+						</div>
+						<table class="table">
+							<tr>
+								<th width="10%"><TMPL_VAR NAME='LNG_Created'></th>
+								<th width="10%"><TMPL_VAR NAME='LNG_Email'></th>
+								<th width="10%"><TMPL_VAR NAME='LNG_User'></th>
+								<th width="7%"><TMPL_VAR NAME='LNG_IsSended'></th>
+								<th><TMPL_VAR NAME='LNG_Title'></th>
+								<th width="20%"><TMPL_VAR NAME='LNG_ErrorMessage'></th>
+							</tr>
+							<TMPL_LOOP NAME='EmailList'>
+								<tr <TMPL_IF NAME='is_sended' VALUE='N'>class="danger"</TMPL_IF>>
+									<td><TMPL_VAR NAME='created' FORMAT='datetime'></td>
+									<td><TMPL_VAR NAME='email'></td>
+									<td>
+										<a href="<TMPL_VAR NAME='ADMIN_PATH'>user.php?user_id=<TMPL_VAR NAME='user_id'>"><TMPL_VAR NAME='user_name'></a>
+									</td>
+									<td><TMPL_VAR NAME='is_sended'></td>
+									<td>
+										<a href="#" class="email-text" data-emailID="<TMPL_VAR NAME='email_id'>"><TMPL_VAR NAME='title'></a>
+									</td>
+									<td><TMPL_VAR NAME='error_message'></td>
+								</tr>
+							</TMPL_LOOP>
+						</table>
+						<div class="text-center">
+							<ul class="pagination">
+								<TMPL_VAR NAME='Paging' ESCAPE='none'>
+							</ul>
+						</div>
+						<TMPL_ELSE>
+							<div class="alert alert-success"><TMPL_VAR NAME='LNG_Empty'></div>
+					</TMPL_IF>
+				</TMPL_IF>
+				<TMPL_IF NAME='Section' VALUE='import'>
+					<TMPL_IF NAME='ImportList'>
+						<div class="row">
+							<div class="col-md-6 form-group text-center-xs">
+								<span><TMPL_VAR NAME='ImportListInfo'></span>
+							</div>
+						</div>
+						<table class="table">
+							<tr>
+								<th width="10%"><TMPL_VAR NAME='LNG_Created'></th>
+								<th width="10%"><TMPL_VAR NAME='LNG_Updated'></th>
+								<th width="10%"><TMPL_VAR NAME='LNG_CompanyUnit'></th>
+								<th width="10%"><TMPL_VAR NAME='LNG_EmployeeCount'></th>
+								<th width="10%"><TMPL_VAR NAME='LNG_User'></th>
+								<th width="7%"><TMPL_VAR NAME='LNG_Completed'></th>
+								<th><TMPL_VAR NAME='LNG_Title'></th>
+							</tr>
+							<TMPL_LOOP NAME='ImportList'>
+								<tr <TMPL_IF NAME='ended' VALUE='N'>class="danger"</TMPL_IF>>
+									<td><TMPL_VAR NAME='created' FORMAT='datetimefull'></td>
+									<td><TMPL_VAR NAME='updated' FORMAT='datetimefull'></td>
+									<td>
+										<a href="<TMPL_VAR NAME='ADMIN_PATH'>module.php?load=company&Section=company_unit&company_unit_id=<TMPL_VAR NAME='company_unit_id'>"><TMPL_VAR NAME='company_unit_title'></a>
+									</td>
+									<td><TMPL_VAR NAME='employee_count'></td>
+									<td>
+										<a href="<TMPL_VAR NAME='ADMIN_PATH'>user.php?user_id=<TMPL_VAR NAME='user_id'>"><TMPL_VAR NAME='first_name'> <TMPL_VAR NAME='last_name'></a>
+									</td>
+									<td><TMPL_VAR NAME='ended'></td>
+									<td><TMPL_VAR NAME='content' ESCAPE='nl2br'></td>
+								</tr>
+							</TMPL_LOOP>
+						</table>
+						<div class="text-center">
+							<ul class="pagination">
+								<TMPL_VAR NAME='Paging' ESCAPE='none'>
+							</ul>
+						</div>
+						<TMPL_ELSE>
+							<div class="alert alert-success"><TMPL_VAR NAME='LNG_Empty'></div>
+					</TMPL_IF>
+				</TMPL_IF>
+			</div>
+		</div>
+	</section>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+		var companyTitles = [];
+		"<TMPL_LOOP NAME='CompanyUnitList'>"
+			companyTitles.push("<TMPL_VAR NAME='title' ESCAPE='none'>");
+		"</TMPL_LOOP>"
+
+		$('input[name=FilterCompanyUnitTitle]').typeahead({
+			hint: true,
+			highlight: true,
+			minLength: 1
+		}, {
+			//name: 'states',
+			displayKey: 'value',
+			source: typeaheadSubstringMatcher(companyTitles)
+		});
+
+        $('.email-text').click(function(e){
+            var emailID = $(this).attr('data-emailID');
+            var title = $(this).html();
+            $.ajax({
+                url: "<TMPL_VAR NAME='ADMIN_PATH'>ajax.php",
+                type: 'GET',
+                dataType: 'JSON',
+                data:{
+                    Action: 'GetEmailTextHTML',
+                    email_id: emailID,
+					title: title
+                },
+                success: function(data){
+                    if(typeof data.HTML != 'undefined'){
+                        $(data.HTML).modal('show').on('hidden.bs.modal', function () {
+                            $(this).remove();
+                        });
+                    }
+                },
+                error: function(XMLHttpRequest, textStatus, errorThrown) { 
+                    //console.log("Status: " + textStatus); console.log("Error: " + errorThrown); 
+                }     
+            });
+            e.preventDefault();
+        });
+    });
+</script>

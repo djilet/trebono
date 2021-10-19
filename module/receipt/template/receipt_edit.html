@@ -1,0 +1,1389 @@
+<div class="row">
+	<TMPL_IF NAME='ErrorList'>
+		<div class="alert alert-danger alert-no-margin">
+			<TMPL_LOOP NAME='ErrorList'>
+				<TMPL_VAR NAME='Message' ESCAPE='none'><TMPL_UNLESS NAME='__LAST__'><br /></TMPL_UNLESS>
+			</TMPL_LOOP>
+		</div>
+	</TMPL_IF>
+	<TMPL_IF NAME='MessageList'>
+		<div class="alert alert-success alert-no-margin">
+			<TMPL_LOOP NAME='MessageList'>
+				<TMPL_VAR NAME='Message'><TMPL_UNLESS NAME='__LAST__'><br /></TMPL_UNLESS>
+			</TMPL_LOOP>
+		</div>
+	</TMPL_IF>
+	<section class="box no-margin">
+		<header class="panel_header" for="header_receipt_edit" table="receipt">
+			<h2 class="title"><TMPL_VAR NAME='LNG_EditReceipt'> #<TMPL_VAR NAME='legal_receipt_id'></h2>
+		</header>
+		<div class="content-body padding-3">
+			<div class="row row-new floating-button-row">
+				<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 padding-3">
+					<section class="box ">
+						<header class="panel_header" for="header_receipt_edit_file_list" table="receipt">
+							<h2 class="title"><TMPL_VAR NAME='LNG_FileList'/></h2>
+						</header>
+						<div class="content-body">
+							<TMPL_IF NAME='ReceiptFileList'>
+								<div id="receipt-file-list" class="carousel slide" data-ride="carousel">
+
+									<div class="carousel-inner" role="listbox">
+										<TMPL_LOOP NAME='ReceiptFileList'>
+											<div class="item <TMPL_IF NAME='__FIRST__'>active</TMPL_IF>">
+												<a href="<TMPL_VAR NAME='file_image_full_path'>" class="receipt-photo-link">
+													<img src="<TMPL_VAR NAME='file_image_admin_path'>" style="width:100%;">
+												</a>
+												<a href="<TMPL_VAR NAME='file_image_full_path'>" class="receipt-photo-link">
+													<div class="carousel-caption">
+														<h3><TMPL_VAR NAME='__ROWNUM__'>/<TMPL_VAR NAME='global.ReceiptFileListCount'></h3>
+													</div>
+												</a>
+												<div class="center">
+													<br />
+													<a href="#" class="signature-log" receipt_file_id="<TMPL_VAR NAME='receipt_file_id'>"><TMPL_VAR NAME='LNG_SignatureLog'/> #<TMPL_VAR NAME='receipt_file_id'></a><br />
+													<TMPL_IF NAME='status' VALUE='approved'>
+														<a href="<TMPL_VAR NAME='MODULE_URL'>&<TMPL_VAR NAME='ParamsForURL'>&receipt_id=<TMPL_VAR NAME='receipt_id'>&Action=GetEvidencePack"><TMPL_VAR NAME='LNG_EvidencePack'></a><br />
+													</TMPL_IF>
+
+													<!-- <a class="broke-image" href="<TMPL_VAR NAME='MODULE_URL'>&<TMPL_VAR NAME='ParamsForURL'>&receipt_file_id=<TMPL_VAR NAME='receipt_file_id'>&Action=BrokeImage"><TMPL_VAR NAME='LNG_BrokeImage'> #<TMPL_VAR NAME='receipt_file_id'></a> -->
+												</div>
+											</div>
+										</TMPL_LOOP>
+									</div>
+
+									<a class="left carousel-control" href="#receipt-file-list" role="button" data-slide="prev">
+										<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+									</a>
+									<a class="right carousel-control" href="#receipt-file-list" role="button" data-slide="next">
+										<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+									</a>
+								</div>
+							<TMPL_ELSE>
+								<div class="alert alert-success"><TMPL_VAR NAME='LNG_Empty'/></div>
+							</TMPL_IF>
+						</div>
+					</section>
+					<section class="box">
+						<header class="panel_header" for="header_receipt_edit_comment_list" table="receipt">
+							<h2 class="title"><TMPL_VAR NAME='LNG_CommentList'/> <span id="comment-count-flag"></span></h2>
+						</header>
+						<div class="content-body">
+							<section class="box nobox">
+								<div class="profile-info row">
+									<div class="profile-image col-md-4 col-sm-4 col-xs-4">
+										<a href="<TMPL_VAR NAME='ADMIN_PATH'>module.php?load=company&Section=employee&employee_id=<TMPL_VAR NAME='employee_id'>">
+											<TMPL_IF NAME="EMPLOYEE_user_image">
+											<img src="<TMPL_VAR NAME='EMPLOYEE_user_image_admin_path'>" class="img-responsive img-circle">
+												<TMPL_ELSE/>
+												<img src="<TMPL_VAR NAME='ADMIN_PATH'>template/images/avatar_default_50.png" class="img-responsive img-circle">
+											</TMPL_IF>
+										</a>
+									</div>
+									<div class="profile-details col-md-8 col-sm-8 col-xs-8">
+										<h3>
+											<a href="<TMPL_VAR NAME='ADMIN_PATH'>module.php?load=company&Section=employee&employee_id=<TMPL_VAR NAME='employee_id'>" style="color:#777777">
+												<TMPL_VAR NAME='EMPLOYEE_first_name'/> <TMPL_VAR NAME='EMPLOYEE_last_name'/>
+											</a>
+										</h3>
+										<p class="uprofile-title"><TMPL_VAR NAME='EMPLOYEE_company_unit_title'/></p>
+									</div>
+								</div>
+								<div class="uprofile-bottom">
+									<a class="btn btn-primary" data-toggle="modal" href="#" id="show-employee-receipt-list"><TMPL_VAR NAME='LNG_CommentListAllReceipts'/></a>
+									<a class="btn btn-primary" data-toggle="modal" href="#" id="show-employee-chat-list"><TMPL_VAR NAME='LNG_CommentListAllChats'/></a>
+								</div>
+							</section>
+							<div class="row form-group">
+								<div class="col-md-12 col-sm-12 col-xs-12 <TMPL_IF NAME='tax_auditor'>hidden</TMPL_IF>">
+									<form id="comment-add-form">
+										<div class="controls">
+											<textarea class="form-control autogrow" placeholder="<TMPL_VAR NAME='LNG_CommentListContentPlaceholder'>" name="content" style="overflow: hidden; word-wrap: break-word; height: 70px;"></textarea>
+										</div>
+										<div class="enter_post_btns form-inline text-right col-md-12 col-sm-12 col-xs-12">
+											<input type="file" name="comment_file" class="form-control pull-left" />
+											<button type="submit" class="btn btn-md btn-primary"><TMPL_VAR NAME='LNG_CommentListSend'/></button>
+										</div>
+										<input type="hidden" name="Action" value="SaveReceiptComment" />
+										<input type="hidden" name="receipt_id" value="<TMPL_VAR NAME='receipt_id'>" />
+									</form>
+								</div>
+							</div>
+							<div id="comment-list-container" class="receipt-comment-list-container">
+
+							</div>
+						</div>
+					</section>
+				</div>
+				<div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 padding-3">
+					<section class="box ">
+						<header class="panel_header" for="header_receipt_edit_processing" table="receipt">
+							<h2 class="title"><TMPL_VAR NAME='LNG_ReceiptProcessing'/></h2>
+						</header>
+						<div class="employee-header">
+							<div class="row">
+								<div class="col-md-6">
+									<TMPL_IF NAME='client'>
+										<TMPL_VAR NAME='LNG_Device'>
+											<TMPL_IF NAME='client' VALUE='android'>
+												<i class="fa fa-android"></i>
+												<TMPL_ELSEIF NAME='client' VALUE='ios'>
+													<i class="fa fa-apple"></i>
+											</TMPL_IF>
+											<TMPL_IF NAME='version'>
+												<TMPL_VAR NAME='LNG_Version'> <TMPL_VAR NAME='version'></br>
+											</TMPL_IF>
+											<TMPL_VAR NAME='LNG_Owner'>
+												<TMPL_IF NAME='is_owner'>
+													<i class="fa fa-check"></i>
+													<TMPL_ELSE>
+														<i class="fa fa-close"></i>
+												</TMPL_IF>
+												</br>
+									</TMPL_IF>
+									<TMPL_IF NAME='is_web_upload'>
+										<TMPL_VAR NAME='LNG_IsWebUpload'> <i class="fa fa-check"></i> <br>
+									</TMPL_IF>
+									<TMPL_VAR NAME='LNG_Created'> <TMPL_VAR NAME='created' FORMAT='datetime'>
+								</div>
+								<div class="col-md-6" align="right">
+									<TMPL_VAR NAME='LNG_EmployeeName'>: <TMPL_VAR NAME='EMPLOYEE_first_name'/> <TMPL_VAR NAME='EMPLOYEE_last_name'/>
+										</br>
+										<TMPL_VAR NAME='LNG_CompanyUnitTitle'>: <TMPL_VAR NAME='EMPLOYEE_company_unit_title'/>
+								</div>
+								<TMPL_IF NAME='ConfirmationEmployeePDFLink'>
+									<div class="col-md-6" align="right">
+										<a rel="tooltip" data-toggle="tooltip" data-original-title="<TMPL_VAR NAME='LNG_DownloadPDF'>" data-placement="top" href="<TMPL_VAR NAME='ConfirmationEmployeePDFLink'>" target="_blank"><i class="fa fa-file-pdf-o"></i> <TMPL_VAR NAME='LNG_ConfirmationPDF'></a>
+									</div>
+								</TMPL_IF>
+							</div>
+						</div>
+						<form action="<TMPL_VAR NAME='MODULE_URL'>" method="post" id="receipt-save-form" class="enter-to-tab" autocomplete="off">
+							<div class="content-body">
+								<div class="row">
+									<div class="row">
+										<TMPL_IF NAME='EMPLOYEE_mobile__main__mobile_model_id'>
+											<div class="col-md-6">
+												<div class="form-group">
+													<label class="form-label" for="EMPLOYEE_mobile__main__mobile_model" table="product"><TMPL_VAR NAME='LNG_MobileModel'/></label>
+													<TMPL_IF NAME="receipt_id">
+														<TMPL_IF NAME='HistoryAdmin'>
+															(<a href="#" class="property-history" property_name="<TMPL_VAR NAME='EMPLOYEE_mobile__main__mobile_model_id'>"><TMPL_VAR NAME='LNG_RevisionHistory'></a>)
+														</TMPL_IF>
+													</TMPL_IF>
+													<div class="controls">
+														<textarea class="form-control autogrow" id="EMPLOYEE_mobile__main__mobile_model" name="EMPLOYEE_mobile__main__mobile_model" style="overflow: hidden; word-wrap: break-word; height: 70px;"<TMPL_IF NAME='close'>readonly</TMPL_IF>><TMPL_VAR NAME='EMPLOYEE_mobile__main__mobile_model'></textarea>
+													</div>
+												</div>
+											</div>
+										</TMPL_IF>
+										<TMPL_IF NAME='EMPLOYEE_mobile__main__mobile_number_id'>
+											<div class="col-md-6">
+												<div class="form-group">
+													<label class="form-label" for="EMPLOYEE_mobile__main__mobile_number" table="product"><TMPL_VAR NAME='LNG_MobileNumber'/></label>
+													<TMPL_IF NAME="receipt_id">
+														<TMPL_IF NAME='HistoryAdmin'>
+															(<a href="#" class="property-history" property_name="<TMPL_VAR NAME='EMPLOYEE_mobile__main__mobile_number_id'>"><TMPL_VAR NAME='LNG_RevisionHistory'></a>)
+														</TMPL_IF>
+													</TMPL_IF>
+													<div class="controls">
+														<textarea class="form-control autogrow" id="EMPLOYEE_mobile__main__mobile_number" name="EMPLOYEE_mobile__main__mobile_number" style="overflow: hidden; word-wrap: break-word; height: 70px;"<TMPL_IF NAME='close'>readonly</TMPL_IF>><TMPL_VAR NAME='EMPLOYEE_mobile__main__mobile_number'></textarea>
+													</div>
+												</div>
+											</div>
+										</TMPL_IF>
+									</div>
+									<TMPL_IF NAME='EMPLOYEE_internet__main__contractual_information_id'>
+										<div class="row">
+											<div class="col-md-12">
+												<div class="form-group">
+													<label class="form-label" for="EMPLOYEE_internet__main__contractual_information" table="product"><TMPL_VAR NAME='LNG_InternetContractualInfo'/></label>
+													<TMPL_IF NAME="receipt_id">
+														<TMPL_IF NAME='HistoryAdmin'>
+															(<a href="#" class="property-history" property_name="<TMPL_VAR NAME='EMPLOYEE_internet__main__contractual_information_id'>"><TMPL_VAR NAME='LNG_RevisionHistory'></a>)
+														</TMPL_IF>
+													</TMPL_IF>
+													<div class="controls">
+														<textarea class="form-control autogrow" id="EMPLOYEE_internet__main__contractual_information" name="EMPLOYEE_internet__main__contractual_information" style="overflow: hidden; word-wrap: break-word; height: 70px;"<TMPL_IF NAME='close'>readonly</TMPL_IF>><TMPL_VAR NAME='EMPLOYEE_internet__main__contractual_information'></textarea>
+													</div>
+												</div>
+											</div>
+										</div>
+									</TMPL_IF>
+									<TMPL_IF NAME='EMPLOYEE_mobile__main__contractual_information_id'>
+										<div class="row">
+											<div class="col-md-12">
+												<div class="form-group">
+													<label class="form-label" for="EMPLOYEE_mobile__main__contractual_information" table="product"><TMPL_VAR NAME='LNG_MobileContractualInfo'/></label>
+													<TMPL_IF NAME="receipt_id">
+														<TMPL_IF NAME='HistoryAdmin'>
+															(<a href="#" class="property-history" property_name="<TMPL_VAR NAME='EMPLOYEE_mobile__main__contractual_information_id'>"><TMPL_VAR NAME='LNG_RevisionHistory'></a>)
+														</TMPL_IF>
+													</TMPL_IF>
+													<div class="controls">
+														<textarea class="form-control autogrow" id="EMPLOYEE_mobile__main__contractual_information" name="EMPLOYEE_mobile__main__contractual_information" style="overflow: hidden; word-wrap: break-word; height: 70px;"<TMPL_IF NAME='close'>readonly</TMPL_IF>><TMPL_VAR NAME='EMPLOYEE_mobile__main__contractual_information'></textarea>
+													</div>
+												</div>
+											</div>
+										</div>
+									</TMPL_IF>
+									<TMPL_IF NAME='EMPLOYEE_food__main__important_info_id'>
+										<div class="row">
+											<div class="col-md-12">
+												<div class="form-group">
+													<label class="form-label" for="EMPLOYEE_food__main__important_info" table="product"><TMPL_VAR NAME='LNG_ImportantInfoFood'/></label>
+													<TMPL_IF NAME="receipt_id">
+														<TMPL_IF NAME='HistoryAdmin'>
+															(<a href="#" class="property-history" property_name="<TMPL_VAR NAME='EMPLOYEE_food__main__important_info_id'>"><TMPL_VAR NAME='LNG_RevisionHistory'></a>)
+														</TMPL_IF>
+													</TMPL_IF>
+													<div class="controls">
+														<textarea class="form-control autogrow" id="EMPLOYEE_food__main__important_info" name="EMPLOYEE_food__main__important_info" style="overflow: hidden; word-wrap: break-word; height: 70px;"<TMPL_IF NAME='close'>readonly</TMPL_IF>><TMPL_VAR NAME='EMPLOYEE_food__main__important_info'></textarea>
+													</div>
+												</div>
+											</div>
+										</div>
+									</TMPL_IF>
+									<TMPL_IF NAME='EMPLOYEE_food_voucher__main__important_info_id'>
+										<div class="row">
+											<div class="col-md-12">
+												<div class="form-group">
+													<label class="form-label" for="EMPLOYEE_food_voucher__main__important_info" table="product"><TMPL_VAR NAME='LNG_ImportantInfoFoodVoucher'/></label>
+													<TMPL_IF NAME="receipt_id">
+														<TMPL_IF NAME='HistoryAdmin'>
+															(<a href="#" class="property-history" property_name="<TMPL_VAR NAME='EMPLOYEE_food_voucher__main__important_info_id'>"><TMPL_VAR NAME='LNG_RevisionHistory'></a>)
+														</TMPL_IF>
+													</TMPL_IF>
+													<div class="controls">
+														<textarea class="form-control autogrow" id="EMPLOYEE_food_voucher__main__important_info" name="EMPLOYEE_food_voucher__main__important_info" style="overflow: hidden; word-wrap: break-word; height: 70px;"<TMPL_IF NAME='close'>readonly</TMPL_IF>><TMPL_VAR NAME='EMPLOYEE_food_voucher__main__important_info'></textarea>
+													</div>
+												</div>
+											</div>
+										</div>
+									</TMPL_IF>
+									<TMPL_IF NAME='EMPLOYEE_internal_verification_info_id'>
+										<div class="row">
+											<div class="col-md-12">
+												<div class="form-group">
+													<label class="form-label" for="EMPLOYEE_internal_verification_info" table="product"><TMPL_VAR NAME='LNG_InternalVerificationInfo'/></label>
+													<TMPL_IF NAME="receipt_id">
+														<TMPL_IF NAME='HistoryAdmin'>
+															(<a href="#" class="property-history" property_name="<TMPL_VAR NAME='EMPLOYEE_internal_verification_info_id'>"><TMPL_VAR NAME='LNG_RevisionHistory'></a>)
+														</TMPL_IF>
+													</TMPL_IF>
+													<div class="controls">
+														<textarea class="form-control autogrow" id="EMPLOYEE_internal_verification_info" name="EMPLOYEE_internal_verification_info" style="overflow: hidden; word-wrap: break-word; height: 70px;"<TMPL_IF NAME='close'>readonly</TMPL_IF>><TMPL_VAR NAME='EMPLOYEE_internal_verification_info'></textarea>
+													</div>
+												</div>
+											</div>
+										</div>
+									</TMPL_IF>
+								</div>
+								<div class="row">
+									<div id="show-option-table"></div>
+								</div>
+								<TMPL_IF NAME='Admin'>
+									<div class="row">
+										<div class="col-md-3">
+											<div class="uprofile-bottom">
+												<a class="btn btn-primary" data-toggle="modal" href="#" id="show-processing-details"><TMPL_VAR NAME='LNG_ProcessingDetails'/></a>
+											</div>
+										</div>
+									</div>
+								</TMPL_IF>
+								<hr />
+								<div class="row">
+									<div class="col-md-12">
+										<div class="form-group">
+											<label class="form-label" for="comment" table="receipt"><TMPL_VAR NAME='LNG_Comment'/></label>
+											<TMPL_IF NAME="receipt_id">
+												<TMPL_IF NAME='HistoryAdmin'>
+													(<a href="#" class="property-history" property_name="comment"><TMPL_VAR NAME='LNG_RevisionHistory'></a>)
+												</TMPL_IF>
+												<div class="controls">
+													<textarea class="form-control autogrow" name="comment" style="overflow: hidden; word-wrap: break-word; height: 70px;"<TMPL_IF NAME='close'>readonly</TMPL_IF>><TMPL_VAR NAME='comment'></textarea>
+												</div>
+											</TMPL_IF>
+										</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-3">
+										<div class="form-group">
+											<label class="form-label" for="document_date" table="receipt"><TMPL_VAR NAME='LNG_DateTimeReceipt'/></label>
+											<TMPL_IF NAME="receipt_id">
+												<TMPL_IF NAME='HistoryAdmin'>
+													(<a href="#" class="property-history" property_name="document_date"><TMPL_VAR NAME='LNG_RevisionHistory'/></a>)
+												</TMPL_IF>
+											</TMPL_IF>
+											<div class="input-group date" data-link-field="dtpick_1">
+												<input class="form-control <TMPL_UNLESS NAME='close'>datepicker</TMPL_IF>" size="16" type="text" name="document_date" value="<TMPL_VAR NAME='document_date' FORMAT='date'>" tabindex="1" <TMPL_IF NAME='close'>readonly</TMPL_IF>>
+												<span class="input-group-addon"><span class="fa fa-calendar"></span></span>
+											</div>
+											<input type="hidden" id="dtpick_1" value="" <TMPL_IF NAME='close'>readonly</TMPL_IF>/>
+										</div>
+									</div>
+									<div class="col-md-3">
+										<div class="form-group">
+											<label class="form-label" for="store_name" table="receipt"><TMPL_VAR NAME='LNG_StoreName'/></label>
+											<TMPL_IF NAME="receipt_id">
+												<TMPL_IF NAME='HistoryAdmin'>
+													(<a href="#" class="property-history" property_name="store_name"><TMPL_VAR NAME='LNG_RevisionHistory'/></a>)
+												</TMPL_IF>
+											</TMPL_IF>
+											<input type="text" class="form-control" name="store_name" value="<TMPL_VAR NAME='store_name'>" <TMPL_IF NAME='close'>readonly</TMPL_IF>/>
+										</div>
+									</div>
+									<div class="col-md-3">
+										<div class="form-group">
+											<label class="form-label" for="group_id" table="receipt"><TMPL_VAR NAME='LNG_ProductGroup'/></label>
+											<TMPL_IF NAME="receipt_id">
+												<TMPL_IF NAME='HistoryAdmin'>
+													(<a href="#" class="property-history" property_name="group_id"><TMPL_VAR NAME='LNG_RevisionHistory'/></a>)
+												</TMPL_IF>
+											</TMPL_IF>
+											<select class="form-control" name="group_id" <TMPL_IF NAME='close'>disabled</TMPL_IF>>
+											<TMPL_LOOP NAME='ProductGroupList'>
+												<option value="<TMPL_VAR NAME='group_id'>" <TMPL_IF NAME='Selected'>selected</TMPL_IF>><TMPL_VAR NAME='title_translation'/></option>
+											</TMPL_LOOP>
+											</select>
+											<TMPL_IF NAME='trip_id'>
+												<TMPL_VAR NAME='LNG_Trip'> <TMPL_VAR NAME='trip_id'> (<TMPL_VAR NAME='trip_name'>)
+											</TMPL_IF>
+										</div>
+									</div>
+									<TMPL_IF NAME='SetsOfGoodsList'>
+										<div class="col-md-3">
+											<div class="form-group">
+												<label class="form-label" for="sets_of_goods" table="receipt"><TMPL_VAR NAME='LNG_SetOfGoods'/></label>
+												<TMPL_IF NAME="receipt_id">
+													<TMPL_IF NAME='HistoryAdmin'>
+														(<a href="#" class="property-history" property_name="sets_of_goods"><TMPL_VAR NAME='LNG_RevisionHistory'></a>)
+													</TMPL_IF>
+												</TMPL_IF>
+												<select class="form-control" id="sets_of_goods" name="sets_of_goods" <TMPL_IF NAME='close'>disabled</TMPL_IF>>
+													<TMPL_LOOP NAME='SetsOfGoodsList'>
+														<option value="<TMPL_VAR NAME='SetsOfGoodsList.set_of_goods'>"
+															<TMPL_IF NAME='selected'>selected</TMPL_IF>
+															vat="<TMPL_VAR NAME='SetsOfGoodsList.vat'>"
+														>
+															<TMPL_VAR NAME='SetsOfGoodsList.set_of_goods'/>
+														</option>
+													</TMPL_LOOP>
+												</select>
+											</div>
+										</div>
+									</TMPL_IF>
+									<TMPL_IF NAME='ReceiptTypeList'>
+										<div class="col-md-3">
+											<div class="form-group">
+												<label class="form-label" for="receipt_from" table="receipt"><TMPL_VAR NAME='LNG_Type'/></label>
+												<TMPL_IF NAME="receipt_id">
+													<TMPL_IF NAME='HistoryAdmin'>
+														(<a href="#" class="property-history" property_name="receipt_from"><TMPL_VAR NAME='LNG_RevisionHistory'></a>)
+													</TMPL_IF>
+												</TMPL_IF>
+												<select class="form-control" id="receipt_from" name="receipt_from" <TMPL_IF NAME='close'>disabled</TMPL_IF>>
+													<TMPL_LOOP NAME='ReceiptTypeList'>
+														<option value="<TMPL_VAR NAME='code'>" <TMPL_IF NAME='selected'>selected</TMPL_IF>><TMPL_VAR NAME='title_translation'/></option>
+													</TMPL_LOOP>
+												</select>
+											</div>
+										</div>
+									</TMPL_IF>
+								</div>
+								<div class="row">
+									<div class="col-md-3">
+										<div class="form-group">
+											<label class="form-label" for="document_guid" table="receipt"><TMPL_VAR NAME='LNG_DocumentGUID'/></label>
+											<TMPL_IF NAME="receipt_id">
+												<TMPL_IF NAME='HistoryAdmin'>
+													(<a href="#" class="property-history" property_name="document_guid"><TMPL_VAR NAME='LNG_RevisionHistory'/></a>)
+												</TMPL_IF>
+											</TMPL_IF>
+											<input type="text" class="form-control" name="document_guid" value="<TMPL_VAR NAME='document_guid'>" tabindex="2" <TMPL_IF NAME='close'>readonly</TMPL_IF>/>
+										</div>
+									</div>
+									<div class="col-md-3">
+										<div class="form-group">
+											<label class="form-label" for="amount_approved" table="receipt"><TMPL_VAR NAME='LNG_AmountApproved'/></label>
+											<TMPL_IF NAME="receipt_id">
+												<TMPL_IF NAME='HistoryAdmin'>
+													(<a href="#" class="property-history" property_name="amount_approved"><TMPL_VAR NAME='LNG_RevisionHistory'></a>)
+												</TMPL_IF>
+											</TMPL_IF>
+											<input type="text" class="form-control" id="amount_approved" name="amount_approved" value="<TMPL_VAR NAME='amount_approved' FORMAT='price'>" tabindex="3" <TMPL_IF NAME='close'>readonly</TMPL_IF>/>
+										</div>
+									</div>
+									<div class="col-md-3 <TMPL_IF NAME='ShowCurrency'><TMPL_ELSE>hidden</TMPL_IF>">
+										<div class="form-group">
+											<label class="form-label" for="ReceiptCurrencySelect" table="receipt"><TMPL_VAR NAME='LNG_Currency'></label>
+											<TMPL_IF NAME="receipt_id">
+												<TMPL_IF NAME='HistoryAdmin'>
+													(<a href="#" class="property-history" property_name="currency_id"><TMPL_VAR NAME='LNG_RevisionHistory'></a>)
+												</TMPL_IF>
+											</TMPL_IF>
+											<select class="form-control" name="currency_id" id="ReceiptCurrencySelect" <TMPL_UNLESS NAME='IsVoucher'>tabindex="4"</TMPL_UNLESS> <TMPL_IF NAME='close'> disabled</TMPL_IF>>
+											<TMPL_LOOP NAME="CurrencyList">
+												<option value="<TMPL_VAR NAME='id'>" <TMPL_IF NAME='selected' VALUE='1'>selected</TMPL_IF>><TMPL_VAR NAME='digit'/></option>
+											</TMPL_LOOP>
+											</select>
+										</div>
+									</div>
+									<div class="col-md-3 <TMPL_IF NAME='ShowVAT'><TMPL_ELSE>hidden</TMPL_IF>">
+										<div class="form-group">
+											<label class="form-label" for="VATSelect" table="receipt"><TMPL_VAR NAME='LNG_TravelVAT'></label>
+											<TMPL_IF NAME="receipt_id">
+												<TMPL_IF NAME='HistoryAdmin'>
+													(<a href="#" class="property-history" property_name="vat"><TMPL_VAR NAME='LNG_RevisionHistory'></a>)
+												</TMPL_IF>
+											</TMPL_IF>
+											<select class="form-control" name="vat" id="VATSelect" <TMPL_UNLESS NAME='IsVoucher'>tabindex="4"</TMPL_UNLESS> <TMPL_IF NAME='close'> disabled</TMPL_IF>>
+												<option value="0" <TMPL_IF NAME='vat' VALUE='0'>selected</TMPL_IF>><TMPL_VAR NAME='LNG_VATZero'></option>
+												<option value="5" <TMPL_IF NAME='vat' VALUE='5'>selected</TMPL_IF>><TMPL_VAR NAME='LNG_VATFive'></option>
+												<option value="7" <TMPL_IF NAME='vat' VALUE='7'>selected</TMPL_IF>><TMPL_VAR NAME='LNG_VATSeven'></option>
+												<option value="16" <TMPL_IF NAME='vat' VALUE='16'>selected</TMPL_IF>><TMPL_VAR NAME='LNG_VATSixteen'></option>
+												<option value="19" <TMPL_IF NAME='vat' VALUE='19'>selected</TMPL_IF>><TMPL_VAR NAME='LNG_VATNineteen'></option>
+											</select>
+										</div>
+									</div>
+									<TMPL_IF NAME='ShowTravel'>
+									</div>
+										<div class="row">
+											<TMPL_IF NAME='TravelDailyAllowanceOn'>
+												<div class="col-md-3">
+													<label class="form-label" for="DaysAmountUnder16" table="receipt"><TMPL_VAR NAME='LNG_DaysAmountUnder16'></label>
+													<TMPL_IF NAME="receipt_id">
+														<TMPL_IF NAME='HistoryAdmin'>
+															(<a href="#" class="property-history" property_name="days_amount_under_16"><TMPL_VAR NAME='LNG_RevisionHistory'></a>)
+														</TMPL_IF>
+													</TMPL_IF>
+													<input type="text" class="form-control" id="DaysAmountUnder16" name="days_amount_under_16" value="<TMPL_VAR NAME='days_amount_under_16'>" tabindex="3" <TMPL_IF NAME='close'>readonly</TMPL_IF>/>
+												</div>
+												<div class="col-md-3">
+													<label class="form-label" for="DaysAmountOver16" table="receipt"><TMPL_VAR NAME='LNG_DaysAmountOver16'></label>
+													<TMPL_IF NAME="receipt_id">
+														<TMPL_IF NAME='HistoryAdmin'>
+															(<a href="#" class="property-history" property_name="days_amount_over_16"><TMPL_VAR NAME='LNG_RevisionHistory'></a>)
+														</TMPL_IF>
+													</TMPL_IF>
+													<input type="text" class="form-control" id="DaysAmountOver16" name="days_amount_over_16" value="<TMPL_VAR NAME='days_amount_over_16'>" tabindex="3" <TMPL_IF NAME='close'>readonly</TMPL_IF>/>
+												</div>
+											</TMPL_IF>
+									</TMPL_IF>
+									<TMPL_IF NAME='MoveRealAmountApproved'>
+										</div>
+										<div class="row">
+									</TMPL_IF>
+									<div class="col-md-6">
+										<div class="form-group">
+											<label class="form-label" for="real_amount_approved" table="receipt"><TMPL_VAR NAME='LNG_RealAmountApproved'/></label>
+											<TMPL_IF NAME="receipt_id">
+												<TMPL_IF NAME='HistoryAdmin'>
+													(<a href="#" class="property-history" property_name="real_amount_approved"><TMPL_VAR NAME='LNG_RevisionHistory'></a>)
+												</TMPL_IF>
+											</TMPL_IF>
+											<input type="text" class="form-control" value="<TMPL_VAR NAME='real_amount_approved' FORMAT='price'>" readonly />
+										</div>
+									</div>
+								<TMPL_UNLESS NAME='ShowTravel'>
+									<TMPL_UNLESS NAME='MoveRealAmountApproved'>
+										</div>
+										<div class="row">
+									</TMPL_UNLESS>
+								</TMPL_IF>
+									<div class="col-md-3">
+										<div class="form-group">
+											<label class="form-label" for="status" table="receipt"><TMPL_VAR NAME='LNG_Status'/></label>
+											<TMPL_IF NAME="receipt_id">
+												<TMPL_IF NAME='HistoryAdmin'>
+													(<a href="#" class="property-history" property_name="status"><TMPL_VAR NAME='LNG_RevisionHistory'></a>)
+												</TMPL_IF>
+											</TMPL_IF>
+											<select class="form-control" name="status" id="ReceiptStatusSelect" tabindex="4"<TMPL_IF NAME='close'> disabled</TMPL_IF>>
+											<option value="new" <TMPL_IF NAME='status' VALUE='new'>selected</TMPL_IF>><TMPL_VAR NAME='LNG_StatusNew'/></option>
+											<option value="review" <TMPL_IF NAME='status' VALUE='review'>selected</TMPL_IF>><TMPL_VAR NAME='LNG_StatusReview'/></option>
+											<option value="supervisor" <TMPL_IF NAME='status' VALUE='supervisor'>selected</TMPL_IF>><TMPL_VAR NAME='LNG_StatusSupervisor'/></option>
+											<option value="approve_proposed" <TMPL_IF NAME='status' VALUE='approve_proposed'>selected</TMPL_IF>><TMPL_VAR NAME='LNG_StatusApproveProposed'/></option>
+											<option value="approved" <TMPL_IF NAME='status' VALUE='approved'>selected</TMPL_IF>><TMPL_VAR NAME='LNG_StatusApproved'/></option>
+											<option value="denied" <TMPL_IF NAME='status' VALUE='denied'>selected</TMPL_IF>><TMPL_VAR NAME='LNG_StatusDenied'/></option>
+											</select>
+											<TMPL_UNLESS NAME='HideDenialReasons'>
+												<input type="hidden" name="denial_reason" value="<TMPL_VAR NAME='denial_reason'>">
+												<a href="#choose-denial-reason" data-toggle="modal" id="choose-denial-reason-link" <TMPL_IF NAME='status' OP='!=' VALUE='denied'>class="hidden"<TMPL_ELSEIF NAME='ErrorList'><TMPL_ELSE>class="hidden"</TMPL_IF>><TMPL_VAR NAME='LNG_ChooseReason'></br></a>
+												<span id="reasons" <TMPL_UNLESS NAME='denial_reason'>class="hidden"</TMPL_UNLESS>><TMPL_IF NAME='denial_reason'><TMPL_VAR NAME="LNG_Reason"> <TMPL_VAR NAME='denial_reason'>;</TMPL_IF></span>
+											</TMPL_UNLESS>
+										</div>
+									</div>
+									<div class="col-md-3">
+										<div class="form-group">
+											<label class="form-label" for="status_updated" table="receipt"><TMPL_VAR NAME='LNG_DateTimeStatus'></label>
+											<input type="text" class="form-control" name="status_updated" value="<TMPL_VAR NAME='status_updated' FORMAT='datetime'>" readonly/>
+										</div>
+									</div>
+									<TMPL_IF NAME='ConfirmationWithPicture' VALUE='N'>
+										<div class="col-md-3">
+											<div class="form-group">
+												<label class="form-label" for="material_status" table="employee"><TMPL_VAR NAME='LNG_MaterialStatus'/></label>
+												<TMPL_IF NAME="receipt_id">
+													<TMPL_IF NAME='HistoryAdmin'>
+														(<a href="#" class="property-history" property_name="material_status"><TMPL_VAR NAME='LNG_RevisionHistory'></a>)
+													</TMPL_IF>
+												</TMPL_IF>
+												<input type="text" class="form-control" id="material_status" name="material_status" value="<TMPL_VAR NAME='RECEIPT_material_status'>" readonly/>
+											</div>
+										</div>
+										<div class="col-md-3">
+											<div class="form-group">
+												<label class="form-label" for="child_count" table="employee"><TMPL_VAR NAME='LNG_ChildCount'/></label>
+												<TMPL_IF NAME="receipt_id">
+													<TMPL_IF NAME='HistoryAdmin'>
+														(<a href="#" class="property-history" property_name="child_count"><TMPL_VAR NAME='LNG_RevisionHistory'></a>)
+													</TMPL_IF>
+												</TMPL_IF>
+												<input type="text" class="form-control" id="child_count" name="child_count" value="<TMPL_VAR NAME='RECEIPT_child_count'>" readonly/>
+											</div>
+										</div>
+									</TMPL_IF>
+									<TMPL_COMMENT>
+										<div class="col-md-3 <TMPL_UNLESS NAME='ShowDocumentDateFromField'>hidden</TMPL_UNLESS>">
+											<div class="form-group">
+												<label class="form-label" for="document_date_from" table="receipt"><TMPL_VAR NAME='LNG_DocumentDateFrom'></label>
+												<TMPL_IF NAME="receipt_id">
+													<TMPL_IF NAME='HistoryAdmin'>
+														(<a href="#" class="property-history" property_name="document_date_from"><TMPL_VAR NAME='LNG_RevisionHistory'></a>)
+													</TMPL_IF>
+												</TMPL_IF>
+												<input class="form-control <TMPL_UNLESS NAME='close'>datepicker</TMPL_IF>" type="text" name="document_date_from" value="<TMPL_VAR NAME='document_date_from' FORMAT='datepicker'>" <TMPL_IF NAME='close'>readonly</TMPL_IF>>
+											</div>
+										</div>
+										<div class="col-md-3 <TMPL_UNLESS NAME='ShowDocumentDateToField'>hidden</TMPL_UNLESS>">
+											<div class="form-group">
+												<label class="form-label" for="document_date_to" table="receipt"><TMPL_VAR NAME='LNG_DocumentDateTo'></label>
+												<TMPL_IF NAME="receipt_id">
+													<TMPL_IF NAME='HistoryAdmin'>
+														(<a href="#" class="property-history" property_name="document_date_to"><TMPL_VAR NAME='LNG_RevisionHistory'/></a>)
+													</TMPL_IF>
+												</TMPL_IF>
+												<input class="form-control <TMPL_UNLESS NAME='close'>datepicker</TMPL_IF>" type="text" name="document_date_to" value="<TMPL_VAR NAME='document_date_to' FORMAT='datepicker'>" <TMPL_IF NAME='close'>readonly</TMPL_IF>>
+											</div>
+										</div>
+									</TMPL_COMMENT>
+								</div>
+								<div class="row <TMPL_IF NAME='ShowBooked'><TMPL_ELSE>hidden</TMPL_IF>">
+									<div class="col-md-3">
+										<div class="form-group">
+											<input type="checkbox" name="booked" value="Y" class="icheck-minimal-grey"<TMPL_IF NAME='booked' VALUE='Y'> checked</TMPL_IF> <TMPL_IF NAME='close'>readonly</TMPL_IF>/>
+											<label class="form-label" for="booked" table="receipt"><TMPL_VAR NAME='LNG_Booked'></label>
+											<TMPL_IF NAME="receipt_id">
+												<TMPL_IF NAME='HistoryAdmin'>
+													(<a href="#" class="property-history" property_name="booked"><TMPL_VAR NAME='LNG_RevisionHistory'/></a>)
+												</TMPL_IF>
+											</TMPL_IF>
+										</div>
+									</div>
+									<div class="col-md-3">
+										<div class="form-group">
+											<label class="form-label" for="ref_number" table="receipt"><TMPL_VAR NAME='LNG_RefNumber'/></label>
+											<TMPL_IF NAME="receipt_id">
+												<TMPL_IF NAME='HistoryAdmin'>
+													(<a href="#" class="property-history" property_name="ref_number"><TMPL_VAR NAME='LNG_RevisionHistory'></a>)
+												</TMPL_IF>
+											</TMPL_IF>
+											<input type="text" class="form-control" id="ref_number" name="ref_number" value="<TMPL_VAR NAME='ref_number'>" <TMPL_IF NAME='close'>readonly</TMPL_IF>/>
+										</div>
+									</div>
+									<div class="col-md-3">
+										<div class="form-group">
+											<label class="form-label" for="acc_system" table="receipt"><TMPL_VAR NAME='LNG_AccSystem'/></label>
+											<TMPL_IF NAME="receipt_id">
+												<TMPL_IF NAME='HistoryAdmin'>
+													(<a href="#" class="property-history" property_name="acc_system"><TMPL_VAR NAME='LNG_RevisionHistory'></a>)
+												</TMPL_IF>
+											</TMPL_IF>
+											<input type="text" class="form-control" id="acc_system" name="acc_system" value="<TMPL_VAR NAME='acc_system'>" <TMPL_IF NAME='close'>readonly</TMPL_IF>/>
+										</div>
+									</div>
+								</div>
+								<input type="hidden" name="Save" value="1" />
+								<input type="hidden" name="receipt_id" value="<TMPL_VAR NAME='receipt_id'>" />
+								<input type="hidden" name="next_receipt_id" value="<TMPL_VAR NAME='next_receipt_id'>" disabled/>
+								<TMPL_VAR NAME='ParamsForForm' ESCAPE='none'/>
+							</form>
+							<TMPL_UNLESS NAME='HiddenLineList'>
+								<div id="line-list-container">
+
+								</div>
+							</TMPL_UNLESS>
+							<form action="<TMPL_VAR NAME='MODULE_URL'>" method="post" id="line-add-form" class="enter-to-tab collapse <TMPL_IF NAME='Action' VALUE='SaveLine'>in</TMPL_IF>" autocomplete="off">
+								<div class="row">
+									<div class="col-md-2">
+										<div class="form-group">
+											<label class="form-label" for="line_number" table="receipt_line"><TMPL_VAR NAME='LNG_LineFormLineNumber'></label><br />
+											<input class="form-control" type="text" name="line_number" id="line_number" />
+										</div>
+									</div>
+									<div class="col-md-2">
+										<div class="form-group">
+											<label class="form-label" for="sku" table="receipt_line"><TMPL_VAR NAME='LNG_LineFormSKU'/></label><br />
+											<input class="form-control" type="text" name="sku" id="sku" />
+										</div>
+									</div>
+									<div class="col-md-2">
+										<div class="form-group">
+											<label class="form-label required" for="title" table="receipt_line"><TMPL_VAR NAME='LNG_LineFormTitle'></label><br />
+											<input class="form-control" type="text" name="title" id="title" />
+										</div>
+									</div>
+									<div class="col-md-1">
+										<div class="form-group">
+											<label class="form-label required" for="quantity" table="receipt_line"><TMPL_VAR NAME='LNG_LineFormQuantity'></label><br />
+											<input class="form-control" type="text" name="quantity" id="quantity" value="1"/>
+										</div>
+									</div>
+									<div class="col-md-1">
+										<div class="form-group">
+											<label class="form-label required" for="price" table="receipt_line"><TMPL_VAR NAME='LNG_LineFormPrice'></label><br />
+											<input class="form-control" type="text" name="price" id="price" />
+										</div>
+									</div>
+									<div class="col-md-2">
+										<div class="form-group">
+											<label class="form-label required" for="vat" table="receipt_line"><TMPL_VAR NAME='LNG_VAT'/></label><br />
+											<select class="form-control" name="vat" id="vat">
+												<option value="7"><TMPL_VAR NAME='LNG_Approved'/></option>
+												<option value="19"><TMPL_VAR NAME='LNG_Denied'/></option>
+											</select>
+										</div>
+									</div>
+									<div class="col-md-2">
+										<div class="form-group">
+											<label class="form-label">&nbsp;</label><br />
+											<button type="submit" class="btn btn-primary btn-icon"><i class="fa fa-save"></i> <TMPL_VAR NAME='LNG_Save'></button>
+										</div>
+									</div>
+								</div>
+								<input type="hidden" name="Action" value="SaveReceiptLine" />
+								<input type="hidden" name="receipt_id" value="<TMPL_VAR NAME='receipt_id'>" />
+								<TMPL_VAR NAME='ParamsForForm' ESCAPE='none'>
+							</form>
+							<form action="<TMPL_VAR NAME='MODULE_URL'>" method="post" id="approve-receipt-form" class="enter-to-tab collapse" autocomplete="off">
+								<input type="hidden" name="ApproveReceipt" value="1" />
+								<input type="hidden" name="receipt_id" value="<TMPL_VAR NAME='receipt_id'>" />
+								<TMPL_VAR NAME='ParamsForForm' ESCAPE='none'>
+							</form>
+						</div>
+					</section>
+				</div>
+			</div>
+		</div>
+	</section>
+</div>
+
+<div id="floating-button">
+	<a href="#" class="btn btn-primary receipt-next pull-right" tabindex="5"><TMPL_VAR NAME='LNG_NextReceipt'/> &rarr;</a>
+
+	<button type="submit" id="receipt-save-button" class="btn btn-primary btn-icon pull-right" <TMPL_IF NAME='close'>disabled</TMPL_IF>><i class="fa fa-save"></i> <TMPL_VAR NAME='LNG_Save'/></button>
+
+	<a data-toggle="collapse" data-target="#line-add-form" class="btn btn-primary btn-icon pull-right" <TMPL_IF NAME='close'>disabled</TMPL_IF>>
+		<i class="fa fa-plus"></i> <TMPL_VAR NAME='LNG_LineAdd'/>
+	</a>
+
+	<TMPL_IF NAME='Admin'>
+		<TMPL_IF NAME='status' VALUE='approve_proposed'>
+			<a href="#" class="btn btn-primary receipt-approve pull-right"><TMPL_VAR NAME='LNG_ApproveReceiptByEmployee'/></a>
+		</TMPL_IF>
+	</TMPL_IF>
+
+</div>
+
+<!-- General section box modal start -->
+<div class="modal" id="choose-denial-reason" tabindex="-1" role="dialog" aria-labelledby="ultraModal-Label" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title" data-type="1" ><TMPL_VAR NAME="LNG_PleaseChooseReason"/></h4>
+			</div>
+			<div class="modal-body">
+				<div class="row">
+					<div class="col-md-12">
+						<table class="table table-borderless">
+							<TMPL_LOOP NAME='DenialReasonList'>
+								<tr>
+									<td class="col-md-12">
+										<input reason-id="<TMPL_VAR NAME='__INDEX__'>" type="checkbox" class="icheck-minimal-green reason" value="<TMPL_VAR NAME='Reason'>" /> <TMPL_VAR NAME='Reason'>
+									</td>
+								</tr>
+							</TMPL_LOOP>
+						</table>
+					</div>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button data-dismiss="modal" class="btn btn-default" type="button"><TMPL_VAR NAME='LNG_Cancel'/></button>
+				<button class="btn btn-success" id="choose-denial-reason-btn"><TMPL_VAR NAME='LNG_Choose'/></button>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- modal end -->
+
+<script type="text/javascript">
+	$(document).ready(function(){
+
+		$("#line-add-form").on("shown.bs.collapse", function(){
+			$("#title").focus();
+		});
+
+		var approvedOption = $("#ReceiptStatusSelect").find("option[value=approved]");
+		if (!approvedOption.prop("selected"))
+			approvedOption.wrap("<span>");
+
+		$('.receipt-next').click(function(e){
+
+			var saveLine = $("#line-add-form").hasClass("in");
+			$("#receipt-save-form").find("input[name=next_receipt_id]").prop("disabled", false);
+			if(saveLine){
+				SaveLine(function(result){
+					if(result){
+						if ($(this).attr('disabled') != "disabled") {
+							$(this).attr('disabled', true);
+							$('#receipt-save-button').attr('disabled', true);
+							$('#receipt-save-form').submit();
+						}
+					}else{
+						//nothing to do
+					}
+				});
+			}else{
+				if ($(this).attr('disabled') != "disabled") {
+					$(this).attr('disabled', true);
+					$('#receipt-save-button').attr('disabled', true);
+					$('#receipt-save-form').submit();
+				}
+			}
+			e.preventDefault();
+		});
+
+		$('.receipt-approve').click(function(e){
+			$('#approve-receipt-form').submit();
+			e.preventDefault();
+		});
+
+		// add popups for receipt photo (original and duplicated)
+		duplicatedZoomId = "duplicated-zoom";
+		$('body').append(
+			'<div id="zoom-popups">' +
+				'<div id="receipt-photo-popup" class="zoom-popup"><div id="zoom" data-width="0" data-height="0" onmousemove="zoomInPreview(event)"></div><img /></div>' +
+				'<div id="duplicated-receipt-photo-popup" class="zoom-popup"><div id="duplicated-zoom" data-width="0" data-height="0" onmousemove="zoomInPreview(event, duplicatedZoomId)"></div><img /></div>' +
+			'</div>'
+		);
+
+		$('a.receipt-photo-link').click(function(e){
+			$('#receipt-photo-popup img').attr('src', $(this).attr('href'));
+			var zoom = document.getElementById("zoom");
+			zoom.style.backgroundImage = "url('"+$(this).attr('href')+"')";
+			$('#receipt-photo-popup').show();
+			e.preventDefault();
+		});
+
+		$(document).on('click','#receipt-photo-popup',function(e){
+			$('#receipt-photo-popup').hide();
+		});
+
+		$('#receipt-save-button').click(function(e){
+			$('#receipt-save-button').attr('disabled', true);
+			$('.receipt-next').attr('disabled', true);
+			$('#receipt-save-form').submit();
+			e.preventDefault();
+		});
+
+		$('#line-add-form').submit(function(e){
+			SaveLine(null);
+			e.preventDefault();
+		});
+
+		$(document).on('click', '.line-remove', function(e){
+			var title = $(this).attr('title');
+			var line_id = $(this).attr('line_id');
+			var msg = GetTranslation('confirm-remove').replace(/%Title%/g, title);
+			ModalConfirm(msg, function(){
+				$.ajax({
+					url: '<TMPL_VAR NAME='MODULE_PATH'>ajax.php',
+					type: 'POST',
+					dataType: 'JSON',
+					data:{
+						Action: 'RemoveReceiptLine',
+						LineIDs: [line_id]
+					},
+					success: function(data){
+						LoadLineList();
+					}
+				});
+			});
+			e.preventDefault();
+		});
+
+		$(document).on('click', '.line-exception', function(e){
+			var title = $(this).attr('title');
+			var vat = $(this).attr('vat');
+			var receipt_from = $('#receipt_from').val();
+			var msg = GetTranslation('confirm-exception').replace(/%Title%/g, title);
+			ModalConfirm(msg, function(){
+				$.ajax({
+					url: '<TMPL_VAR NAME='MODULE_PATH'>ajax.php',
+					type: 'POST',
+					dataType: 'JSON',
+					data:{
+						Action: 'AddException',
+						Vat: vat,
+						ReceiptFrom: receipt_from,
+						Title: title
+					},
+					success: function(data){
+						LoadLineList();
+					}
+				});
+			});
+			e.preventDefault();
+		});
+
+		$(document).on('change', '.line-approved', function(e){
+			var title = $(this).attr('title');
+			var line_id = $(this).attr('line_id');
+			if($(this).prop('checked')){
+				var approved = 'Y';
+			 }
+			 else{
+				 var approved = 'N';
+			 }
+			$.ajax({
+				url: '<TMPL_VAR NAME='MODULE_PATH'>ajax.php',
+				type: 'POST',
+				dataType: 'JSON',
+				data:{
+					Action: 'ApproveReceiptLine',
+					LineIDs: [line_id],
+					Approved: approved
+				},
+				success: function(data){
+					LoadLineList();
+				}
+			});
+		});
+
+		$(document).on('change', '#receipt_from', function(e){
+			var receipt_from = $(this).val();
+			var receipt_id = <TMPL_VAR NAME='receipt_id'>;
+			$.ajax({
+				url: '<TMPL_VAR NAME='MODULE_PATH'>ajax.php',
+				type: 'POST',
+				dataType: 'JSON',
+				data:{
+					Action: 'UpdateField',
+					ReceiptID: receipt_id,
+					Value: receipt_from,
+					Field: 'receipt_from'
+				},
+				success: function(data){
+					location.reload();
+				}
+			});
+		});
+
+		$('#show-employee-receipt-list').click(function(e){
+			var employeeID = "<TMPL_VAR NAME='employee_id'>";
+			var receiptID = <TMPL_VAR NAME='receipt_id'>;
+			$.ajax({
+				url: '<TMPL_VAR NAME='PROJECT_PATH'>module/receipt/ajax.php',
+				type: 'GET',
+				dataType: 'JSON',
+				data:{
+					Action: 'GetEmployeeReceiptListHTML',
+					employee_id: employeeID,
+					receipt_id: receiptID
+				},
+				success: function(data){
+					if(typeof data.HTML != 'undefined'){
+						$(data.HTML).modal('show').on('hidden.bs.modal', function () {
+							$(this).remove();
+						});
+					}
+				}
+			});
+
+			e.preventDefault();
+		});
+
+		$('#show-employee-chat-list').click(function(e){
+			$.ajax({
+				url: '<TMPL_VAR NAME='PROJECT_PATH'>module/receipt/ajax.php',
+				type: 'GET',
+				dataType: 'JSON',
+				data:{
+					Action: 'GetEmployeeChatListHTML',
+					employee_id: "<TMPL_VAR NAME='employee_id'>"
+				},
+				success: function(data){
+					if(typeof data.HTML != 'undefined'){
+						$(data.HTML).modal('show').on('hidden.bs.modal', function () {
+							$(this).remove();
+						});
+					}
+				}
+			});
+
+			e.preventDefault();
+		});
+
+		$('#comment-add-form').submit(function(e){
+			SaveComment();
+			e.preventDefault();
+		});
+
+		$('#comment-add-form textarea').click(function(){
+			var receiptID = "<TMPL_VAR NAME='receipt_id'>";
+
+			$.ajax({
+				url: '<TMPL_VAR NAME='PROJECT_PATH'>module/receipt/ajax.php',
+				type: 'GET',
+				dataType: 'JSON',
+				data:{
+					Action: 'MarkAsReadByAdmin',
+					receipt_id: receiptID
+				}
+			});
+		});
+
+		if(!"<TMPL_VAR NAME='ErrorList'>" && !"<TMPL_VAR NAME='MessageList'>"){
+			$('a.receipt-photo-link').click();
+		}
+		if ("<TMPL_VAR NAME='Saved'>" || "<TMPL_VAR NAME='close'>")
+			$("a.receipt-next").focus();
+		else
+			$("#receipt-save-form").find("input[name=document_date]").focus();
+
+		setInterval(LoadCommentList, 5000);
+
+		LoadLineList();
+		LoadCommentList();
+
+		$(window).load(function(){
+			if($('[name=document_date]').val() == "") {
+				$("[name='document_date']").datepicker('setDate', new Date());
+				$('[name=document_date]').datepicker("show");
+				ValidateReceiptUpdateErrors(false);
+			}
+			UpdateOptionsTable();
+		});
+
+		$('[name=document_date]').on("changeDate", function(e) {
+			ValidateReceiptUpdateErrors(false);
+			UpdateOptionsTable();
+		});
+
+		$('#receipt-save-form input').add('#receipt-save-form select').on("change", function(e) {
+			if($(this).attr("id") == "ReceiptStatusSelect") {
+				ValidateReceiptUpdateErrors(true);
+			} else {
+				ValidateReceiptUpdateErrors(false);
+			}
+
+		});
+
+
+		$('.broke-image').on("click", function(e) {
+
+			$url = $(this).attr('href');
+
+			$.ajax({
+				url: $url,
+				type: 'GET',
+				dataType: 'JSON',
+				data:{},
+				success: function(data){
+					location.reload();
+					}
+			});
+
+			e.preventDefault();
+		});
+
+		$('#show-processing-details').click(function(e){
+			var receiptID = <TMPL_VAR NAME='receipt_id'>;
+			$.ajax({
+				url: '<TMPL_VAR NAME='PROJECT_PATH'>module/receipt/ajax.php',
+				type: 'GET',
+				dataType: 'JSON',
+				data:{
+					Action: 'GetProcessingDetailsHTML',
+					receipt_id: receiptID
+				},
+				success: function(data){
+					if(typeof data.HTML != 'undefined'){
+						$(data.HTML).modal('show').on('hidden.bs.modal', function () {
+							$(this).remove();
+						});
+					}
+				}
+			});
+
+			e.preventDefault();
+		});
+
+		$(document).on('change', '#sets_of_goods', function(e){
+			var vat = $('#sets_of_goods option:selected').attr('vat');
+			$('#VATSelect').val(parseInt(vat));
+		});
+	});
+
+	var MessageArray = [];
+
+	function LoadLineList(){
+		$.ajax({
+			url: '<TMPL_VAR NAME='MODULE_PATH'>ajax.php?<TMPL_VAR NAME='ParamsForURL'>',
+			type: 'GET',
+			dataType: 'JSON',
+			data:{
+				Action: 'GetReceiptLineListHTML',
+				receipt_id: '<TMPL_VAR NAME='receipt_id'>'
+			},
+			success: function(data){
+				if(typeof data.HTML != 'undefined')
+					$('#line-list-container').html(data.HTML);
+			}
+		});
+	}
+
+	function SaveLine(callback){
+		var form = $('#line-add-form');
+		var formData = form.serialize();
+		$.ajax({
+			url: '<TMPL_VAR NAME='MODULE_PATH'>ajax.php',
+			type: 'POST',
+			dataType: 'JSON',
+			data: formData,
+			success: function (data) {
+				if (data.Status == "success") {
+					form[0].reset();
+					form.collapse('hide');
+					LoadLineList();
+					if(callback)
+						callback(true);
+				} else {
+					ModalAlert(GetTranslation("error"), data.Error);
+					if(callback)
+						callback(false);
+				}
+			}
+		});
+	}
+
+	function LoadCommentList(){
+		var container = $('#comment-list-container');
+
+		$.ajax({
+			url: '<TMPL_VAR NAME='MODULE_PATH'>ajax.php?<TMPL_VAR NAME='ParamsForURL'>',
+			type: 'GET',
+			dataType: 'JSON',
+			data:{
+				Action: 'GetReceiptCommentListHTML',
+				receipt_id: '<TMPL_VAR NAME='receipt_id'>'
+			},
+			success: function(data){
+				if(typeof data.HTML != 'undefined'){
+					container.html(data.HTML);
+					$('#comment-count-flag').html("("+data.CommentCount+" <TMPL_VAR NAME='LNG_CommentCountSuffix' ESCAPE='js'>)");
+				}
+			}
+		});
+	}
+
+	function SaveComment(){
+		var form = $('#comment-add-form');
+		var formData = new FormData(form[0]);
+		$.ajax({
+			url: '<TMPL_VAR NAME='MODULE_PATH'>ajax.php',
+			type: 'POST',
+			dataType: 'JSON',
+			data: formData,
+			processData: false,
+			contentType: false,
+			success: function (data) {
+				if (data.Status == "success") {
+					form[0].reset();
+					LoadCommentList();
+				} else {
+					ModalAlert(GetTranslation("error"), data.Error);
+				}
+			}
+		});
+	}
+
+	function ValidateReceiptUpdateErrors(isStatusChange){
+		var form = $('#receipt-save-form');
+		var formData = new FormData(form[0]);
+
+		$.ajax({
+			url: '<TMPL_VAR NAME='MODULE_PATH'>ajax.php?<TMPL_VAR NAME='ParamsForURL'>&Action=ValidateReceiptUpdateErrors',
+			type: 'POST',
+			dataType: 'JSON',
+			data: formData,
+			processData: false,
+			contentType: false,
+			success: function(data){
+
+				for(var i = 0; i < MessageArray.length; i++)
+				{
+					HideMessage(MessageArray[i]);
+				}
+
+				if(data.Status == "error")
+				{
+					for(var i = 0; i < data.ErrorList.length; i++)
+					{
+						MessageArray.push(CreateStaticMessage(data.ErrorList[i]["Message"], 'error'));
+					}
+
+					if (data.Receipt.show_duplicate_receipt_photo) {
+						$('a.duplicated-receipt-photo-link').click(function(e){
+							$('#duplicated-receipt-photo-popup img').attr('src', $(this).attr('href'));
+							var zoom = document.getElementById("duplicated-zoom");
+							zoom.style.backgroundImage = "url('"+$(this).attr('href')+"')";
+							$('#duplicated-receipt-photo-popup').show();
+							e.preventDefault();
+						});
+						$(document).on('click','#duplicated-receipt-photo-popup',function(e){
+							$('#duplicated-receipt-photo-popup').hide();
+						});
+					}
+
+					if(!isStatusChange) {
+						if(data.Receipt.hasOwnProperty("proposed_denial_reason")) {
+							SetDenialReasons(data.Receipt["proposed_denial_reason"]);
+							$('#ReceiptStatusSelect').val("denied");
+						}
+						else if(data.Receipt.hasOwnProperty("denial_reason")) {
+							SetDenialReasons(data.Receipt["denial_reason"]);
+						}
+						else {
+							SetDenialReasons("");
+							$('#ReceiptStatusSelect').val(prevSelectedStatus);
+						}
+					}
+				}
+			}
+		});
+		return MessageArray;
+	}
+
+	function SetDenialReasons(reasons) {
+
+		$('input[name="denial_reason"]').val(reasons);
+
+		if(reasons != '') {
+			$('#reasons').html("<TMPL_VAR NAME='LNG_Reason'>" + ' ' + reasons + ';');
+			$('#reasons').removeClass('hidden');
+		}
+		else {
+			$('#reasons').html("");
+			$('#reasons').addClass('hidden');
+		}
+	}
+
+	function UpdateOptionsTable() {
+		var groupID = "<TMPL_VAR NAME='group_id'>";
+		var receiptID = "<TMPL_VAR NAME='receipt_id'>";
+		var employeeID = "<TMPL_VAR NAME='EMPLOYEE_employee_id'>";
+		var statusUpdated = "<TMPL_VAR NAME='status_updated'>";
+		var date = $('[name="document_date"]').val();
+		var status = $('[name="status"]').val();
+		var save = "<TMPL_VAR NAME='Save'>";
+
+		$.ajax({
+			url: "<TMPL_VAR NAME='MODULE_PATH'>ajax.php",
+			type: 'GET',
+			dataType: 'JSON',
+			data:{
+				Action: 'GetOptionsTableHTML',
+				receipt_id: receiptID,
+				employee_id: employeeID,
+				document_date: date,
+				group_id: groupID,
+				status: status,
+				status_updated: statusUpdated,
+				save: save
+			},
+			success: function(data){
+				if(typeof data.HTML != 'undefined'){
+					$('#show-option-table').html(data.HTML);
+				}
+			}
+		});
+	}
+
+	/*<TMPL_IF NAME="receipt_id">*/
+		$('.property-history').click(function(e){
+			var propertyName = $(this).attr('property_name');
+			var receiptID = "<TMPL_VAR NAME='receipt_id'>";
+			var employeeID = "<TMPL_VAR NAME='EMPLOYEE_employee_id'>";
+			var propertyNameTranslation = $("label[for='" + propertyName + "']").text();
+			if (propertyNameTranslation.length === 0) {
+				var id = $(this).next("[name="+propertyName).attr('id');
+				propertyNameTranslation = $("label[for='" + id + "']").text();
+			}
+
+			$.ajax({
+				url: "<TMPL_VAR NAME='MODULE_PATH'>ajax.php",
+				type: 'GET',
+				dataType: 'JSON',
+				data:{
+					Action: 'GetPropertyHistoryReceiptHTML',
+					property_name: propertyName,
+					receipt_id: receiptID,
+					employee_id: employeeID,
+					property_name_translation: propertyNameTranslation
+				},
+				success: function(data){
+					if(typeof data.HTML != 'undefined'){
+						$(data.HTML).modal('show').on('hidden.bs.modal', function () {
+							$(this).remove();
+						});
+					}
+				}
+			});
+
+			e.preventDefault();
+		});
+	/*</TMPL_IF>*/
+
+	$('.signature-log').click(function(e){
+			var receiptFileID = $(this).attr('receipt_file_id');
+
+			$.ajax({
+				url: "<TMPL_VAR NAME='MODULE_PATH'>ajax.php",
+				type: 'GET',
+				dataType: 'JSON',
+				data:{
+					Action: 'GetReceiptFileSignatureLogHTML',
+					receipt_file_id: receiptFileID
+				},
+				success: function(data){
+					if(typeof data.HTML != 'undefined'){
+						$(data.HTML).modal('show').on('hidden.bs.modal', function () {
+							$(this).remove();
+						});
+					}
+				}
+			});
+
+			e.preventDefault();
+	});
+
+	var prevStatus = "<TMPL_VAR NAME='status'>";
+	var prevSelectedStatus = "<TMPL_VAR NAME='status'>";
+	var receiptDenialReason = "<TMPL_IF NAME='denial_reason'><TMPL_VAR NAME='LNG_Reason'> <TMPL_VAR NAME='denial_reason'>;</TMPL_IF>";
+	$('#ReceiptStatusSelect').on('change', function(){
+		prevSelectedStatus = $(this).val()
+		if($(this).val() == 'denied') {
+			if((prevStatus != 'denied'))
+				$('#choose-denial-reason-link').removeClass('hidden');
+			SetDenialReasons(receiptDenialReason);
+			$('#reasons').removeClass('hidden');
+			if(receiptDenialReason == ''){
+				$('.reason:checked').each(function(){
+					reasons = $(this).parent().removeClass('checked');
+				});
+			}
+		}
+		else {
+			$('#choose-denial-reason-link').addClass('hidden');
+			$('#reasons').addClass('hidden');
+		}
+	});
+
+	$('#choose-denial-reason-btn').on('click', function(){
+			var reasons = '';
+			$('.reason:checked').each(function(){
+				if(reasons == '')
+					reasons = $(this).val();
+				else
+					reasons = reasons + ', ' + $(this).val();
+			});
+
+			SetDenialReasons(reasons);
+
+			$(this).closest('.modal').modal('hide');
+	});
+
+	// enable zoom on mouseover
+	$(document).on('mouseover', '#receipt-photo-popup', function() {
+		var pre = document.getElementById("zoom");
+		pre.style.display = "block";
+	});
+	$(document).on('mouseover', '#duplicated-receipt-photo-popup', function() {
+		var pre = document.getElementById("duplicated-zoom");
+		pre.style.display = "block";
+	});
+
+	// disable zoom on mouseout
+	$(document).on('mouseout', '#receipt-photo-popup', function() {
+		var pre = document.getElementById("zoom");
+		pre.style.display = "none";
+	});
+	$(document).on('mouseout', '#duplicated-receipt-photo-popup', function() {
+		var pre = document.getElementById("duplicated-zoom");
+		pre.style.display = "none";
+	});
+
+	function zoomInPreview(event, zoomId = "zoom") {
+		//original image
+		var imgSource = event.target.style.backgroundImage;
+		imgSource = imgSource.replace("url(\"", "");
+		imgSource = imgSource.replace("\")", "");
+
+		//original image size
+		var width, height;
+		width = $("#" + zoomId).attr("data-width");
+		height = $("#" + zoomId).attr("data-height");
+
+		var zoom = document.getElementById(zoomId);
+
+		//fix for safari
+		if (width == 0 || height == 0)
+		{
+			$("<img/>") // Make in memory copy of image to avoid css issues
+				.attr("src", imgSource)
+				.load(function() {
+					$("#" + zoomId).attr("data-width", this.width);
+					$("#" + zoomId).attr("data-height", this.height);
+					width = $("#" + zoomId).attr("data-width");
+					height = $("#" + zoomId).attr("data-height");
+				});
+		}
+
+		var popup = document.getElementById(zoomId).parentNode;
+
+		//container size
+		var preWidth = popup.offsetWidth,
+			preHeight = popup.offsetHeight;
+
+		var cx, cy, x, y, lensWidth, lensHeight;
+		lensWidth = preWidth /  (width / preWidth);
+		lensHeight = preHeight / (height / preHeight);
+
+		cx = popup.offsetWidth / lensWidth;
+		cy = popup.offsetHeight / lensHeight;
+
+		x = event.offsetX;
+		y = event.offsetY;
+
+		if (x > popup.offsetWidth - lensWidth) {x = popup.offsetWidth - lensWidth;}
+		if (x < 0) {x = 0;}
+		if (y > popup.offsetHeight - lensHeight) {y = popup.offsetHeight - lensHeight;}
+		if (y < 0) {y = 0;}
+
+		zoom.style.backgroundPosition = "-" + (x * cx) + "px -" + (y * cy) + "px";
+	}
+</script>

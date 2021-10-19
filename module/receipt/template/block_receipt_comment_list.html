@@ -1,0 +1,47 @@
+<TMPL_IF NAME='ReceiptCommentList'>
+	<TMPL_LOOP NAME='ReceiptCommentList'>
+		<div class="uprofile_wall_posts col-md-12 col-sm-12 col-xs-12">
+			<div class="pic-wrapper col-md-1 col-sm-1 col-xs-2 text-center">
+				<TMPL_IF NAME='user_image'>
+					<img src="<TMPL_VAR NAME='user_image_admin_path'>" class="" alt="">
+				</TMPL_IF>
+			</div>
+			<div class="info-wrapper col-md-11 col-sm-11 col-xs-10">
+				<div class="row">
+					<div class="col-xs-8">
+						<div class="username">
+							<span class="bold"><TMPL_VAR NAME='first_name'> <TMPL_VAR NAME='last_name'></span> <TMPL_IF NAME='is_owner_comment' VALUE='N'>(<TMPL_VAR NAME='LNG_CommentListAdministrator'>)</TMPL_IF>
+						</div>
+						<div class="info text-muted">
+							<TMPL_VAR NAME='content' ESCAPE='nl2br'>
+						</div>
+						<div class="info-details">
+							<ul class="list-unstyled list-inline">
+								<li><span class="text-muted" title="<TMPL_VAR NAME='created' FORMAT='datetime'>"><TMPL_VAR NAME='created_ago'></span></li>
+							</ul>
+						</div>
+						<div class="clearfix"></div>
+					</div>
+					<div class="col-xs-4 text-right">
+						<TMPL_IF NAME='comment_file'>
+							<TMPL_IF NAME='is_comment_file_image' VALUE='Y'>
+								<a href="<TMPL_VAR NAME='comment_file_full_path'>" target="_blank">
+									<img src="<TMPL_VAR NAME='comment_file_admin_path'>" />
+								</a>
+							<TMPL_ELSE>
+								<div>
+									<a href="<TMPL_VAR NAME='comment_file_download_path'>" target="_blank"><TMPL_VAR NAME='comment_file'></a>
+								</div>
+							</TMPL_IF>
+						</TMPL_IF>
+					</div>
+				</div>
+			</div>	
+			<div class="clearfix"></div>
+		</div>
+	</TMPL_LOOP>
+<TMPL_ELSE>
+	<div class="col-md-12">
+		<div class="alert alert-success"><TMPL_VAR NAME='LNG_Empty'></div>
+	</div>
+</TMPL_IF>

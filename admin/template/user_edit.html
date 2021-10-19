@@ -1,0 +1,609 @@
+<div class="row">
+	<TMPL_IF NAME='ErrorList'>
+		<div class="alert alert-error alert-no-margin"><TMPL_LOOP NAME='ErrorList'><TMPL_VAR NAME='Message'><TMPL_UNLESS NAME='__LAST__'><br /></TMPL_UNLESS></TMPL_LOOP></div>
+	</TMPL_IF>
+	<TMPL_IF NAME='MessageList'>
+		<div class="alert alert-success alert-no-margin"><TMPL_LOOP NAME='MessageList'><TMPL_VAR NAME='Message'><TMPL_UNLESS NAME='__LAST__'><br /></TMPL_UNLESS></TMPL_LOOP></div>
+	</TMPL_IF>
+</div>
+<div class="row">
+	<section class="box no-margin">
+		<header class="panel_header" for="header_user_edit" table="core">
+			<TMPL_IF NAME='user_id'>
+				<h2 class="title"><TMPL_VAR NAME='LNG_EditUser'></h2>
+			<TMPL_ELSE>
+				<h2 class="title"><TMPL_VAR NAME='LNG_AddUser'></h2>
+			</TMPL_IF>
+		</header>
+		<div class="content-body padding-3">
+			<form action="<TMPL_VAR NAME='ADMIN_PATH'>user.php" method="post" class="nform" enctype="multipart/form-data" id="form-user-edit" data-validation="true" autocomplete="off">
+				<div class="col-md-6 padding-3">
+					<section class="box">
+						<header class="panel_header" for="header_user_edit_personal" table="core">
+							<h2 class="title"><TMPL_VAR NAME='LNG_FieldsetPersonal'></h2>
+						</header>
+						<div class="content-body">
+                            <div class="form-group">
+								<TMPL_LOOP NAME="ArchiveMessage">
+									<TMPL_VAR NAME="Message"/>
+									<TMPL_UNLESS NAME="__LAST__"><br></TMPL_UNLESS>
+								</TMPL_LOOP>
+                            </div>
+							<div class="row">
+								<div class="col-md-6">
+									<div class="form-group" id="user_image-box"></div>
+									<script type="text/javascript">
+										$(document).ready(function(){
+											params = new Array();
+											<TMPL_LOOP NAME='UserImageParamList'>
+												params.push({
+													"Name" : "<TMPL_VAR NAME='SourceName'>",
+													"Width" : "<TMPL_VAR NAME='Width'>",
+													"Height" : "<TMPL_VAR NAME='Height'>",
+													"Resize" : "<TMPL_VAR NAME='Resize'>",
+													"X1" : "<TMPL_VAR NAME='X1'>",
+													"X2" : "<TMPL_VAR NAME='X2'>",
+													"Y1" : "<TMPL_VAR NAME='Y1'>",
+													"Y2" : "<TMPL_VAR NAME='Y2'>"
+												});
+											</TMPL_LOOP>
+											CreateImageInput('user_image', '<TMPL_VAR NAME='user_image_admin_path'>', '<TMPL_VAR NAME='user_image_full_path'>', '<TMPL_VAR NAME='user_image'>', '<TMPL_VAR NAME='user_id'>', 'RemoveUserImage', '<TMPL_VAR NAME='ADMIN_PATH'>ajax.php', 0, params);
+										});
+									</script>
+								</div>
+								<div class="col-md-6">
+									<div class="form-group">
+										<label for="salutation" table="user_info"><TMPL_VAR NAME='LNG_Salutation'></label>
+										<TMPL_IF NAME="user_id">
+											<TMPL_IF NAME='HistoryAdmin'>
+												(<a href="#" class="property-history" property_name="salutation"><TMPL_VAR NAME='LNG_RevisionHistory'></a>)
+											</TMPL_IF>
+										</TMPL_IF>
+										<br />
+										<select class="form-control" name="salutation">
+											<option value="Herr" <TMPL_IF NAME='salutation' VALUE='Herr'>selected</TMPL_IF>><TMPL_VAR NAME='LNG_SalutationMr'></option>
+											<option value="Frau" <TMPL_IF NAME='salutation' VALUE='Frau'>selected</TMPL_IF>><TMPL_VAR NAME='LNG_SalutationMs'></option>
+										</select>
+									</div>
+									<div class="form-group">
+										<label class="required" for="first_name" table="user_info"><TMPL_VAR NAME='LNG_FirstName'></label>
+										<TMPL_IF NAME="user_id">
+											<TMPL_IF NAME='HistoryAdmin'>
+												(<a href="#" class="property-history" property_name="first_name"><TMPL_VAR NAME='LNG_RevisionHistory'></a>)
+											</TMPL_IF>
+										</TMPL_IF>
+										<br />
+										<input <TMPL_UNLESS NAME='CloudAdmin'>disabled</TMPL_UNLESS> class="form-control" type="text" name="first_name" id="first_name" value="<TMPL_VAR NAME='first_name'>" />
+									</div>
+									<div class="form-group">
+										<label class="required" for="last_name" table="user_info"><TMPL_VAR NAME='LNG_LastName'></label>
+										<TMPL_IF NAME="user_id">
+											<TMPL_IF NAME='HistoryAdmin'>
+												(<a href="#" class="property-history" property_name="last_name"><TMPL_VAR NAME='LNG_RevisionHistory'></a>)
+											</TMPL_IF>
+										</TMPL_IF>
+										<br />
+										<input <TMPL_UNLESS NAME='CloudAdmin'>disabled</TMPL_UNLESS> class="form-control" type="text" name="last_name" id="last_name" value="<TMPL_VAR NAME='last_name'>" />
+									</div>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="form-label" for="birthday" table="user_info"><TMPL_VAR NAME='LNG_Birthday'></label>
+								<TMPL_IF NAME="user_id">
+									<TMPL_IF NAME='HistoryAdmin'>
+										(<a href="#" class="property-history" property_name="birthday"><TMPL_VAR NAME='LNG_RevisionHistory'></a>)
+									</TMPL_IF>
+								</TMPL_IF>
+								<br />
+								<input <TMPL_UNLESS NAME='CloudAdmin'>disabled</TMPL_UNLESS> class="form-control datepicker" type="text" name="birthday" id="birthday" value="<TMPL_VAR NAME='birthday' FORMAT='datepicker'>" />
+							</div>
+							<div class="row">
+								<div class="col-md-6">
+									<div class="form-group">
+										<label for="street" table="user_info"><TMPL_VAR NAME='LNG_Street'></label>
+										<TMPL_IF NAME="user_id">
+											<TMPL_IF NAME='HistoryAdmin'>
+												(<a href="#" class="property-history" property_name="street"><TMPL_VAR NAME='LNG_RevisionHistory'></a>)
+											</TMPL_IF>
+										</TMPL_IF>
+										<br />
+										<input <TMPL_UNLESS NAME='CloudAdmin'>disabled</TMPL_UNLESS> class="form-control" type="text" name="street" id="street" value="<TMPL_VAR NAME='street'>" />
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div class="form-group">
+										<label for="house" table="user_info"><TMPL_VAR NAME='LNG_House'></label>
+										<TMPL_IF NAME="user_id">
+											<TMPL_IF NAME='HistoryAdmin'>
+												(<a href="#" class="property-history" property_name="house"><TMPL_VAR NAME='LNG_RevisionHistory'></a>)
+											</TMPL_IF>
+										</TMPL_IF>
+										<br />
+										<input <TMPL_UNLESS NAME='CloudAdmin'>disabled</TMPL_UNLESS> class="form-control" type="text" name="house" id="house" value="<TMPL_VAR NAME='house'>" />
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-6">
+									<div class="form-group">
+										<label for="zip_code" table="user_info"><TMPL_VAR NAME='LNG_ZipCode'></label>
+										<TMPL_IF NAME="user_id">
+											<TMPL_IF NAME='HistoryAdmin'>
+												(<a href="#" class="property-history" property_name="zip_code"><TMPL_VAR NAME='LNG_RevisionHistory'></a>)
+											</TMPL_IF>
+										</TMPL_IF>
+										<br />
+										<input <TMPL_UNLESS NAME='CloudAdmin'>disabled</TMPL_UNLESS> class="form-control" type="text" name="zip_code" id="zip_code" value="<TMPL_VAR NAME='zip_code'>" />
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div class="form-group">
+										<label for="city" table="user_info"><TMPL_VAR NAME='LNG_City'></label>
+										<TMPL_IF NAME="user_id">
+											<TMPL_IF NAME='HistoryAdmin'>
+												(<a href="#" class="property-history" property_name="city"><TMPL_VAR NAME='LNG_RevisionHistory'></a>)
+											</TMPL_IF>
+										</TMPL_IF>
+										<br/>
+										<input <TMPL_UNLESS NAME='CloudAdmin'>disabled</TMPL_UNLESS> class="form-control" type="text" name="city" id="city" value="<TMPL_VAR NAME='city'>" />
+									</div>
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="country" table="user_info"><TMPL_VAR NAME='LNG_Country'></label>
+								<TMPL_IF NAME="user_id">
+									<TMPL_IF NAME='HistoryAdmin'>
+										(<a href="#" class="property-history" property_name="country"><TMPL_VAR NAME='LNG_RevisionHistory'></a>)
+									</TMPL_IF>
+								</TMPL_IF>
+								<br />
+								<input <TMPL_UNLESS NAME='CloudAdmin'>disabled</TMPL_UNLESS> class="form-control" type="text" name="country" id="country" value="<TMPL_VAR NAME='country'>" />
+							</div>
+							<div class="form-group">
+								<label for="phone" table="user_info"><TMPL_VAR NAME='LNG_Phone'></label>
+								<TMPL_IF NAME="user_id">
+									<TMPL_IF NAME='HistoryAdmin'>
+										(<a href="#" class="property-history" property_name="phone"><TMPL_VAR NAME='LNG_RevisionHistory'></a>)
+									</TMPL_IF>
+								</TMPL_IF>
+								<br />
+								<input <TMPL_UNLESS NAME='CloudAdmin'>disabled</TMPL_UNLESS> class="form-control" type="text" name="phone" id="phone" value="<TMPL_VAR NAME='phone'>" data-mask="phone" />
+							</div>
+							<div class="form-group">
+								<label for="belongs_to_company" table="user_info"><TMPL_VAR NAME='LNG_BelongsToCompany'></label>
+								<TMPL_IF NAME="user_id">
+									<TMPL_IF NAME='HistoryAdmin'>
+										(<a href="#" class="property-history" property_name="belongs_to_company"><TMPL_VAR NAME='LNG_RevisionHistory'></a>)
+									</TMPL_IF>
+								</TMPL_IF>
+								<br />
+								<input <TMPL_UNLESS NAME='CloudAdmin'>disabled</TMPL_UNLESS> class="form-control" type="text" name="belongs_to_company" id="belongs_to_company" value="<TMPL_VAR NAME='belongs_to_company'>"/>
+							</div>
+							<div class="form-group">
+								<label for="email" class="required" table="user_info"><TMPL_VAR NAME='LNG_Email'></label>
+								<TMPL_IF NAME="user_id">
+									<TMPL_IF NAME='HistoryAdmin'>
+										(<a href="#" class="property-history" property_name="email"><TMPL_VAR NAME='LNG_RevisionHistory'></a>)
+									</TMPL_IF>
+								</TMPL_IF>
+								<br />
+								<input <TMPL_UNLESS NAME='CloudAdmin'>disabled</TMPL_UNLESS> class="form-control" type="text" name="email" id="email" value="<TMPL_VAR NAME='email'>" data-validation-type="email" />
+							</div>
+							<TMPL_IF NAME='MyProfile'>
+							<div class="form-group" <TMPL_UNLESS NAME='CloudAdmin'>style="display:none;"</TMPL_UNLESS>>
+								<label for="OldPassword" table="user_info"><TMPL_VAR NAME='LNG_OldPassword'></label>
+								<TMPL_IF NAME='HistoryAdmin'>
+									(<a href="#" class="property-history" property_name="password"><TMPL_VAR NAME="LNG_RevisionHistory"/></a>)
+								</TMPL_IF>
+								<br />
+								<input class="form-control" type="password" name="OldPassword" id="OldPassword" />
+							</div>
+							</TMPL_IF>
+							<div class="form-group" <TMPL_UNLESS NAME='CloudAdmin'>style="display:none;"</TMPL_UNLESS>>
+								<label for="password1" table="user_info"<TMPL_UNLESS NAME='user_id'> class="required"</TMPL_UNLESS>><TMPL_VAR NAME='LNG_NewPassword'/></label>
+								<TMPL_IF NAME="user_id">
+									<TMPL_IF NAME='HistoryAdmin'>
+										(<a href="#" class="property-history" property_name="password1"><TMPL_VAR NAME="LNG_RevisionHistory"/></a>)
+									</TMPL_IF>
+								</TMPL_IF>
+								<br />
+								<!--<small><TMPL_VAR NAME="LNG_PasswordRequirements"></small>-->
+								<input class="form-control" type="password" name="password1" id="password1" />
+							</div>
+							<div class="form-group" <TMPL_UNLESS NAME='CloudAdmin'>style="display:none;"</TMPL_UNLESS>>
+								<label for="password2" table="user_info"<TMPL_UNLESS NAME='user_id'> class="required"</TMPL_UNLESS>><TMPL_VAR NAME='LNG_RepeatPassword'/></label><br />
+								<input class="form-control" type="password" name="password2" id="password2" />
+							</div>
+							<TMPL_IF NAME='MyProfile'>
+								<TMPL_IF NAME='InterfaceLanguageList'>
+									<div class="form-group">
+										<label for="InterfaceLanguage" class="required" table="user_info"><TMPL_VAR NAME='LNG_InterfaceLanguage'></label><br />
+										<select name="InterfaceLanguage" id="InterfaceLanguage" class="form-control">
+											<TMPL_LOOP NAME='InterfaceLanguageList'>
+												<option value="<TMPL_VAR NAME='Folder'>"<TMPL_IF NAME='Selected'> selected="selected"</TMPL_IF>><TMPL_VAR NAME='NativeName'></option>
+											</TMPL_LOOP>
+										</select>
+									</div>
+								</TMPL_IF>
+							</TMPL_IF>
+						</div>
+					</section>
+				</div>
+				<div class="col-md-6 padding-3">
+					<section class="box">
+						<header class="panel_header" for="header_user_edit_permissions" table="core">
+							<h2 class="title"><TMPL_VAR NAME='LNG_FieldsetPermissions'/></h2>
+							<TMPL_IF NAME="user_id">
+								<TMPL_IF NAME='HistoryAdmin'>
+									<div class="actions panel_actions pull-right">
+									<a href="#" class="permission-history" property_name="permission"><TMPL_VAR NAME='LNG_RevisionHistory'/></a>
+									</div>
+								</TMPL_IF>
+							</TMPL_IF>
+						</header>
+						<div class="content-body">
+							<table class="table table-borderless">
+								<TMPL_LOOP NAME='AvailablePermissionList'>
+									<tr>
+										<td class="col-md-12">
+											<h3><TMPL_VAR NAME='title_translation'></h3>
+										</td>
+									</tr>
+									<TMPL_LOOP NAME='permissions'>
+										<TMPL_IF NAME='CloudAdmin'>
+											<tr permission-id="<TMPL_VAR NAME='permission_id'>">
+												<td class="col-md-12">
+													<input type="checkbox" class="icheck-minimal-green" name="PermissionIDs[]" value="<TMPL_VAR NAME='permission_id'>"<TMPL_IF NAME='checked'> checked="checked"</TMPL_IF> /> <TMPL_VAR NAME='title_translation'>
+													<TMPL_IF NAME='link_to' VALUE='company_unit'>
+														<a href="#" class="btn btn-primary btn-sm left15 company-unit-add"><i class="fa fa-plus"></i></a>
+														<table class="table table-borderless table-striped company-unit-list">
+
+														</table>
+													<TMPL_ELSEIF NAME='link_to' VALUE='product_group'>
+														<a href="#" class="btn btn-primary btn-sm left15 product-group-add"><i class="fa fa-plus"></i></a>
+														<table class="table table-borderless table-striped product-group-list">
+
+														</table>
+													<TMPL_ELSEIF NAME='link_to' VALUE='partner'>
+														<a href="#" class="btn btn-primary btn-sm left15 partner-add"><i class="fa fa-plus"></i></a>
+														<table class="table table-borderless table-striped partner-list">
+														</table>
+													</TMPL_IF>
+												</td>
+											</tr>
+										<TMPL_ELSE>
+											<TMPL_IF NAME='checked'>
+												<tr permission-id="<TMPL_VAR NAME='permission_id'>">
+													<td class="col-md-12">
+														<input type="checkbox" disabled class="icheck-minimal-green" name="PermissionIDs[]" value="<TMPL_VAR NAME='permission_id'>"<TMPL_IF NAME='checked'> checked="checked"</TMPL_IF> /> <TMPL_VAR NAME='title_translation'>
+														<TMPL_IF NAME='link_to' VALUE='company_unit'>
+															<table class="table table-borderless table-striped company-unit-list">
+															</table>
+														<TMPL_ELSEIF NAME='link_to' VALUE='product_group'>
+															<table class="table table-borderless table-striped product-group-list">
+															</table>
+														<TMPL_ELSEIF NAME='link_to' VALUE='partner'>
+															<table class="table table-borderless table-striped partner-list">
+															</table>
+														</TMPL_IF>
+													</td>
+												</tr>
+											</TMPL_IF>
+										</TMPL_IF>
+									</TMPL_LOOP>
+								</TMPL_LOOP>
+							</table>
+						</div>
+					</section>
+				</div>
+
+				<div class="clearfix"></div>
+
+				<div>
+					<button type="submit" class="btn btn-primary btn-icon left15 right15"><i class="fa fa-save"></i><TMPL_VAR NAME='LNG_Save'></button>
+					<a class="btn btn-icon" onclick="javascript:history.back(); return false;"><i class="fa fa-ban"></i><TMPL_VAR NAME='LNG_Cancel'></a>
+				</div>
+				<TMPL_VAR NAME='ParamsForForm' ESCAPE='none'>
+				<input type="hidden" name="user_id" value="<TMPL_VAR NAME='user_id'>" />
+				<input type="hidden" name="Do" value="Save" />
+			</form>
+		</div>
+	</section>
+</div>
+<script type="text/javascript">
+	var cloudAdmin = "<TMPL_VAR NAME='CloudAdmin'>";
+	var companyUnitList = [];
+	<TMPL_LOOP NAME='CompanyUnitList'>
+		companyUnitList.push({'company_unit_id': '<TMPL_VAR NAME='company_unit_id' ESCAPE='js'>', 'parent_unit_id': '<TMPL_VAR NAME='parent_unit_id' ESCAPE='js'>', 'title': '<TMPL_VAR NAME='title' ESCAPE='js'>'});
+	</TMPL_LOOP>
+
+	var productGroupList = [];
+	<TMPL_LOOP NAME='ProductGroupList'>
+		productGroupList.push({'group_id': '<TMPL_VAR NAME='group_id' ESCAPE='js'>', 'title': '<TMPL_VAR NAME='title_translation' ESCAPE='js'>'});
+	</TMPL_LOOP>
+
+	var partnerList = [];
+	<TMPL_LOOP NAME='PartnerList'>
+			partnerList.push({'partner_id': '<TMPL_VAR NAME='partner_id' ESCAPE='js'>', 'title': '<TMPL_VAR NAME='title' ESCAPE='js'>'});
+	</TMPL_LOOP>
+
+	$('.company-unit-add').click(function(e){
+		AddCompanyUnit($(this).closest('tr').attr('permission-id'));
+		e.preventDefault();
+	});
+
+	$('.product-group-add').click(function(e){
+		AddProductGroup($(this).closest('tr').attr('permission-id'));
+		e.preventDefault();
+	});
+
+	$('.partner-add').click(function(e){
+		AddPartner($(this).closest('tr').attr('permission-id'));
+		e.preventDefault();
+	});
+
+	function AddCompanyUnit(permissionID, company_unit_id){
+        var tr;
+	    if (cloudAdmin != 1)
+			tr = $('<tr><td></td></tr>');
+        else
+            tr = $('<tr><td></td><td width="30"><a href="#" class="company-unit-remove"><i class="fa fa-close"></i></a></td></tr>');
+		$('tr[permission-id="'+permissionID+'"] .company-unit-list').append(tr);
+		if(company_unit_id){
+			//add selects from root to selected
+			var companyUnitPath = GetCompanyUnitPath(company_unit_id);
+			for(var i = 0; i < companyUnitPath.length; i++){
+				AddCompanySelect(tr.find('td:first'), companyUnitPath[i]['parent_unit_id'], companyUnitPath[i]['company_unit_id'], permissionID);
+				if(i == (companyUnitPath.length - 1)){
+					AddCompanySelect(tr.find('td:first'), companyUnitPath[i]['company_unit_id'], 0, permissionID);
+				}
+			}
+		}else{
+			AddCompanySelect(tr.find('td:first'), 0, 0, permissionID)
+		}
+	}
+
+	function AddProductGroup(permissionID, product_group_id){
+        var tr;
+        if (cloudAdmin != 1)
+            tr = $('<tr><td></td></tr>');
+        else
+			tr = $('<tr><td></td><td width="30"><a href="#" class="product-group-remove"><i class="fa fa-close"></i></a></td></tr>');
+		$('tr[permission-id="'+permissionID+'"] .product-group-list').append(tr);
+		if(product_group_id){
+			AddProductSelect(tr.find('td:first'), product_group_id, permissionID);
+		}else{
+			AddProductSelect(tr.find('td:first'), 0, permissionID)
+		}
+	}
+
+	function AddPartner(permissionID, partner_id) {
+		var tr;
+		if (cloudAdmin != 1)
+			tr = $('<tr><td></td></tr>');
+		else
+			tr = $('<tr><td></td><td width="30"><a href="#" class="partner-remove"><i class="fa fa-close"></i></a></td></tr>');
+		$('tr[permission-id="'+permissionID+'"] .partner-list').append(tr);
+		if(partner_id){
+			AddPartnerSelect(tr.find('td:first'), partner_id, permissionID);
+		}else{
+			AddPartnerSelect(tr.find('td:first'), 0, permissionID)
+		}
+	}
+
+	function GetCompanyUnitPath(companyUnitID){
+		var result = [];
+		for(var i = 0; i < companyUnitList.length; i++){
+			if(companyUnitList[i]['company_unit_id'] == companyUnitID){
+				if(companyUnitList[i]['parent_unit_id']){
+					result = result.concat(GetCompanyUnitPath(companyUnitList[i]['parent_unit_id']));
+				}
+				result.push(companyUnitList[i]);
+			}
+		}
+		return result;
+	}
+
+	function AddCompanySelect(td, parentUnitID, selectedCompanyUnitID, permissionID){
+		var select = GetCompanyUnitSelect(parentUnitID, selectedCompanyUnitID, permissionID);
+		if(select != null){
+			td.append(select);
+			select.select2({allowClear:true});
+            if (cloudAdmin != 1)
+            	select.select2("enable", false);
+		}
+	}
+
+	function AddProductSelect(td, selectedProductGroupID, permissionID){
+		var select = GetProductGroupSelect(selectedProductGroupID, permissionID);
+		if(select != null){
+			td.append(select);
+			select.select2({allowClear:true});
+            if (cloudAdmin != 1)
+                select.select2("enable", false);
+		}
+	}
+
+	function AddPartnerSelect(td, selectedPartnerID, permissionID){
+		var select = GetPartnerSelect(selectedPartnerID, permissionID);
+		if(select != null){
+			td.append(select);
+			select.select2({allowClear:true});
+			if (cloudAdmin != 1)
+				select.select2("enable", false);
+		}
+	}
+
+	function GetCompanyUnitSelect(parentUnitID, selectedCompanyUnitID, permissionID){
+		var select = $('<select name="PermissionLinkIDs['+permissionID+'][]" class="select2 company-unit-select" data-allow-clear="true"><option></option></select>');
+		for(var i = 0; i < companyUnitList.length; i++){
+			if(companyUnitList[i]['parent_unit_id'] == parentUnitID){
+				var option = $('<option value="'+companyUnitList[i]['company_unit_id']+'">'+companyUnitList[i]['title']+'</option>');
+				if(companyUnitList[i]['company_unit_id'] == selectedCompanyUnitID)
+					option.attr('selected', true);
+				select.append(option);
+			}
+		}
+
+		if(select.find('option').size() > 1)
+			return select;
+		else
+			return null;
+	}
+
+	function GetProductGroupSelect(selectedProductGroupID, permissionID){
+		var select = $('<select name="PermissionLinkIDs['+permissionID+'][]" class="select2 product-group-select" data-allow-clear="true"><option></option></select>');
+		for(var i = 0; i < productGroupList.length; i++){
+			var option = $('<option value="'+productGroupList[i]['group_id']+'">'+productGroupList[i]['title']+'</option>');
+			if(productGroupList[i]['group_id'] == selectedProductGroupID)
+				option.attr('selected', true);
+			select.append(option);
+		}
+		if(select.find('option').size() > 1)
+			return select;
+		else
+			return null;
+	}
+
+	function GetPartnerSelect(selectedPartnerID, permissionID){
+		var select = $('<select name="PermissionLinkIDs['+permissionID+'][]" class="select2 partner-select" data-allow-clear="true"><option></option></select>');
+		for(var i = 0; i < partnerList.length; i++){
+			var option = $('<option value="'+partnerList[i]['partner_id']+'">'+partnerList[i]['title']+'</option>');
+			if(partnerList[i]['partner_id'] == selectedPartnerID)
+				option.attr('selected', true);
+			select.append(option);
+		}
+		if(select.find('option').size() > 1)
+			return select;
+		else
+			return null;
+	}
+
+	$(document).on('change', '.company-unit-select', function(){
+		$(this).nextAll().remove();
+		if($(this).val() > 0){
+			var permissionID = $(this).closest('tr[permission-id]').attr('permission-id');
+			AddCompanySelect($(this).closest('td'), $(this).val(), 0, permissionID);
+			$(this).prev('.company-unit-select').prev('.company-unit-select').prop('disabled', true);
+		} else {
+			$(this).prev('.company-unit-select').prev('.company-unit-select').prop('disabled', false);
+		}
+	});
+
+	$(document).on('click', '.company-unit-remove', function(e){
+		$(this).closest('tr').remove();
+		e.preventDefault();
+	});
+
+	$(document).on('click', '.product-group-remove', function(e){
+		$(this).closest('tr').remove();
+		e.preventDefault();
+	});
+
+	$(document).on('click', '.partner-remove', function(e){
+		$(this).closest('tr').remove();
+		e.preventDefault();
+	});
+
+	$(document).ready(function(){
+		var companyTitles = [];
+        <TMPL_LOOP NAME='CompanyUnitList'>
+        	<TMPL_UNLESS NAME='parent_unit_id'>
+        		companyTitles.push('<TMPL_VAR NAME='title' ESCAPE='js'>');
+        	</TMPL_UNLESS>
+        </TMPL_LOOP>
+
+        $('input[name=belongs_to_company]').typeahead({
+            hint: true,
+            highlight: true,
+            minLength: 0
+        }, {
+            //name: 'states',
+            displayKey: 'value',
+            source: typeaheadSubstringMatcher(companyTitles)
+        });
+
+        $(document).on('click', 'input[name=belongs_to_company]', function(){
+        	ev = $.Event("keydown");
+        	ev.keyCode = ev.which = 40;
+        	$(this).trigger(ev);
+        	return true;
+        });
+
+        $('.company-unit-select').each(function(i,elem) {
+			if($(this).val() > 0){
+				$(this).prev('.company-unit-select').prev('.company-unit-select').prop('disabled', true);
+			}
+		});
+	});
+
+	"<TMPL_LOOP NAME='AvailablePermissionList'>"
+		"<TMPL_LOOP NAME='permissions'>"
+			"<TMPL_IF NAME='link_to' VALUE='company_unit'>"
+				"<TMPL_LOOP NAME='LinkIDList'>"
+					AddCompanyUnit('<TMPL_VAR NAME='permissions.permission_id' ESCAPE='js'>', '<TMPL_VAR NAME='link_id' ESCAPE='js'>');
+				"</TMPL_LOOP>"
+			"<TMPL_ELSEIF NAME='link_to' VALUE='product_group'>"
+				"<TMPL_LOOP NAME='LinkIDList'>"
+					AddProductGroup('<TMPL_VAR NAME='permissions.permission_id' ESCAPE='js'>', '<TMPL_VAR NAME='link_id' ESCAPE='js'>');
+				"</TMPL_LOOP>"
+				"<TMPL_ELSEIF NAME='link_to' VALUE='partner'>"
+					"<TMPL_LOOP NAME='LinkIDList'>"
+					AddPartner('<TMPL_VAR NAME='permissions.permission_id' ESCAPE='js'>', '<TMPL_VAR NAME='link_id' ESCAPE='js'>');
+					"</TMPL_LOOP>"
+			"</TMPL_IF>"
+		"</TMPL_LOOP>"
+	"</TMPL_LOOP>"
+
+    /*<TMPL_IF NAME="user_id">*/
+        $('.property-history').click(function(e){
+            var propertyName = $(this).attr('property_name');
+            var userID = "<TMPL_VAR NAME='user_id'>";
+			var propertyNameTranslation = $("label[for='" + propertyName + "']").text();
+
+            $.ajax({
+                url: "<TMPL_VAR NAME='ADMIN_PATH'>ajax.php",
+                type: 'GET',
+                dataType: 'JSON',
+                data:{
+                    Action: 'GetPropertyHistoryUserHTML',
+                    property_name: propertyName,
+                    user_id: userID,
+					property_name_translation: propertyNameTranslation
+                },
+                success: function(data){
+                    if(typeof data.HTML != 'undefined'){
+                        $(data.HTML).modal('show').on('hidden.bs.modal', function () {
+                            $(this).remove();
+                        });
+                    }
+                }
+            });
+
+            e.preventDefault();
+        });
+    $('.permission-history').click(function(e){
+        var userID = "<TMPL_VAR NAME='user_id'>";
+
+        $.ajax({
+            url: "<TMPL_VAR NAME='ADMIN_PATH'>ajax.php",
+            type: 'GET',
+            dataType: 'JSON',
+            data:{
+                Action: 'GetPermissionHistoryUserHTML',
+                user_id: userID
+            },
+            success: function(data){
+                if(typeof data.HTML != 'undefined'){
+                    $(data.HTML).modal('show').on('hidden.bs.modal', function () {
+                        $(this).remove();
+                    });
+                }
+            }
+        });
+
+        e.preventDefault();
+    });
+    /*</TMPL_IF>*/
+
+</script>

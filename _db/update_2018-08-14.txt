@@ -1,0 +1,30 @@
+--lst_main
+DROP TABLE "public"."operation";
+DROP TABLE "public"."company_unit_history";
+DROP TABLE "public"."employee_contract";
+DROP TABLE "public"."company_unit_contract";
+
+--lst_personal
+DROP TABLE "public"."employee_history";
+
+--lst_history
+CREATE DATABASE "lst_control" WITH TEMPLATE="template1" ENCODING='UTF8' LC_COLLATE='Russian_Russia.1251' LC_CTYPE='Russian_Russia.1251';
+CREATE SEQUENCE "public"."operation_OperationID_seq" INCREMENT 1;
+CREATE TABLE "public"."operation" ("operation_id" integer NOT NULL DEFAULT nextval('"operation_OperationID_seq"'::regclass), "date" timestamp without time zone NOT NULL, "user_id" integer NOT NULL, "ip" character varying(255) NOT NULL, "link" character varying(255) NOT NULL, "section" character varying(255) NOT NULL, "code" character varying(255) NOT NULL, "object_id" integer) WITH OIDS;
+CREATE TABLE "public"."employee_history" ("value_id" integer NOT NULL, "employee_id" integer NOT NULL, "property_name" character varying(255) NOT NULL, "value" character varying(255) NOT NULL, "created" timestamp without time zone NOT NULL, "user_id" integer NOT NULL) WITH OIDS;
+CREATE SEQUENCE "public"."employee_history_EmployeeID_seq" INCREMENT 1;
+ALTER TABLE "public"."employee_history" ALTER COLUMN "value_id" SET DEFAULT nextval('"employee_history_EmployeeID_seq"'::regclass);
+CREATE SEQUENCE "public"."company_history_CompanyUnitID_seq" INCREMENT 1;
+CREATE TABLE "public"."company_unit_history" ("value_id" integer NOT NULL DEFAULT nextval('"company_history_CompanyUnitID_seq"'::regclass), "company_unit_id" integer NOT NULL, "property_name" character varying(255) NOT NULL, "value" character varying(255) NOT NULL, "created" timestamp without time zone NOT NULL, "user_id" integer NOT NULL) WITH OIDS;
+CREATE SEQUENCE "public"."option_value_history_ValueID_seq" INCREMENT 1;
+CREATE TABLE "public"."option_value_history" ("value_id" integer NOT NULL DEFAULT nextval('"option_value_history_ValueID_seq"'::regclass), "level" character varying(255) NOT NULL, "entity_id" integer, "option_id" integer NOT NULL, "value" character varying(255) NOT NULL, "created" timestamp without time zone NOT NULL, "user_id" integer NOT NULL) WITH OIDS;
+CREATE TABLE "public"."employee_contract" ("contract_id" integer, "employee_id" integer NOT NULL, "product_id" integer NOT NULL, "created" timestamp without time zone NOT NULL, "start_date" date NOT NULL, "end_date" date, PRIMARY KEY ("contract_id")) WITH OIDS;
+CREATE SEQUENCE "public"."employee_contract_ContractID_seq" INCREMENT 1;
+ALTER TABLE "public"."employee_contract" ALTER COLUMN "contract_id" SET DEFAULT nextval('"employee_contract_ContractID_seq"'::regclass);
+ALTER TABLE "public"."employee_contract" ADD COLUMN "start_user_id" integer NOT NULL DEFAULT 0;
+ALTER TABLE "public"."employee_contract" ADD COLUMN "end_user_id" integer;
+CREATE TABLE "public"."company_unit_contract" ("contract_id" integer, "company_unit_id" integer NOT NULL, "product_id" integer NOT NULL, "created" timestamp without time zone NOT NULL, "start_date" date NOT NULL, "end_date" date, PRIMARY KEY ("contract_id")) WITH OIDS;
+CREATE SEQUENCE "public"."company_contract_ContractID_seq" INCREMENT 1;
+ALTER TABLE "public"."company_unit_contract" ALTER COLUMN "contract_id" SET DEFAULT nextval('"company_contract_ContractID_seq"'::regclass);
+ALTER TABLE "public"."company_unit_contract" ADD COLUMN "start_user_id" integer NOT NULL DEFAULT 0;
+ALTER TABLE "public"."company_unit_contract" ADD COLUMN "end_user_id" integer;

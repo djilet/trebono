@@ -1,0 +1,78 @@
+<TMPL_IF NAME='ReceiptLineList'>
+	<table class="table">
+		<thead>
+			<tr>
+				<th><TMPL_VAR NAME='LNG_LineSKU'></th>
+				<th><TMPL_VAR NAME='LNG_LineTitle'></th>
+				<th><TMPL_VAR NAME='LNG_LinePrice'></th>
+				<th><TMPL_VAR NAME='LNG_LineQuantity'></th>
+				<th><TMPL_VAR NAME='LNG_LineCost'></th>
+				<th><TMPL_VAR NAME='LNG_VAT'></th>
+				<th></th>
+				<th></th>
+				<th></th>
+			</tr>
+		</thead>
+		<tbody>
+			<TMPL_LOOP NAME='ReceiptLineList'>
+				<tr <TMPL_IF NAME='approvable' VALUE='Y'>class="success"<TMPL_ELSEIF NAME='approvable' VALUE='N'>class="danger"</TMPL_IF>>
+					<td><TMPL_VAR NAME='sku'></th>
+					<td>
+						<TMPL_IF NAME='close'>
+							<TMPL_VAR NAME='title'>
+						<TMPL_ELSE>
+							<a href="<TMPL_VAR NAME='MODULE_URL'>&<TMPL_VAR NAME='ParamsForURL'>&receipt_id=<TMPL_VAR NAME='receipt_id'>&line_id=<TMPL_VAR NAME='line_id'>"><TMPL_VAR NAME='title'>
+						</TMPL_IF>
+					</td>
+					<td><TMPL_VAR NAME='price' FORMAT='price'></td>
+					<td><TMPL_VAR NAME='quantity' FORMAT='price'></td>
+					<td><TMPL_VAR NAME='cost' FORMAT='price'></td>
+					<td><TMPL_VAR NAME='vat'></td>
+					<td class="text-right">
+						<input type="checkbox" title="<TMPL_VAR NAME='title'>" line_id="<TMPL_VAR NAME='line_id'>" value="Y" <TMPL_IF NAME='approved' VALUE='Y'>checked</TMPL_IF> class="iswitch iswitch-md iswitch-primary line-approved" <TMPL_IF NAME='close'>disabled</TMPL_IF>/>
+					</td>
+					<td class="text-right">
+						<TMPL_UNLESS NAME='close'>
+							<TMPL_IF NAME='ReceiptFrom' VALUE='shop'>
+								<TMPL_IF NAME='vat' VALUE='19'>
+									<a href="#" class="line-exception" title="<TMPL_VAR NAME='title'>" vat="<TMPL_VAR NAME='vat'>"><i class='fa fa-long-arrow-up arrow'></i></a>
+								<TMPL_ELSEIF NAME='vat' VALUE='7'>
+									<a href="#" class="line-exception" title="<TMPL_VAR NAME='title'>" vat="<TMPL_VAR NAME='vat'>"><i class='fa fa-long-arrow-down arrow'></i></a>
+								</TMPL_IF>
+							<TMPL_ELSEIF NAME='ReceiptFrom' VALUE='restaurant'>
+								<a href="#" class="line-exception" title="<TMPL_VAR NAME='title'>" vat="<TMPL_VAR NAME='vat'>"><i class='fa fa-long-arrow-down arrow'></i></a>
+							</TMPL_IF>
+						</TMPL_UNLESS>
+					</td>
+					<td class="text-right">
+						<TMPL_UNLESS NAME='close'><a href="#" class="line-remove" title="<TMPL_VAR NAME='title'>" line_id="<TMPL_VAR NAME='line_id'>"><i class='fa fa-close delete'></i></a></TMPL_UNLESS>
+					</td>
+				</tr>
+			</TMPL_LOOP>
+			<tr>
+				<th></th>
+				<th></th>
+				<th></th>
+				<th><TMPL_VAR NAME='LNG_TotalAmount'></th>
+				<th><TMPL_VAR NAME='cost' FORMAT='price'></th>
+				<th></th>
+				<th></th>
+				<th></th>
+				<th></th>
+			</tr>
+			<tr>
+				<th></th>
+				<th></th>
+				<th></th>
+				<th><TMPL_VAR NAME='LNG_TotalAmountApprove'></th>
+				<th><TMPL_IF NAME='cost_approved'><span id="cost_approved"><TMPL_VAR NAME='cost_approved' FORMAT='price'></span></TMPL_IF></th>
+				<th></th>
+				<th></th>
+				<th></th>
+				<th></th>
+			</tr>
+		</tbody>
+	</table>
+<TMPL_ELSE>
+	<div class="alert alert-success"><TMPL_VAR NAME='LNG_LineListEmpty'></div>
+</TMPL_IF>

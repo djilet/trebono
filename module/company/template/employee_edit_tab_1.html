@@ -1,0 +1,973 @@
+<div class="row">
+	<div class="col-md-6 padding-3">
+		<section class="box">
+			<header class="panel_header" for="header_employee_edit_info" table="company">
+				<h2 class="title"><TMPL_VAR NAME='LNG_FieldsetInfo'></h2>
+			</header>
+			<div class="content-body">
+				<div class="form-group">
+					<TMPL_LOOP NAME="ArchiveMessage">
+						<TMPL_VAR NAME="Message"/>
+						<TMPL_UNLESS NAME="__LAST__"><br></TMPL_UNLESS>
+					</TMPL_LOOP>
+				</div>
+				<div class="row">
+					<div class="col-md-6">
+						<div class="form-group" id="user_image-box"></div>
+						<script type="text/javascript">
+							$(document).ready(function(){
+								params = new Array();
+								<TMPL_LOOP NAME='UserImageParamList'>
+									params.push({
+									"Name" : "<TMPL_VAR NAME='SourceName'>",
+									"Width" : "<TMPL_VAR NAME='Width'>",
+									"Height" : "<TMPL_VAR NAME='Height'>",
+									"Resize" : "<TMPL_VAR NAME='Resize'>",
+									"X1" : "<TMPL_VAR NAME='X1'>",
+									"X2" : "<TMPL_VAR NAME='X2'>",
+									"Y1" : "<TMPL_VAR NAME='Y1'>",
+									"Y2" : "<TMPL_VAR NAME='Y2'>"
+								});
+								</TMPL_LOOP>
+								CreateImageInput('user_image', '<TMPL_VAR NAME='user_image_admin_path'>', '<TMPL_VAR NAME='user_image_full_path'>', '<TMPL_VAR NAME='user_image'>', '<TMPL_VAR NAME='user_id'>', 'RemoveUserImage', '<TMPL_VAR NAME='ADMIN_PATH'>ajax.php', 0, params);
+							});
+						</script>
+					</div>
+					<div class="col-md-6">
+						<div class="form-group">
+							<label class="form-label">
+								<TMPL_VAR NAME='LNG_DeviceAmount'>: <TMPL_VAR NAME='device_amount'>
+							</label>
+						</div>
+						<div class="form-group">
+							<label class="form-label" for="salutation" table="user_info"><TMPL_VAR NAME='LNG_Salutation'></label>
+							<TMPL_IF NAME="employee_id">
+								<TMPL_IF NAME='HistoryAdmin'>
+									(<a href="#" class="property-history" property_name="salutation"><TMPL_VAR NAME='LNG_RevisionHistory'></a>)
+								</TMPL_IF>
+							</TMPL_IF>
+							<br />
+							<select class="form-control" name="salutation">
+								<option value="Herr" <TMPL_IF NAME='salutation' VALUE='Herr'>selected</TMPL_IF>><TMPL_VAR NAME='LNG_SalutationMr'></option>
+								<option value="Frau" <TMPL_IF NAME='salutation' VALUE='Frau'>selected</TMPL_IF>><TMPL_VAR NAME='LNG_SalutationMs'></option>
+							</select>
+						</div>
+						<div class="form-group">
+							<label class="form-label required" for="first_name" table="user_info"><TMPL_VAR NAME='LNG_FirstName'></label>
+							<TMPL_IF NAME="employee_id">
+								<TMPL_IF NAME='HistoryAdmin'>
+									(<a href="#" class="property-history" property_name="first_name"><TMPL_VAR NAME='LNG_RevisionHistory'></a>)
+								</TMPL_IF>
+							</TMPL_IF>
+							<br />
+							<input class="form-control" type="text" name="first_name" id="first_name" value="<TMPL_VAR NAME='first_name'>" />
+						</div>
+						<div class="form-group">
+							<label class="form-label required" for="last_name" table="user_info"><TMPL_VAR NAME='LNG_LastName'></label>
+							<TMPL_IF NAME="employee_id">
+								<TMPL_IF NAME='HistoryAdmin'>
+									(<a href="#" class="property-history" property_name="last_name"><TMPL_VAR NAME='LNG_RevisionHistory'></a>)
+								</TMPL_IF>
+							</TMPL_IF>
+							<br />
+							<input class="form-control" type="text" name="last_name" id="last_name" value="<TMPL_VAR NAME='last_name'>" />
+						</div>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="form-label" for="birthday" table="user_info"><TMPL_VAR NAME='LNG_Birthday'></label>
+					<TMPL_IF NAME="employee_id">
+						<TMPL_IF NAME='HistoryAdmin'>
+							(<a href="#" class="property-history" property_name="birthday"><TMPL_VAR NAME='LNG_RevisionHistory'></a>)
+						</TMPL_IF>
+					</TMPL_IF>
+					<br />
+					<input class="form-control datepicker" type="text" name="birthday" id="birthday" value="<TMPL_VAR NAME='birthday' FORMAT='datepicker'>" />
+				</div>
+				<div class="row">
+					<div class="col-md-6">
+						<div class="form-group">
+							<label class="form-label" for="street" table="user_info"><TMPL_VAR NAME='LNG_Street'></label>
+							<TMPL_IF NAME="employee_id">
+								<TMPL_IF NAME='HistoryAdmin'>
+									(<a href="#" class="property-history" property_name="street"><TMPL_VAR NAME='LNG_RevisionHistory'></a>)
+								</TMPL_IF>
+							</TMPL_IF>
+							<br />
+							<input class="form-control" type="text" name="street" id="street" value="<TMPL_VAR NAME='street'>" />
+						</div>
+					</div>
+					<div class="col-md-6">
+						<div class="form-group">
+							<label class="form-label" for="house" table="user_info"><TMPL_VAR NAME='LNG_House'></label>
+							<TMPL_IF NAME="employee_id">
+								<TMPL_IF NAME='HistoryAdmin'>
+									(<a href="#" class="property-history" property_name="house"><TMPL_VAR NAME='LNG_RevisionHistory'></a>)
+								</TMPL_IF>
+							</TMPL_IF>
+							<br />
+							<input class="form-control" type="text" name="house" id="house" value="<TMPL_VAR NAME='house'>" />
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-6">
+						<div class="form-group">
+							<label class="form-label" for="zip_code" table="user_info"><TMPL_VAR NAME='LNG_ZipCode'></label>
+							<TMPL_IF NAME="employee_id">
+								<TMPL_IF NAME='HistoryAdmin'>
+									(<a href="#" class="property-history" property_name="zip_code"><TMPL_VAR NAME='LNG_RevisionHistory'></a>)
+								</TMPL_IF>
+							</TMPL_IF>
+							<br />
+							<input class="form-control" type="text" name="zip_code" id="zip_code" value="<TMPL_VAR NAME='zip_code'>" />
+						</div>
+					</div>
+					<div class="col-md-6">
+						<div class="form-group">
+							<label class="form-label" for="city" table="user_info"><TMPL_VAR NAME='LNG_City'></label>
+							<TMPL_IF NAME="employee_id">
+								<TMPL_IF NAME='HistoryAdmin'>
+									(<a href="#" class="property-history" property_name="city"><TMPL_VAR NAME='LNG_RevisionHistory'></a>)
+								</TMPL_IF>
+							</TMPL_IF>
+							<br />
+							<input class="form-control" type="text" name="city" id="city" value="<TMPL_VAR NAME='city'>" />
+						</div>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="form-label" for="country" table="user_info"><TMPL_VAR NAME='LNG_Country'></label>
+					<TMPL_IF NAME="employee_id">
+						<TMPL_IF NAME='HistoryAdmin'>
+							(<a href="#" class="property-history" property_name="country"><TMPL_VAR NAME='LNG_RevisionHistory'></a>)
+						</TMPL_IF>
+					</TMPL_IF>
+					<br />
+					<input class="form-control" type="text" name="country" id="country" value="<TMPL_VAR NAME='country'>" />
+				</div>
+				<div class="form-group">
+					<label class="form-label" for="phone" table="user_info"><TMPL_VAR NAME='LNG_Phone'></label>
+					<TMPL_IF NAME="employee_id">
+						<TMPL_IF NAME='HistoryAdmin'>
+							(<a href="#" class="property-history" property_name="phone"><TMPL_VAR NAME='LNG_RevisionHistory'></a>)
+						</TMPL_IF>
+					</TMPL_IF>
+					<br />
+					<input class="form-control" type="text" name="phone" id="phone" value="<TMPL_VAR NAME='phone'>" data-mask="phone" />
+				</div>
+				<div class="form-group">
+					<label class="form-label required" for="email" table="user_info"><TMPL_VAR NAME='LNG_Email'></label>
+					<TMPL_IF NAME="employee_id">
+						<TMPL_IF NAME='HistoryAdmin'>
+							(<a href="#" class="property-history" property_name="email"><TMPL_VAR NAME='LNG_RevisionHistory'></a>)
+						</TMPL_IF>
+					</TMPL_IF>
+					<br />
+					<input class="form-control" type="text" name="email" id="email" value="<TMPL_VAR NAME='email'>" data-validation-type="email" />
+				</div>
+				<div class="row">
+					<div class="col-md-6">
+						<div class="form-group">
+							<label class="form-label" for="material_status" table="user_info"><TMPL_VAR NAME='LNG_MaterialStatus'></label>
+							<TMPL_IF NAME="employee_id">
+								<TMPL_IF NAME='HistoryAdmin'>
+									(<a href="#" class="property-history" property_name="material_status"><TMPL_VAR NAME='LNG_RevisionHistory'></a>)
+								</TMPL_IF>
+							</TMPL_IF>
+							<br />
+							<select class="form-control" name="material_status">
+								<option value="married" <TMPL_IF NAME='material_status' VALUE='married'>selected</TMPL_IF>><TMPL_VAR NAME='LNG_MaterialStatusMarried'></option>
+								<option value="single" <TMPL_IF NAME='material_status' VALUE='single'>selected</TMPL_IF>><TMPL_VAR NAME='LNG_MaterialStatusSingle'></option>
+							</select>
+						</div>
+					</div>
+					<div class="col-md-6">
+						<div class="form-group">
+							<label class="form-label" for="child_count" table="employee"><TMPL_VAR NAME='LNG_ChildCount'></label>
+							<TMPL_IF NAME="employee_id">
+								<TMPL_IF NAME='HistoryAdmin'>
+									(<a href="#" class="property-history" property_name="child_count"><TMPL_VAR NAME='LNG_RevisionHistory'></a>)
+								</TMPL_IF>
+							</TMPL_IF>
+							<br />
+							<input class="form-control" type="text" name="child_count" id="child_count" value="<TMPL_VAR NAME='child_count'>" />
+						</div>
+					</div>
+				</div>
+				<TMPL_IF NAME='ShowBankData'>
+					<div class="form-group company-only">
+						<label class="form-label" for="bank_name" table="employee"><TMPL_VAR NAME='LNG_BankName'></label>
+						<TMPL_IF NAME="company_unit_id">
+							<TMPL_IF NAME='HistoryAdmin'>
+								(<a href="#" class="property-history" id="bank_name" property_name="bank_name"><TMPL_VAR NAME='LNG_RevisionHistory'></a>)
+							</TMPL_IF>
+						</TMPL_IF>
+						<div class="controls"><input type="text" class="form-control bank-data" name="bank_name" value="<TMPL_VAR NAME='bank_name'>"></div>
+					</div>
+					<div class="form-group company-only">
+						<label class="form-label" for="iban" table="employee"><TMPL_VAR NAME='LNG_IBAN'></label>
+						<TMPL_IF NAME="company_unit_id">
+							<TMPL_IF NAME='HistoryAdmin'>
+								(<a href="#" class="property-history" property_name="iban"><TMPL_VAR NAME='LNG_RevisionHistory'></a>)
+							</TMPL_IF>
+						</TMPL_IF>
+						<div class="controls"><input type="text" class="form-control bank-data" id="iban" name="iban" value="<TMPL_VAR NAME='iban'>"></div>
+					</div>
+					<div class="form-group company-only">
+						<label class="form-label" for="bic" table="employee"><TMPL_VAR NAME='LNG_BIC'></label>
+						<TMPL_IF NAME="company_unit_id">
+							<TMPL_IF NAME='HistoryAdmin'>
+								(<a href="#" class="property-history" property_name="bic"><TMPL_VAR NAME='LNG_RevisionHistory'></a>)
+							</TMPL_IF>
+						</TMPL_IF>
+						<div class="controls"><input type="text" class="form-control bank-data" id="bic" name="bic" value="<TMPL_VAR NAME='bic'>"></div>
+					</div>
+				</TMPL_IF>
+				<TMPL_IF NAME='employee_id'>
+					<div class="form-group">
+						<label class="form-label" for="password1" table="user_info"><TMPL_VAR NAME='LNG_NewPassword'></label>
+						<TMPL_IF NAME="user_id">
+							<TMPL_IF NAME='HistoryAdmin'>
+								(<a href="#" class="property-history" property_name="password1"><TMPL_VAR NAME="LNG_RevisionHistory"/></a>)
+							</TMPL_IF>
+						</TMPL_IF>
+						<br />
+						<!--<small><TMPL_VAR NAME="LNG_PasswordRequirements"></small>-->
+						<input class="form-control" type="password" name="password1" id="password1" />
+					</div>
+					<div class="form-group">
+						<label class="form-label" for="password2" table="user_info"><TMPL_VAR NAME='LNG_RepeatPassword'></label><br />
+						<input class="form-control" type="password" name="password2" id="password2" />
+					</div>
+				</TMPL_IF>
+			</div>
+		</section>
+		<!--<section class="box">
+            <header class="panel_header">
+                <h2 class="title pull-left"><TMPL_VAR NAME='LNG_GivveInfo'></h2>
+            </header>
+            <div class="content-body">
+                <div class="row">
+                    <div class="col-md-6 form-group">
+                        <label class="form-label"><TMPL_VAR NAME='LNG_GivveLogin'></label><br/>
+                        <input type="text" name="givve_login" class="form-control" value="<TMPL_VAR NAME='givve_login'>">
+                    </div>
+                    <div class="col-md-6 form-group">
+                        <label class="form-label"><TMPL_VAR NAME='LNG_GivvePassword'></label><br/>
+                        <input type="password" name="givve_password" class="form-control" value="<TMPL_VAR NAME='givve_password'>">
+                    </div>
+                </div>
+            </div>
+        </section>-->
+	</div>
+	<div class="col-md-6 padding-3">
+		<section class="box">
+			<header class="panel_header" for="header_employee_edit_company_info" table="company">
+				<h2 class="title"><TMPL_VAR NAME='LNG_FieldsetCompanyInfo'></h2>
+			</header>
+			<div class="content-body">
+				<div class="row">
+					<div class="col-md-6">
+						<div class="form-group">
+							<label class="form-label required" for="company_unit_id" table="employee"><TMPL_VAR NAME='LNG_CompanyUnitID'></label>
+							<TMPL_IF NAME="employee_id">
+								<TMPL_IF NAME='HistoryAdmin'>
+									(<a href="#" class="property-history" property_name="company_unit_id"><TMPL_VAR NAME='LNG_RevisionHistory'></a>)
+								</TMPL_IF>
+							</TMPL_IF>
+							<select class="select2" name="company_unit_id" data-allow-clear="true">
+								<option value=""></option>
+								<TMPL_LOOP NAME='CompanyUnitList'>
+									<TMPL_IF NAME='Selected'>
+										<option value="<TMPL_VAR NAME='company_unit_id'>" selected><TMPL_VAR NAME='select_prefix'> <TMPL_VAR NAME='title'></option>
+										<TMPL_ELSEIF NAME='archive' VALUE='N'>
+											<option value="<TMPL_VAR NAME='company_unit_id'>"><TMPL_VAR NAME='select_prefix'> <TMPL_VAR NAME='title'></option>
+									</TMPL_IF>
+								</TMPL_LOOP>
+							</select>
+							<TMPL_IF NAME='EmployeeViewer'>
+								<input type="hidden" name="company_unit_id" value="<TMPL_VAR NAME='company_unit_id'>">
+							</TMPL_IF>
+						</div>
+					</div>
+					<div class="col-md-6">
+						<div class="form-group">
+							<label class="form-label" for="start_date" table="employee"><TMPL_VAR NAME='LNG_StartDate'></label>
+							<TMPL_IF NAME="employee_id">
+								<TMPL_IF NAME='HistoryAdmin'>
+									(<a href="#" class="property-history" property_name="start_date"><TMPL_VAR NAME='LNG_RevisionHistory'></a>)
+								</TMPL_IF>
+							</TMPL_IF>
+							<br />
+							<input class="form-control datepicker" type="text" name="start_date" id="start_date" value="<TMPL_VAR NAME='start_date' FORMAT='datepicker'>" />
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-12">
+						<div class="form-group">
+							<label class="form-label" for="work_place" table="employee"><TMPL_VAR NAME='LNG_WorkPlace'></label>
+							<TMPL_IF NAME="employee_id">
+								<TMPL_IF NAME='HistoryAdmin'>
+									(<a href="#" class="property-history" property_name="work_place"><TMPL_VAR NAME='LNG_RevisionHistory'></a>)
+								</TMPL_IF>
+							</TMPL_IF>
+							<br />
+							<input class="form-control" type="text" name="work_place" id="work_place" value="<TMPL_VAR NAME='work_place'>" />
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-6">
+						<div class="form-group">
+							<label class="form-label" for="cost_center_number" table="employee"><TMPL_VAR NAME='LNG_CostCenterNumber'></label>
+							<TMPL_IF NAME="employee_id">
+								<TMPL_IF NAME='HistoryAdmin'>
+									(<a href="#" class="property-history" property_name="cost_center_number"><TMPL_VAR NAME='LNG_RevisionHistory'></a>)
+								</TMPL_IF>
+							</TMPL_IF>
+							<br />
+							<input class="form-control" type="text" name="cost_center_number" id="cost_center_number" value="<TMPL_VAR NAME='cost_center_number'>" />
+						</div>
+					</div>
+					<div class="col-md-6">
+						<div class="form-group">
+							<label class="form-label required" for="working_days_per_week" table="employee"><TMPL_VAR NAME='LNG_WorkingDaysPerWeek'></label>
+							<TMPL_IF NAME="employee_id">
+								<TMPL_IF NAME='HistoryAdmin'>
+									(<a href="#" class="property-history" property_name="working_days_per_week"><TMPL_VAR NAME='LNG_RevisionHistory'></a>)
+								</TMPL_IF>
+							</TMPL_IF>
+							<br />
+							<select class="form-control" name="working_days_per_week">
+								<option value="1" <TMPL_IF NAME='working_days_per_week' VALUE='1'>selected</TMPL_IF>>1</option>
+								<option value="2" <TMPL_IF NAME='working_days_per_week' VALUE='2'>selected</TMPL_IF>>2</option>
+								<option value="3" <TMPL_IF NAME='working_days_per_week' VALUE='3'>selected</TMPL_IF>>3</option>
+								<option value="4" <TMPL_IF NAME='working_days_per_week' VALUE='4'>selected</TMPL_IF>>4</option>
+								<option value="5" <TMPL_IF NAME='working_days_per_week' VALUE='5'>selected</TMPL_IF>>5</option>
+								<option value="6" <TMPL_IF NAME='working_days_per_week' VALUE='6'>selected</TMPL_IF>>6</option>
+								<option value="7" <TMPL_IF NAME='working_days_per_week' VALUE='7'>selected</TMPL_IF>>7</option>
+							</select>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-6">
+						<label class="form-label" for="employee_guid" table="employee"><TMPL_VAR NAME='LNG_EmployeeGUID'></label>
+						<TMPL_IF NAME="employee_id">
+							<TMPL_IF NAME='HistoryAdmin'>
+								(<a href="#" class="property-history" property_name="employee_guid"><TMPL_VAR NAME='LNG_RevisionHistory'></a>)
+							</TMPL_IF>
+						</TMPL_IF>
+						<br />
+						<input class="form-control" type="text" data-mask="[A-Za-z0-9]+" data-isregex="1" name="employee_guid" id="employee_guid" value="<TMPL_VAR NAME='employee_guid'>" />
+					</div>
+					<div class="col-md-6">
+						<label class="form-label" for="active_contract_number" table="employee"><TMPL_VAR NAME='LNG_ActiveContractNumber'></label>
+						<TMPL_IF NAME="employee_id">
+							<TMPL_IF NAME='HistoryAdmin'>
+								(<a href="#" class="property-history" property_name="active_contract_number"><TMPL_VAR NAME='LNG_RevisionHistory'></a>)
+							</TMPL_IF>
+						</TMPL_IF>
+						<br />
+						<input class="form-control" type="text" data-mask="[A-Za-z0-9]{1,15}$" data-isregex="1" name="active_contract_number" id="active_contract_number" value="<TMPL_VAR NAME='active_contract_number'>" />
+					</div>
+				</div>
+				<TMPL_IF NAME='Admin'>
+					<div class="form-group">
+						<label class="form-label" for="comment" table="employee"><TMPL_VAR NAME='LNG_Comment'></label>
+						<TMPL_IF NAME="employee_id">
+							<TMPL_IF NAME='HistoryAdmin'>
+								(<a href="#" class="property-history" property_name="comment"><TMPL_VAR NAME='LNG_RevisionHistory'></a>)
+							</TMPL_IF>
+						</TMPL_IF>
+						<br />
+						<input class="form-control" type="text" name="comment" id="comment" value="<TMPL_VAR NAME='comment'>" />
+					</div>
+				</TMPL_IF>
+				<div class="form-group">
+					<label class="form-label" for="yearly_total_benefits" table="employee"><TMPL_VAR NAME='LNG_YearlyTotalBenefits'></label>
+					<TMPL_IF NAME="employee_id">
+						<TMPL_IF NAME='HistoryAdmin'>
+							(<a href="#" class="property-history" property_name="yearly_total_benefits"><TMPL_VAR NAME='LNG_RevisionHistory'></a>)
+						</TMPL_IF>
+					</TMPL_IF>
+					<br />
+					<input class="form-control" type="text" name="yearly_total_benefits" id="yearly_total_benefits" value="<TMPL_VAR NAME='yearly_total_benefits' FORMAT='price'>" />
+				</div>
+			</div>
+		</section>
+	</div>
+	<TMPL_IF NAME='employee_id'>
+		<div class="col-md-6 padding-3">
+			<section class="box">
+				<header class="panel_header" for="header_employee_accepted_documents" table="company">
+					<h2 class="title"><TMPL_VAR NAME='LNG_FieldsetAcceptedDocuments'></h2>
+				</header>
+				<div class="content-body">
+					<table class="table" id="employee-accepted-documents">
+						<thead>
+						<tr>
+							<th><TMPL_VAR NAME='LNG_DocumentType'></th>
+							<th><TMPL_VAR NAME='LNG_DocumentAcceptedVersionList'></th>
+							<TMPL_UNLESS NAME='EmployeeViewer'>
+								<th><TMPL_VAR NAME='LNG_DocumentVersionList'></th>
+								<TMPL_ELSE>
+									<th><TMPL_VAR NAME='LNG_DocumentCurrentVersion'></th>
+							</TMPL_UNLESS>
+						</tr>
+						</thead>
+						<tbody>
+						<TMPL_LOOP NAME='AcceptedDocumentList'>
+							<tr>
+								<td><TMPL_VAR NAME='title_translation'></td>
+								<td>
+									<TMPL_LOOP NAME='accepted_version_list'>
+										<TMPL_IF NAME='__FIRST__'>
+											<div>
+												<TMPL_IF NAME='pdf_link'>
+													<a href="<TMPL_VAR NAME='pdf_link' />" target="_blank" rel="tooltip" data-toggle="tooltip" data-placement="top">
+														<TMPL_VAR NAME='version'>
+													</a>
+													<TMPL_ELSE>
+														<a href="<TMPL_VAR NAME='ADMIN_PATH'>config.php?config_version_id=<TMPL_VAR NAME='value'>"><TMPL_VAR NAME='value'></a>
+												</TMPL_IF>
+												<TMPL_VAR NAME='created' FORMAT='datetime'>
+											</div>
+										</TMPL_IF>
+									</TMPL_LOOP>
+									<TMPL_IF NAME='accepted_version_list'>
+										<a href="#" class="dashed" data-toggle="modal" data-target="#document-accepted-<TMPL_VAR NAME='code'>"><TMPL_VAR NAME='LNG_DocumentShowAll'></a>
+										<div id="document-accepted-<TMPL_VAR NAME='code'>" class="modal fade" data-backdrop="static" tabindex="-1" role="dialog">
+											<div class="modal-dialog">
+												<div class="modal-content">
+													<div class="modal-body">
+														<TMPL_LOOP NAME='accepted_version_list'>
+															<div>
+																<TMPL_IF NAME='pdf_link'>
+																	<a href="<TMPL_VAR NAME='pdf_link' />" target="_blank" rel="tooltip" data-toggle="tooltip" data-placement="top">
+																		<TMPL_VAR NAME='version'>
+																	</a>
+																	<TMPL_ELSE>
+																		<a href="<TMPL_VAR NAME='ADMIN_PATH'>config.php?config_version_id=<TMPL_VAR NAME='value'>"><TMPL_VAR NAME='value'></a>
+																</TMPL_IF>
+																<TMPL_VAR NAME='created' FORMAT='datetime'>
+															</div>
+														</TMPL_LOOP>
+													</div>
+													<div class="modal-footer">
+														<button type="button" class="btn btn-info" data-dismiss="modal"><TMPL_VAR NAME='LNG_Close'></button>
+													</div>
+												</div>
+											</div>
+										</div>
+									</TMPL_IF>
+								</td>
+								<TMPL_UNLESS NAME='EmployeeViewer'>
+									<td>
+										<TMPL_IF NAME='version_list'>
+											<TMPL_LOOP NAME='version_list'>
+												<TMPL_IF NAME='__FIRST__'>
+													<div>
+														<TMPL_IF NAME='edit_link'>
+															<a href="<TMPL_VAR NAME='edit_link' />"><TMPL_VAR NAME='version'></a>
+															<TMPL_ELSE>
+																<a href="<TMPL_VAR NAME='ADMIN_PATH'>config.php?config_version_id=<TMPL_VAR NAME='id'>"><TMPL_VAR NAME='id'></a>
+														</TMPL_IF>
+														<TMPL_VAR NAME='created' FORMAT='datetime'>
+													</div>
+												</TMPL_IF>
+											</TMPL_LOOP>
+											<TMPL_UNLESS NAME='confirmation'>
+												<a href="#" class="dashed" data-toggle="modal" data-target="#document-<TMPL_VAR NAME='code'>"><TMPL_VAR NAME='LNG_DocumentShowAll'></a>
+												<div id="document-<TMPL_VAR NAME='code'>" class="modal fade" data-backdrop="static" tabindex="-1" role="dialog">
+													<div class="modal-dialog">
+														<div class="modal-content">
+															<div class="modal-body">
+																<TMPL_LOOP NAME='version_list'>
+																	<div>
+																		<TMPL_IF NAME='edit_link'>
+																			<a href="<TMPL_VAR NAME='edit_link' />"><TMPL_VAR NAME='version'></a>
+																			<TMPL_ELSE>
+																				<a href="<TMPL_VAR NAME='ADMIN_PATH'>config.php?config_version_id=<TMPL_VAR NAME='id'>"><TMPL_VAR NAME='id'></a>
+																		</TMPL_IF>
+																		<TMPL_VAR NAME='created' FORMAT='datetime'>
+																	</div>
+																</TMPL_LOOP>
+															</div>
+															<div class="modal-footer">
+																<button type="button" class="btn btn-info" data-dismiss="modal"><TMPL_VAR NAME='LNG_Close'></button>
+															</div>
+														</div>
+													</div>
+												</div>
+											</TMPL_UNLESS>
+										</TMPL_IF>
+									</td>
+								</TMPL_UNLESS>
+								<TMPL_IF NAME='EmployeeViewer'>
+									<td>
+										<TMPL_IF NAME='version_list'>
+											<TMPL_LOOP NAME='version_list'>
+												<TMPL_UNLESS NAME='agreement'>
+													<TMPL_IF NAME='__FIRST__'>
+														<div>
+															<a href="<TMPL_VAR NAME='ADMIN_PATH'>config.php?config_version_id=<TMPL_VAR NAME='id'>" target="_blank"><TMPL_VAR NAME='LNG_Show'></a>
+														</div>
+													</TMPL_IF>
+												</TMPL_UNLESS>
+												<TMPL_IF NAME='agreement'>
+													<div>
+														<a href="<TMPL_VAR NAME='edit_link'>" target="_blank"><TMPL_VAR NAME='LNG_Show'></a>
+													</div>
+												</TMPL_IF>
+											</TMPL_LOOP>
+										</TMPL_IF>
+									</td>
+								</TMPL_IF>
+							</tr>
+						</TMPL_LOOP>
+						</tbody>
+					</table>
+				</div>
+			</section>
+		</div>
+	</TMPL_IF>
+</div>
+<div class="row">
+	<TMPL_IF NAME='HistoryAdmin'>
+		<div class="col-md-6 padding-3">
+			<section class="box">
+				<header class="panel_header" for="header_employee_edit_acc" table="company">
+					<h2 class="title"><TMPL_VAR NAME='LNG_FieldsetAcc'></h2>
+				</header>
+				<div class="content-body">
+					<div class="form-group">
+						<label class="form-label" for="acc_meal_value_tax_flat" table="employee"><TMPL_VAR NAME='LNG_AccMealValueTaxFlat'></label>
+						<TMPL_IF NAME="employee_id">
+							<TMPL_IF NAME='HistoryAdmin'>
+								(<a href="#" class="property-history" property_name="acc_meal_value_tax_flat"><TMPL_VAR NAME='LNG_RevisionHistory'></a>)
+							</TMPL_IF>
+						</TMPL_IF>
+						<br />
+						<TMPL_IF NAME='inherited_acc_meal_value_tax_flat'>
+							<div>
+								<label class="form-label">
+									<small class="text-info">
+										<TMPL_VAR NAME='LNG_InheritedValueSourceCompanyUnit'>: <TMPL_VAR NAME='inherited_acc_meal_value_tax_flat'>
+									</small>
+								</label>
+							</div>
+						</TMPL_IF>
+						<input class="form-control" type="text" name="acc_meal_value_tax_flat" id="acc_meal_value_tax_flat" value="<TMPL_VAR NAME='acc_meal_value_tax_flat'>" data-mask="**********" />
+					</div>
+					<div class="form-group">
+						<label class="form-label" for="acc_food_subsidy_tax_free" table="employee"><TMPL_VAR NAME='LNG_AccFoodSubsidyTaxFree'></label>
+						<TMPL_IF NAME="employee_id">
+							<TMPL_IF NAME='HistoryAdmin'>
+								(<a href="#" class="property-history" property_name="acc_food_subsidy_tax_free"><TMPL_VAR NAME='LNG_RevisionHistory'></a>)
+							</TMPL_IF>
+						</TMPL_IF>
+						<br />
+						<TMPL_IF NAME='inherited_acc_food_subsidy_tax_free'>
+							<div>
+								<label class="form-label">
+									<small class="text-info">
+										<TMPL_VAR NAME='LNG_InheritedValueSourceCompanyUnit'>: <TMPL_VAR NAME='inherited_acc_food_subsidy_tax_free'>
+									</small>
+								</label>
+							</div>
+						</TMPL_IF>
+						<input class="form-control" type="text" name="acc_food_subsidy_tax_free" id="acc_food_subsidy_tax_free" value="<TMPL_VAR NAME='acc_food_subsidy_tax_free'>" data-mask="**********" />
+					</div>
+					<div class="form-group">
+						<label class="form-label" for="acc_gross_salary" table="employee"><TMPL_VAR NAME='LNG_AccGrossSalary'></label>
+						<TMPL_IF NAME="employee_id">
+							<TMPL_IF NAME='HistoryAdmin'>
+								(<a href="#" class="property-history" property_name="acc_gross_salary"><TMPL_VAR NAME='LNG_RevisionHistory'></a>)
+							</TMPL_IF>
+						</TMPL_IF>
+						<br />
+						<TMPL_IF NAME='inherited_acc_gross_salary'>
+							<div>
+								<label class="form-label">
+									<small class="text-info">
+										<TMPL_VAR NAME='LNG_InheritedValueSourceCompanyUnit'>: <TMPL_VAR NAME='inherited_acc_gross_salary'>
+									</small>
+								</label>
+							</div>
+						</TMPL_IF>
+						<input class="form-control" type="text" name="acc_gross_salary" id="acc_gross_salary" value="<TMPL_VAR NAME='acc_gross_salary'>" data-mask="**********" />
+					</div>
+					<div class="form-group">
+						<label class="form-label" for="acc_grant_of_materials" table="employee"><TMPL_VAR NAME='LNG_AccGrantOfMaterials'></label>
+						<TMPL_IF NAME="employee_id">
+							<TMPL_IF NAME='HistoryAdmin'>
+								(<a href="#" class="property-history" property_name="acc_grant_of_materials"><TMPL_VAR NAME='LNG_RevisionHistory'></a>)
+							</TMPL_IF>
+						</TMPL_IF>
+						<br />
+						<TMPL_IF NAME='inherited_acc_grant_of_materials'>
+							<div>
+								<label class="form-label">
+									<small class="text-info">
+										<TMPL_VAR NAME='LNG_InheritedValueSourceCompanyUnit'>: <TMPL_VAR NAME='inherited_acc_grant_of_materials'>
+									</small>
+								</label>
+							</div>
+						</TMPL_IF>
+						<input class="form-control" type="text" name="acc_grant_of_materials" id="acc_grant_of_materials" value="<TMPL_VAR NAME='acc_grant_of_materials'>" data-mask="**********" />
+					</div>
+					<div class="form-group">
+						<label class="form-label" for="acc_internet_subsidy_tax" table="employee"><TMPL_VAR NAME='LNG_AccInternetSubsidyTax'></label>
+						<TMPL_IF NAME="employee_id">
+							<TMPL_IF NAME='HistoryAdmin'>
+								(<a href="#" class="property-history" property_name="acc_internet_subsidy_tax"><TMPL_VAR NAME='LNG_RevisionHistory'></a>)
+							</TMPL_IF>
+						</TMPL_IF>
+						<br />
+						<TMPL_IF NAME='inherited_acc_internet_subsidy_tax'>
+							<div>
+								<label class="form-label">
+									<small class="text-info">
+										<TMPL_VAR NAME='LNG_InheritedValueSourceCompanyUnit'>: <TMPL_VAR NAME='inherited_acc_internet_subsidy_tax'>
+									</small>
+								</label>
+							</div>
+						</TMPL_IF>
+						<input class="form-control" type="text" name="acc_internet_subsidy_tax" id="acc_internet_subsidy_tax" value="<TMPL_VAR NAME='acc_internet_subsidy_tax'>" data-mask="**********" />
+					</div>
+					<div class="form-group">
+						<label class="form-label" for="acc_mobile_subsidy_tax_free" table="employee"><TMPL_VAR NAME='LNG_AccMobileSubsidyTaxFree'></label>
+						<TMPL_IF NAME="employee_id">
+							<TMPL_IF NAME='HistoryAdmin'>
+								(<a href="#" class="property-history" property_name="acc_mobile_subsidy_tax_free"><TMPL_VAR NAME='LNG_RevisionHistory'></a>)
+							</TMPL_IF>
+						</TMPL_IF>
+						<br />
+						<TMPL_IF NAME='inherited_acc_mobile_subsidy_tax_free'>
+							<div>
+								<label class="form-label">
+									<small class="text-info">
+										<TMPL_VAR NAME='LNG_InheritedValueSourceCompanyUnit'>: <TMPL_VAR NAME='inherited_acc_mobile_subsidy_tax_free'>
+									</small>
+								</label>
+							</div>
+						</TMPL_IF>
+						<input class="form-control" type="text" name="acc_mobile_subsidy_tax_free" id="acc_mobile_subsidy_tax_free" value="<TMPL_VAR NAME='acc_mobile_subsidy_tax_free'>" data-mask="**********" />
+					</div>
+					<div class="form-group">
+						<label class="form-label" for="acc_recreation_subsidy_tax_flat" table="employee"><TMPL_VAR NAME='LNG_AccRecreationSubsidyTaxFlat'></label>
+						<TMPL_IF NAME="employee_id">
+							<TMPL_IF NAME='HistoryAdmin'>
+								(<a href="#" class="property-history" property_name="acc_recreation_subsidy_tax_flat"><TMPL_VAR NAME='LNG_RevisionHistory'></a>)
+							</TMPL_IF>
+						</TMPL_IF>
+						<br />
+						<TMPL_IF NAME='inherited_acc_recreation_subsidy_tax_flat'>
+							<div>
+								<label class="form-label">
+									<small class="text-info">
+										<TMPL_VAR NAME='LNG_InheritedValueSourceCompanyUnit'>: <TMPL_VAR NAME='inherited_acc_recreation_subsidy_tax_flat'>
+									</small>
+								</label>
+							</div>
+						</TMPL_IF>
+						<input class="form-control" type="text" name="acc_recreation_subsidy_tax_flat" id="acc_recreation_subsidy_tax_flat" value="<TMPL_VAR NAME='acc_recreation_subsidy_tax_flat'>" data-mask="**********" />
+					</div>
+					<div class="form-group">
+						<label class="form-label" for="acc_net_income" table="employee"><TMPL_VAR NAME='LNG_AccNetIncome'></label>
+						<TMPL_IF NAME="employee_id">
+							<TMPL_IF NAME='HistoryAdmin'>
+								(<a href="#" class="property-history" property_name="acc_net_income"><TMPL_VAR NAME='LNG_RevisionHistory'></a>)
+							</TMPL_IF>
+						</TMPL_IF>
+						<br />
+						<TMPL_IF NAME='inherited_acc_net_income'>
+							<div>
+								<label class="form-label">
+									<small class="text-info">
+										<TMPL_VAR NAME='LNG_InheritedValueSourceCompanyUnit'>: <TMPL_VAR NAME='inherited_acc_net_income'>
+									</small>
+								</label>
+							</div>
+						</TMPL_IF>
+						<input class="form-control" type="text" name="acc_net_income" id="acc_net_income" value="<TMPL_VAR NAME='acc_net_income'>" data-mask="**********" />
+					</div>
+					<div class="form-group">
+						<label class="form-label" for="acc_bonus_tax_flat" table="employee"><TMPL_VAR NAME='LNG_AccBonus'></label>
+						<TMPL_IF NAME="employee_id">
+							<TMPL_IF NAME='HistoryAdmin'>
+								(<a href="#" class="property-history" property_name="acc_bonus_tax_flat"><TMPL_VAR NAME='LNG_RevisionHistory'></a>)
+							</TMPL_IF>
+						</TMPL_IF>
+						<br />
+						<TMPL_IF NAME='inherited_acc_bonus_tax_flat'>
+							<div>
+								<label class="form-label">
+									<small class="text-info">
+										<TMPL_VAR NAME='LNG_InheritedValueSourceCompanyUnit'>: <TMPL_VAR NAME='inherited_acc_bonus_tax_flat'>
+									</small>
+								</label>
+							</div>
+						</TMPL_IF>
+						<input class="form-control" type="text" name="acc_bonus_tax_flat" id="acc_bonus_tax_flat" value="<TMPL_VAR NAME='acc_bonus_tax_flat'>" data-mask="**********" />
+					</div>
+					<div class="form-group">
+						<label class="form-label" for="acc_transport_tax_free" table="employee"><TMPL_VAR NAME='LNG_AccTransport'></label>
+						<TMPL_IF NAME="employee_id">
+							<TMPL_IF NAME='HistoryAdmin'>
+								(<a href="#" class="property-history" property_name="acc_transport_tax_free"><TMPL_VAR NAME='LNG_RevisionHistory'></a>)
+							</TMPL_IF>
+						</TMPL_IF>
+						<br />
+						<TMPL_IF NAME='inherited_acc_transport_tax_free'>
+							<div>
+								<label class="form-label">
+									<small class="text-info">
+										<TMPL_VAR NAME='LNG_InheritedValueSourceCompanyUnit'>: <TMPL_VAR NAME='inherited_acc_transport_tax_free'>
+									</small>
+								</label>
+							</div>
+						</TMPL_IF>
+						<input class="form-control" type="text" name="acc_transport_tax_free" id="acc_transport_tax_free" value="<TMPL_VAR NAME='acc_transport_tax_free'>" data-mask="**********" />
+					</div>
+					<div class="form-group">
+						<label class="form-label" for="acc_child_care_tax_free" table="employee"><TMPL_VAR NAME='LNG_AccChildCare'></label>
+						<TMPL_IF NAME="employee_id">
+							<TMPL_IF NAME='HistoryAdmin'>
+								(<a href="#" class="property-history" property_name="acc_transport_tax_free"><TMPL_VAR NAME='LNG_RevisionHistory'></a>)
+							</TMPL_IF>
+						</TMPL_IF>
+						<br />
+						<TMPL_IF NAME='inherited_acc_child_care_tax_free'>
+							<div>
+								<label class="form-label">
+									<small class="text-info">
+										<TMPL_VAR NAME='LNG_InheritedValueSourceCompanyUnit'>: <TMPL_VAR NAME='inherited_acc_child_care_tax_free'>
+									</small>
+								</label>
+							</div>
+						</TMPL_IF>
+						<input class="form-control" type="text" name="acc_child_care_tax_free" id="acc_child_care_tax_free" value="<TMPL_VAR NAME='acc_child_care_tax_free'>" data-mask="**********" />
+					</div>
+					<div class="form-group">
+						<label class="form-label" for="acc_travel_tax_free" table="employee"><TMPL_VAR NAME='LNG_AccTravel'></label>
+						<TMPL_IF NAME="employee_id">
+							<TMPL_IF NAME='HistoryAdmin'>
+								(<a href="#" class="property-history" property_name="acc_travel_tax_free"><TMPL_VAR NAME='LNG_RevisionHistory'></a>)
+							</TMPL_IF>
+						</TMPL_IF>
+						<br />
+						<TMPL_IF NAME='inherited_acc_travel_tax_free'>
+							<div>
+								<label class="form-label">
+									<small class="text-info">
+										<TMPL_VAR NAME='LNG_InheritedValueSourceCompanyUnit'>: <TMPL_VAR NAME='inherited_acc_travel_tax_free'>
+									</small>
+								</label>
+							</div>
+						</TMPL_IF>
+						<input class="form-control" type="text" name="acc_travel_tax_free" id="acc_travel_tax_free" value="<TMPL_VAR NAME='acc_travel_tax_free'>" data-mask="**********" />
+					</div>
+					<div class="form-group">
+						<label class="form-label" for="acc_daily_allowance" table="employee"><TMPL_VAR NAME='LNG_AccDailyAllowance'></label>
+						<TMPL_IF NAME="employee_id">
+							<TMPL_IF NAME='HistoryAdmin'>
+								(<a href="#" class="property-history" property_name="acc_daily_allowance"><TMPL_VAR NAME='LNG_RevisionHistory'></a>)
+							</TMPL_IF>
+						</TMPL_IF><br />
+						<TMPL_IF NAME='inherited_acc_daily_allowance'>
+							<div>
+								<label class="form-label">
+									<small class="text-info">
+										<TMPL_VAR NAME='LNG_InheritedValueSourceCompanyUnit'>: <TMPL_VAR NAME='inherited_acc_daily_allowance'>
+									</small>
+								</label>
+							</div>
+						</TMPL_IF>
+						<input class="form-control" type="text" name="acc_daily_allowance" id="acc_daily_allowance" value="<TMPL_VAR NAME='acc_daily_allowance'>" data-mask="**********" />
+					</div>
+					<div class="form-group">
+						<label class="form-label" for="acc_gift" table="employee"><TMPL_VAR NAME='LNG_AccGift'></label>
+						<TMPL_IF NAME="employee_id">
+							<TMPL_IF NAME='HistoryAdmin'>
+								(<a href="#" class="property-history" property_name="acc_gift"><TMPL_VAR NAME='LNG_RevisionHistory'></a>)
+							</TMPL_IF>
+						</TMPL_IF><br />
+						<TMPL_IF NAME='inherited_acc_gift'>
+							<div>
+								<label class="form-label">
+									<small class="text-info">
+										<TMPL_VAR NAME='LNG_InheritedValueSourceCompanyUnit'>: <TMPL_VAR NAME='inherited_acc_gift'>
+									</small>
+								</label>
+							</div>
+						</TMPL_IF>
+						<input class="form-control" type="text" name="acc_gift" id="acc_gift" value="<TMPL_VAR NAME='acc_gift'>" data-mask="**********" />
+					</div>
+					<div class="form-group">
+						<label class="form-label" for="acc_corporate_health_management" table="employee"><TMPL_VAR NAME='LNG_AccCorporateHealthManagement'></label>
+						<TMPL_IF NAME="employee_id">
+							<TMPL_IF NAME='HistoryAdmin'>
+								(<a href="#" class="property-history" property_name="acc_corporate_health_management"><TMPL_VAR NAME='LNG_RevisionHistory'></a>)
+							</TMPL_IF>
+						</TMPL_IF><br />
+						<TMPL_IF NAME='inherited_acc_corporate_health_management'>
+							<div>
+								<label class="form-label">
+									<small class="text-info">
+										<TMPL_VAR NAME='LNG_InheritedValueSourceCompanyUnit'>: <TMPL_VAR NAME='inherited_acc_corporate_health_management'>
+									</small>
+								</label>
+							</div>
+						</TMPL_IF>
+						<input class="form-control" type="text" name="acc_corporate_health_management" id="acc_corporate_health_management" value="<TMPL_VAR NAME='acc_corporate_health_management'>" data-mask="**********" />
+					</div>
+				</div>
+			</section>
+		</div>
+	</TMPL_IF>
+	<TMPL_IF NAME='HistoryAdmin'>
+		<div class="col-md-6 padding-3">
+			<section class="box margin-top-4">
+				<header class="panel_header" for="header_employee_edit_acc" table="employee">
+					<h2 class="title"><TMPL_VAR NAME='LNG_BookkeepingAccountInformation'></h2>
+				</header>
+				<div class="content-body">
+					<div class="form-group">
+						<label class="form-label" for="creditor_number" table="employee"><TMPL_VAR NAME='LNG_CreditorNumber'></label>
+						<input class="form-control" type="text" name="creditor_number" id="creditor_number" value="<TMPL_VAR NAME='creditor_number'>" readonly />
+					</div>
+					<div class="form-group">
+						<label class="form-label" for="acc_ticket" table="employee"><TMPL_VAR NAME='LNG_AccTicket'></label>
+						<TMPL_IF NAME="employee_id">
+							<TMPL_IF NAME='HistoryAdmin'>
+								(<a href="#" class="property-history" property_name="acc_ticket"><TMPL_VAR NAME='LNG_RevisionHistory'></a>)
+							</TMPL_IF>
+						</TMPL_IF><br />
+						<TMPL_IF NAME='inherited_acc_ticket'>
+							<div>
+								<label class="form-label">
+									<small class="text-info">
+										<TMPL_VAR NAME='LNG_InheritedValueSourceCompanyUnit'>: <TMPL_VAR NAME='inherited_acc_ticket'>
+									</small>
+								</label>
+							</div>
+						</TMPL_IF>
+						<input class="form-control" type="text" name="acc_ticket" id="acc_ticket" value="<TMPL_VAR NAME='acc_ticket'>" data-mask="**********" />
+					</div>
+					<div class="form-group">
+						<label class="form-label" for="acc_accommodation" table="employee"><TMPL_VAR NAME='LNG_AccAccommodation'></label>
+						<TMPL_IF NAME="employee_id">
+							<TMPL_IF NAME='HistoryAdmin'>
+								(<a href="#" class="property-history" property_name="acc_accommodation"><TMPL_VAR NAME='LNG_RevisionHistory'></a>)
+							</TMPL_IF>
+						</TMPL_IF><br />
+						<TMPL_IF NAME='inherited_acc_accommodation'>
+							<div>
+								<label class="form-label">
+									<small class="text-info">
+										<TMPL_VAR NAME='LNG_InheritedValueSourceCompanyUnit'>: <TMPL_VAR NAME='inherited_acc_accommodation'>
+									</small>
+								</label>
+							</div>
+						</TMPL_IF>
+						<input class="form-control" type="text" name="acc_accommodation" id="acc_accommodation" value="<TMPL_VAR NAME='acc_accommodation'>" data-mask="**********" />
+					</div>
+					<div class="form-group">
+						<label class="form-label" for="acc_hospitality" table="employee"><TMPL_VAR NAME='LNG_AccCorporateHospitality'></label>
+						<TMPL_IF NAME="employee_id">
+							<TMPL_IF NAME='HistoryAdmin'>
+								(<a href="#" class="property-history" property_name="acc_hospitality"><TMPL_VAR NAME='LNG_RevisionHistory'></a>)
+							</TMPL_IF>
+						</TMPL_IF><br />
+						<TMPL_IF NAME='inherited_acc_hospitality'>
+							<div>
+								<label class="form-label">
+									<small class="text-info">
+										<TMPL_VAR NAME='LNG_InheritedValueSourceCompanyUnit'>: <TMPL_VAR NAME='inherited_acc_hospitality'>
+									</small>
+								</label>
+							</div>
+						</TMPL_IF>
+						<input class="form-control" type="text" name="acc_hospitality" id="acc_hospitality" value="<TMPL_VAR NAME='acc_hospitality'>" data-mask="**********" />
+					</div>
+					<div class="form-group">
+						<label class="form-label" for="acc_parking" table="employee"><TMPL_VAR NAME='LNG_AccParking'></label>
+						<TMPL_IF NAME="employee_id">
+							<TMPL_IF NAME='HistoryAdmin'>
+								(<a href="#" class="property-history" property_name="acc_parking"><TMPL_VAR NAME='LNG_RevisionHistory'></a>)
+							</TMPL_IF>
+						</TMPL_IF><br />
+						<TMPL_IF NAME='inherited_acc_parking'>
+							<div>
+								<label class="form-label">
+									<small class="text-info">
+										<TMPL_VAR NAME='LNG_InheritedValueSourceCompanyUnit'>: <TMPL_VAR NAME='inherited_acc_parking'>
+									</small>
+								</label>
+							</div>
+						</TMPL_IF>
+						<input class="form-control" type="text" name="acc_parking" id="acc_parking" value="<TMPL_VAR NAME='acc_parking'>" data-mask="**********" />
+					</div>
+					<div class="form-group">
+						<label class="form-label" for="acc_other" table="employee"><TMPL_VAR NAME='LNG_AccOtherCosts'></label>
+						<TMPL_IF NAME="employee_id">
+							<TMPL_IF NAME='HistoryAdmin'>
+								(<a href="#" class="property-history" property_name="acc_other"><TMPL_VAR NAME='LNG_RevisionHistory'></a>)
+							</TMPL_IF>
+						</TMPL_IF><br />
+						<TMPL_IF NAME='inherited_acc_other'>
+							<div>
+								<label class="form-label">
+									<small class="text-info">
+										<TMPL_VAR NAME='LNG_InheritedValueSourceCompanyUnit'>: <TMPL_VAR NAME='inherited_acc_other'>
+									</small>
+								</label>
+							</div>
+						</TMPL_IF>
+						<input class="form-control" type="text" name="acc_other" id="acc_other" value="<TMPL_VAR NAME='acc_other'>" data-mask="**********" />
+					</div>
+					<div class="form-group">
+						<label class="form-label" for="acc_travel_costs" table="employee"><TMPL_VAR NAME='LNG_AccTravelCosts'></label>
+						<TMPL_IF NAME="employee_id">
+							<TMPL_IF NAME='HistoryAdmin'>
+								(<a href="#" class="property-history" property_name="acc_travel_costs"><TMPL_VAR NAME='LNG_RevisionHistory'></a>)
+							</TMPL_IF>
+							<TMPL_IF NAME='inherited_acc_travel_costs'>
+								<div>
+									<label class="form-label">
+										<small class="text-info">
+											<TMPL_VAR NAME='LNG_InheritedValueSourceCompanyUnit'>: <TMPL_VAR NAME='inherited_acc_travel_costs'>
+										</small>
+									</label>
+								</div>
+							</TMPL_IF>
+						</TMPL_IF><br />
+						<input class="form-control" type="text" name="acc_travel_costs" id="acc_travel_costs" value="<TMPL_VAR NAME='acc_travel_costs'>" data-mask="**********" />
+					</div>
+					<div class="form-group">
+						<label class="form-label" for="acc_creditor" table="employee"><TMPL_VAR NAME='LNG_AccCreditor'></label>
+						<TMPL_IF NAME="employee_id">
+							<TMPL_IF NAME='HistoryAdmin'>
+								(<a href="#" class="property-history" property_name="acc_creditor"><TMPL_VAR NAME='LNG_RevisionHistory'></a>)
+							</TMPL_IF>
+						</TMPL_IF><br />
+						<TMPL_IF NAME='inherited_acc_creditor'>
+							<div>
+								<label class="form-label">
+									<small class="text-info">
+										<TMPL_VAR NAME='LNG_InheritedValueSourceCompanyUnit'>: <TMPL_VAR NAME='inherited_acc_creditor'>
+									</small>
+								</label>
+							</div>
+						</TMPL_IF>
+						<input class="form-control" type="text" name="acc_creditor" id="acc_creditor" value="<TMPL_VAR NAME='acc_creditor'>" data-mask="**********" />
+					</div>
+				</div>
+			</section>
+		</div>
+	</TMPL_IF>
+</div>

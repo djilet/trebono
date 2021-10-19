@@ -1,0 +1,2 @@
+UPDATE "public"."receipt" SET "status"='approve_proposed' WHERE "status"='approved_partially';
+ALTER TABLE "public"."receipt" DROP COLUMN "user_confirmed";

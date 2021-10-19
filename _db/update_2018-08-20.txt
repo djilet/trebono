@@ -1,0 +1,1 @@
+ALTER TABLE "public"."receipt" ADD COLUMN "user_confirmed" Timestamp Without Time Zone;

@@ -1,0 +1,371 @@
+<div class="row">
+	<TMPL_IF NAME='ErrorList'>
+		<div class="alert alert-danger alert-no-margin">
+			<TMPL_LOOP NAME='ErrorList'>
+				<TMPL_VAR NAME='Message'><TMPL_UNLESS NAME='__LAST__'><br /></TMPL_UNLESS>
+			</TMPL_LOOP>
+		</div>
+	</TMPL_IF>
+	<TMPL_IF NAME='MessageList'>
+		<div class="alert alert-success alert-no-margin">
+			<TMPL_LOOP NAME='MessageList'>
+				<TMPL_VAR NAME='Message'><TMPL_UNLESS NAME='__LAST__'><br /></TMPL_UNLESS>
+			</TMPL_LOOP>
+		</div>
+	</TMPL_IF>
+	<section class="box no-margin">
+		<header class="panel_header" for="header_employee_list" table="company">
+			<h2 class="title"><TMPL_VAR NAME='LNG_EmployeeList'></h2>
+		</header>
+		<div class="content-body">
+			<form action="<TMPL_VAR NAME='MODULE_URL'>" id="EmployeeSearchSubmit" method="post" autocomplete="off">
+				<div class="row">
+					<div class="col-md-2 col-sm-3">
+						<div class="form-group">
+							<label class="form-label"><TMPL_VAR NAME='LNG_FilterName'></label>
+							<input type="text" placeholder="<TMPL_VAR NAME='LNG_FilterNamePlaceholder'>" class="form-control" name="FilterName" value="<TMPL_VAR NAME='FilterName'>">
+						</div>
+					</div>
+					<div class="col-md-2 col-sm-3">
+						<div class="form-group">
+							<label class="form-label"><TMPL_VAR NAME='LNG_FilterCompanyTitle'></label>
+							<input type="text" placeholder="<TMPL_VAR NAME='LNG_FilterCompanyTitlePlaceholder'>" class="form-control" name="FilterCompanyTitle" value="<TMPL_VAR NAME='FilterCompanyTitle'>">
+							<input type="hidden" name="FilterCompanyUnitID" value="<TMPL_VAR NAME='FilterCompanyUnitID'>">
+						</div>
+					</div>
+					<div class="col-md-2 col-sm-3">
+						<label class="form-label"><TMPL_VAR NAME='LNG_IsActive'/></label>
+						<select name="FilterArchive" class="form-control">
+							<option value=""><TMPL_VAR NAME='LNG_All'/></option>
+							<option value="N" <TMPL_IF NAME='FilterArchive' value='N'>selected</TMPL_IF>><TMPL_VAR NAME='LNG_IsActiveY'/></option>
+							<option value="Y" <TMPL_IF NAME='FilterArchive' value='Y'>selected</TMPL_IF>><TMPL_VAR NAME='LNG_IsActiveN'/></option>
+						</select>
+					</div>
+					<div class="col-md-2 col-sm-3">
+						<label class="form-label"><TMPL_VAR NAME='LNG_AppUsed'/></label>
+						<select name="FilterApplicationUsed" class="form-control">
+							<option value=""><TMPL_VAR NAME='LNG_All'/></option>
+							<option value="N" <TMPL_IF NAME='FilterApplicationUsed' value='N'>selected</TMPL_IF>><TMPL_VAR NAME='LNG_IsMobileN'/></option>
+							<option value="Y" <TMPL_IF NAME='FilterApplicationUsed' value='Y'>selected</TMPL_IF>><TMPL_VAR NAME='LNG_IsMobileY'/></option>
+						</select>
+					</div>
+					<div class="col-md-2 col-sm-3">
+						<label class="form-label"><TMPL_VAR NAME='LNG_HasActiveContractFor'/></label>
+						<select name="FilterBookedModule" class="form-control select2-like placehold">
+							<option value=""></option>
+							<TMPL_LOOP NAME="ProductListBookedSearch">
+								<optgroup label="<TMPL_VAR NAME='title_translation'>">
+									<TMPL_LOOP NAME="ProductList">
+										<option value="<TMPL_VAR NAME='product_id'>" <TMPL_IF NAME='selected' VALUE='Y'>selected</TMPL_IF>><TMPL_VAR NAME="title_translation"/></option>
+									</TMPL_LOOP>
+								</optgroup>
+							</TMPL_LOOP>
+						</select>
+					</div>
+					<div class="col-md-2 col-sm-3 text-right">
+						<div class="form-group">
+							<label class="form-label hidden-xs">&nbsp;</label><br />
+							<a href="<TMPL_VAR NAME='MODULE_URL'>&<TMPL_VAR NAME='ParamsForURL'>&employee_id=" class="btn btn-primary btn-icon"><i class="fa fa-plus"></i> <TMPL_VAR NAME='LNG_Add'></a>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<TMPL_IF NAME='Admin'>
+						<div class="col-md-2">
+							<label class="form-label"><TMPL_VAR NAME='LNG_Option'/></label>
+							<select name="FilterOption" class="form-control select2-like placehold">
+								<option value=""></option>
+								<TMPL_LOOP NAME="ProductListFieldsSearch">
+									<optgroup label="<TMPL_VAR NAME='title_translation'>">
+										<TMPL_LOOP NAME="OptionList">
+											<option value="<TMPL_VAR NAME='option_id'>" data-type="<TMPL_VAR NAME='type'>" data-product="<TMPL_VAR NAME='product_id'>" data-product_group="<TMPL_VAR NAME='group_id'>" <TMPL_IF NAME='selected' value='Y'>selected</TMPL_IF>><TMPL_VAR NAME="title_translation"/></option>
+										</TMPL_LOOP>
+									</optgroup>
+								</TMPL_LOOP>
+							</select>
+						</div>
+						<div class="col-md-1">
+							<label class="form-label"><TMPL_VAR NAME='LNG_OptionOperation'/></label>
+							<select name="FilterOptionOperation" class="form-control select2-like placehold">
+								<option value="="> = </option>
+								<option value=">" <TMPL_IF NAME='FilterOptionOperation' value='>'>selected</TMPL_IF>> > </option>
+								<option value="<" <TMPL_IF NAME='FilterOptionOperation' value='<'>selected</TMPL_IF>> < </option>
+								<option value=">=" <TMPL_IF NAME='FilterOptionOperation' value='>='>selected</TMPL_IF>> >= </option>
+								<option value="<=" <TMPL_IF NAME='FilterOptionOperation' value='<='>selected</TMPL_IF>> <= </option>
+							</select>
+						</div>
+						<div class="col-md-2">
+							<label class="form-label"><TMPL_VAR NAME='LNG_OptionValue'/></label>
+							<input type="text" name="FilterOptionValue" class="form-control" value="<TMPL_VAR NAME='FilterOptionValue'>">
+							<input type="text" name="FilterOptionValueDatepicker" class="form-control datepicker hidden" value="<TMPL_VAR NAME='FilterOptionValueDatepicker'>">
+							<input type="text" name="FilterOptionProduct" class="form-control hidden" value="">
+							<input type="text" name="FilterOptionProductGroup" class="form-control hidden" value="">
+						</div>
+				</div>
+				<br/>
+				<div class="row">
+					<div class="col-md-2">
+						<label class="form-label"><TMPL_VAR NAME='LNG_ProductGroupForReceipts'/></label>
+						<select name="FilterProductReceiptSearch" class="form-control select2-like placehold">
+							<option value=""></option>
+							<TMPL_LOOP NAME="ProductGroupListReceipt">
+								<option value="<TMPL_VAR NAME='group_id'>" <TMPL_IF NAME='selected' value='Y'>selected</TMPL_IF>><TMPL_VAR NAME="title_translation"/></option>
+							</TMPL_LOOP>
+						</select>
+					</div>
+					<div class="col-md-2">
+						<label class="form-label"><TMPL_VAR NAME='LNG_Option'/></label>
+						<select name="FilterReceiptOptionValueOne" class="form-control select2-like placehold">
+							<option value=""></option>
+							<TMPL_LOOP NAME="OptionListReceiptSearch">
+								<option value="<TMPL_VAR NAME='option_id'>" <TMPL_IF NAME='receipt_value_one_selected' value='Y'>selected</TMPL_IF>><TMPL_VAR NAME="title_translation"/></option>
+							</TMPL_LOOP>
+						</select>
+					</div>
+					<div class="col-md-1">
+						<label class="form-label"><TMPL_VAR NAME='LNG_OptionOperation'/></label>
+						<select name="FilterReceiptOptionOperation" class="form-control select2-like placehold">
+							<option value="="> = </option>
+							<option value=">" <TMPL_IF NAME='FilterReceiptOptionOperation' value='>'>selected</TMPL_IF>> > </option>
+							<option value="<" <TMPL_IF NAME='FilterReceiptOptionOperation' value='<'>selected</TMPL_IF>> < </option>
+							<option value=">=" <TMPL_IF NAME='FilterReceiptOptionOperation' value='>='>selected</TMPL_IF>> >= </option>
+							<option value="<=" <TMPL_IF NAME='FilterReceiptOptionOperation' value='<='>selected</TMPL_IF>> <= </option>
+						</select>
+					</div>
+					<div class="col-md-2">
+						<label class="form-label"><TMPL_VAR NAME='LNG_Option'/></label>
+						<select name="FilterReceiptOptionValueTwo" class="form-control select2-like placehold">
+							<option value=""></option>
+							<TMPL_LOOP NAME="OptionListReceiptSearch">
+								<option value="<TMPL_VAR NAME='option_id'>" <TMPL_IF NAME='receipt_value_two_selected' value='Y'>selected</TMPL_IF>><TMPL_VAR NAME="title_translation"/></option>
+							</TMPL_LOOP>
+						</select>
+					</div>
+					</TMPL_IF>
+					<div class="col-md-2 col-sm-3">
+						<div class="form-group">
+							<label class="form-label hidden-xs">&nbsp;</label><br />
+							<button type="submit" class="btn btn-primary btn-icon"><i class="fa fa-search"></i> <TMPL_VAR NAME='LNG_FilterApply'></button>
+						</div>
+					</div>
+				</div>
+				<br>
+				<TMPL_VAR NAME='ParamsForFilter' ESCAPE='none'>
+			</form>
+
+			<TMPL_IF NAME='EmployeeList'>
+				<div class="row">
+					<div class="col-md-6 form-group text-center-xs">
+						<span><TMPL_VAR NAME='ListInfo'></span>
+					</div>
+					<div class="col-md-6 form-group text-right text-center-xs">
+						<form action="<TMPL_VAR NAME='MODULE_URL'>" method="post" class="form-inline">
+							<span class="right15 visible-xs-block visible-sm-inline visible-md-inline visible-lg-inline"><TMPL_VAR NAME='LNG_EmployeesOnPage'></span>
+							<select name="ItemsOnPage" class="form-control">
+								<TMPL_LOOP NAME='ItemsOnPageList'>
+									<option <TMPL_IF NAME='Selected'>selected</TMPL_IF> value="<TMPL_VAR NAME='Value'>"><TMPL_IF NAME='Value'><TMPL_VAR NAME='Value'><TMPL_ELSE><TMPL_VAR NAME='LNG_All'></TMPL_IF></option>
+								</TMPL_LOOP>
+							</select>
+							<TMPL_VAR NAME='ParamsForItemsOnPage' ESCAPE='none'>
+						</form>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col-md-12 col-sm-12 col-xs-12">
+						<table class="table table-hover table-tree">
+							<thead>
+								<tr>
+									<th><TMPL_VAR NAME='LNG_Name'></th>
+									<th><TMPL_VAR NAME='LNG_Products'></th>
+									<th><TMPL_VAR NAME='LNG_CompanyTitle'></th>
+									<th width="200"><TMPL_VAR NAME='LNG_Phone'></th>
+									<th><TMPL_VAR NAME='LNG_Email'></th>
+									<th width="175"><TMPL_VAR NAME='LNG_LastLogin'></th>
+									<th width="175"><TMPL_VAR NAME='LNG_LastApiCall'></th>
+									<th width="100"><TMPL_VAR NAME='LNG_AppUsed'></th>
+									<th></th>
+								</tr>
+							</thead>
+							<tbody>
+								<TMPL_LOOP NAME='EmployeeList'>
+									<tr<TMPL_IF NAME="archive" VALUE="Y"> class="inactive"</TMPL_IF>>
+										<td><a href="<TMPL_VAR NAME='MODULE_URL'>&<TMPL_VAR NAME='ParamsForURL'>&employee_id=<TMPL_VAR NAME='employee_id'>"><TMPL_VAR NAME='last_name'> <TMPL_VAR NAME='first_name'></a></td>
+										<td><TMPL_LOOP NAME='product_group_list'><TMPL_VAR NAME='title_translation'></br></TMPL_LOOP></td>
+										<td>
+											<TMPL_IF NAME='root_company_unit_id'>
+												<a href="<TMPL_VAR NAME='MODULE_URL'>&Section=company_unit&company_unit_id=<TMPL_VAR NAME='root_company_unit_id'>"><TMPL_VAR NAME='root_company_unit_title'></a>,
+											</TMPL_IF>
+											<a href="<TMPL_VAR NAME='MODULE_URL'>&Section=company_unit&company_unit_id=<TMPL_VAR NAME='company_unit_id'>"><TMPL_VAR NAME='company_unit_title'></a>
+										</td>
+										<td>
+											<TMPL_VAR NAME='phone'>
+										</td>
+										<td>
+											<TMPL_VAR NAME='email'>
+										</td>
+										<td><TMPL_VAR NAME='last_login' FORMAT='datetime'></td>
+										<td><TMPL_VAR NAME='last_api_call' FORMAT='datetime'></td>
+										<td>
+											<TMPL_IF NAME='uses_application' VALUE='Y'>
+												<TMPL_IF NAME='device_version_list'>
+													<TMPL_LOOP NAME='device_version_list'>
+														<TMPL_IF NAME='client' VALUE='android'>
+															<i class="fa fa-android"></i>
+														<TMPL_ELSEIF NAME='client' VALUE='ios'>
+															<i class="fa fa-apple"></i>
+														</TMPL_IF>
+														<a href="#" class="version-history" device-id="<TMPL_VAR NAME='device_id'>" user-id="<TMPL_VAR NAME='user_id'>"><TMPL_VAR NAME='version'></a></br>
+													</TMPL_LOOP>
+												<TMPL_ELSE>
+													<i class="fa fa-check"></i>
+												</TMPL_IF>
+											</TMPL_IF>
+										</td>
+										<td class="text-right">
+											<TMPL_IF NAME="Admin">
+												<TMPL_IF NAME="archive" VALUE="N">
+													<a role="button" data-employee-ids="<TMPL_VAR NAME='employee_id'>" class="confirm-disactivate" title="<TMPL_VAR NAME='first_name'> <TMPL_VAR NAME='last_name'>"><i class='fa fa-close delete'></i></a>
+													<TMPL_ELSE/>
+													<a href="<TMPL_VAR NAME='MODULE_URL'>&<TMPL_VAR NAME='ParamsForURL'>&Do=Activate&EmployeeIDs[]=<TMPL_VAR NAME='employee_id'>" class="confirm-activate" title="<TMPL_VAR NAME='first_name'> <TMPL_VAR NAME='last_name'>"><i class='fa fa-check activate'></i></a>
+												</TMPL_IF>
+											</TMPL_IF>
+										</td>
+									</tr>
+								</TMPL_LOOP>
+							</tbody>
+						</table>
+						<div class="text-center">
+							<ul class="pagination">
+								<TMPL_VAR NAME='Paging' ESCAPE='none'>
+							</ul>
+						</div>
+					</div>
+				</div>
+			<TMPL_ELSE>
+				<div class="alert alert-success"><TMPL_VAR NAME='LNG_Empty'></div>
+			</TMPL_IF>
+		</div>
+	</section>
+</div>
+
+<script type="text/javascript">
+	function refreshPage() {
+		window.location.reload();
+	}
+
+	$(document).ready(function() {
+		$('select[name=ItemsOnPage]').change(function() {
+			$(this).closest('form').submit();
+		});
+		var companyTitles = [];
+		"<TMPL_LOOP NAME='CompanyUnitList'>"
+			companyTitles.push("<TMPL_VAR NAME='title' ESCAPE='none'>");
+		"</TMPL_LOOP>"
+
+		$('input[name=FilterCompanyTitle]').typeahead({
+			hint: true,
+			highlight: true,
+			minLength: 1
+		}, {
+			//name: 'states',
+			displayKey: 'value',
+			source: typeaheadSubstringMatcher(companyTitles)
+		});
+		FilterOptionValue();
+
+		$("[name=FilterOption]").on("change", function() {
+			FilterOptionValue();
+		});
+
+		$("#EmployeeSearchSubmit [type=submit]").on("click", function (e) {
+			e.preventDefault();
+			if (!$("[name='FilterProductReceiptSearch']").val() && $("[name='FilterReceiptOptionValueOne']").val() && $("[name='FilterReceiptOptionValueTwo']").val())
+				ModalAlert("<TMPL_VAR NAME='LNG_Error'>", "<TMPL_VAR NAME='LNG_FilterReceiptEmptyProduct'>");
+			else
+				$("#EmployeeSearchSubmit").submit();
+		});
+
+		$(document).on('click', 'a.confirm-disactivate', function(e) {
+			e.preventDefault();
+			var $a = $(this);
+			var title = $a.attr('title');
+			var msg = '<TMPL_VAR NAME="LNG_DeactivateMessage">'.replace(/%Title%/g, title);
+
+			ModalConfirm(msg, function() {
+				$.ajax({
+					url: "<TMPL_VAR NAME='PROJECT_PATH'>module/company/ajax.php",
+					type: 'POST',
+					dataType: 'JSON',
+					data: {
+						Action: 'RemoveEmployee',
+						employee_ids: $a.data('employee-ids'),
+					},
+					success: function(data) {
+						if (data.status === 'success') {
+							CreateStaticTopMessage(data.message, 'success');
+							$a.closest('tr').addClass('inactive');
+							refreshPage();
+						} else {
+							ModalAlert("<TMPL_VAR NAME='LNG_Error'>", data.error);
+						}
+					},
+					error: function(jqXHR, textStatus, errorThrown) {
+						CreateStaticTopMessage(textStatus + " / " + errorThrown, 'error');
+					}
+				});
+			});
+		});
+		$(document).on('click', 'a.confirm-activate', function(e){
+			var a = $(this);
+			var title = a.attr('title');
+			var msg = '<TMPL_VAR NAME="LNG_ActivateMessage">'.replace(/%Title%/g, title);
+			ModalConfirm(msg, function(){
+				window.location.href = a.attr('href');
+			});
+			e.preventDefault();
+		});
+	});
+
+	$('.version-history').click(function(e) {
+		var deviceID = $(this).attr('device-id');
+		var userID = $(this).attr('user-id');
+
+		$.ajax({
+			url: "<TMPL_VAR NAME='PROJECT_PATH'>module/company/ajax.php",
+			type: 'GET',
+			dataType: 'JSON',
+			data:{
+				Action: 'GetVersionHistoryDeviceHTML',
+				device_id: deviceID,
+				user_id: userID
+			},
+			success: function(data){
+				if (typeof data.HTML != 'undefined') {
+					$(data.HTML).modal('show').on('hidden.bs.modal', function () {
+						$(this).remove();
+					});
+				}
+			}
+		});
+
+		e.preventDefault();
+	});
+
+	function FilterOptionValue()
+	{
+		var filterSelect = $("[name=FilterOption]").find(':selected');
+		if (filterSelect.attr('data-type') == "date")
+		{
+			$("[name=FilterOptionValue]").addClass("hidden");
+			$("[name=FilterOptionValueDatepicker]").removeClass("hidden");
+		}
+		else
+		{
+			$("[name=FilterOptionValue]").removeClass("hidden");
+			$("[name=FilterOptionValueDatepicker]").addClass("hidden");
+		}
+		$("[name=FilterOptionProduct]").val(filterSelect.attr("data-product"));
+		$("[name=FilterOptionProductGroup]").val(filterSelect.attr("data-product_group"));
+	}
+</script>

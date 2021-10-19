@@ -1,0 +1,207 @@
+<TMPL_IF NAME='BookkeepingAdmin'>
+<div class="row">
+	<section class="box no-margin">
+		<header class="panel_header" for="header_bookkeeping_list_filter" table="billing">
+			<h2 class="title pull-left"><TMPL_VAR NAME='LNG_Filter'></h2>
+			<div class="actions panel_actions pull-left">
+				<i class="box_toggle fa fa-chevron-down"></i>
+			</div>
+		</header>								
+		<div class="content-body">
+			<form action="<TMPL_VAR NAME='MODULE_URL'>&Section=bookkeeping_export" method="post">
+				<div class="row">   
+					<div class="col-md-3">
+						<div class="form-group">
+							<label class="form-label"><TMPL_VAR NAME='LNG_FilterCreatedRange'></label><br />
+							<input type="text" name="FilterCreatedRange" class="form-control daterange active" value="<TMPL_VAR NAME='FilterCreatedRange'>" data-time-picker-increment="1" data-time-picker="true">
+						</div>
+					</div>	
+					<div class="col-md-3">
+						<div class="form-group">
+							<label class="form-label"><TMPL_VAR NAME='LNG_FilterTitle'></label>
+							<input type="text" placeholder="<TMPL_VAR NAME='LNG_FilterTitlePlaceholder'>" class="form-control" name="FilterTitle" value="<TMPL_VAR NAME='FilterTitle'>">
+						</div>
+					</div>
+					<div class="col-md-3">
+						<div class="form-group">
+							<label class="form-label hidden-xs">&nbsp;</label><br />
+							<button type="submit" class="btn btn-primary btn-icon"><i class="fa fa-search"></i> <TMPL_VAR NAME='LNG_FilterApply'></button>
+						</div>
+					</div>
+				</div>
+				<TMPL_VAR NAME='ParamsForFilter' ESCAPE='none'/>
+			</form>
+			<form action="<TMPL_VAR NAME='MODULE_URL'>&Section=bookkeeping_export" method="post">
+				<div class="row">
+					<div class="col-md-3">
+						<label class="form-label">&nbsp;</label><br />
+						<select id="HowToChoose" class="form-control select2-like">
+							<option value="1"><TMPL_VAR NAME="LNG_SelectOne"/></option>
+							<option value="2"><TMPL_VAR NAME="LNG_SelectAll"/></option>
+						</select>
+					</div>
+					<div class="col-md-3">
+						<label class="form-label"><TMPL_VAR NAME='LNG_CompanyUntFilter'></label><br />
+						<select name="company_unit_id[]" class="form-control select2" multiple data-allow-clear="true" data-placeholder="<TMPL_VAR NAME='LNG_CompanyUntFilter'>">
+							<TMPL_VAR NAME="CompanyListHtml" ESCAPE="none"/>
+						</select>
+						<input type="text" class="form-control hidden AllCompanies" value="" disabled>
+					</div>
+					<div class="col-md-3">
+						<label class="form-label"><TMPL_VAR NAME='LNG_DateOfExport'></label><br />
+						<input type="text" id="create_date" name="date" class="form-control datepicker" FORMAT='datepicker'>
+					</div>
+					<div class="col-md-3">
+						<label class="form-label hidden-xs">&nbsp;</label><br />
+						<button type="submit" class="btn btn-primary btn-icon"><i class="fa fa-file-export"></i> <TMPL_VAR NAME='LNG_TravelExport'></button>
+					</div>
+				</div>
+				<input type="hidden" name="Action" value="Export" />
+				<TMPL_VAR NAME='ParamsForFilter' ESCAPE='none'>
+			</form>
+		</div>
+	</section>
+</div>
+</TMPL_IF>
+<div class="row">
+	<section class="box no-margin">
+		<header class="panel_header" for="header_bookkeeping_export_list" table="billing">
+			<h2 class="title"><TMPL_VAR NAME='LNG_BookkeepingExport'></h2>
+		</header>								
+		<div class="content-body">
+			<div class="row">
+				<div class="col-md-12 col-sm-12 col-xs-12">
+					<TMPL_IF NAME='ExportList'>
+						<div class="row">
+							<div class="col-md-6 form-group text-center-xs">
+								<span><TMPL_VAR NAME='ListInfo'/></span>
+							</div>
+							<div class="col-md-6 form-group text-right text-center-xs">
+								<form action="<TMPL_VAR NAME='MODULE_URL'>&Section=bookkeeping_export" method="post" class="form-inline">
+									<span class="right15 visible-xs-block visible-sm-inline visible-md-inline visible-lg-inline"><TMPL_VAR NAME='LNG_DocumentsOnPage'/></span>
+									<select name="ItemsOnPage" class="form-control">
+										<TMPL_LOOP NAME='ItemsOnPageList'>
+											<option <TMPL_IF NAME='Selected'>selected</TMPL_IF> value="<TMPL_VAR NAME='Value'>"><TMPL_IF NAME='Value'><TMPL_VAR NAME='Value'><TMPL_ELSE><TMPL_VAR NAME='LNG_All'></TMPL_IF></option>
+										</TMPL_LOOP>
+									</select>
+									<TMPL_VAR NAME='ParamsForItemsOnPage' ESCAPE='none'>
+								</form>
+							</div>
+						</div>
+						<table class="table table-striped">
+							<thead>
+								<tr>
+									<th><TMPL_VAR NAME='LNG_CompanyUnitTitle'></th>
+									<th><TMPL_VAR NAME='LNG_Date'></th>
+									<th><TMPL_VAR NAME='LNG_Created'></th>
+									<th><TMPL_VAR NAME='LNG_CreatedBy'></th>
+									<th class="text-center"><TMPL_VAR NAME='LNG_Export'></th>
+									<th></th>
+									<th></th>
+								</tr>
+							</thead>
+							<tbody>
+								<TMPL_LOOP NAME='ExportList'>
+									<TMPL_IF NAME='archive' VALUE='N'>
+										<tr>
+											<TMPL_ELSE/>
+										<tr class="inactive">
+									</TMPL_IF>
+										<td width="40%"><TMPL_VAR NAME='title'/></td>
+										<td width="15%"><TMPL_VAR NAME='date' FORMAT='datetime'/></td>
+										<td width="15%"><TMPL_VAR NAME='created' FORMAT='datetime'/></td>
+										<td width="15%"><TMPL_VAR NAME='created_by'/></td>
+										<td class="text-center">
+											<TMPL_IF NAME='file'>
+												<a rel="tooltip" data-toggle="tooltip" data-original-title="<TMPL_VAR NAME='LNG_DownloadExport'>" data-placement="top" href="<TMPL_VAR NAME='MODULE_URL'>&<TMPL_VAR NAME='ParamsForURL'>&Action=GetBookkeepingExport&export_id=<TMPL_VAR NAME='bookkeeping_export_id'>"><i class="fa fa-file-pdf-o"></i></a>
+											</TMPL_IF>
+										</td>
+										<td class="text-right">
+											<TMPL_IF NAME='Admin'>
+												<TMPL_IF NAME='archive' VALUE='N'>
+													<a href="<TMPL_VAR NAME='MODULE_URL'>&<TMPL_VAR NAME='ParamsForURL'>&Action=Remove&ExportIDs[]=<TMPL_VAR NAME='bookkeeping_export_id'>" class="confirm-remove" title="<TMPL_VAR NAME='LNG_BookkeepingExportFor'> '<TMPL_VAR NAME='title'>' <TMPL_VAR NAME='LNG_Created'> <TMPL_VAR NAME='created' FORMAT='datetime'>"><i class='fa fa-close delete'></i></a>
+												</TMPL_IF>
+											</TMPL_IF>
+										</td>
+										<td>
+											<TMPL_IF NAME='HistoryAdmin'>
+												(<a href="#" class="property-history" property_name="archive" bookkeeping_export_id="<TMPL_VAR NAME='bookkeeping_export_id'>"><TMPL_VAR NAME='LNG_RevisionHistory'></a>)
+											</TMPL_IF>
+										</td>
+									</tr>
+								</TMPL_LOOP>
+							</tbody>
+						</table>
+						<div class="text-center">
+							<ul class="pagination">
+								<TMPL_VAR NAME='Paging' ESCAPE='none'>
+							</ul>
+						</div>		
+					<TMPL_ELSE>
+						<div class="alert alert-success"><TMPL_VAR NAME='LNG_Empty'></div>
+					</TMPL_IF>
+				</div>
+			</div>
+		</div>
+	</section>
+</div>
+
+<script type="text/javascript">
+	$(document).ready(function(){
+		$('select[name=ItemsOnPage]').change(function(){
+			$(this).closest('form').submit();
+		});
+
+		$("#HowToChoose").on("change", function () {
+			var select = $("[name='company_unit_id[]']");
+
+			switch (this.value){
+				case "1":
+					select.val([]).trigger("change");
+					$(".AllCompanies").addClass("hidden");
+					select.removeClass("hidden");
+					break;
+				case "2":
+					var opval = select.find("option").map(function(){ return $(this).val(); });
+					select.val(opval).trigger("change");
+					select.addClass("hidden");
+					$(".AllCompanies").removeClass("hidden");
+					$(".AllCompanies").val("<TMPL_VAR NAME='LNG_AllCompanies'> ("+opval.length+")");
+					break;
+			}
+		});
+
+		$('.property-history').click(function (e) {
+			var propertyName = $(this).attr('property_name');
+			var exportID = $(this).attr('bookkeeping_export_id');
+			$.ajax({
+				url: '<TMPL_VAR NAME='PROJECT_PATH'>module/billing/ajax.php',
+				type: 'GET',
+				dataType: 'JSON',
+				data:{
+					Action: 'GetPropertyHistoryBookkeepingExportHTML',
+					property_name: propertyName,
+					export_id: exportID
+				},
+				success: function(data){
+					if(typeof data.HTML != 'undefined'){
+						$(data.HTML).modal('show').on('hidden.bs.modal', function () {
+							$(this).remove();
+						});
+					}
+				}
+			});
+			e.preventDefault();
+		});
+
+		$(document).on('click','a.confirm-remove',function(e){
+			var a = $(this);
+			var title = a.attr('title');
+			var msg = '<TMPL_VAR NAME="LNG_RemoveMessage">'.replace(/%Title%/g, title);
+			ModalConfirm(msg, function(){
+				window.location.href = a.attr('href');
+			});
+			e.preventDefault();
+		});
+	});
+</script>

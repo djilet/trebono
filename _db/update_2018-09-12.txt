@@ -1,0 +1,23 @@
+--lst-control
+CREATE TABLE public.partner_contract
+(
+    partner_contract_id integer NOT NULL,
+    contract_id integer,
+    partner_id integer,
+    commission character varying(32),
+    "long" character varying(32),
+    implementation_fee character varying(32),
+    level character varying
+);
+
+CREATE SEQUENCE public."partner_contract_ContractID_seq";
+
+ALTER TABLE "public"."partner_contract" ALTER COLUMN "partner_contract_id" SET DEFAULT nextval('"partner_contract_ContractID_seq"'::regclass);
+
+--lst-main
+ALTER TABLE public.partner DROP COLUMN app_logo_image;
+ALTER TABLE public.partner DROP COLUMN app_logo_mini_image;
+ALTER TABLE public.partner DROP COLUMN payment_type;
+ALTER TABLE public.partner DROP COLUMN payment_method;
+ALTER TABLE public.partner DROP COLUMN financial_statement_date;
+ALTER TABLE public.partner DROP COLUMN invoice_date;

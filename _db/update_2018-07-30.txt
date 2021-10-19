@@ -1,0 +1,4 @@
+UPDATE "public"."config" SET "config_id"='2', "code"='vat_exception_19_shop', "value"='' WHERE "config_id"='2';
+UPDATE "public"."config" SET "config_id"='1', "code"='vat_exception_7_shop', "value"='' WHERE "config_id"='1';
+INSERT INTO "public"."config" ("config_id","code","value") VALUES (nextval('"config_ConfigID_seq"'::regclass),'vat_exception_19_restaurant','');
+ALTER TABLE "public"."receipt_line" ADD COLUMN "approved" character varying(255);

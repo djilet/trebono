@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Root>
+    <module-title>Partner</module-title>
+
+    <partner-title-empty>Partner Name eingeben</partner-title-empty>
+    <title-partner-edit>Partnerstammdaten bearbeiten</title-partner-edit>
+    <title-partner-unit-add>Partner hinzufügen</title-partner-unit-add>
+
+    <payment-method-sepa>SEPA Lastschrift</payment-method-sepa>
+    <payment-method-bill>Rechnung</payment-method-bill>
+    <payment-method-credit_card>Kreditkarte</payment-method-credit_card>
+    <payment-type-monthly>Monatlich</payment-type-monthly>
+    <payment-type-quarterly>Quartal</payment-type-quarterly>
+    <payment-type-yearly>Jährlich</payment-type-yearly>
+
+    <title-contact-edit>Kontaktperson ändern</title-contact-edit>
+    <title-contact-add>Kontakt hinzufügen</title-contact-add>
+    <contact-type-management>Geschäftsführer/Eigentümer</contact-type-management>
+    <contact-type-hr>Personalmanager</contact-type-hr>
+    <contact-type-finance>Finanzmanager</contact-type-finance>
+    <contact-type-it>IT-Manager</contact-type-it>
+    <contact-type-other>Sonst.</contact-type-other>
+    <contract-intersection-found>Start Datum von %product% stimmt nicht mit dem Start Datum im Kunden überein.
+    </contract-intersection-found>
+
+    <contact-for-commission>Provision</contact-for-commission>
+    <contact-for-contract>Vertrag</contact-for-contract>
+    <contact-for-service>Service</contact-for-service>
+    <contact-for-support>Support</contact-for-support>
+
+    <contracts-created>%count% Verträge erstellt</contracts-created>
+    <contracts-removed>%count% contract(s) removed</contracts-removed>
+    <product-list-empty>Service Liste ist leer</product-list-empty>
+    <cannot-create-contract>Partnervertrag kann nicht erstellt werden.</cannot-create-contract>
+    <contract-closed>Vertrag beendet</contract-closed>
+    <product_id-required>Service nicht angegeben</product_id-required>
+    <partner_id-required>Partner nicht angegeben</partner_id-required>
+    <partner_type-required>Partner Typ nicht angegeben</partner_type-required>
+    <company_unit_id-required>Kunde nicht angegeben</company_unit_id-required>
+    <commission->Provision</commission->
+    <commission-service>Service</commission-service>
+    <commission-implementation>Implementierung</commission-implementation>
+
+    <error-save-excel>Cannot save excel file</error-save-excel>
+    <export-no-records>Keine Provisionsansprüche vorhanden.</export-no-records>
+    <error-filestorage>Error moving file to filestorage</error-filestorage>
+    <error-download>Error generating download link</error-download>
+</Root>

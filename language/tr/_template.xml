@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Root>
+    <common>
+        <Yes>Ja</Yes>
+        <No>Nein</No>
+        <All>Alle</All>
+        <Create>Erstellen</Create>
+        <Save>Speichern</Save>
+        <Cancel>Abbruch</Cancel>
+        <Close>Schließen</Close>
+        <Help>Help</Help>
+        <Search>Suche</Search>
+        <Edit>Ändern</Edit>
+        <Remove>Löschen</Remove>
+        <Empty>Leer</Empty>
+        <TabMain>Allgemeine</TabMain>
+        <TabSEO>SEO</TabSEO>
+        <TabAdditional>Zusätzliche</TabAdditional>
+    </common>
+    <admin>
+        <_footer.html>
+            <YouAreLoggedInAs>Sie sind eingeloggt als</YouAreLoggedInAs>
+            <Logout>Log out</Logout>
+        </_footer.html>
+        <_header.html>
+            <MyProfile>Mein Profil</MyProfile>
+            <Logout>Logout</Logout>
+            <HelpTips>Hilfe</HelpTips>
+            <MoreTips>mehr</MoreTips>
+        </_header.html>
+        <forgot_password.html>
+            <ForgotPassword>Restore password</ForgotPassword>
+            <EmailRequired>Bitte E-Mail eingeben.</EmailRequired>
+            <Email>Registrierte E-Mail</Email>
+            <Close>Schliessen</Close>
+            <GetPassword>Passwort anfordern</GetPassword>
+        </forgot_password.html>
+        <forgot_password_email.html>
+            <Hello>Hallo,</Hello>
+            <YourLogin>Ihr Login ist:</YourLogin>
+            <YourNewPassword>Ihr neues Passwort ist:</YourNewPassword>
+        </forgot_password_email.html>
+        <login.html>
+            <AdministrationPanel>Administration Panel</AdministrationPanel>
+            <LoginRequired>Bitte Login E-Mail eingeben:</LoginRequired>
+            <PasswordRequired>Bitte Passwort eingeben:</PasswordRequired>
+            <Login>Login</Login>
+            <Password>Passwort</Password>
+            <RememberMe>Remember Me</RememberMe>
+            <ForgotPassword>Passwort vergessen?</ForgotPassword>
+            <ButtonLogin>Anmelden</ButtonLogin>
+        </login.html>
+        <user_edit.html>
+            <EditUser>Anwenderdaten bearbeiten</EditUser>
+            <AddUser>Anwender hinzufügen</AddUser>
+            <FieldsetPersonal>Anwender Info</FieldsetPersonal>
+            <Salutation>Anrede</Salutation>
+            <FirstName>Vorname</FirstName>
+            <LastName>Nachname</LastName>
+            <Birthday>Geburtstag</Birthday>
+            <Phone>Mobilnummer</Phone>
+            <Email>E-Mail</Email>
+            <ZipCode>PLZ</ZipCode>
+            <Country>Land</Country>
+            <City>Stadt</City>
+            <Street>Straße</Street>
+            <House>Hausnummer</House>
+            <OldPassword>Aktuelles Passwort</OldPassword>
+            <NewPassword>Neues Passwort</NewPassword>
+            <RepeatPassword>Neues Passwort wiederholen</RepeatPassword>
+            <PasswordRequirements>Das Passwort muss aus mindestens 8 Zeichen bestehen und mindestens einen
+                Großbuchstaben und eine Zahl enthalten
+            </PasswordRequirements>
+            <FieldsetPermissions>Rollen</FieldsetPermissions>
+            <AddCompanyUnit>Neuen Kunden anlegen</AddCompanyUnit>
+            <InterfaceLanguage>Sprache</InterfaceLanguage>
+            <RevisionHistory>Historie</RevisionHistory>
+            <PasswordHistory>Passwort Historie</PasswordHistory>
+            <BelongsToCompany>Gehört der Firma</BelongsToCompany>
+        </user_edit.html>
+        <user_list.html>
+            <UserList>Zugriffsrechte Anwender</UserList>
+            <NoSelection>Please choose at least one user from the list</NoSelection>
+            <ConfirmRemoveMultiple>Are you sure you want to remove the selected users?</ConfirmRemoveMultiple>
+            <ConfirmDisactivateMultiple>Sind Sie sicher, dass Sie den ausgewählten Nutzer de-aktivieren wollen?
+            </ConfirmDisactivateMultiple>
+            <ConfirmRemove>Sind Sie sicher, dass Sie den Nutzer '%Name%' löschen wollen?</ConfirmRemove>
+            <ConfirmActivate>Are you sure you want to activate user '%Name%'?</ConfirmActivate>
+            <FilterUser>Anwender</FilterUser>
+            <FilterCompanyUnit>Administrator für Unternehmen</FilterCompanyUnit>
+            <FilterCompanyUnitPlaceholder>Suche</FilterCompanyUnitPlaceholder>
+            <FilterFromCompanyUnit>Administrator von der Unternehmen</FilterFromCompanyUnit>
+            <FilterFromCompanyUnitPlaceholder>Suche</FilterFromCompanyUnitPlaceholder>
+            <Administrator>Administrator</Administrator>
+            <Employee>Mitarbeiter</Employee>
+            <Search>Suche</Search>
+            <Add>Neuen Anwender anlegen</Add>
+            <Name>Name</Name>
+            <Phone>Mobilnummer</Phone>
+            <Email>E-Mail</Email>
+            <LastLogin>Letzter Login</LastLogin>
+            <Edit>Click to edit user</Edit>
+            <Empty>Nothing is found by your request</Empty>
+            <RemoveMultiple>Markierte Daten löschen</RemoveMultiple>
+
+            <IsActive>Daten von</IsActive>
+            <IsActiveY>aktiven</IsActiveY>
+            <IsActiveN>de-aktivierten</IsActiveN>
+        </user_list.html>
+        <config_list.html>
+            <ConfigList>Einstellungen</ConfigList>
+            <Title>Name</Title>
+            <Code>Code</Code>
+            <RemoveOrganizationUnit>Kunde entfernen</RemoveOrganizationUnit>
+            <ConfirmRemoveOU>Do you really want to remove all data of company</ConfirmRemoveOU>
+            <Company>Kunde</Company>
+            <PartnerType>Partner Typ</PartnerType>
+            <PartnerTypeParams>Standardwerte für Partner</PartnerTypeParams>
+            <SendPushForAll>Senden Sie die Push-Benachrichtigung für alle Mitarbeiter</SendPushForAll>
+            <SendForAll>Senden Sie für alle</SendForAll>
+            <BusinessPartner>Business Partner</BusinessPartner>
+            <Kundenbetreuer>Kundenbetreuer</Kundenbetreuer>
+            <LosungPartner>Lösungspartner</LosungPartner>
+            <Commission>% Service</Commission>
+            <Implementation>% Implementierung</Implementation>
+            <Long>Dauer in Monaten</Long>
+            <CurrentValue>Current value</CurrentValue>
+            <AutochangeTitle>Massenänderung Kundendaten</AutochangeTitle>
+            <AutochangeSelectOne>Ein oder mehrere Kunde(n)</AutochangeSelectOne>
+            <AutochangeSelectAll>Alle Kunden</AutochangeSelectAll>
+            <AutochangeSelectFilter>Kundenauswahl mit Filter</AutochangeSelectFilter>
+            <AutochangeAllCompanies>Alle Kunden</AutochangeAllCompanies>
+            <AutochangeCompanyPlaceholder>Kunde</AutochangeCompanyPlaceholder>
+            <AutochangeOptionPlaceholder>Änderungsfeld</AutochangeOptionPlaceholder>
+            <AutochangeValuePlaceholder>Neuer Wert</AutochangeValuePlaceholder>
+            <AutochangeOneMore>weiteres Feld</AutochangeOneMore>
+            <AutochangeNoCompanies>Kein Kunde ausgewählt</AutochangeNoCompanies>
+            <AutochangeFilterValuePlaceholder>Filter-Wert</AutochangeFilterValuePlaceholder>
+            <AutochangeFilterPlaceholder>Filter-Feld</AutochangeFilterPlaceholder>
+            <AutochangeDoFilter>Filter</AutochangeDoFilter>
+            <AutochangeFilterWarning>Select the option to filter company units</AutochangeFilterWarning>
+            <AutochangeFilterError>Filter error</AutochangeFilterError>
+            <AutochangeModalQuestion>Wollen Sie wirklich die Feldwerte ändern?</AutochangeModalQuestion>
+        </config_list.html>
+        <config_edit.html>
+            <EditConfig>Einstellung bearbeiten</EditConfig>
+        </config_edit.html>
+        <config_history_value.html>
+            <Version>Ausführung</Version>
+        </config_history_value.html>
+        <logging.html>
+            <Logging>Logging</Logging>
+            <FilterUser>Anwender</FilterUser>
+            <FilterSection>Funktionsbereich</FilterSection>
+            <All>Alle</All>
+            <Receipt>Beleg Überprüfung</Receipt>
+            <Support>Support</Support>
+            <Company>Kunden Info</Company>
+            <Employee>Mitarbeiter</Employee>
+            <Product>Cloud Service Einstellungen</Product>
+            <Partner>Partner</Partner>
+            <Billing>Rechnungstellung</Billing>
+            <Settings>Einstellungen Benachrichtigungen</Settings>
+            <Config>Verschiedene Einstellungen</Config>
+            <Logging>Protokollierung</Logging>
+            <Users>Zugriffsrechte/Rollen Anwender</Users>
+            <Dashboard>Dashboard</Dashboard>
+            <PushHistory>Push-Benachrichtigung</PushHistory>
+            <FilterDateRange>Datum &amp; Zeitbereich</FilterDateRange>
+            <Date>Datum</Date>
+            <User>Anwender</User>
+            <IP>IP-Adresse</IP>
+            <Link>Link</Link>
+            <Description>Beschreibung</Description>
+            <OperationsOnPage>Aktionen pro Seite</OperationsOnPage>
+        </logging.html>
+        <block_property_history.html>
+            <PropertyValueHistory>Änderungshistorie</PropertyValueHistory>
+            <Value>Werte</Value>
+            <UserName>Name</UserName>
+            <Created>Datum</Created>
+            <Close>Schließen</Close>
+        </block_property_history.html>
+        <block_permission_history.html>
+            <OptionValueHistory>Änderungshistorie</OptionValueHistory>
+            <Permission>Rechte</Permission>
+            <Value>Werte</Value>
+            <UserName>Name</UserName>
+            <Created>Datum</Created>
+            <Close>Schließen</Close>
+        </block_permission_history.html>
+        <push_history.html>
+            <Push>Push-Benachrichtigung Protokollierung</Push>
+            <Created>Datum</Created>
+            <Device>Gerät</Device>
+            <Version>Ausführung</Version>
+            <DeviceID>Gerät ID</DeviceID>
+            <User>Anwender</User>
+            <UserID>Anwender ID</UserID>
+            <IsSended>Wird gesendet</IsSended>
+            <Text>Text</Text>
+            <ErrorMessage>Fehlermeldung</ErrorMessage>
+        </push_history.html>
+        <dashboard.html>
+            <Dashboard>Dashboard</Dashboard>
+            <DateFrom>ab Datum</DateFrom>
+            <DateTo>bis Datum</DateTo>
+            <IncludeInvoices>Welche Rechnungszeiträume sollen einbezogen werden?</IncludeInvoices>
+            <All>Alle</All>
+            <Future>Nur im Vorraus-Rechnungen</Future>
+            <Past>Nur Nachberechnungen</Past>
+            <FilterApply>Suche</FilterApply>
+            <InvoiceImplementationStatistics>Umsätze Implementierung</InvoiceImplementationStatistics>
+            <InvoiceRecurringStatistics>Umsätze mtl. Servicegebühren</InvoiceRecurringStatistics>
+            <StatusStatistics>Bearbeitungsdauer</StatusStatistics>
+            <Avg>AVG</Avg>
+            <Min>MIN</Min>
+            <Max>MAX</Max>
+            <ReceiptStatistics>Belegstatistik</ReceiptStatistics>
+            <Receipts>Belege wurden erstellt</Receipts>
+            <DeniedReceipts>die Belege wurden abgelehnt</DeniedReceipts>
+            <ReceiptList>Beleg Liste</ReceiptList>
+            <GroupBy>Gruppiere nach</GroupBy>
+            <StatusUser>Anwender</StatusUser>
+            <Employee>Mitarbeiter</Employee>
+            <Created>Erstellt am:</Created>
+            <ReceiptID>Beleg ID:</ReceiptID>
+            <DenialReason>Grund:</DenialReason>
+            <Close>Schließen</Close>
+            <Service>Service</Service>
+        </dashboard.html>
+    </admin>
+</Root>

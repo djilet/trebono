@@ -1,0 +1,43 @@
+{
+  "Status": "success",
+  "Code": 200,
+  "ErrorList": null,
+  "MessageList": null,
+  "Data": [
+    {
+      "service_id": "1",
+      "title": "Digital Luncheon voucher Service",
+      "image_url": ""
+    },
+    {
+      "service_id": "2",
+      "title": "Benefit Service",
+      "image_url": ""
+    },
+    {
+      "service_id": "3",
+      "title": "Internet Service",
+      "image_url": ""
+    },
+    {
+      "service_id": "4",
+      "title": "Advertisement Service",
+      "image_url": ""
+    },
+    {
+      "service_id": "5",
+      "title": "Recreation Service",
+      "image_url": ""
+    },
+    {
+      "service_id": "6",
+      "title": "Mobile Service",
+      "image_url": ""
+    },
+    {
+      "service_id": "7",
+      "title": "Gifts",
+      "image_url": ""
+    }
+  ]
+}

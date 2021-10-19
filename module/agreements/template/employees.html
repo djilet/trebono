@@ -1,0 +1,82 @@
+<div class="row">
+	<TMPL_INCLUDE NAME="_tabs.html"/>
+	
+	<section class="box no-margin">
+        <header class="panel_header" for="header_employees" table="agreements">
+            <h2 class="title"><TMPL_VAR NAME='LNG_SectionEmployees'/> - <TMPL_VAR NAME="CompanyUnitTitle" /></h2>
+        </header>
+        <div class="content-body">
+
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th><TMPL_VAR NAME="LNG_Username" /></th>
+                        <th width="320px"><TMPL_VAR NAME="LNG_Service" /></th>
+                        <th width="130px"><TMPL_VAR NAME="LNG_Version" ESCAPE='none' /></th>
+                        <th width="200px"><TMPL_VAR NAME="LNG_Date" /></th>
+                        <th width="150px"><TMPL_VAR NAME="LNG_Device" /></th>
+                        <th width="30px"><TMPL_VAR NAME="LNG_Pdf" /></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <TMPL_LOOP NAME="EmployeeList">
+                        <tr>
+                            <td  <TMPL_IF NAME='ServicesCount'> rowspan="<TMPL_VAR NAME="ServicesCount" />"</TMPL_IF>>
+                                <TMPL_IF NAME="Admin" VALUE="Y">
+                                    <a href="<TMPL_VAR NAME='ADMIN_PATH' />module.php?load=company&Section=employee&employee_id=<TMPL_VAR NAME='employee_id' />" target="_blank">
+                                        <TMPL_VAR NAME="last_name" /> <TMPL_VAR NAME="first_name" />
+                                    </a>
+                                <TMPL_ELSE>
+                                    <TMPL_VAR NAME="last_name" /> <TMPL_VAR NAME="first_name" />
+                                </TMPL_IF>
+                            </td>
+
+                            <TMPL_IF NAME="ServicesList">
+                                <TMPL_LOOP NAME="ServicesList">
+                                    <td><TMPL_VAR NAME="group_title_translation" /></td>
+                                    <td>
+                                        <TMPL_VAR NAME="version" /> / <TMPL_VAR NAME="last_version" />
+                                    </td>
+                                    <td><TMPL_VAR NAME="updated_at" FORMAT="datetime" /></td>
+                                    <td><TMPL_VAR NAME="device_info" /></td>
+                                    <td>
+                                        <a href="<TMPL_VAR NAME='agreement_pdf_link' />" target="_blank" rel="tooltip" data-toggle="tooltip" data-original-title="<TMPL_VAR NAME='LNG_DownloadPDF' />" data-placement="top">
+                                            <span class="fa fa-file-pdf-o"></span>
+                                        </a>
+                                    </td>
+                                    <?php break;?>
+                                </TMPL_LOOP>
+                            <TMPL_ELSE>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </TMPL_IF>
+                        </tr>
+
+                        <TMPL_LOOP NAME="ServicesList">
+                            <TMPL_UNLESS NAME="__FIRST__">
+                                <tr>
+                                    <td><TMPL_VAR NAME="group_title_translation" /></td>
+                                    <td>
+                                        <TMPL_VAR NAME="version" /> / <TMPL_VAR NAME="last_version" />
+                                    </td>
+                                    <td><TMPL_VAR NAME="updated_at" FORMAT="datetime" /></td>
+                                    <td><TMPL_VAR NAME="device_info" /></td>
+                                    <td>
+                                        <a href="<TMPL_VAR NAME='agreement_pdf_link' />" target="_blank" rel="tooltip" data-toggle="tooltip" data-original-title="<TMPL_VAR NAME='LNG_DownloadPDF' />" data-placement="top">
+                                            <span class="fa fa-file-pdf-o"></span>
+                                        </a>
+                                    </td>
+                                </tr>
+                            </TMPL_UNLESS>
+                        </TMPL_LOOP>
+
+                    </TMPL_LOOP>
+                </tbody>
+            </table>
+
+        </div>
+    </section>
+</div>

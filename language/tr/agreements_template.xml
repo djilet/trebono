@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Root>
+    <common>
+        <SectionContracts>Ergänzende Vereinbarungen</SectionContracts>
+        <SectionEmployees>Mitarbeiter</SectionEmployees>
+        <Close>Schließen</Close>
+    </common>
+
+    <admin>
+        <contracts.html>
+            <Title>Ergänzende Vereinbarungen</Title>
+            <Service>Modul</Service>
+            <Version>Aktuelle Versions-Nr.</Version>
+            <UpdatedAt>Aktualisiert am</UpdatedAt>
+            <History>Historie anzeigen</History>
+            <LabelConfirmMessage>Information nach der Bestätigung</LabelConfirmMessage>
+            <LabelContract>Text der Ergänzenden Vereinbarung</LabelContract>
+
+            <AvailableVariables>Verfügbare Variablen</AvailableVariables>
+            <AvailableVariablesComment>Wenn Sie darauf klicken, fügen Sie eine Variable an der Cursorposition ein
+            </AvailableVariablesComment>
+            <VariableCompanyName>Unternehmensname</VariableCompanyName>
+            <VariableCompanyStreet>Straße Unternehmen</VariableCompanyStreet>
+            <VariableCompanyHouse>Hausnr. Unternehmen</VariableCompanyHouse>
+            <VariableCompanyZipCode>Postleitzahl Unternehmens</VariableCompanyZipCode>
+            <VariableCompanyCity>Stadt Unternehmen</VariableCompanyCity>
+            <VariableEmployeeFirstName>Vorname Mitarbeiter</VariableEmployeeFirstName>
+            <VariableEmployeeLastName>Nachname Mitarbeiter</VariableEmployeeLastName>
+            <VariableEmployeeBirthday>Geburtsdatum Mitarbeiter</VariableEmployeeBirthday>
+            <VariableEmployeeStreet>Straße Mitarbeiter</VariableEmployeeStreet>
+            <VariableEmployeeHouse>Hausnr. Mitarbeiter</VariableEmployeeHouse>
+            <VariableEmployeeZipCode>Postleitzahl Mitarbeiters</VariableEmployeeZipCode>
+            <VariableEmployeeCity>Stadt Mitarbeiter</VariableEmployeeCity>
+            <VariableEmployeeWorkPlace>Beschäftigungsort Mitarbeiter</VariableEmployeeWorkPlace>
+            <VariableContractStartDate>Start Datum Sachlohnart</VariableContractStartDate>
+            <VariableMonthlyAmount>Monatl. € Betrag</VariableMonthlyAmount>
+            <VariableUnitsPerMonth>Max. Einheiten pro Monat</VariableUnitsPerMonth>
+            <VariableMealValue>Sachbezugswert Hauptmahlzeit</VariableMealValue>
+            <VariableEmployerMealGrant>AG Essenszuschuss</VariableEmployerMealGrant>
+            <VariableMealValueEmployerMealGrant>Wert digitale Essensmarke</VariableMealValueEmployerMealGrant>
+
+            <RevisionHistory>Historie</RevisionHistory>
+        </contracts.html>
+
+        <employees.html>
+            <Username>Mitarbeiter</Username>
+            <Service>Modul</Service>
+            <Version><![CDATA[Version <br> (akzeptierte Version / aktuelle Version)]]></Version>
+            <Date>Datum</Date>
+            <Device>Geräteinformationen</Device>
+            <Pdf>PDF/A</Pdf>
+            <DownloadPDF>Download PDF</DownloadPDF>
+        </employees.html>
+
+        <partial_agreements_history_list.html>
+            <AgreementHistory>Änderungshistorie</AgreementHistory>
+            <Created>Erstellungsdatum</Created>
+            <View>Anzeige</View>
+            <Version>Version</Version>
+            <User>Nutzer</User>
+        </partial_agreements_history_list.html>
+
+        <mail_pdf.html>
+            <SupplementaryAgreement>Ergänzende Vereinbarung</SupplementaryAgreement>
+            <Page>Seite</Page>
+            <Of>von</Of>
+            <City>Ort,</City>
+            <Datum>Datum</Datum>
+            <Signature>Unterschrift</Signature>
+        </mail_pdf.html>
+
+        <contract_mail.html>
+            <FooterText>Mit freundlichen Grüßen
+                Ihr trebono Team
+            </FooterText>
+            <FooterAddress>2KS Cloud Services GmbH
+                Bahnhofstrasse 54, 64 367 Darmstadt, Germany
+
+                Tel.: +49 6151 493 411-0
+                Web: www.trebono.de
+                Email: support@trebono.de
+
+                Geschäftsführer/Managing Directors: Jörg Klingler, Thorsten Stein
+                Handelsregister/Commercial Register: Amtsgericht Darmstadt HRB 87964
+            </FooterAddress>
+            <Attachment>*This message and any attachments are solely for the intended recipient and may contain
+                confidential or privileged information. If you are not the intended recipient, any disclosure, copying,
+                use, or distribution of the information included in this message and any attachments is prohibited. If
+                you have received this communication in error, please notify us by reply e-mail and immediately and
+                permanently delete this message and any attachments.
+            </Attachment>
+        </contract_mail.html>
+
+        <partial_block_property_history.html>
+            <PropertyValueHistory>Änderungshistorie</PropertyValueHistory>
+            <Value>Werte</Value>
+            <UserName>Name</UserName>
+            <Created>Datum</Created>
+            <Close>Schließen</Close>
+        </partial_block_property_history.html>
+
+    </admin>
+</Root>

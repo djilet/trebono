@@ -1,0 +1,82 @@
+#SVN directory
+/.svn
+
+#Eclipse IDE files
+/.settings
+/.buildpath
+/.project
+
+#Composer-loaded files
+/vendor/*
+!/vendor/etc/
+!/vendor/usr/
+
+#CMS cache and logs
+/var/cache/*
+/var/log/*
+/var/xml/*
+/var/image/*
+
+# #CMS uploaded/created files
+# /website/lst/var/mail/*
+# /website/lst/var/user/*
+# /website/lst/var/config/*
+# /website/lst/var/company/apps/*
+# /website/lst/var/company/company/*
+# /website/lst/var/company/voucher/*
+# /website/lst/var/company/file/*
+# /website/lst/var/company/payroll/*
+# /website/lst/var/billing/invoice/*
+# /website/lst/var/receipt/file/*
+# /website/lst/var/receipt/comment/*
+# /website/lst/var/product/product_group/*
+# /website/lst/var/product/receipt_type/*
+# /website/lst/var/agreements/*
+
+# #CMS configs
+# /website/configure.xml
+# /website/lst/configure.ini
+
+# #mpdf library generated font data
+# /include/mpdf60/ttfontdata/*
+
+.gitkeep
+
+#local testing scripts
+/debug/*
+
+.docker-config.json
+/local/*
+
+.git
+.ipynb_checkpoints
+notebooks
+unused
+Dockerfile
+*.Dockerfile
+.DS_Store
+.gitignore
+README.md
+env.*
+/devops/*
+# vendor
+
+# To prevent storing dev/temporary container data
+*.csv
+tmp
+
+# project specific
+manifest-demo.yml
+manifest-release.yml
+manifest-test.yml
+test_result.txt
+test.test
+.env.gitlab-ci
+.gitlab-ci.yaml
+# /docker-entrypoint/*
+/docker-entrypoint-initdb.d/*
+.dockerignore
+.docker-config.json
+_db/*
+Makefile
+cf.env

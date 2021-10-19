@@ -1,0 +1,2 @@
+--lst-control
+ALTER TABLE public.partner_contract DROP COLUMN level;

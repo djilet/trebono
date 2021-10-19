@@ -1,0 +1,57 @@
+<div class="bookkeeping">
+	<strong>Reise Name:</strong> <TMPL_VAR NAME='trip_name'>
+	<br><br><br>
+
+	<strong>Reise ID:</strong> <TMPL_VAR NAME='trip_id'>
+	<br><br><br>
+
+	<strong>Reisezweck und Start-/Ende-Zeit:</strong> <TMPL_VAR NAME='purpose'>
+	<br><br><br>
+
+	<strong>Start Datum:</strong> <TMPL_VAR NAME='start_date' FORMAT="date">
+	<br><br><br>
+
+	<strong>Ende Datum:</strong> <TMPL_VAR NAME='end_date' FORMAT="date">
+	<TMPL_IF NAME='days_amount_under_16'>
+		<br><br><br>
+		<strong>> 8 Stunden:</strong> <TMPL_VAR NAME='days_amount_under_16'>
+	</TMPL_IF>
+
+	<TMPL_IF NAME='days_amount_over_16'>
+		<br><br><br>
+		<strong>> 24 Stunden:</strong> <TMPL_VAR NAME='days_amount_over_16'>
+	</TMPL_IF>
+</div>
+
+<TMPL_LOOP NAME='receipt_list'>
+	<TMPL_LOOP NAME='FileList'>
+		<pagebreak margin-top="40" />
+		<div class="bookkeeping-header">
+			<table width="100%" border="0" cellpadding="5">
+				<tr>
+					<td width="21%">Name: <TMPL_VAR NAME='employee_name'></td>
+					<td width="14%">Kreditor: <TMPL_VAR NAME='acc_creditor'></td>
+					<td width="12%">MA-Nr.: <TMPL_VAR NAME='employee_guid'></td>
+					<td width="14%">KST: <TMPL_VAR NAME='cost_center_number'></td>
+					<td width="14%">Bu-Konto: <TMPL_VAR NAME='receipt_list.acc_receipt_type'></td>
+					<td width="14%">Bu-Konto2: <TMPL_VAR NAME='receipt_list.acc_system'></td>
+					<td width="11%"><img align="right" src="<TMPL_VAR NAME='PROJECT_PATH'>module/<TMPL_VAR NAME='Module'>/template/images/logo-small.jpeg"></td>
+				</tr>
+				<tr>
+					<td width="21%">trebono Beleg Nr.: <TMPL_VAR NAME='receipt_list.legal_receipt_id'></td>
+					<td colspan="2">Genehmigter Betrag: <TMPL_VAR NAME='receipt_list.real_amount_approved' FORMAT="price"></td>
+					<td>Währung: <TMPL_VAR NAME='receipt_list.digit'></td>
+					<td>Steuer: <TMPL_VAR NAME='receipt_list.vat'>%</td>
+				</tr>
+				<tr>
+					<td colspan="3">Info: <TMPL_VAR NAME='verification_info'></td>
+					<td colspan="4">Kommentar: <TMPL_VAR NAME='receipt_list.comment'></td>
+				</tr>
+			</table>
+		</div>
+		<div class="bookkeeping" style="text-align: center">
+			<img class="receipt" src="<TMPL_VAR NAME='file_image_full_path'>">
+		</div>
+	</TMPL_LOOP>
+</TMPL_LOOP>
+

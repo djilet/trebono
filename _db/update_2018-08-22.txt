@@ -1,0 +1,15 @@
+--lst-control
+CREATE INDEX "employee_contract_product_id_key" ON "public"."employee_contract" USING BTREE ("product_id");
+CREATE INDEX "employee_contract_employee_id_key" ON "public"."employee_contract" USING BTREE ("employee_id");
+CREATE INDEX "employee_contract_start_date_key" ON "public"."employee_contract" USING BTREE ("start_date");
+CREATE INDEX "employee_contract_end_date_key" ON "public"."employee_contract" USING BTREE ("end_date");
+
+CREATE INDEX "company_unit_contract_product_id_key" ON "public"."company_unit_contract" USING BTREE ("product_id");
+CREATE INDEX "company_unit_contract_company_unit_id_key" ON "public"."company_unit_contract" USING BTREE ("company_unit_id");
+CREATE INDEX "company_unit_contract_start_date_key" ON "public"."company_unit_contract" USING BTREE ("start_date");
+CREATE INDEX "company_unit_contract_end_date_key" ON "public"."company_unit_contract" USING BTREE ("end_date");
+--lst-private
+CREATE INDEX "employee_company_unit_id_key" ON "public"."employee" USING BTREE ("company_unit_id");
+CREATE INDEX "employee_user_id_key" ON "public"."employee" USING BTREE ("user_id");
+--lst-main
+CREATE INDEX "company_unit_parent_unit_id_key" ON "public"."company_unit" USING BTREE ("parent_unit_id");

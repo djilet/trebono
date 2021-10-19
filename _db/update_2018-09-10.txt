@@ -1,0 +1,15 @@
+ALTER TABLE "public"."comment" RENAME TO "receipt_comment";
+ALTER SEQUENCE "public"."comment_CommentID_seq" NO CYCLE;
+ALTER SEQUENCE "public"."comment_CommentID_seq" RENAME TO "receipt_comment_CommentID_seq";
+ALTER TABLE "public"."receipt_comment" RENAME COLUMN "CommentID" TO "comment_id";
+ALTER TABLE "public"."receipt_comment" RENAME COLUMN "ReceiptID" TO "receipt_id";
+ALTER TABLE "public"."receipt_comment" RENAME COLUMN "UserID" TO "user_id";
+ALTER TABLE "public"."receipt_comment" DROP COLUMN "AnswerTo" CASCADE;
+ALTER TABLE "public"."receipt_comment" RENAME COLUMN "Text" TO "content";
+ALTER TABLE "public"."receipt_comment" RENAME COLUMN "Created" TO "created";
+ALTER TABLE "public"."receipt_comment" RENAME COLUMN "AttachedFile" TO "comment_file";
+ALTER TABLE "public"."receipt_comment" ADD COLUMN "archive" flag NOT NULL DEFAULT 'N';
+CREATE INDEX "receipt_comment_receipt_id_key" ON "public"."receipt_comment" USING BTREE ("receipt_id");
+CREATE INDEX "receipt_comment_user_id_key" ON "public"."receipt_comment" USING BTREE ("user_id");
+CREATE INDEX "receipt_comment_created_key" ON "public"."receipt_comment" USING BTREE ("created");
+ALTER TABLE "public"."receipt_comment" ALTER COLUMN "comment_file" DROP NOT NULL;

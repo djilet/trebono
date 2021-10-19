@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Root>
+    <section-invoice>Rechnungsliste</section-invoice>
+    <section-payroll>Lohnabrechnungen PDF</section-payroll>
+    <module-title>Rechnungsstellung</module-title>
+
+    <invoice-status-new>Neu</invoice-status-new>
+    <invoice-status-sent>Gesendet</invoice-status-sent>
+    <invoice-status-paid>Bezahlt</invoice-status-paid>
+    <invoice-status-error>Fehler: Konnte nicht gesendet werden</invoice-status-error>
+
+    <product-group-base>Basis Modul</product-group-base>
+    <product-base__main>Basis Modul</product-base__main>
+    <product-group-benefit>Sachbezug</product-group-benefit>
+    <product-benefit__main>Sachbezug</product-benefit__main>
+    <product-group-food>Digitale Essensmarken</product-group-food>
+    <product-food__main>Hauptservice DEM</product-food__main>
+    <product-food__document_plausibility>Plausibilitätsprüfung Beleg</product-food__document_plausibility>
+    <product-food__lump_sum_tax_examination>Prüfung Pauschal-versteuerungfreiheit
+    </product-food__lump_sum_tax_examination>
+    <product-food__weekly_shopping>Wocheneinkauf</product-food__weekly_shopping>
+    <product-food__canteen>Kantinennutzung</product-food__canteen>
+    <product-group-internet>Internet</product-group-internet>
+    <product-internet__main>Internet</product-internet__main>
+    <product-group-ad>Werbung</product-group-ad>
+    <product-ad__main>Werbung</product-ad__main>
+    <product-group-recreation>Erholungsbeihilfe</product-group-recreation>
+    <product-recreation__main>Erholungsbeihilfe</product-recreation__main>
+    <product-group-mobile>Handy</product-group-mobile>
+    <product-mobile__main>Handy</product-mobile__main>
+    <product-group-gift>Geschenke</product-group-gift>
+    <product-gift__main>Geschenke</product-gift__main>
+    <product-group-bonus>Prämie 37b</product-group-bonus>
+    <product-bonus__main>Prämie 37b</product-bonus__main>
+    <product-group-transport>Job Ticket</product-group-transport>
+    <product-transport__main>Job Ticket</product-transport__main>
+    <product-group-child_care>Kinderbetreuung</product-group-child_care>
+    <product-child_care__main>Kinderbetreuung</product-child_care__main>
+
+    <product-food__advanced_security>Digitale Essensmarken Erweiterte Sicherheit</product-food__advanced_security>
+    <product-benefit__advanced_security>Sachbezug Erweiterte Sicherheit</product-benefit__advanced_security>
+    <product-internet__advanced_security>Internet Erweiterte Sicherheit</product-internet__advanced_security>
+    <product-ad__advanced_security>Werbung Erweiterte Sicherheit</product-ad__advanced_security>
+    <product-recreation__advanced_security>Erholungsbeihilfe Erweiterte Sicherheit
+    </product-recreation__advanced_security>
+    <product-mobile__advanced_security>Handy Erweiterte Sicherheit</product-mobile__advanced_security>
+    <product-gift__advanced_security>Geschenke Erweiterte Sicherheit</product-gift__advanced_security>
+    <product-bonus__advanced_security>Prämie Erweiterte Sicherheit</product-bonus__advanced_security>
+    <product-transport__advanced_security>Öffentlicher Transport Erweiterte Sicherheit
+    </product-transport__advanced_security>
+    <product-child_care__advanced_security>Kinderbetreuung Erweiterte Sicherheit</product-child_care__advanced_security>
+</Root>

@@ -1,0 +1,189 @@
+<TMPL_IF NAME='Admin'>
+    <div class="row">
+        <section class="box no-margin">
+            <header class="panel_header" for="header_master_data_list" table="master_data">
+                <h2 class="title"><TMPL_VAR NAME='LNG_GenerateMasterData'></h2>
+            </header>
+            <TMPL_IF NAME='ErrorList'>
+                <div class="alert alert-danger alert-no-margin">
+                    <TMPL_LOOP NAME='ErrorList'>
+                        <TMPL_VAR NAME='Message'><TMPL_UNLESS NAME='__LAST__'><br /></TMPL_UNLESS>
+                    </TMPL_LOOP>
+                </div>
+            </TMPL_IF>
+            <TMPL_IF NAME='MessageList'>
+                <div class="alert alert-success alert-no-margin">
+                    <TMPL_LOOP NAME='MessageList'>
+                        <TMPL_VAR NAME='Message'><TMPL_UNLESS NAME='__LAST__'><br /></TMPL_UNLESS>
+                    </TMPL_LOOP>
+                </div>
+            </TMPL_IF>
+            <div class="content-body">
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <form action="<TMPL_VAR NAME='MODULE_URL'>&Section=master_data" method="post">
+                                <label class="form-label hidden-xs">&nbsp;</label><br/>
+                                <input type="hidden" name="Do" value="CreateCompanyUnitMasterDataService"/>
+                                <input type="hidden" name="Type" value="New"/>
+                                <button type="submit" class="btn btn-primary btn-icon">
+                                    <TMPL_VAR NAME='LNG_CompanyUnitMasterDataService'>
+                                </button>
+                            </form>
+                            <form action="<TMPL_VAR NAME='MODULE_URL'>&Section=master_data" method="post">
+                                 <label class="form-label hidden-xs">&nbsp;</label><br/>
+                                <input type="hidden" name="Do" value="CreateCompanyUnitMasterDataService"/>
+                                <input type="hidden" name="Type" value="Update"/>
+                                <button type="submit" class="btn btn-primary btn-icon">
+                                    <TMPL_VAR NAME='LNG_CompanyUnitMasterDataServiceUpdate'>
+                                </button>
+                            </form>
+                        </div>
+                        <div class="form-group">
+                            <form action="<TMPL_VAR NAME='MODULE_URL'>&Section=master_data" method="post">
+                                <label class="form-label hidden-xs">&nbsp;</label><br/>
+                                <input type="hidden" name="Do" value="CreateCompanyUnitMasterDataVoucher"/>
+                                <input type="hidden" name="Type" value="New"/>
+                                <button type="submit" class="btn btn-primary btn-icon">
+                                    <TMPL_VAR NAME='LNG_CompanyUnitMasterDataVoucher'>
+                                </button>
+                            </form>
+                            <form action="<TMPL_VAR NAME='MODULE_URL'>&Section=master_data" method="post">
+                                <label class="form-label hidden-xs">&nbsp;</label><br/>
+                                <input type="hidden" name="Do" value="CreateCompanyUnitMasterDataVoucher"/>
+                                <input type="hidden" name="Type" value="Update"/>
+                                <button type="submit" class="btn btn-primary btn-icon">
+                                    <TMPL_VAR NAME='LNG_CompanyUnitMasterDataVoucherUpdate'>
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <form action="<TMPL_VAR NAME='MODULE_URL'>&Section=master_data" method="post">
+                                    <label class="form-label hidden-xs">&nbsp;</label><br/>
+                                    <input type="hidden" name="Do" value="CreateSepaServiceMasterData"/>
+                                    <input type="hidden" name="Type" value="New"/>
+                                    <button type="submit" class="btn btn-primary btn-icon">
+                                        <TMPL_VAR NAME='LNG_SepaMasterDataService'>
+                                    </button>
+                            </form>
+                            <form action="<TMPL_VAR NAME='MODULE_URL'>&Section=master_data" method="post">
+                                    <label class="form-label hidden-xs">&nbsp;</label><br/>
+                                    <input type="hidden" name="Do" value="CreateSepaServiceMasterData"/>
+                                    <input type="hidden" name="Type" value="Update"/>
+                                    <button type="submit" class="btn btn-primary btn-icon">
+                                        <TMPL_VAR NAME='LNG_SepaMasterDataServiceUpdate'>
+                                    </button>
+                            </form>
+                        </div>
+                        <div class="form-group">
+                            <form action="<TMPL_VAR NAME='MODULE_URL'>&Section=master_data" method="post">
+                                    <label class="form-label hidden-xs">&nbsp;</label><br/>
+                                    <input type="hidden" name="Do" value="CreateSepaVoucherMasterData"/>
+                                    <input type="hidden" name="Type" value="New"/>
+                                    <button type="submit" class="btn btn-primary btn-icon">
+                                        <TMPL_VAR NAME='LNG_SepaMasterDataVoucher'>
+                                    </button>
+                            </form>
+                            <form action="<TMPL_VAR NAME='MODULE_URL'>&Section=master_data" method="post">
+                                    <label class="form-label hidden-xs">&nbsp;</label><br/>
+                                    <input type="hidden" name="Do" value="CreateSepaVoucherMasterData"/>
+                                    <input type="hidden" name="Type" value="Update"/>
+                                    <button type="submit" class="btn btn-primary btn-icon">
+                                        <TMPL_VAR NAME='LNG_SepaMasterDataVoucherUpdate'>
+                                    </button>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <form action="<TMPL_VAR NAME='MODULE_URL'>&Section=master_data" method="post">
+                                <label class="form-label hidden-xs">&nbsp;</label><br/>
+                                <input type="hidden" name="Do" value="CreateEmployeeMasterData"/>
+                                <input type="hidden" name="Type" value="New"/>
+                                <button type="submit" class="btn btn-primary btn-icon">
+                                    <TMPL_VAR NAME='LNG_EmployeeMasterData'>
+                                </button>
+                            </form>
+                            <form action="<TMPL_VAR NAME='MODULE_URL'>&Section=master_data" method="post">
+                                <label class="form-label hidden-xs">&nbsp;</label><br/>
+                                <input type="hidden" name="Do" value="CreateEmployeeMasterData"/>
+                                <input type="hidden" name="Type" value="Update"/>
+                                <button type="submit" class="btn btn-primary btn-icon">
+                                    <TMPL_VAR NAME='LNG_EmployeeMasterDataUpdate'>
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</TMPL_IF>
+<div class="row">
+    <section class="box no-margin">
+        <header class="panel_header" for="header_master_data_list" table="master_data">
+            <h2 class="title"><TMPL_VAR NAME='LNG_MasterData'></h2>
+        </header>
+        <div class="content-body">
+            <div class="row">
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <TMPL_IF NAME='MasterDataList'>
+                        <div class="row">
+                            <div class="col-md-6 form-group text-center-xs">
+                                <span><TMPL_VAR NAME='ListInfo'/></span>
+                            </div>
+                            <div class="col-md-6 form-group text-right text-center-xs">
+                                <form action="<TMPL_VAR NAME='MODULE_URL'>&Section=master_data" method="post" class="form-inline">
+                                    <span class="right15 visible-xs-block visible-sm-inline visible-md-inline visible-lg-inline"><TMPL_VAR NAME='LNG_DocumentsOnPage'/></span>
+                                    <select name="ItemsOnPage" class="form-control">
+                                        <TMPL_LOOP NAME='ItemsOnPageList'>
+                                            <option <TMPL_IF NAME='Selected'>selected</TMPL_IF> value="<TMPL_VAR NAME='Value'>"><TMPL_IF NAME='Value'><TMPL_VAR NAME='Value'><TMPL_ELSE><TMPL_VAR NAME='LNG_All'></TMPL_IF></option>
+                                        </TMPL_LOOP>
+                                    </select>
+                                    <TMPL_VAR NAME='ParamsForItemsOnPage' ESCAPE='none'>
+                                </form>
+                            </div>
+                        </div>
+                        <table class="table table-striped">
+                            <thead>
+                            <tr>
+                                <th><TMPL_VAR NAME='LNG_MasterDataType'></th>
+                                <th><TMPL_VAR NAME='LNG_Created'></th>
+                                <th class="text-center"><TMPL_VAR NAME='LNG_Export'></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <TMPL_LOOP NAME='MasterDataList'>
+                                <tr>
+                                    <td><TMPL_VAR NAME='type_title'/></td>
+                                    <td><TMPL_VAR NAME='created' FORMAT='datetime'/></td>
+                                    <td class="text-center">
+                                        <a rel="tooltip" data-toggle="tooltip" data-original-title="<TMPL_VAR NAME='LNG_DownloadExport'>" data-placement="top" href="<TMPL_VAR NAME='MODULE_URL'>&<TMPL_VAR NAME='ParamsForURL'>&Action=GetMasterDataExport&master_data_id=<TMPL_VAR NAME='master_data_id'>"><i class="fa fa-file-text-o"></i></a>
+                                    </td>
+                                </tr>
+                            </TMPL_LOOP>
+                            </tbody>
+                        </table>
+                        <div class="text-center">
+                            <ul class="pagination">
+                                <TMPL_VAR NAME='Paging' ESCAPE='none'>
+                            </ul>
+                        </div>
+                        <TMPL_ELSE>
+                            <div class="alert alert-success"><TMPL_VAR NAME='LNG_Empty'></div>
+                    </TMPL_IF>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('select[name=ItemsOnPage]').change(function(){
+            $(this).closest('form').submit();
+        });
+    });
+</script>

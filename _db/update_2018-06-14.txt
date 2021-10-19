@@ -1,0 +1,16 @@
+ALTER TABLE "public"."company_unit" ADD COLUMN "bank_details" character varying(255);
+ALTER TABLE "public"."company_unit" ADD COLUMN "iban" character varying(255);
+ALTER TABLE "public"."company_unit" ADD COLUMN "bic" character varying(255);
+ALTER TABLE "public"."company_unit" ADD COLUMN "register" character varying(255);
+ALTER TABLE "public"."company_unit" ADD COLUMN "tax_number" character varying(255);
+ALTER TABLE "public"."company_unit" ADD COLUMN "payment_type" character varying(255);
+ALTER TABLE "public"."company_unit" ADD COLUMN "payment_period" character varying(255);
+ALTER TABLE "public"."company_unit" ADD COLUMN "financial_statement_date" date;
+ALTER TABLE "public"."contact" ADD COLUMN "contact_for_invoice" character varying(255);
+ALTER TABLE "public"."contact" ADD COLUMN "contact_for_contract" character varying(255);
+ALTER TABLE "public"."contact" ADD COLUMN "contact_for_service" character varying(255);
+ALTER TABLE "public"."contact" ADD COLUMN "contact_for_support" character varying(255);
+UPDATE contact SET contact_for_invoice='N';
+UPDATE contact SET contact_for_contract='N';
+UPDATE contact SET contact_for_service='N';
+UPDATE contact SET contact_for_support='N';

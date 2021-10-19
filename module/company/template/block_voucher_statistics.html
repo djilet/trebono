@@ -1,0 +1,187 @@
+<div class="row">
+	<TMPL_IF NAME='ShowVoucherIDs'>
+		<table class="table bvs-table no-margin table-with-scrollbar">
+			<tbody>
+			<tr>
+				<td class="text-center text-bold"><TMPL_VAR NAME='LNG_VoucherAmount'></td>
+				<td class="text-center text-bold">#</td>
+				<td class="text-center text-bold"><TMPL_VAR NAME='LNG_VoucherOpenAmount'></td>
+				<td colspan="13" class="text-center text-bold"><TMPL_VAR NAME='LNG_VoucherPaidAmount'></td>
+			</tr>
+			<tr>
+				<td></td>
+				<td></td>
+				<td></td>
+				<TMPL_LOOP NAME='MonthTitleList'>
+					<td class="text-center text-bold"><TMPL_VAR NAME='title'></td>
+				</TMPL_LOOP>
+				<td class="text-center text-bold"><TMPL_VAR NAME='Year'></td>
+			</tr>
+			</tbody>
+			<TMPL_LOOP NAME='StatisticsList'>
+				<tbody class="no-margin">
+					<tr>
+						<td class="text-center">
+							<TMPL_VAR NAME='amount' FORMAT='price'>€<br/>
+							<a href="" class="moreLinkStatistics" group-id="<TMPL_VAR NAME='ProductGroupID'>" data-amount="<TMPL_VAR NAME='open_amount'>"><TMPL_VAR NAME="LNG_Expand"></a>
+						</td>
+						<td class="text-center"></td>
+						<td class="text-center">
+							<TMPL_IF NAME='open_amount'><TMPL_VAR NAME='open_amount' FORMAT='price'>€<br/></TMPL_IF>
+						</td>
+						<TMPL_LOOP NAME='month_list'>
+							<td class="text-center <TMPL_IF NAME='approved'>primary</TMPL_IF>">
+								<TMPL_IF NAME='paid'><TMPL_VAR NAME='paid' FORMAT='price'>€<br/></TMPL_IF>
+								<TMPL_IF NAME='approved'>
+									<TMPL_IF NAME='paid'>
+										(<TMPL_VAR NAME='approved' FORMAT='price'>€ <TMPL_VAR NAME='LNG_Approved'>)<br/>
+										<TMPL_ELSE>
+											<TMPL_VAR NAME='approved' FORMAT='price'>€ <TMPL_VAR NAME='LNG_Approved'><br/>
+									</TMPL_IF>
+								</TMPL_IF>
+							</td>
+						</TMPL_LOOP>
+						<td>
+							<TMPL_IF NAME='paid'><TMPL_VAR NAME='paid' FORMAT='price'>€<br/></TMPL_IF>
+							<TMPL_IF NAME='approved'>
+								<TMPL_IF NAME='paid'>
+									(<TMPL_VAR NAME='approved' FORMAT='price'>€ <TMPL_VAR NAME='LNG_Approved'>)<br/>
+									<TMPL_ELSE>
+										<TMPL_VAR NAME='approved' FORMAT='price'>€ <TMPL_VAR NAME='LNG_Approved'><br/>
+								</TMPL_IF>
+							</TMPL_IF>
+						</td>
+					</tr>
+				</tbody>
+				<tbody class="no-margin" data-amount="<TMPL_VAR NAME='open_amount'>" group-id="<TMPL_VAR NAME='ProductGroupID'>" style="display: none;">
+				<TMPL_LOOP NAME='voucher_list'>
+					<tr class="gray">
+						<td class="text-center"></td>
+						<td class="text-center"><a href="#" class="voucher-receipts" voucher_id="<TMPL_VAR NAME='voucher_id'>"><TMPL_VAR NAME='voucher_id'></a></td>
+						<td class="text-center">
+							<TMPL_IF NAME='amount_left'><TMPL_VAR NAME='amount_left' FORMAT='price'>€<br/></TMPL_IF>
+						</td>
+						<TMPL_LOOP NAME='month_list'>
+							<td class="text-center <TMPL_IF NAME='approved'>purple</TMPL_IF>">
+								<TMPL_IF NAME='paid'><TMPL_VAR NAME='paid' FORMAT='price'>€<br/></TMPL_IF>
+								<TMPL_IF NAME='approved'>
+									<TMPL_IF NAME='paid'>
+										(<TMPL_VAR NAME='approved' FORMAT='price'>€ <TMPL_VAR NAME='LNG_Approved'>)<br/>
+										<TMPL_ELSE>
+											<TMPL_VAR NAME='approved' FORMAT='price'>€ <TMPL_VAR NAME='LNG_Approved'><br/>
+									</TMPL_IF>
+								</TMPL_IF>
+							</td>
+						</TMPL_LOOP>
+						<td>
+							<TMPL_IF NAME='paid'><TMPL_VAR NAME='paid' FORMAT='price'>€<br/></TMPL_IF>
+							<TMPL_IF NAME='approved'>
+								<TMPL_IF NAME='paid'>
+									(<TMPL_VAR NAME='approved' FORMAT='price'>€ <TMPL_VAR NAME='LNG_Approved'>)<br/>
+									<TMPL_ELSE>
+										<TMPL_VAR NAME='approved' FORMAT='price'>€ <TMPL_VAR NAME='LNG_Approved'><br/>
+								</TMPL_IF>
+							</TMPL_IF>
+						</td>
+					</tr>
+				</TMPL_LOOP>
+				</tbody>
+			</TMPL_LOOP>
+		</table>
+		<TMPL_ELSE>
+			<table class="table bvs-table no-margin table-with-scrollbar">
+				<tbody>
+					<tr>
+						<td class="text-center text-bold"><TMPL_VAR NAME='LNG_VoucherAmount'></td>
+						<td class="text-center text-bold"><TMPL_VAR NAME='LNG_Employee'></td>
+						<TMPL_LOOP NAME='MonthTitleList'>
+							<td class="text-center text-bold"><TMPL_VAR NAME='title'></td>
+						</TMPL_LOOP>
+						<td class="text-center text-bold"><TMPL_VAR NAME='LNG_StatisticsTotal'></td>
+					</tr>
+				</tbody>
+				<TMPL_LOOP NAME='StatisticsList'>
+					<tbody class="no-margin">
+					<tr>
+						<td class="text-center">
+							<TMPL_VAR NAME='amount' FORMAT='price'>€<br/>
+								<a href="" class="moreLinkStatistics" group-id="<TMPL_VAR NAME='ProductGroupID'>" data-amount="<TMPL_VAR NAME='amount'>"><TMPL_VAR NAME="LNG_Expand"></a>
+						</td>
+						<td></td>
+						<TMPL_LOOP NAME='month_list'>
+							<td <TMPL_IF NAME='future_count'> class='primary' </TMPL_IF> >
+							<p class="text-center">
+								<TMPL_VAR NAME='count'>
+									<TMPL_IF NAME='show_future_count'>(<TMPL_VAR NAME='future_count'> <TMPL_VAR NAME='LNG_FutureGenerated'>)</TMPL_IF>
+							</p>
+							</td>
+						</TMPL_LOOP>
+						<td>
+							<p class="text-center"><TMPL_VAR NAME='count'></p>
+						</td>
+					</tr>
+					</tbody>
+					<tbody class="no-margin" data-amount="<TMPL_VAR NAME='amount'>" group-id="<TMPL_VAR NAME='ProductGroupID'>" style="display: none;">
+					<TMPL_LOOP NAME='employee_list'>
+						<tr class="gray">
+							<td></td>
+							<td>
+								<a href="<TMPL_VAR NAME='MODULE_URL'>&<TMPL_VAR NAME='ParamsForUrl'>Section=employee&employee_id=<TMPL_VAR NAME='employee_id'>&ActiveTab=3"><TMPL_VAR NAME='employee_name'></a>
+							</td>
+							<TMPL_LOOP NAME='month_list'>
+								<td <TMPL_IF NAME='future_count'> class='purple' </TMPL_IF>>
+								<p class="text-center">
+									<TMPL_VAR NAME='count'>
+									<TMPL_IF NAME='show_future_count'>(<TMPL_VAR NAME='future_count'> <TMPL_VAR NAME='LNG_FutureGenerated'>)</TMPL_IF>
+								</p>
+								</td>
+							</TMPL_LOOP>
+							<td>
+								<p class="text-center"><TMPL_VAR NAME='count'></p>
+							</td>
+						</tr>
+					</TMPL_LOOP>
+					</tbody>
+				</TMPL_LOOP>
+			</table>
+	</TMPL_IF>
+</div>
+<script>
+	$(document).ready(function(){
+		var productGroupID = "<TMPL_VAR NAME='ProductGroupID'>";
+		$("a.moreLinkStatistics[group-id="+productGroupID+"]").click(function(e){
+			var productGroupID = $(this).attr("group-id");
+			if($(this).is('.open')){
+				$(this).removeClass('open').text('<TMPL_VAR NAME="LNG_Expand">');
+				$("tbody[data-amount='"+$(this).attr('data-amount')+"'][group-id="+productGroupID+"]").fadeOut(300);
+			}
+			else{
+				$(this).addClass('open').text('<TMPL_VAR NAME="LNG_Collapse">');
+				$("tbody[data-amount='"+$(this).attr('data-amount')+"'][group-id="+productGroupID+"]").fadeIn(300);
+			}
+			e.preventDefault();
+		});
+
+        $('.voucher-receipts').click(function(e){
+            var voucherID = $(this).attr('voucher_id');
+            $.ajax({
+                url: '<TMPL_VAR NAME='PROJECT_PATH'>module/company/ajax.php',
+                type: 'GET',
+                dataType: 'JSON',
+                data:{
+                    Action: 'GetVoucherReceipts',
+                    voucher_id: voucherID
+                },
+                success: function(data){
+                    if(typeof data.HTML != 'undefined'){
+                        $(data.HTML).modal('show').on('hidden.bs.modal', function () {
+                            $(this).remove();
+                        });
+                    }
+                }
+            });
+            e.stopImmediatePropagation();
+            e.preventDefault();
+        });
+	});
+</script>

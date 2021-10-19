@@ -1,0 +1,3 @@
+ALTER TABLE "public"."config" ADD COLUMN "group_code" Character Varying( 50 ) DEFAULT 'receipt_shop' NOT NULL;
+ALTER TABLE "public"."config" ADD COLUMN "editor" Character Varying( 50 ) DEFAULT 'plain' NOT NULL;
+ALTER TABLE "public"."config" ADD COLUMN "updated" Timestamp Without Time Zone DEFAULT (now() at time zone 'utc') NOT NULL;

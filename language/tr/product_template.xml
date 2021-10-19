@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Root>
+    <admin>
+        <option_list.html>
+            <History>Historie</History>
+            <Save>Speichern</Save>
+            <Reset>Abbruch</Reset>
+            <DateOfParams>Datum der Parameter</DateOfParams>
+        </option_list.html>
+        <block_option_value_history.html>
+            <OptionValueHistory>Änderungshistorie</OptionValueHistory>
+            <Value>Werte</Value>
+            <UserName>Ändernder</UserName>
+            <Created>Datum Änderung</Created>
+            <Close>Schließen</Close>
+        </block_option_value_history.html>
+        <block_contract_history.html>
+            <ContractHistory>Änderungshistorie</ContractHistory>
+            <StartDate>Start Datum</StartDate>
+            <EndDate>Ende Datum</EndDate>
+            <StartUserName>Name Ändernder Start Datum</StartUserName>
+            <EndUserName>Name Ändernder Ende Datum</EndUserName>
+            <Created>Datum der Änderung</Created>
+            <Close>Schließen</Close>
+        </block_contract_history.html>
+        <product_group_list.html>
+            <ProductGroupList>Service-Symbole</ProductGroupList>
+            <ProductGroupImage>Symbol</ProductGroupImage>
+            <Title>Titel</Title>
+            <AppVersionList>Liste der App-Versionen</AppVersionList>
+            <AddAppVersion>App-Version hinzufügen</AddAppVersion>
+            <AppVersion>App-Version</AppVersion>
+            <Client>Client</Client>
+            <Critical>Kritisch</Critical>
+        </product_group_list.html>
+        <product_group_edit.html>
+            <EditProductGroup>Bearbeiten Service</EditProductGroup>
+        </product_group_edit.html>
+        <price_list.html>
+            <Title>Titel</Title>
+            <CurrentValue>Aktueller Wert</CurrentValue>
+        </price_list.html>
+        <app_version_edit.html>
+            <AddAppVersion>App-Version hinzufügen</AddAppVersion>
+            <EditAppVersion>App-Version bearbeiten</EditAppVersion>
+            <AppVersion>App-Version</AppVersion>
+            <Client>Client</Client>
+            <Critical>Kritisch</Critical>
+        </app_version_edit.html>
+    </admin>
+</Root>

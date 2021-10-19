@@ -1,0 +1,328 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Root>
+    <admin>
+        <company_unit_list.html>
+            <CompanyUnitList>Kunden</CompanyUnitList>
+            <FilterTitle>Kunde</FilterTitle>
+            <FilterTitlePlaceholder>Name eingeben</FilterTitlePlaceholder>
+            <FilterApply>Suche</FilterApply>
+            <Add>Neuen Kunden anlegen</Add>
+            <UploadFile>AZ-Datei hochladen</UploadFile>
+            <CompaniesOnPage>Kunden pro Seite</CompaniesOnPage>
+            <Title>Name des Kunden</Title>
+            <Products>Aktive Cloud Services</Products>
+            <Address>Anschrift</Address>
+            <Contacts>Kontaktpersonen</Contacts>
+            <Employees>Anzahl Mitarbeiter</Employees>
+            <Design>Design</Design>
+            <IsActive>Daten von:</IsActive>
+            <IsActiveY>aktiven</IsActiveY>
+            <IsActiveN>de-aktivierten</IsActiveN>
+            <Agreements>Vereinbarungen</Agreements>
+
+            <CompanyAgreementEnablingSaving>Änderungen speichern</CompanyAgreementEnablingSaving>
+            <CompanyAgreementEnablingSuccess>Erfolgreich gespeichert</CompanyAgreementEnablingSuccess>
+            <CompanyAgreementEnablingError>Speichern fehlgeschlagen</CompanyAgreementEnablingError>
+        </company_unit_list.html>
+        <company_unit_edit.html>
+            <TabCompanyInfo>Stammdaten Unternehmen</TabCompanyInfo>
+            <TabCloudServices>Cloud Services Einstellungen</TabCloudServices>
+            <TabActivity>Sonstiges</TabActivity>
+
+            <EditCompany>Stammdaten ändern</EditCompany>
+            <EditDepartment>Abteilungsstammdaten ändern</EditDepartment>
+            <AddCompanyUnit>Neuen Kunden/Abt. anlegen</AddCompanyUnit>
+            <IsDepartment>Ist es eine Abteilung?</IsDepartment>
+            <GeneralInfo>Allgemeine Stammdaten</GeneralInfo>
+            <Parent>Mutterunternehmen</Parent>
+            <Title>Unternehmensname</Title>
+            <CustomerGUID>Kundennummer</CustomerGUID>
+            <ZipCode>PLZ</ZipCode>
+            <Country>Land</Country>
+            <City>Stadt</City>
+            <Street>Straße</Street>
+            <House>Hausnummer</House>
+            <Email>E-Mail</Email>
+            <Phone>Festnetz</Phone>
+            <ClientID>Eigene Mandanten ID in Buchhaltungssoftware (z.B. Datev)</ClientID>
+            <VATPayerID>Ust-ID</VATPayerID>
+            <Comment>Bemerkungen:</Comment>
+            <Colorscheme>Mobile App Layout</Colorscheme>
+            <BankDetails>Bankverbindung</BankDetails>
+            <IBAN>IBAN</IBAN>
+            <BIC>BIC</BIC>
+            <Register>Handelsregister</Register>
+            <TaxNumber>Steuernummer</TaxNumber>
+            <TaxConsultant>Steuerberater ID (z.B. DATEV)</TaxConsultant>
+            <PaymentMethod>Zahlungsmethode</PaymentMethod>
+            <SEPA>SEPA Lastschrift</SEPA>
+            <Bill>Rechnung</Bill>
+            <CreditCard>Kreditkarte</CreditCard>
+            <PaymentType>Rechnungsperiode</PaymentType>
+            <Monthly>monatlich</Monthly>
+            <Quarterly>Quartal</Quarterly>
+            <Yearly>jährlich</Yearly>
+            <InvoiceDate>Tag der Rechnungstellung</InvoiceDate>
+            <FinancialStatementDate>Tag für Lohnexport-Dateiversand</FinancialStatementDate>
+            <DatevFormat>DATEV format</DatevFormat>
+            <DatevFormatLodas>Lodas</DatevFormatLodas>
+            <DatevFormatLug>Lug</DatevFormatLug>
+            <Save>Speichern</Save>
+            <Reset>Wiederherstellen</Reset>
+            <EmploymentAgreement>Arbeitsvertrag</EmploymentAgreement>
+
+            <Export>Export</Export>
+            <ExportDatev>Unsere Rechnungen exportieren - DATEV Format</ExportDatev>
+            <ExportDateFrom>Zeitraum von</ExportDateFrom>
+            <ExportDateTo>Zeitraum bis</ExportDateTo>
+            <ExportAccessNote>Speichert Firma / Abteilung, um auf Export</ExportAccessNote>
+
+            <ContactList>Kontaktperson</ContactList>
+            <ContactListAccessNote>Kundendaten speichern, um Ansprechpartner Info einzugeben.</ContactListAccessNote>
+            <ContactName>Name</ContactName>
+            <ContactType>Rolle</ContactType>
+            <ContactEmail>E-Mail</ContactEmail>
+            <ContactPhone>Telefon</ContactPhone>
+            <AddContact>Kontakt hinzufügen</AddContact>
+
+            <FieldsetAcc>Lohnartennummer (LAN) für Lohndaten-Export</FieldsetAcc>
+            <AccMealValueTaxFlat>LAN Sachbezugswert Hauptmahlzeit mit pauschale Versteuerung</AccMealValueTaxFlat>
+            <AccFoodSubsidyTaxFree>LAN Steuerfreier Essenszuschuss</AccFoodSubsidyTaxFree>
+            <AccGrossSalary>LAN Bruttogehalt</AccGrossSalary>
+            <AccGrantOfMaterials>LAN Sachkostenzuschuss</AccGrantOfMaterials>
+            <AccInternetSubsidyTax>LAN Internetkostenzuschuss pauschal versteuert</AccInternetSubsidyTax>
+            <AccMobileSubsidyTaxFree>LAN Handykostenzuschuss frei</AccMobileSubsidyTaxFree>
+            <AccRecreationSubsidyTaxFlat>LAN Erholungskostenzuschuss pauschal versteuert</AccRecreationSubsidyTaxFlat>
+            <AccNetIncome>LAN Nettobezug</AccNetIncome>
+            <AccBonus>LAN Prämiengutschein 37b</AccBonus>
+            <AccTransport>LAN Job Ticket</AccTransport>
+            <AccChildCare>LAN Kinderbetreuung</AccChildCare>
+
+            <AppLogos>Unternehmens Logo</AppLogos>
+            <AppLogosBase>Logo in Mobile App</AppLogosBase>
+            <AppLogosMini>Reduziertes Logo Mobile App</AppLogosMini>
+            <VoucherLogo>Gutschein-Logo</VoucherLogo>
+
+            <ProductStartDate>Start-Datum</ProductStartDate>
+            <ProductEndDate>Ende-Datum</ProductEndDate>
+            <Z>Z</Z>
+            <W>W</W>
+            <OptionSave>Speichern</OptionSave>
+            <OptionReset>Wiederherstellen</OptionReset>
+            <RevisionHistory>Historie</RevisionHistory>
+            <Partner>Partner</Partner>
+            <DateOfParams>Datum der Parameter</DateOfParams>
+        </company_unit_edit.html>
+        <contact_edit.html>
+            <EditContact>Kontaktperson ändern</EditContact>
+            <AddContact>Kontakt hinzufügen</AddContact>
+            <ContactType>Rolle</ContactType>
+            <LinkedUser>Existierenden Anwender einfügen</LinkedUser>
+            <ClearS2>Anwender als Kontakt entfernen</ClearS2>
+            <ContactTypeManagement>Geschäftsführer</ContactTypeManagement>
+            <ContactTypeHR>Personalwesen</ContactTypeHR>
+            <ContactTypeFinance>Finanzmanager</ContactTypeFinance>
+            <ContactTypeIT>IT-Manager</ContactTypeIT>
+            <ContactTypeOther>Sonst.</ContactTypeOther>
+            <Salutation>Anrede</Salutation>
+            <FirstName>Vorname</FirstName>
+            <LastName>Nachname</LastName>
+            <Position>Titel</Position>
+            <Department>Abteilung</Department>
+            <Email>E-Mail</Email>
+            <Phone>Mobilnummer</Phone>
+            <PhoneJob>Festnetz</PhoneJob>
+            <Comment>Bemerkungen:</Comment>
+            <ContactFor>Kontakt für</ContactFor>
+            <Invoice>E-Rechnung</Invoice>
+            <Contract>Vertrag</Contract>
+            <Services>Service</Services>
+            <Support>Support</Support>
+            <PayrollExport>Lohn Export Datei</PayrollExport>
+            <Save>Speichern</Save>
+            <Reset>Wiederherstellen</Reset>
+            <RevisionHistory>Historie</RevisionHistory>
+        </contact_edit.html>
+        <employee_list.html>
+            <EmployeeList>Liste Mitarbeiter</EmployeeList>
+            <FilterName>Vor- und/oder Nachname</FilterName>
+            <FilterNamePlaceholder>Name</FilterNamePlaceholder>
+            <FilterCompanyTitle>Unternehmen</FilterCompanyTitle>
+            <FilterCompanyTitlePlaceholder>Suche</FilterCompanyTitlePlaceholder>
+            <FilterApply>Suche</FilterApply>
+            <Name>Mitarbeitename</Name>
+            <CompanyTitle>Unternehmen</CompanyTitle>
+            <Phone>Mobilnummer</Phone>
+            <Email>E-Mail</Email>
+            <LastLogin>Letzter Login</LastLogin>
+            <EmployeesOnPage>Anzahl Mitarbeiter pro Seite</EmployeesOnPage>
+            <Add>Mitarbeiter hinzufügen</Add>
+
+            <IsActive>Daten von:</IsActive>
+            <IsActiveY>aktiven</IsActiveY>
+            <IsActiveN>de-aktivierten</IsActiveN>
+            <AppUsed>Aktuelle trebono Version</AppUsed>
+            <IsMobileY>installiert</IsMobileY>
+            <IsMobileN>nicht installiert</IsMobileN>
+            <Products>Aktive Cloud Services</Products>
+        </employee_list.html>
+        <employee_edit.html>
+            <TabEmployeeInfo>Mitarbeiter Stammdaten</TabEmployeeInfo>
+            <TabCloudServices>Cloud Services Einstellungen</TabCloudServices>
+            <TabActivity>Übersicht Aktivitäten</TabActivity>
+
+            <EditEmployee>Mitarbeiter ändern</EditEmployee>
+            <AddEmployee>Mitarbeiter hinzufügen</AddEmployee>
+
+            <FieldsetInfo>Allgemeine Stammdaten</FieldsetInfo>
+            <DeviceAmount>Anzahl aktivierter Geräte</DeviceAmount>
+            <Salutation>Anrede</Salutation>
+            <FirstName>Vorname</FirstName>
+            <LastName>Nachname</LastName>
+            <Birthday>Geburtstag</Birthday>
+            <Phone>Mobilnummer</Phone>
+            <Email>E-Mail</Email>
+            <NewPassword>Neues Passwort</NewPassword>
+            <RepeatPassword>Neues Passwort wiederholen</RepeatPassword>
+            <PasswordRequirements>Das Passwort muss aus mindestens 8 Zeichen bestehen und mindestens einen
+                Großbuchstaben und eine Zahl enthalten
+            </PasswordRequirements>
+            <ZipCode>PLZ</ZipCode>
+            <Country>Land</Country>
+            <City>Stadt</City>
+            <Street>Straße</Street>
+            <House>Hausnummer</House>
+            <MaterialStatus>Familienstand</MaterialStatus>
+            <MaterialStatusSingle>ledig</MaterialStatusSingle>
+            <MaterialStatusMarried>verheiratet</MaterialStatusMarried>
+            <ChildCount>Anzahl Kinder im Haushalt</ChildCount>
+
+            <FieldsetCompanyInfo>Unternehmens Stammdaten des Mitarbeiters</FieldsetCompanyInfo>
+            <CompanyUnitID>Unternehmen/Abteilung</CompanyUnitID>
+            <WorkPlace>Beschäftigungsort</WorkPlace>
+            <StartDate>Start Datum</StartDate>
+            <CostCenterNumber>Kostenstelle</CostCenterNumber>
+            <WorkingDaysPerWeek>Arbeitstage pro Woche</WorkingDaysPerWeek>
+            <EmployeeGUID>Personalnummer in der Lohnabr.</EmployeeGUID>
+            <Comment>Bemerkungen:</Comment>
+
+            <FieldsetActivity>Belege</FieldsetActivity>
+            <ReceiptUpdated>Letze Aktualisierung:</ReceiptUpdated>
+            <ReceiptCreated>Erstellt am:</ReceiptCreated>
+            <ReceiptReceiptID>Beleg ID:</ReceiptReceiptID>
+            <ReceiptStatus>Aktueller Status:</ReceiptStatus>
+            <Service>Service</Service>
+
+            <FieldsetStatistics>Statistik</FieldsetStatistics>
+            <StatisticsMonthlyStatisticsDate>Statistik Monat</StatisticsMonthlyStatisticsDate>
+            <StatisticsShow>Anzeigen</StatisticsShow>
+
+            <FieldsetAcc>Lohnartennummer (LAN) für Export</FieldsetAcc>
+            <AccMealValueTaxFlat>LAN Sachbezugswert Hauptmahlzeit mit pauschale Versteuerung</AccMealValueTaxFlat>
+            <AccFoodSubsidyTaxFree>LAN Steuerfreier Essenszuschuss</AccFoodSubsidyTaxFree>
+            <AccGrossSalary>LAN Bruttogehalt</AccGrossSalary>
+            <AccGrantOfMaterials>LAN Sachkostenzuschuss</AccGrantOfMaterials>
+            <AccInternetSubsidyTax>LAN Internetkostenzuschuss pauschal versteuert</AccInternetSubsidyTax>
+            <AccMobileSubsidyTaxFree>LAN Handykostenzuschuss frei</AccMobileSubsidyTaxFree>
+            <AccRecreationSubsidyTaxFlat>LAN Erholungskostenzuschuss pauschal versteuert</AccRecreationSubsidyTaxFlat>
+            <AccNetIncome>LAN Nettobezug</AccNetIncome>
+            <AccBonus>LAN Prämiengutschein 37b</AccBonus>
+            <AccTransport>LAN Job Ticket</AccTransport>
+            <AccChildCare>LAN Kinderbetreuung</AccChildCare>
+
+            <Save>Speichern</Save>
+            <Reset>Wiederherstellen</Reset>
+            <Resend>E-Mail zurücksenden</Resend>
+
+            <ProductStartDate>Start Datum</ProductStartDate>
+            <ProductEndDate>Ende Datum</ProductEndDate>
+            <Z>Z</Z>
+            <W>W</W>
+            <Monthly>monatlich</Monthly>
+            <Yearly>jährlich</Yearly>
+            <InheritedValueSourceGlobal>Standard Cloud Service</InheritedValueSourceGlobal>
+            <InheritedValueSourceCompanyUnit>Kundenstandard</InheritedValueSourceCompanyUnit>
+            <NoInheritedValue>Kein vererbter Wert</NoInheritedValue>
+            <SetSpecificValue>(Einen bestimmten Wert eingeben?)</SetSpecificValue>
+
+            <OptionSave>Speichern</OptionSave>
+            <OptionReset>Wiederherstellen</OptionReset>
+            <RevisionHistory>Historie</RevisionHistory>
+            <DateOfParams>Gültigkeitsdatum Parameter</DateOfParams>
+
+            <VoucherSection>Ausgestellte Gutscheine</VoucherSection>
+            <VoucherAdd>Gutschein hinzufügen</VoucherAdd>
+            <VoucherDate>Gültig ab:</VoucherDate>
+            <VoucherCreated>Erstellt am:</VoucherCreated>
+            <VoucherEndDate>Gültig bis:</VoucherEndDate>
+            <VoucherCreatedUser>Erstellt von:</VoucherCreatedUser>
+            <VoucherAmount>Gutschein Betrag</VoucherAmount>
+            <VoucherReason>Gutschein Grund</VoucherReason>
+            <VoucherRecurring>Dauergutschein?</VoucherRecurring>
+
+            <FieldsetAcceptedDocuments>Akzeptierte Dokumente</FieldsetAcceptedDocuments>
+            <DocumentType>Dokumenttyp</DocumentType>
+            <DocumentAcceptedVersionList>Akzeptierte Versionen</DocumentAcceptedVersionList>
+            <DocumentVersionList>Alle Versionen</DocumentVersionList>
+            <DocumentShowAll>Alle anzeigen</DocumentShowAll>
+
+            <AgreementEmployment>Ergänzende Vereinbarung</AgreementEmployment>
+            <AcceptVersion>Akzeptierte Versionsnummer</AcceptVersion>
+            <AcceptDateOf>vom</AcceptDateOf>
+            <Device>Gerät</Device>
+
+            <Calendar>Essensmarkenkalender</Calendar>
+
+            <GivveInfo>Givve Informationen</GivveInfo>
+            <GivveLogin>Givve Login</GivveLogin>
+            <GivvePassword>Givve Passwort</GivvePassword>
+        </employee_edit.html>
+        <block_calendar.html>
+            <CalendarForDate>Essensmarkenkalender</CalendarForDate>
+            <Date>Datum:</Date>
+            <Unit>Einheiten:</Unit>
+            <ReceiptID>Belegnr.</ReceiptID>
+            <RealAmountApproved>Final genehmigter Betrag</RealAmountApproved>
+            <Created>Datum der Änderung</Created>
+            <Close>Schließen</Close>
+        </block_calendar.html>
+        <block_property_history.html>
+            <PropertyValueHistory>Änderungshistorie</PropertyValueHistory>
+            <Value>Werte</Value>
+            <UserName>Name</UserName>
+            <Created>Datum</Created>
+            <Close>Schließen</Close>
+        </block_property_history.html>
+        <device_version_history.html>
+            <DeviceVersionHistory>Versionshistorie des Geräts</DeviceVersionHistory>
+            <Version>Version</Version>
+            <Date>Datum</Date>
+            <Close>Schließen</Close>
+        </device_version_history.html>
+        <voucher_edit.html>
+            <EditVoucher>Gutschein bearbeiten</EditVoucher>
+            <AddVoucher>Gutschein hinzufügen</AddVoucher>
+            <Created>Erstellt am:</Created>
+            <Amount>Gutschein Betrag in Euro:</Amount>
+            <VoucherDate>Gültig ab:</VoucherDate>
+            <VoucherEndDate>Gültig bis:</VoucherEndDate>
+            <Reason>Gutschein Grund:</Reason>
+            <Recurring>Dauergutschein?</Recurring>
+            <RecurringEndDate>Enddatum für die Rückläufigkeit</RecurringEndDate>
+            <Frequency>Wiederkehrender Gutschein</Frequency>
+            <Monthly>monatlich</Monthly>
+            <Quarterly>vierteljährlich</Quarterly>
+            <Yearly>jährlich</Yearly>
+            <RevisionHistory>Historie</RevisionHistory>
+        </voucher_edit.html>
+        <voucher_pdf.html>
+            <Voucher>Gutschein Nr.:</Voucher>
+            <Employee>Für Mitarbeiter:</Employee>
+            <Amount>Betrag:</Amount>
+            <IssueDate>Ausstellungsdatum:</IssueDate>
+            <EndDate>Gültig bis:</EndDate>
+            <Reason>Grund:</Reason>
+            <ProducedBy>Erstellt von:</ProducedBy>
+        </voucher_pdf.html>
+    </admin>
+</Root>

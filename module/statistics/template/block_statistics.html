@@ -1,0 +1,120 @@
+<div class="row">
+	<div class="col-md-6">
+		<table class="table">
+			<tr>
+				<th><TMPL_VAR NAME='LNG_Monthly'></th>
+				<th><TMPL_VAR NAME='LNG_Available'></th>
+				<th><TMPL_VAR NAME='LNG_ApproveProposed'></th>
+				<th><TMPL_VAR NAME='LNG_Approved'></th>
+			</tr>
+			<tr>
+				<th><TMPL_VAR NAME='LNG_Total'></th>
+				<td>
+					<span class="text-info"><TMPL_VAR NAME='total_available_month' FORMAT='price'>€</span>
+				</td>
+				<td>
+					<span class="text-success"><TMPL_VAR NAME='total_approve_proposed_month' FORMAT='price'>€</span>
+				</td>
+				<td>
+					<span class="text-success"><TMPL_VAR NAME='total_month' FORMAT='price'>€</span>
+				</td>
+			</tr>
+			<TMPL_LOOP NAME='product_groups'>
+				<tr <TMPL_IF NAME='hide'>class="canceled"</TMPL_IF>>
+					<th><TMPL_VAR NAME='title_translation'></th>
+					<TMPL_UNLESS NAME='hide_monthly'>
+						<td>
+							<TMPL_IF NAME='type' VALUE='food'>
+								<span class="text-info"><TMPL_VAR NAME='available_month' FORMAT='price'>€ </span><br />
+								<span class="text-info"><TMPL_VAR NAME='available_units_month' FORMAT='price'> <TMPL_VAR NAME='LNG_Units'></span>
+								<TMPL_ELSE>
+									<span class="text-info"><TMPL_VAR NAME='available_month' FORMAT='price'><TMPL_UNLESS NAME='type' VALUE='travel'>€</TMPL_UNLESS> </span>
+							</TMPL_IF>
+						</td>
+						<td>
+							<TMPL_UNLESS NAME='hide_approved'>
+								<TMPL_IF NAME='type' VALUE='food'>
+									<span class="text-success"><TMPL_VAR NAME='approve_proposed_month' FORMAT='price'>€ </span><br />
+									<span class="text-success"><TMPL_VAR NAME='approve_proposed_units_month' FORMAT='price'> <TMPL_VAR NAME='LNG_Units'></span>
+									<TMPL_ELSE>
+										<TMPL_UNLESS NAME='hide_approve_proposed_month'>
+											<span class="text-success"><TMPL_VAR NAME='approve_proposed_month' FORMAT='price'><TMPL_UNLESS NAME='type' VALUE='travel'>€</TMPL_UNLESS> </span>
+										</TMPL_UNLESS>
+								</TMPL_IF>
+							</TMPL_UNLESS>
+						</td>
+						<td>
+							<TMPL_UNLESS NAME='hide_approved'>
+								<TMPL_IF NAME='type' VALUE='food'>
+									<span class="text-success"><TMPL_VAR NAME='approved_month' FORMAT='price'>€ </span><br />
+									<span class="text-success"><TMPL_VAR NAME='approved_units_month' FORMAT='price'> <TMPL_VAR NAME='LNG_Units'></span>
+									<TMPL_ELSE>
+										<span class="text-success"><TMPL_VAR NAME='approved_month' FORMAT='price'><TMPL_UNLESS NAME='type' VALUE='travel'>€</TMPL_UNLESS> </span>
+								</TMPL_IF>
+							</TMPL_UNLESS>
+						</td>
+						<TMPL_ELSE>
+							<td></td><td></td><td></td>
+					</TMPL_UNLESS>
+				</tr>	
+			</TMPL_LOOP>
+		</table>
+	</div>
+	<div class="col-md-6">
+		<table class="table">
+			<tr>
+				<th><TMPL_VAR NAME='LNG_Yearly'></th>
+				<th><TMPL_VAR NAME='LNG_Available'></th>
+				<th><TMPL_VAR NAME='LNG_ApproveProposed'></th>
+				<th><TMPL_VAR NAME='LNG_ApprovedYearly'></th>
+			</tr>
+			<tr>
+				<th><TMPL_VAR NAME='LNG_Total'></th>
+				<td>
+					<span class="text-info"><TMPL_VAR NAME='total_available_year' FORMAT='price'>€ </span>
+				</td>
+				<td>
+					<span class="text-info"><TMPL_VAR NAME='total_approve_proposed_year' FORMAT='price'>€</span>
+				</td>
+				<td>
+					<span class="text-success"><TMPL_VAR NAME='total_year' FORMAT='price'>€ </span>
+				</td>
+			</tr>
+			<TMPL_LOOP NAME='product_groups'>
+				<tr <TMPL_IF NAME='hide'>class="canceled"</TMPL_IF>>
+					<th><TMPL_VAR NAME='title_translation'></th>
+					<td>
+						<TMPL_IF NAME='type' VALUE='food'>
+							<span class="text-info"><TMPL_VAR NAME='available_year' FORMAT='price'>€ </span><br />
+							<span class="text-info"><TMPL_VAR NAME='available_units_year' FORMAT='price'> <TMPL_VAR NAME='LNG_Units'></span>
+						<TMPL_ELSE>
+							<span class="text-info"><TMPL_VAR NAME='available_year' FORMAT='price'><TMPL_UNLESS NAME='type' VALUE='travel'>€</TMPL_UNLESS> </span>
+						</TMPL_IF>
+					</td>
+					<td>
+						<TMPL_UNLESS NAME='hide_approved'>
+							<TMPL_UNLESS NAME='hide_approve_proposed_year'>
+								<TMPL_IF NAME='type' VALUE='food'>
+									<span class="text-success"><TMPL_VAR NAME='approve_proposed_year' FORMAT='price'>€ </span><br />
+									<span class="text-success"><TMPL_VAR NAME='approve_proposed_units_year' FORMAT='price'> <TMPL_VAR NAME='LNG_Units'></span>
+									<TMPL_ELSE>
+										<span class="text-success"><TMPL_VAR NAME='approve_proposed_year' FORMAT='price'><TMPL_UNLESS NAME='type' VALUE='travel'>€</TMPL_UNLESS> </span>
+								</TMPL_IF>
+							</TMPL_UNLESS>
+						</TMPL_UNLESS>
+					</td>
+					<td>
+						<TMPL_UNLESS NAME='hide_approved'>
+							<TMPL_IF NAME='type' VALUE='food'>
+								<span class="text-success"><TMPL_VAR NAME='approved_year' FORMAT='price'>€</span><br />
+								<span class="text-success"><TMPL_VAR NAME='approved_units_year' FORMAT='price'> <TMPL_VAR NAME='LNG_Units'></span>
+							<TMPL_ELSE>
+								<span class="text-success"><TMPL_VAR NAME='approved_year' FORMAT='price'><TMPL_UNLESS NAME='type' VALUE='travel'>€</TMPL_UNLESS> </span>
+							</TMPL_IF>
+						</TMPL_UNLESS>
+					</td>
+				</tr>	
+			</TMPL_LOOP>
+		</table>
+	</div>
+</div>

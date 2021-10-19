@@ -1,0 +1,160 @@
+<div class="row">
+	<section class="box no-margin">
+		<header class="panel_header" for="header_dashboard" table="core">
+			<h2 class="title"><TMPL_VAR NAME='LNG_ProcessingDashboard'></h2>
+		</header>
+		<div class="content-body">
+			<form action="<TMPL_VAR NAME='MODULE_URL'>" method="post" autocomplete="off">
+				<div class="row">
+					<div class="col-md-3 form-group">
+						<label class="form-label"><TMPL_VAR NAME='LNG_View'></label>
+						<select name="period_group" class="form-control">
+							<option value="month" <TMPL_IF NAME='period_group' VALUE='month'>selected</TMPL_IF>><TMPL_VAR NAME='LNG_Month'></option>
+							<option value="calendar" <TMPL_IF NAME='period_group' VALUE='calendar'>selected</TMPL_IF>><TMPL_VAR NAME='LNG_Calendar'></option>
+						</select>
+					</div>
+					<div class="col-md-3 form-group yearly-statistic <TMPL_IF NAME='period_group' VALUE='calendar'>hidden</TMPL_IF>">
+						<label class="form-label"><TMPL_VAR NAME='LNG_YearlyProcessingStatistics'></label><br />
+						<input type="text"readonly name="yearly_statistics_date" class="form-control processing-dashboard-date datepicker" value="<TMPL_VAR NAME='yearly_statistics_date'>" data-min-view-mode="years" data-format="yyyy"/>
+					</div>
+					<div class="col-md-3 form-group daily-statistic <TMPL_IF NAME='period_group' VALUE='month'>hidden</TMPL_IF><TMPL_UNLESS NAME='period_group'>hidden</TMPL_IF>">
+						<label class="form-label"><TMPL_VAR NAME='LNG_DailyProcessingStatistics'></label><br />
+						<input type="text"readonly name="filter_statistics_range" class="form-control processing-dashboard-date" value="<TMPL_VAR NAME='filter_statistics_range'>">
+					</div>
+					<div class="col-md-3 form-group">
+						<label class="form-label"><TMPL_VAR NAME='LNG_GroupedBy'></label>
+						<select name="grouped_by" class="form-control">
+							<option value="service" <TMPL_IF NAME='grouped_by' VALUE='service'>selected</TMPL_IF>><TMPL_VAR NAME='LNG_Service'></option>
+							<option value="employee" <TMPL_IF NAME='grouped_by' VALUE='employee'>selected</TMPL_IF>><TMPL_VAR NAME='LNG_Employee'></option>
+						</select>
+					</div>
+					<div class="col-md-3 form-group">
+						<label class="form-label">&nbsp;</label><br />
+						<button type="submit" class="btn btn-primary" id="bvs-statistics-show"><TMPL_VAR NAME='LNG_ProcessingStatisticsShow'></button>
+						<input class="hidden" name="Filter" value="1" />
+						<input class="hidden" name="action" value="show" />
+					</div>
+				</div>
+				<div id="statistics-container">
+					<div class="row">
+						<table class="table no-margin processing-dashboard">
+							<thead>
+								<tr>
+									<th class="text-center" colspan="2"><TMPL_VAR NAME='LNG_ServiceName'></th>
+									<TMPL_LOOP NAME='period_list'>
+										<th class="text-center"><TMPL_VAR NAME='title'></th>
+									</TMPL_LOOP>
+									<th class="text-center"><TMPL_VAR NAME='LNG_StatisticsTotal'></th>
+								</tr>
+							</thead>
+							<tbody>
+								<TMPL_LOOP NAME='statistics_list'>
+									<tr class="text-left">
+										<td colspan="2"><h5><TMPL_VAR NAME='title'></td></h5>
+										<td></td>
+									</tr>
+									<TMPL_LOOP NAME='total_type'>
+										<tr class="text-center gray">
+											<td></td>
+											<td class="text-right">
+												<TMPL_VAR NAME='title'><br>
+												<a href="" class="moreLinkStatistics" item-id="<TMPL_VAR NAME='item_id'>" total-type="<TMPL_VAR NAME='__ROWNUM__'>"><TMPL_VAR NAME="LNG_Expand"></a>
+											</td>
+											<TMPL_LOOP NAME='total_list'>
+												<td>
+													<TMPL_IF NAME='total_type.__FIRST__'>
+														<TMPL_VAR NAME='value' FORMAT='price'>€
+													<TMPL_ELSE>
+														<TMPL_VAR NAME='value'>
+													</TMPL_IF>
+												</td>
+											</TMPL_LOOP>
+											<td>
+												<TMPL_IF NAME='__FIRST__'>
+													<TMPL_VAR NAME='total' FORMAT='price'>€
+												<TMPL_ELSE>
+													<TMPL_VAR NAME='total'>
+												</TMPL_IF>
+											</td>
+										</tr>
+										<TMPL_LOOP NAME='details_list'>
+											<tr class="text-center" total-type="<TMPL_VAR NAME='total_type.__ROWNUM__'>" item-id="<TMPL_VAR NAME='total_type.item_id'>" style="display: none">
+												<td></td>
+												<td class="text-right"><TMPL_VAR NAME='name'></td>
+												<TMPL_LOOP NAME='value_list'>
+													<td>
+														<TMPL_IF NAME='total_type.__FIRST__'>
+															<TMPL_VAR NAME='value' FORMAT='price'>€
+														<TMPL_ELSE>
+															<TMPL_VAR NAME='value'>
+														</TMPL_IF>
+													</td>
+												</TMPL_LOOP>
+												<td>
+													<TMPL_IF NAME='total_type.__FIRST__'>
+														<TMPL_VAR NAME='total' FORMAT='price'>€
+													<TMPL_ELSE>
+														<TMPL_VAR NAME='total'>
+													</TMPL_IF>
+												</td>
+											</tr>
+										</TMPL_LOOP>
+									</TMPL_LOOP>
+								</TMPL_LOOP>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</form>
+		</div>
+	</section>
+</div>
+
+<script type="text/javascript">
+
+	$(document).ready(function(){
+
+		$("[name='yearly_statistics_date']").datepicker({
+			format: "yyyy",
+			viewMode: "years",
+			minViewMode: "years"
+		}).datepicker('setDate', new Date("<TMPL_VAR NAME='yearly_statistics_date'>"));
+
+		$('input[name="filter_statistics_range"]').daterangepicker({
+			dateLimit: {
+				"days": 30
+			}
+		});
+
+		$(".range_inputs input").prop("readonly", true);
+
+		$("a.moreLinkStatistics").click(function(e){
+			itemID = $(this).attr("item-id");
+			totalType = $(this).attr("total-type");
+			if($(this).is('.open')){
+				$(this).removeClass('open').text('<TMPL_VAR NAME="LNG_Expand">');
+				$("tr[item-id="+itemID+"][total-type="+totalType+"]").slideUp(300);
+			}
+			else{
+				$(this).addClass('open').text('<TMPL_VAR NAME="LNG_Collapse">');
+				$("tr[item-id="+itemID+"][total-type="+totalType+"]").slideDown(300);
+			}
+			e.preventDefault();
+		});
+
+		$("[name=period_group]").on("change", function(){
+
+			if ($(this).val() == "month")
+			{
+				$(".daily-statistic").addClass("hidden");
+				$(".yearly-statistic").removeClass("hidden");
+			}
+			else
+			{
+				$(".daily-statistic").removeClass("hidden");
+				$(".yearly-statistic").addClass("hidden");
+			}
+		});
+	});
+
+</script>
